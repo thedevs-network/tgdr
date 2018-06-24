@@ -1,12 +1,32 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:latest",
+        "tslint:recommended",
         "tslint-react",
         "tslint-eslint-rules",
         "tslint-config-prettier"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "ter-indent": [
+            true,
+            2
+        ],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "curly": [
+            true,
+            "ignore-same-line"
+        ],
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "any",
+                "named-imports-order": "case-insensitive"
+            }
+        ]
+    },
     "rulesDirectory": []
 }
