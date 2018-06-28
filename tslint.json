@@ -26,6 +26,9 @@
                 "import-sources-order": "any",
                 "named-imports-order": "case-insensitive"
             }
+        ],
+        "jsx-boolean-value": [
+            "never"
         ]
     },
     "rulesDirectory": []
