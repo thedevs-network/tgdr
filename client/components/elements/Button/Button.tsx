@@ -7,7 +7,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 10px 24px;
+  padding: 8px 20px;
   font-size: 13px;
   font-weight: 500;
   /* text-transform: uppercase; */
@@ -16,7 +16,7 @@ const Button = styled.button`
   background-color: #64B5F6;
   border: none;
   border-radius: 20px;
-  box-shadow: 0 3px 6px rgba(25, 118, 210, 0.3);
+  box-shadow: 0 3px 6px rgba(25, 118, 210, 0.2);
   cursor: pointer;
   overflow: hidden;
   transition: box-shadow 0.3s ease-out;
