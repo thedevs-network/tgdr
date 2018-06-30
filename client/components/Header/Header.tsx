@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import { Container } from '../elements/Layout';
 import Logo from '../elements/Logo';
-import Button from '../elements/Button';
+import HeaderMenu from './HeaderMenu';
 
 const HeaderContainer = styled(Flex).attrs({
   align: 'center',
@@ -14,23 +14,14 @@ const HeaderContainer = styled(Flex).attrs({
   box-shadow: 0 3px 5px rgba(160, 160, 160, 0.1);
 `;
 
-const ContentContainer = Container.extend.attrs({
-  align: 'center',
-  justify: 'space-between',
-})``;
-
 class Header extends Component {
   public render() {
     return (
       <HeaderContainer>
-        <ContentContainer>
+        <Container align="center" justify="space-between" >
           <Logo />
-          <div>
-            <Button>
-              + Submit
-            </Button>
-          </div>
-        </ContentContainer>
+          <HeaderMenu />
+        </Container>
       </HeaderContainer>
     );
   }
