@@ -18,7 +18,7 @@ const SubTitle = styled.h3`
 `;
 
 const Slogan: React.SFC = () => (
-  <Flex py={5} flexDirection="column" align="center">
+  <Flex py={5} flexDirection="column" align="center" is="section">
     <Title>
       Discover the content you love on Telegram.
     </Title>

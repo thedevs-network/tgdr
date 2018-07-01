@@ -17,7 +17,7 @@ const A = styled.a`
 `;
 
 const HeaderMenu: React.SFC = () => (
-  <Flex align="center">
+  <Flex align="center" is="nav">
     <Box mx={3}>
       <Button>
         + Submit

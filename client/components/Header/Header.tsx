@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import { Container } from '../elements/Layout';
@@ -14,10 +14,10 @@ const HeaderContainer = styled(Flex).attrs({
   box-shadow: 0 3px 5px rgba(160, 160, 160, 0.1);
 `;
 
-class Header extends Component {
+class Header extends React.Component {
   public render() {
     return (
-      <HeaderContainer>
+      <HeaderContainer is="header">
         <Container align="center" justify="space-between" >
           <Logo />
           <HeaderMenu />
