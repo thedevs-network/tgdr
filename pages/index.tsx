@@ -1,10 +1,8 @@
 import * as React from 'react';
-import Header from '../client/components/Header';
-import Slogan from '../client/components/Slogan';
+import withBody from '../client/withBody';
 
-export default () => (
-  <>
-    <Header />
-    <Slogan />
-  </>
+const Homepage = () => (
+  <p>homepage</p>
 );
+
+export default withBody(Homepage);
