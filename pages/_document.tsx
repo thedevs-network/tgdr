@@ -4,6 +4,7 @@ import 'normalize.css';
 
 const Body = styled.body`
   font: 16px/1.5 'Rubik', sans-serif;
+  color: #666;
   background-color: #F4F5F7;
 `;
 
