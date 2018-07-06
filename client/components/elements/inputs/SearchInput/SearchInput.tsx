@@ -33,7 +33,7 @@ const Input = styled.input.attrs({
   :active {
     outline: none;
     border: none;
-    background-color: #F2F2F2;
+    background-color: #F0F0F0;
   }
   
   ::placeholder {
