@@ -19,7 +19,7 @@ const withBody = (Component: React.ComponentType) => {
           <Flex justify="center">
             <Container mb={6}>
               <Sidebar />
-              <Flex width={[9 / 12]}>
+              <Flex width={[9 / 12]} flexDirection="column">
                 <Component {...this.props} />
               </Flex>
             </Container>
