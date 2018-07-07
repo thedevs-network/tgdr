@@ -1,22 +1,24 @@
+import { IIcons } from '../client/components/elements/Icon';
+
 export interface ICategories {
-  icon?: 'chevron-right' | 'messages-icon' | 'robot-icon' | 'station-icon';
+  icon?: keyof IIcons;
   name: string;
   slug: string;
 }
 
 export const types: ICategories[] = [
   {
-    icon: 'station-icon',
+    icon: 'station',
     name: 'Channels',
     slug: 'channels'
   },
   {
-    icon: 'robot-icon',
+    icon: 'robot',
     name: 'Bots',
     slug: 'bots'
   },
   {
-    icon: 'messages-icon',
+    icon: 'messages',
     name: 'Groups',
     slug: 'groups'
   },

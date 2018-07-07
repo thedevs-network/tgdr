@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import * as categories from '../../../../constants/categories';
+import Icon from '../../elements/Icon';
 
 const Title = styled.h4`
   font-size: 13px;
@@ -47,13 +48,6 @@ const ListLink = styled.a`
   }
 `;
 
-const ListIcon = styled.img`
-  width: ${({ icon }: { icon?: string }) => icon ? 14 : 6}px;
-  height: auto;
-  display: flex;
-  margin-right: 16px;
-`;
-
 const Count = styled.span`
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -74,7 +68,7 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
       {data.map(item => (
         <ListItem key={item.slug}>
           <ListLink>
-            <ListIcon icon={item.icon} src={`/static/images/${item.icon || 'chevron-right'}.svg`} alt={item.name} />
+            <Icon name={item.icon || 'chevronRight'} mr={3} size={item.icon ? 16 : 6} />
             {item.name}
           </ListLink>
           <Count>
