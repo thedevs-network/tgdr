@@ -72,7 +72,7 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
     </Title>
     <List>
       {data.map(item => (
-        <ListItem>
+        <ListItem key={item.slug}>
           <ListLink>
             <ListIcon icon={item.icon} src={`/static/images/${item.icon || 'chevron-right'}.svg`} alt={item.name} />
             {item.name}
