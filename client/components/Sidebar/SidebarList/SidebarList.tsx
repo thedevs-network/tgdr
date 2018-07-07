@@ -78,7 +78,7 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
             {item.name}
           </ListLink>
           <Count>
-            {item.count || 41241}
+            {item.count || 0}
           </Count>
         </ListItem>
       ))}
