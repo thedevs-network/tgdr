@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -10,7 +9,6 @@ const Button = styled.button`
   padding: 8px 20px;
   font-size: 13px;
   font-weight: 500;
-  /* text-transform: uppercase; */
   letter-spacing: 0.05em;
   color: white;
   background-color: #64B5F6;
@@ -19,17 +17,13 @@ const Button = styled.button`
   box-shadow: 0 3px 6px rgba(25, 118, 210, 0.2);
   cursor: pointer;
   overflow: hidden;
-  transition: box-shadow 0.3s ease-out;
+  transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateZ(0);
 
   :hover {
     box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);
+    transform: scale(1.01, 1.01) translateY(-2px);
   }
 `;
 
-const CustomButton: React.SFC = ({ children, ...restProps }) => (
-  <Button {...restProps}>
-    {children}
-  </Button>
-);
-
-export default CustomButton;
+export default Button;
