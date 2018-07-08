@@ -42,9 +42,22 @@ const ListLink = styled.a`
   transition: color 0.3s ease-out;
   cursor: pointer;
 
+  span {
+    transition: transform 0.2s ease-out;
+    transform: translateZ(0);
+  }
+
   :hover,
   :active {
     color: #333;
+
+    span {
+      transform: translateX(3px);
+    }
+
+    svg path {
+      fill: #999FA5;
+    }
   }
 `;
 
@@ -69,7 +82,7 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
         <ListItem key={item.slug}>
           <ListLink>
             <Icon name={item.icon || 'chevronRight'} mr={3} size={item.icon ? 16 : 6} />
-            {item.name}
+            <span>{item.name}</span>
           </ListLink>
           <Count>
             {item.count || 0}
