@@ -1,8 +1,9 @@
 import * as React from 'react';
 import withBody from '../client/withBody';
+import Cards from '../client/components/Cards';
 
 const Homepage = () => (
-  <p>homepage</p>
+  <Cards />
 );
 
 export default withBody(Homepage);
