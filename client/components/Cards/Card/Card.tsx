@@ -11,11 +11,14 @@ import { LightBox } from '../../elements/Layout';
 const CardWrapper = styled(LightBox).attrs({
   align: "center",
   flex: "1 1 auto",
+  is: 'a',
   mb: [3],
   mr: [3],
   p: 3,
   width: [4 / 12],
 })`
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
   transform: translateZ(0);
@@ -27,7 +30,7 @@ const CardWrapper = styled(LightBox).attrs({
 `;
 
 const Card = () => (
-  <CardWrapper>
+  <CardWrapper href="#" title="Card">
     <CardPhoto />
     <Flex flexDirection="column" flex="1 1 auto">
       <CardTitle>
