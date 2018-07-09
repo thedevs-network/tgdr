@@ -17,7 +17,7 @@ const withBody = (Component: React.ComponentType) => {
           <Header />
           <Slogan />
           <Flex justify="center">
-            <Container mb={6}>
+            <Container mb={6} align="flex-start">
               <Sidebar />
               <Flex width={[9 / 12]} flexDirection="column">
                 <Component {...this.props} />
