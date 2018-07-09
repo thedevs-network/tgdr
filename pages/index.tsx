@@ -3,7 +3,11 @@ import withBody from '../client/withBody';
 import Cards from '../client/components/Cards';
 
 const Homepage = () => (
-  <Cards />
+  <>
+    <Cards />
+    <Cards />
+    <Cards />
+  </>
 );
 
 export default withBody(Homepage);
