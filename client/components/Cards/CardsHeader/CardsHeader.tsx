@@ -19,11 +19,11 @@ const ViewAllLink = styled.a`
   transform: translateZ(0);
 
   :hover {
-    color: #2196F3;
+    color: #42A5F5;
     transform: scaleX(1.01) translateX(-4px);
 
     svg path {
-      fill: #2196F3;
+      fill: #42A5F5;
     }
   }
 `;
@@ -31,7 +31,7 @@ const ViewAllLink = styled.a`
 const CardsHeader = () => (
   <Flex justify="space-between" mb={2}>
     <Flex align="center">
-      <Icon name="station" size={18} fill="#C7CFD6" hoverFill="#C7CFD6" mr={3} />
+      <Icon name="station" size={18} fill="#C7CFD6" mr={3} />
       <Title>
         Channels
       </Title>
@@ -39,7 +39,7 @@ const CardsHeader = () => (
     <Flex align="center">
       <ViewAllLink href="#" title="View all channels">
         <span>View all</span>
-        <Icon name="arrowRight" size={10} fill="#64B5F6" hoverFill="#64B5F6" ml={10} />
+        <Icon name="arrowRight" size={10} fill="#64B5F6" ml={10} />
       </ViewAllLink>
     </Flex>
   </Flex>
