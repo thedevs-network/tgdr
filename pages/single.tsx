@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Flex } from 'grid-styled';
 import { LightBox } from '../client/components/elements/Layout';
 import withBody from '../client/withBody';
-import { ChannelDescription, ChannelTitle } from '../client/components/elements/Typography';
+import { Description, Title } from '../client/components/elements/Typography';
 import Image from '../client/components/elements/Image';
 import Button from '../client/components/elements/Button';
 import Icon from '../client/components/elements/Icon';
@@ -21,12 +21,12 @@ const Single: React.SFC = () => (
     <Flex flexDirection="column">
       <Flex align="flex-start">
         <Flex flexDirection="column" mr={4} flex="1 1 0">
-          <ChannelTitle>
+          <Title>
             The Devs
-          </ChannelTitle>
-          <ChannelDescription>
+          </Title>
+          <Description>
             The devs is community for programmers in Telegram. The devs is community for programmers in Telegram.
-          </ChannelDescription>
+          </Description>
         </Flex>
         <Flex width={[116]} align="center" flexDirection="column">
           <Button big>

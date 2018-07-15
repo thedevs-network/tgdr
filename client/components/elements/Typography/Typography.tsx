@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ChannelTitle = styled.h2`
+export const Title = styled.h2`
   margin: 0 0 12px;
   padding: 0;
   font-size: 26px;
@@ -8,7 +8,7 @@ export const ChannelTitle = styled.h2`
   color: #666;
 `;
 
-export const ChannelDescription = styled.p`
+export const Description = styled.p`
   margin: 0;
   padding: 0;
   font-size: 16px;
