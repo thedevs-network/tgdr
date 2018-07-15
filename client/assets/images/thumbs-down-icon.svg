@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.003 15.21">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #ef9a9a;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <path id="thumbs-down" class="cls-1" d="M7.392,10.586v2.642a1.981,1.981,0,0,0,1.981,1.981l2.642-5.944V2H4.565A1.321,1.321,0,0,0,3.244,3.123L2.332,9.067a1.321,1.321,0,0,0,1.321,1.519ZM12.015,2h1.763a1.526,1.526,0,0,1,1.539,1.321V7.944a1.526,1.526,0,0,1-1.539,1.321H12.015" transform="translate(-1.314 -0.999)"/>
+</svg>
