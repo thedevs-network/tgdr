@@ -2,10 +2,10 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import CardJoinButton from './CardJoinButton';
-import CardPhoto from './CardPhoto';
 import CardTitle from './CardTitle';
 import CardMembersCount from './CardMembersCount';
 import CardRate from './CardRate';
+import Image from '../../elements/Image';
 import { LightBox } from '../../elements/Layout';
 
 const CardWrapper = styled(LightBox).attrs({
@@ -31,7 +31,7 @@ const CardWrapper = styled(LightBox).attrs({
 
 const Card = () => (
   <CardWrapper href="#" title="Card">
-    <CardPhoto />
+    <Image mr={3} />
     <Flex flexDirection="column" flex="1 1 auto">
       <CardTitle>
         The Devs
