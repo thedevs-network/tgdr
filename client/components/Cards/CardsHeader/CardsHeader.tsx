@@ -18,7 +18,8 @@ const ViewAllLink = styled.a`
   transition: color 0.3s ease-out, transform 0.3s ease-out;
   transform: translateZ(0);
 
-  :hover {
+  :hover,
+  :focus {
     color: #42A5F5;
     transform: scaleX(1.01) translateX(-4px);
 
