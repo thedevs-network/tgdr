@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import Icon from '../elements/Icon';
-import Hr from '../elements/Hr';
+import Divider from '../elements/Divider';
 
 const Count = styled.h5`
   margin: 0 0 8px;
@@ -60,7 +60,7 @@ const Reviews: React.SFC = () => (
         <Body>Tesla, reporting bigger loss, emphasizes gains in production and sales.</Body>
       </Flex>
     </Flex>
-    <Hr my={0} />
+    <Divider my={0} />
     <Flex alignSelf="flex-end" mt={4}>
       <Link href="#" title="Load more review">
         + Load more

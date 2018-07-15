@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Flex } from 'grid-styled';
 import SearchInput from '../elements/inputs/SearchInput';
 import { LightBox } from '../elements/Layout';
-import Hr from '../elements/Hr';
+import Divider from '../elements/Divider';
 import SidebarList from './SidebarList';
 import * as categories from '../../../constants/categories';
 
@@ -14,7 +14,7 @@ const Sidebar: React.SFC = () => (
     <Flex>
       <SidebarList title="Types" data={categories.types} />
     </Flex>
-    <Hr />
+    <Divider />
     <Flex>
       <SidebarList title="Categories" data={categories.categories} />
     </Flex>

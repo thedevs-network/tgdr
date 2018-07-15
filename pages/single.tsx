@@ -6,7 +6,7 @@ import { Description, Title } from '../client/components/elements/Typography';
 import Image from '../client/components/elements/Image';
 import Button from '../client/components/elements/Button';
 import Icon from '../client/components/elements/Icon';
-import Hr from '../client/components/elements/Hr';
+import Divider from '../client/components/elements/Divider';
 import Rate from '../client/components/Rate';
 import InfoList from '../client/components/InfoList';
 import ReviewForm from '../client/components/ReviewForm';
@@ -36,7 +36,7 @@ const Single: React.SFC = () => (
           <Rate />
         </Flex>
       </Flex>
-      <Hr my={4} />
+      <Divider my={4} />
       <ReviewForm />
       <Reviews />
     </Flex>

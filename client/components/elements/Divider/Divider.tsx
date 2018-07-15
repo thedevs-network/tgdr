@@ -10,20 +10,20 @@ const CustomHr = styled.hr`
   border-radius: 2px;
 `;
 
-interface IHr {
+interface IDivider {
   mb?: number;
   mt?: number;
   my?: number;
 }
 
-const Hr: React.SFC<IHr> = ({ my }) => (
+const Divider: React.SFC<IDivider> = ({ my }) => (
   <Box my={my}>
     <CustomHr />
   </Box>
 );
 
-Hr.defaultProps = {
+Divider.defaultProps = {
   my: 4,
 };
 
-export default Hr;
+export default Divider;
