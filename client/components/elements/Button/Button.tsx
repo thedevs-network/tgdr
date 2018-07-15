@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const Button = styled.button`
+interface IButton {
+  big?: boolean;
+}
+
+const Button = styled.button<IButton>`
   position: relative;
   display: flex;
   align-items: center;
@@ -24,6 +28,10 @@ const Button = styled.button`
     box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);
     transform: scale(1.01, 1.01) translateY(-2px);
   }
+
+  ${({ big }) => big && css`
+    padding: 11px 24px;
+  `}
 `;
 
 export default Button;
