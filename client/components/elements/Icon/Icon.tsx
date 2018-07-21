@@ -51,7 +51,10 @@ const icons: IIcons = {
   users: <Users />,
 };
 
-const IconWrapper = styled(Flex)`
+const IconWrapper = styled(Flex).attrs({
+  align: 'center',
+  justify: 'center',
+})`
   svg {
     width: ${prop('size', 16)}px;
     height: auto;
