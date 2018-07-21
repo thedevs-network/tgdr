@@ -1,10 +1,8 @@
+import * as React from 'react';
 import styled from 'styled-components';
 import Icon from '../../Icon';
 
-const SearchInputIcon = styled(Icon).attrs({
-  name: 'search',
-  size: 14,
-})`
+const InputIcon = styled(Icon)`
   position: absolute;
   right: 8px;
   padding: 8px;
@@ -22,7 +20,8 @@ const SearchInputIcon = styled(Icon).attrs({
       fill: #333;
     }
   }
-
 `;
+
+const SearchInputIcon = () => <InputIcon name="search" size={14} />;
 
 export default SearchInputIcon;
