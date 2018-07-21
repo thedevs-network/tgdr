@@ -24,3 +24,14 @@ export const Description = styled.p`
   font-size: 16px;
   color: #808080;
 `;
+
+interface ILabel {
+  smallLabel?: boolean;
+}
+
+export const Label = styled.label<ILabel>`
+  font-size: ${props => props.smallLabel ? '14' : '16'}px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  padding: 0;
+`;
