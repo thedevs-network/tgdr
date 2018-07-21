@@ -45,7 +45,7 @@ const Textarea: React.SFC<ITeaxtarea> = ({
   smallLabel,
   ...props
 }) => (
-    <Flex flexDirection="column" flex="1 1 0" {...props}>
+    <Flex flexDirection="column" flex="1 1 auto" {...props}>
       <Label smallLabel={smallLabel}>{label}</Label>
       <TextareaInput name={name} placeholder={placeholder} rows={rows} />
     </Flex>

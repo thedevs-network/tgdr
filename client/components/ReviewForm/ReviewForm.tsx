@@ -33,7 +33,7 @@ const Button = styled.button.attrs({
 `;
 
 const ReviewForm: React.SFC = () => (
-  <Flex flexDirection="column" is="form" mb={3}>
+  <Flex flexDirection="column" flex="1 1 auto" is="form" mb={3}>
     <Textarea
       label="Write a review"
       name="review"
