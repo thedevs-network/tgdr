@@ -1,45 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-
-const Label = styled.label`
-  margin-bottom: 16px;  
-  font-size: 14px;
-  font-weight: 500;
-`;
-
-const Textarea = styled.textarea.attrs({
-  id: "review",
-  name: "review",
-  placeholder: "A helpful and informative review",
-  rows: 6,
-})`
-  width: 100%;
-  display: flex;
-  padding: 16px;
-  border: 1px solid #DCDCDC;
-  border-radius: 8px;
-  outline: none;
-  font-size: 14px;
-  font-weight: normal;
-  letter-spacing: 0.03em;
-  color: #888;
-  box-sizing: border-box;
-  background-color: transparent;
-  transition: border 0.2s ease-out;
-
-  :focus {
-    border: 1px solid #BBB;
-    background-color: transparent;
-  }
-
-  ::placeholder {
-    font-size: 14px;
-    font-style: italic;
-    color: #B8B8B8;
-    opacity: 1;
-  }
-`;
+import Textarea from '../elements/inputs/Textarea';
 
 const Button = styled.button.attrs({
   type: 'submit',
@@ -66,14 +28,18 @@ const Button = styled.button.attrs({
     color: white;
     background-color: #888;
     border-color: #888;
-    transform: scale(1.04, 1.04) translateY(-2px)
+    transform: scale(1.04, 1.04) translateY(-2px) translateZ(0);
   }
 `;
 
 const ReviewForm: React.SFC = () => (
   <Flex flexDirection="column" is="form" mb={3}>
-    <Label>Write a review</Label>
-    <Textarea />
+    <Textarea
+      label="Write a review"
+      name="review"
+      placeholder="A helpful and informative review"
+      smallLabel
+    />
     <Button>
       Submit
     </Button>
