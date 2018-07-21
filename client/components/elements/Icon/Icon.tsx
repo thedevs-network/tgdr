@@ -5,8 +5,10 @@ import { prop } from 'styled-tools';
 import ArrowRight from '../../../assets/images/arrow-right-icon.svg';
 import At from '../../../assets/images/at-icon.svg';
 import Calendar from '../../../assets/images/calendar-icon.svg';
+import Camera from '../../../assets/images/camera-icon.svg';
 import ChevronRight from '../../../assets/images/chevron-right.svg';
 import Heart from '../../../assets/images/heart-icon.svg';
+import Info from '../../../assets/images/info-icon.svg';
 import Message from '../../../assets/images/messages-icon.svg';
 import Robot from '../../../assets/images/robot-icon.svg';
 import Search from '../../../assets/images/search-icon.svg';
@@ -19,8 +21,10 @@ export interface IIcons {
   arrowRight: JSX.Element;
   at: JSX.Element;
   calendar: JSX.Element;
+  camera: JSX.Element;
   chevronRight: JSX.Element;
   heart: JSX.Element;
+  info: JSX.Element;
   messages: JSX.Element;
   robot: JSX.Element;
   search: JSX.Element;
@@ -34,8 +38,10 @@ const icons: IIcons = {
   arrowRight: <ArrowRight />,
   at: <At />,
   calendar: <Calendar />,
+  camera: <Camera />,
   chevronRight: <ChevronRight />,
   heart: <Heart />,
+  info: <Info />,
   messages: <Message />,
   robot: <Robot />,
   search: <Search />,
