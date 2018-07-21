@@ -28,7 +28,7 @@ const Button = styled.button<IButton>`
     border-color: ${({ isLike }) => isLike
     ? 'rgba(100, 181, 246, 1)'
     : 'rgba(239, 154, 154, 1)'};
-    transform: scale(1.01, 1.01) translateY(-1px);
+    transform: scale(1.01, 1.01) translateY(-1px) translateZ(0);
   }
 `;
 

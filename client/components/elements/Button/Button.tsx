@@ -26,7 +26,7 @@ const Button = styled.button<IButton>`
 
   :hover {
     box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);
-    transform: scale(1.01, 1.01) translateY(-2px);
+    transform: scale(1.01, 1.01) translateY(-2px) translateZ(0);
   }
 
   ${({ big }) => big && css`

@@ -24,7 +24,7 @@ const CardWrapper = styled(LightBox).attrs({
   transform: translateZ(0);
 
   :hover {
-    transform: scale(1.02, 1.02) translateY(-4px);
+    transform: scale(1.02, 1.02) translateY(-4px) translateZ(0);
     box-shadow: 0 20px 35px rgba(50, 64, 93, 0.12);
   }
 `;
