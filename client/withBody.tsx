@@ -11,7 +11,7 @@ import Sidebar from './components/Sidebar';
 
 const withBody = (Component: React.ComponentType) => {
   class WithBody extends React.Component {
-    public render() {
+    render() {
       return (
         <>
           <Header />

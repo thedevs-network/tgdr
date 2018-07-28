@@ -29,6 +29,10 @@
         ],
         "jsx-boolean-value": [
             "never"
+        ],
+        "member-access": [
+            true,
+            "no-public"
         ]
     },
     "rulesDirectory": []

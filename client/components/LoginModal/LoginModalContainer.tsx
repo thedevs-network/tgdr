@@ -11,7 +11,7 @@ interface IState {
 }
 
 class LoginModalContainer extends React.Component<IProps, IState> {
-  public isLoading: boolean;
+  isLoading: boolean;
   constructor(props) {
     super(props);
     this.state = {
@@ -19,11 +19,11 @@ class LoginModalContainer extends React.Component<IProps, IState> {
     };
   }
 
-  public handleLogin() {
+  handleLogin() {
     this.setState({ isLoading: true });
   }
 
-  public render() {
+  render() {
     if (true) {
       return (
         <MessageModal

@@ -31,11 +31,11 @@ const ModalContainer = styled(Flex).attrs({
 `;
 
 class Modal extends React.Component<IProps, IState> {
-  public static defaultProps = {
+  static defaultProps = {
     width: [0.84, 0.8, 600]
   };
 
-  public show: boolean;
+  show: boolean;
   constructor(props) {
     super(props);
 
@@ -48,12 +48,12 @@ class Modal extends React.Component<IProps, IState> {
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  public openModal() {
+  openModal() {
     this.setState({ show: true });
     document.body.style.overflow = 'hidden';
   }
 
-  public closeModal(e?: React.MouseEvent) {
+  closeModal(e?: React.MouseEvent) {
     if (e) {
       e.preventDefault();
     }
@@ -61,13 +61,13 @@ class Modal extends React.Component<IProps, IState> {
     document.body.style.overflow = 'auto';
   }
 
-  public handleOutsideClick(e) {
+  handleOutsideClick(e) {
     if (e.target.id === 'modal') {
       this.closeModal();
     }
   }
 
-  public render() {
+  render() {
     return (
       <>
         {React.cloneElement(this.props.trigger, {

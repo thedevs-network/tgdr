@@ -15,7 +15,7 @@ const HeaderContainer = styled(Flex).attrs({
 `;
 
 class Header extends React.Component {
-  public render() {
+  render() {
     return (
       <HeaderContainer is="header">
         <Container align="center" justify="space-between" >

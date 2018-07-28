@@ -2,7 +2,9 @@
   "scripts": {
     "dev": "nodemon server/server.ts",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "NODE_ENV=production node production-server/server.js"
+    "start": "NODE_ENV=production node production-server/server.js",
+    "lint": "tslint -p tsconfig.json",
+    "lint:fix": "tslint -p tsconfig.json --fix"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",

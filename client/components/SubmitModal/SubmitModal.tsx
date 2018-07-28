@@ -11,7 +11,7 @@ interface IState {
 }
 
 class SubmitModal extends React.Component<IProps, IState> {
-  public isFormVisible: boolean;
+  isFormVisible: boolean;
   constructor(props) {
     super(props);
     this.state = {
@@ -20,11 +20,11 @@ class SubmitModal extends React.Component<IProps, IState> {
     this.showForm = this.showForm.bind(this);
   }
 
-  public showForm() {
+  showForm() {
     this.setState({ isFormVisible: true });
   }
 
-  public render() {
+  render() {
     if (this.state.isFormVisible) {
       return <SubmitModalForm closeModal={this.props.closeModal} />;
     }
