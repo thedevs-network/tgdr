@@ -6,6 +6,7 @@ import { LightBox } from '../../elements/Layout';
 interface IProps {
   children: (Function) => JSX.Element;
   trigger: JSX.Element;
+  width?: number[];
 }
 
 interface IState {
@@ -30,8 +31,11 @@ const ModalContainer = styled(Flex).attrs({
 `;
 
 class Modal extends React.Component<IProps, IState> {
-  public show: boolean;
+  public static defaultProps = {
+    width: [0.84, 0.8, 600]
+  };
 
+  public show: boolean;
   constructor(props) {
     super(props);
 
@@ -71,11 +75,11 @@ class Modal extends React.Component<IProps, IState> {
         })}
         {this.state.show && (
           <ModalContainer id="modal" onClick={this.handleOutsideClick}>
-            <LightBox 
-              px={[16, 32]} 
-              py={[32, 48]} 
-              width={[0.84, 0.8, 600]} 
-              flexDirection="column" 
+            <LightBox
+              px={[16, 32]}
+              py={[32, 48]}
+              width={this.props.width}
+              flexDirection="column"
               flex="0 0 auto"
             >
               {this.props.children(this.closeModal)}
