@@ -22,6 +22,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-dropzone": "^4.2.13",
+    "react-telegram-login": "^1.0.2-beta-6",
     "styled-components": "^3.3.3",
     "styled-tools": "^0.6.0",
     "typescript": "^2.7.1"
