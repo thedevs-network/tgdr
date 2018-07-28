@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import { prop } from 'styled-tools';
 import Icon from '../elements/Icon';
 import Button from '../elements/Button';
 import Divider from '../elements/Divider';
@@ -12,7 +13,7 @@ const IconBox = styled(Flex).attrs({
 })`
   width: 80px;
   height: 80px;
-  border: 4px solid ${props => props.color};
+  border: 4px solid ${prop('color')};
   border-radius: 100%;
 `;
 

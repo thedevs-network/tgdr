@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { ifProp } from 'styled-tools';
 
 interface ITitle {
   small?: boolean;
@@ -30,7 +31,7 @@ interface ILabel {
 }
 
 export const Label = styled.label<ILabel>`
-  font-size: ${props => props.smallLabel ? '14' : '16'}px;
+  font-size: ${ifProp({ smallLabel: true }, "14px", "16px")};
   font-weight: 500;
   margin-bottom: 8px;
   padding: 0;

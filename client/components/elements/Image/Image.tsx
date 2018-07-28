@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { prop } from 'styled-tools';
 import { Flex } from 'grid-styled';
 
 interface IImage {
@@ -14,7 +15,7 @@ interface IImage {
 }
 
 const ImageWrapper = styled(Flex) <IImage>`
-  height: ${({ h }) => h}px;
+  height: ${prop('h')}px;
   background-color: #eee;
   border-radius: 50%;
   overflow: hidden;
