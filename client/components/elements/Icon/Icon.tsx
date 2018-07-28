@@ -6,7 +6,9 @@ import ArrowRight from '../../../assets/images/arrow-right-icon.svg';
 import At from '../../../assets/images/at-icon.svg';
 import Calendar from '../../../assets/images/calendar-icon.svg';
 import Camera from '../../../assets/images/camera-icon.svg';
-import ChevronRight from '../../../assets/images/chevron-right.svg';
+import Check from '../../../assets/images/check-icon.svg';
+import ChevronRight from '../../../assets/images/chevron-right-icon.svg';
+import Close from '../../../assets/images/close-icon.svg';
 import Heart from '../../../assets/images/heart-icon.svg';
 import Info from '../../../assets/images/info-icon.svg';
 import Message from '../../../assets/images/messages-icon.svg';
@@ -22,7 +24,9 @@ export interface IIcons {
   at: JSX.Element;
   calendar: JSX.Element;
   camera: JSX.Element;
+  check: JSX.Element;
   chevronRight: JSX.Element;
+  close: JSX.Element;
   heart: JSX.Element;
   info: JSX.Element;
   messages: JSX.Element;
@@ -39,7 +43,9 @@ const icons: IIcons = {
   at: <At />,
   calendar: <Calendar />,
   camera: <Camera />,
+  check: <Check />,
   chevronRight: <ChevronRight />,
+  close: <Close />,
   heart: <Heart />,
   info: <Info />,
   messages: <Message />,
