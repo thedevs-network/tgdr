@@ -1,9 +1,12 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import LoginModal from './LoginModal';
 import MessageModal from '../MessageModal';
+import { login } from '../../store/auth';
 
 interface IProps {
   closeModal: () => void;
+  login: typeof login;
 }
 
 interface IState {
@@ -14,17 +17,15 @@ class LoginModalContainer extends React.Component<IProps, IState> {
   isLoading: boolean;
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: false,
-    };
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin() {
-    this.setState({ isLoading: true });
+  handleLogin(data) {
+    this.props.login(data);
   }
 
   render() {
-    if (true) {
+    if (false) {
       return (
         <MessageModal
           closeModal={this.props.closeModal}
@@ -41,4 +42,4 @@ class LoginModalContainer extends React.Component<IProps, IState> {
   }
 }
 
-export default LoginModalContainer;
+export default connect(null, { login })(LoginModalContainer);
