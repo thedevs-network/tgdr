@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NextContext } from 'next';
-import initializeStore from './store/initializeStore';
+import { initializeStore } from './store';
 
 interface IApp extends React.ComponentClass<any, any> {
   getInitialProps?: (ctx: NextContext) => Promise<any>;
