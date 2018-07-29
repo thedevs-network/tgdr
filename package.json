@@ -47,6 +47,7 @@
     "@types/passport": "^0.4.5",
     "@types/react": "^16.4.7",
     "@types/react-dropzone": "^4.2.0",
+    "@types/react-redux": "^6.0.5",
     "babel-plugin-inline-react-svg": "^0.5.3",
     "babel-plugin-styled-components": "^1.5.1",
     "nodemon": "^1.12.1",
