@@ -5,7 +5,12 @@ import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
+import * as passport from 'passport';
 import config from './config';
+import auth from './api/authApi';
+
+// Import passport strategies
+import './passport';
 
 const app = next({ dev: config.is_dev });
 const handle = app.getRequestHandler();
@@ -28,11 +33,16 @@ app.prepare()
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
 
+    // Initialize passport
+    server.use(passport.initialize());
+
     // Serve static files inside static folder
     server.use(express.static('static'));
 
     // Routes
-    server.get('*', (req: express.Request, res: express.Response) => handle(req, res));
+    server.use('/api/auth', auth);
+
+    server.get('*', (req, res) => handle(req, res));
 
     // Start server
     server.listen(config.port, err => {
