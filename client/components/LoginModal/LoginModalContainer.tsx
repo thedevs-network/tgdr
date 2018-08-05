@@ -1,23 +1,44 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Flex } from 'grid-styled';
 import LoginModal from './LoginModal';
 import MessageModal from '../MessageModal';
 import { login } from '../../store/auth';
+import Spinner from '../elements/Spinner';
+import { IAuthState } from '../../store/auth/types';
 
 interface IProps {
+  auth: IAuthState;
   closeModal: () => void;
   login: typeof login;
 }
 
 interface IState {
-  isLoading: boolean;
+  isIframeLoading: boolean;
 }
 
 class LoginModalContainer extends React.Component<IProps, IState> {
-  isLoading: boolean;
+  state: IState;
   constructor(props) {
     super(props);
+
+    this.state = {
+      isIframeLoading: true,
+    };
+
     this.handleLogin = this.handleLogin.bind(this);
+    this.checkIframeLoaded = this.checkIframeLoaded.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkIframeLoaded();
+  }
+
+  checkIframeLoaded() {
+    const iframe = document.querySelector('iframe');
+    if (!iframe) return setTimeout(this.checkIframeLoaded, 200);
+    iframe.addEventListener('load', () =>
+      this.setState({ isIframeLoading: false }));
   }
 
   handleLogin(data) {
@@ -25,21 +46,37 @@ class LoginModalContainer extends React.Component<IProps, IState> {
   }
 
   render() {
-    if (false) {
+    const { isIframeLoading } = this.state;
+    const { auth, closeModal } = this.props;
+
+    if (auth.isLoading) {
+      return (
+        <Flex justify="center" my={4}>
+          <Spinner size={32} />
+        </Flex>
+      );
+    }
+
+    if (auth.isFetched) {
       return (
         <MessageModal
-          closeModal={this.props.closeModal}
-          text="You have logged in successfully."
-          title="Welcom, Pouria!"
-          type="success"
+          closeModal={closeModal}
+          text={auth.message.text}
+          title={auth.message.title}
+          type={auth.message.type}
         />
       );
     }
 
     return (
-      <LoginModal handleLogin={this.handleLogin} />
+      <LoginModal
+        handleLogin={this.handleLogin}
+        isIframeLoaded={isIframeLoading}
+      />
     );
   }
 }
 
-export default connect(null, { login })(LoginModalContainer);
+const mapStateToProps = ({ auth }) => ({ auth });
+
+export default connect(mapStateToProps, { login })(LoginModalContainer);
