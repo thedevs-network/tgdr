@@ -1,5 +1,7 @@
 export enum AuthStateTypes {
-  LOGIN_REQUEST = '@@auth/LOGIN_REQUEST'
+  LOGIN_FAILURE = '@@auth/LOGIN_FAILURE',
+  LOGIN_REQUEST = '@@auth/LOGIN_REQUEST',
+  LOGIN_SUCCESS = '@@auth/LOGIN_SUCCESS',
 }
 
 export interface ILoginParams {
@@ -12,6 +14,19 @@ export interface ILoginParams {
 }
 
 export interface IAuthState {
-  readonly jwt: string;
-  readonly loading: boolean;
+  readonly isFetched: boolean;
+  readonly isLoading: boolean;
+  readonly message: {
+    text: string
+    title: string
+    type: 'success' | 'error'
+  };
+  readonly token: string;
+}
+
+export interface IToken {
+  exp: number;
+  iat: number;
+  iss: string;
+  sub: string;
 }
