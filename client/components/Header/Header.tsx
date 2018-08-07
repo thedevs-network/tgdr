@@ -5,7 +5,7 @@ import { Container } from '../elements/Layout';
 import Logo from '../elements/Logo';
 import HeaderMenu from './HeaderMenu';
 
-const HeaderContainer = styled(Flex).attrs({
+const HeaderWrapper = styled(Flex).attrs({
   align: 'center',
   justify: 'center',
 })`
@@ -17,12 +17,12 @@ const HeaderContainer = styled(Flex).attrs({
 class Header extends React.Component {
   render() {
     return (
-      <HeaderContainer is="header">
+      <HeaderWrapper is="header">
         <Container align="center" justify="space-between" >
           <Logo />
           <HeaderMenu />
         </Container>
-      </HeaderContainer>
+      </HeaderWrapper>
     );
   }
 }
