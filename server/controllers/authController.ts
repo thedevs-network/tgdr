@@ -19,3 +19,8 @@ export const loginHandler = (req: express.Request, res: express.Response) => {
   const jwt = signToken(req.user);
   res.status(200).json({ token: jwt });
 };
+
+export const renewHandler = (req: express.Request, res: express.Response) => {
+  const jwt = signToken(req.user);
+  res.status(200).json({ token: jwt });
+};
