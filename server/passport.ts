@@ -1,6 +1,7 @@
 import * as passport from 'passport';
 import config from './config';
 import TelegramStratagy from 'passport-telegram-official';
+import * as PassportJwt from 'passport-jwt';
 import User from './models/User';
 
 passport.use(new TelegramStratagy({
@@ -23,3 +24,20 @@ passport.use(new TelegramStratagy({
     return cb(error, false, "Couldn't authenticate.");
   }
 }));
+
+const jwtOptions = {
+  jwtFromRequest: PassportJwt.ExtractJwt.fromHeader('authorization'),
+  secretOrKey: config.jwt_secret,
+};
+
+passport.use(
+  new PassportJwt.Strategy(jwtOptions, async (payload, cb) => {
+    try {
+      const user = await User.findOne({telegram_id: payload.id});
+      if (!user) return cb(null, false);
+      return cb(null, user);
+    } catch (error) {
+      return cb(error, false);
+    }
+  })
+);
