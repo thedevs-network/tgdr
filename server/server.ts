@@ -7,7 +7,7 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as passport from 'passport';
 import config from './config';
-import auth from './api/authApi';
+import authApi from './api/authApi';
 
 // Import passport strategies
 import './passport';
@@ -39,8 +39,8 @@ app.prepare()
     // Serve static files inside static folder
     server.use(express.static('static'));
 
-    // Routes
-    server.use('/api/auth', auth);
+    // API
+    server.use('/api/auth', authApi);
 
     server.get('*', (req, res) => handle(req, res));
 
