@@ -19,19 +19,17 @@ const A = styled.a`
   }
 `;
 
-const HeaderMenu: React.SFC = () => (
-  <Flex align="center" is="nav">
-    <Box mx={3}>
-      <Modal
-        trigger={(
-          <Button>
-            + Submit
-          </Button>
-        )}>
-        {closeModal => <SubmitModal closeModal={closeModal} />}
-      </Modal>
-    </Box>
-    <Box ml={2}>
+interface IProps {
+  name: string;
+}
+
+const HeaderMenu: React.SFC<IProps> = ({ name }) => {
+  const authLink = name
+    ? (
+      <A href="#" title="logout">
+        {name} (logout)
+      </A>
+    ) : (
       <Modal
         trigger={(
           <A href="#" title="Login or sign up">
@@ -40,8 +38,25 @@ const HeaderMenu: React.SFC = () => (
         )}>
         {closeModal => <LoginModal closeModal={closeModal} />}
       </Modal>
-    </Box>
-  </Flex>
-);
+    );
+
+  return (
+    <Flex align="center" is="nav">
+      <Box mx={3}>
+        <Modal
+          trigger={(
+            <Button>
+              + Submit
+          </Button>
+          )}>
+          {closeModal => <SubmitModal closeModal={closeModal} />}
+        </Modal>
+      </Box>
+      <Box ml={2}>
+        {authLink}
+      </Box>
+    </Flex>
+  );
+};
 
 export default HeaderMenu;

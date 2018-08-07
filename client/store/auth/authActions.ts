@@ -18,6 +18,14 @@ const loginFailure = (): AnyAction => ({
   type: AuthStateTypes.LOGIN_FAILURE,
 });
 
+const requestLogout = (): AnyAction => ({
+  type: AuthStateTypes.LOGOUT_REQUEST,
+});
+
+const logoutSuccessful = (): AnyAction => ({
+  type: AuthStateTypes.LOGOUT_REQUEST,
+});
+
 const decodeToken = (token: string): IToken => jwtDecode(token);
 
 const saveToken = (token: string) => {
@@ -25,6 +33,8 @@ const saveToken = (token: string) => {
   const daysToExpire = differenceInDays(decodedToken.exp, decodedToken.iat);
   Cookie.set('token', token, { expires: daysToExpire });
 };
+
+const deleteToken = () => Cookie.remove('token');
 
 export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
   try {
@@ -37,4 +47,10 @@ export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
     dispatch(loginFailure());
     return Promise.reject(error);
   }
+}; 
+
+export const logout = () => async (dispatch: Dispatch) => {
+  dispatch(requestLogout());
+  deleteToken();
+  dispatch(logoutSuccessful());
 }; 

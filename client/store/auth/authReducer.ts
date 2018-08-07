@@ -10,6 +10,7 @@ const initialState: IAuthState = {
     title: null,
     type: null,
   },
+  name: null,
   token: null,
 };
 
@@ -28,6 +29,7 @@ export const authReducer: Reducer<IAuthState> = (state = initialState, action) =
         title: `Welcome ${shortenLongName(action.payload.name, 17)}`,
         type: 'success'
       },
+      name: action.payload.name,
       token: action.payload.token,
     };
 

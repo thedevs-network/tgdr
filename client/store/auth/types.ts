@@ -2,6 +2,8 @@ export enum AuthStateTypes {
   LOGIN_FAILURE = '@@auth/LOGIN_FAILURE',
   LOGIN_REQUEST = '@@auth/LOGIN_REQUEST',
   LOGIN_SUCCESS = '@@auth/LOGIN_SUCCESS',
+  LOGOUT_REQUEST = '@@auth/LOGOUT_REQUEST',
+  LOGOUT_SUCCESS = '@@auth/LOGOUT_SUCCESS',
 }
 
 export interface ILoginParams {
@@ -21,6 +23,7 @@ export interface IAuthState {
     title: string
     type: 'success' | 'error'
   };
+  readonly name: string;
   readonly token: string;
 }
 

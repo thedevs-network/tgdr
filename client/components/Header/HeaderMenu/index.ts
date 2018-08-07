@@ -1,1 +1,1 @@
-export { default } from './HeaderMenu';
+export { default } from './HeaderMenuContainer';
