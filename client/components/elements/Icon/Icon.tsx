@@ -11,6 +11,7 @@ import ChevronRight from '../../../assets/images/chevron-right-icon.svg';
 import Close from '../../../assets/images/close-icon.svg';
 import Heart from '../../../assets/images/heart-icon.svg';
 import Info from '../../../assets/images/info-icon.svg';
+import Logout from '../../../assets/images/log-out-icon.svg';
 import Message from '../../../assets/images/messages-icon.svg';
 import Robot from '../../../assets/images/robot-icon.svg';
 import Search from '../../../assets/images/search-icon.svg';
@@ -29,6 +30,7 @@ export interface IIcons {
   close: JSX.Element;
   heart: JSX.Element;
   info: JSX.Element;
+  logout: JSX.Element;
   messages: JSX.Element;
   robot: JSX.Element;
   search: JSX.Element;
@@ -48,6 +50,7 @@ const icons: IIcons = {
   close: <Close />,
   heart: <Heart />,
   info: <Info />,
+  logout: <Logout />,
   messages: <Message />,
   robot: <Robot />,
   search: <Search />,
@@ -69,7 +72,7 @@ const IconWrapper = styled(Flex).attrs({
       fill: ${prop('fill', '#C7CFD6')};
       stroke: ${prop('stroke', 'none')};
       opacity: 1;
-      transition: fill 0.3s ease-out;
+      transition: fill 0.3s ease-out, stroke 0.3s ease-out;
     }
   }
 
