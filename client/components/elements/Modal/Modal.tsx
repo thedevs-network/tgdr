@@ -48,15 +48,14 @@ class Modal extends React.Component<IProps, IState> {
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
-  openModal() {
+  openModal(e) {
+    e.preventDefault();
     this.setState({ show: true });
     document.body.style.overflow = 'hidden';
   }
 
   closeModal(e?: React.MouseEvent) {
-    if (e) {
-      e.preventDefault();
-    }
+    if (e) e.preventDefault();
     this.setState({ show: false });
     document.body.style.overflow = 'auto';
   }
