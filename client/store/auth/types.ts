@@ -4,6 +4,7 @@ export enum AuthStateTypes {
   LOGIN_SUCCESS = '@@auth/LOGIN_SUCCESS',
   LOGOUT_REQUEST = '@@auth/LOGOUT_REQUEST',
   LOGOUT_SUCCESS = '@@auth/LOGOUT_SUCCESS',
+  RENEW_SUCCESS = '@@auth/RENEW_SUCCESS',
 }
 
 export interface ILoginParams {
@@ -16,6 +17,7 @@ export interface ILoginParams {
 }
 
 export interface IAuthState {
+  readonly isAuthenticated: boolean;
   readonly isFetched: boolean;
   readonly isLoading: boolean;
   readonly message: {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NextStatelessComponent } from 'next';
+import withVerifyToken from '../client/withVerifyToken';
 import Body from '../client/components/Body';
 import Cards from '../client/components/Cards';
 
@@ -11,4 +12,4 @@ const Homepage: NextStatelessComponent = () => (
   </Body>
 );
 
-export default Homepage;
+export default withVerifyToken(Homepage);

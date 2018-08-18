@@ -26,6 +26,11 @@ const logoutSuccessful = (): AnyAction => ({
   type: AuthStateTypes.LOGOUT_REQUEST,
 });
 
+const renewTokenSuccessful = (payload: IToken & { token: string }): AnyAction => ({
+  payload,
+  type: AuthStateTypes.RENEW_SUCCESS,
+});
+
 const decodeToken = (token: string): IToken => jwtDecode(token);
 
 const saveToken = (token: string) => {
@@ -54,3 +59,18 @@ export const logout = () => async (dispatch: Dispatch) => {
   deleteToken();
   dispatch(logoutSuccessful());
 }; 
+
+export const renewToken = (token: string) => async (dispatch: Dispatch) => {
+  try {
+    const { data: { token: newToken } } = await axios.post('/api/auth/renew', null, {
+      headers: {
+        'Authorization': token,
+      }
+    });
+    saveToken(newToken);
+    const decodedToken = decodeToken(newToken);
+    dispatch(renewTokenSuccessful({ ...decodedToken, token }));
+  } catch (error) {
+    deleteToken();
+  }
+};

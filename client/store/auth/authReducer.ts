@@ -3,6 +3,7 @@ import { AuthStateTypes, IAuthState } from './types';
 import { shortenLongName } from '../../utils';
 
 const initialState: IAuthState = {
+  isAuthenticated: false,
   isFetched: false,
   isLoading: false,
   message: {
@@ -17,11 +18,13 @@ const initialState: IAuthState = {
 export const authReducer: Reducer<IAuthState> = (state = initialState, action) => {
   switch (action.type) {
   case AuthStateTypes.LOGIN_REQUEST:
-    return { ...state, isLoading: true };
+    return { ...state, isAuthenticated: false, isLoading: true };
 
   case AuthStateTypes.LOGIN_SUCCESS:
+  case AuthStateTypes.RENEW_SUCCESS:
     return {
       ...state,
+      isAuthenticated: true,
       isFetched: true,
       isLoading: false,
       message: {
@@ -36,6 +39,7 @@ export const authReducer: Reducer<IAuthState> = (state = initialState, action) =
   case AuthStateTypes.LOGIN_FAILURE:
     return {
       ...state,
+      isAuthenticated: false,
       isFetched: true,
       isLoading: false,
       message: {
