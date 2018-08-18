@@ -54,7 +54,7 @@ export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
   }
 }; 
 
-export const logout = () => async (dispatch: Dispatch) => {
+export const logout = () => (dispatch: Dispatch) => {
   dispatch(requestLogout());
   deleteToken();
   dispatch(logoutSuccessful());
