@@ -1,4 +1,6 @@
-export interface IInput {
+import { CommonFieldInputProps } from 'redux-form';
+
+export interface IInput extends Partial<WrappedFieldProps> {
   label: string;
   mb?: number;
   ml?: number;

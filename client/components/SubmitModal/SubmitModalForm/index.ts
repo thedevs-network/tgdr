@@ -1,1 +1,1 @@
-export { default } from './SubmitModalForm';
+export { default } from './SubmitModalFormContainer';
