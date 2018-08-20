@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Flex } from 'grid-styled';
+import { Field } from 'redux-form';
 import Button from '../../elements/Button';
 import Icon from '../../elements/Icon';
 import SelectInput from '../../elements/inputs/SelectInput';
@@ -8,27 +9,48 @@ import Textarea from '../../elements/inputs/Textarea';
 import { categories } from '../../../../constants/categories';
 
 interface ISubmitModalForm {
+  onSubmit: any;
   closeModal: () => void;
 }
 
 const getOptions = item => ({ key: item.name, value: item.slug });
 
-const SubmitModalForm: React.SFC<ISubmitModalForm> = ({ closeModal }) => {
+const SubmitModalForm: React.SFC<ISubmitModalForm> = ({ closeModal, onSubmit }) => {
   const categoryOptions = [
     { key: 'Select a category', value: '' },
     ...categories.map(getOptions),
   ];
   return (
-    <>
+    <Flex is="form" onSubmit={onSubmit} flexDirection="column">
       <Flex justifyContent="space-between" >
-        <TextInput label="Username" name="username" placeholder="@example" mr={3} mb={3} />
-        <SelectInput label="Category" name="category" mb={3} options={categoryOptions} />
+        <Field
+          component={TextInput}
+          label="Username"
+          mb={3}
+          mr={3}
+          name="username"
+          placeholder="@example"
+        />
+        <Field
+          options={categoryOptions}
+          mb={3}
+          name="category"
+          component={SelectInput}
+          label="Category"
+        />
       </Flex>
       <Flex width={1}>
-        <TextInput label="Name" name="name" placeholder="Lorem Ipsum" mb={3} />
+        <Field
+          component={TextInput}
+          label="Title"
+          mb={3}
+          name="title"
+          placeholder="Example"
+        />
       </Flex>
       <Flex mb={4}>
-        <Textarea
+        <Field
+          component={Textarea}
           label="Description"
           name="description"
           placeholder="A helpful and informative description"
@@ -43,7 +65,7 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({ closeModal }) => {
           Cancel
         </Button>
       </Flex>
-    </>
+    </Flex>
   );
 };
 
