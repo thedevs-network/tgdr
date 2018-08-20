@@ -36,3 +36,8 @@ export const Label = styled.label<ILabel>`
   margin-bottom: 8px;
   padding: 0;
 `;
+
+export const InputErrorMessage = styled.small`
+  padding-top: 4px;
+  color: #F44336;
+`;
