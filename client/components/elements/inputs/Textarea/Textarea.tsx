@@ -1,14 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import { Label } from '../../Typography';
+import { ifProp } from 'styled-tools';
+import { InputErrorMessage, Label } from '../../Typography';
 import { IInput } from '..';
 
 const TextareaInput = styled.textarea`
   width: 100%;
   display: flex;
   padding: 16px;
-  border: 1px solid #DCDCDC;
+  border: 1px solid ${ifProp({ hasError: true }, '#E57373', '#DCDCDC')};
   border-radius: 8px;
   outline: none;
   font-size: 14px;
@@ -20,7 +21,8 @@ const TextareaInput = styled.textarea`
   transition: border-color 0.2s ease-out;
 
   :focus {
-    border-color: #BBB;
+  border-color: ${ifProp({ hasError: true }, '#E57373', '#BBB')};
+
     background-color: transparent;
   }
 
@@ -37,19 +39,27 @@ interface ITeaxtarea extends IInput {
   smallLabel?: boolean;
 }
 
-const Textarea: React.SFC<ITeaxtarea> = ({
-  label,
-  name,
-  placeholder,
-  rows,
-  smallLabel,
-  ...props
-}) => (
-    <Flex flexDirection="column" flex="1 1 auto" {...props}>
+const Textarea: React.SFC<ITeaxtarea> = (props) => {
+  const { label, name, placeholder, rows, smallLabel, input, meta, ...restProps } = props;
+  const hasError = meta.touched && meta.error;
+  const errorMessage = hasError && (
+    <InputErrorMessage>{meta.error}</InputErrorMessage>
+  );
+
+  return (
+    <Flex flexDirection="column" flex="1 1 auto" {...restProps}>
       <Label smallLabel={smallLabel}>{label}</Label>
-      <TextareaInput name={name} placeholder={placeholder} rows={rows} />
+      <TextareaInput
+        {...input}
+        hasError={!!hasError}
+        name={name}
+        placeholder={placeholder}
+        rows={rows}
+      />
+      {errorMessage}
     </Flex>
   );
+};
 
 Textarea.defaultProps = {
   rows: 6,
