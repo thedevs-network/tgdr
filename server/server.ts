@@ -8,6 +8,10 @@ import * as mongoose from 'mongoose';
 import * as passport from 'passport';
 import config from './config';
 import authApi from './api/authApi';
+import entryApi from './api/entryApi';
+
+// Import Telegram bot
+import './bot';
 
 // Import passport strategies
 import './passport';
@@ -41,12 +45,15 @@ app.prepare()
 
     // API
     server.use('/api/auth', authApi);
+    server.use('/api/entry', entryApi);
 
     server.get('*', (req, res) => handle(req, res));
 
     // Start server
     server.listen(config.port, err => {
       if (err) throw err;
-      console.log(`> Ready on http://localhost:${config.port}`); // tslint:disable-line:no-console
+      console.log( // tslint:disable-line:no-console
+        `> Ready on http://localhost:${config.port}`
+      ); 
     });
   });
