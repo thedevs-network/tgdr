@@ -40,8 +40,11 @@ interface ITeaxtarea extends IInput {
 }
 
 const Textarea: React.SFC<ITeaxtarea> = (props) => {
-  const { label, name, placeholder, rows, smallLabel, input, meta, ...restProps } = props;
-  const hasError = meta.touched && meta.error;
+  const {
+    label, name, placeholder, rows, smallLabel, input, meta, ...restProps
+  } = props;
+
+  const hasError = meta && meta.touched && meta.error;
   const errorMessage = hasError && (
     <InputErrorMessage>{meta.error}</InputErrorMessage>
   );
