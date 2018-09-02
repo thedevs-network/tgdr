@@ -4,11 +4,7 @@ import * as express from 'express';
 import axios from 'axios';
 import * as botController from './botController';
 
-export const getDetails = async (
-  req: express.Request, 
-  res: express.Response,
-  next: express.NextFunction,
-) => {
+export const getDetails: express.RequestHandler = async (req, res, next) => {
   const { category, description, title, username } = req.body;
   
   const isBot = /^\w+bot$/ig.test(username);
@@ -33,11 +29,7 @@ export const getDetails = async (
   }
 };
 
-export const downloadImage = async (
-  _req: express.Request, 
-  res: express.Response,
-  next: express.NextFunction,
-) => {
+export const downloadImage: express.RequestHandler = async (_req, res,next) => {
   const { username } = res.locals.entry;
     
   const fileLocalPath = path.join(

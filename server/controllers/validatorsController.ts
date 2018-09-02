@@ -5,11 +5,7 @@ interface IError {
   msg: string;
 }
 
-export const entry = (
-  req: express.Request, 
-  res: express.Response, 
-  next: express.NextFunction
-) => {
+export const entry: express.RequestHandler = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const messages = errors.array().map((item: IError) => item.msg);
