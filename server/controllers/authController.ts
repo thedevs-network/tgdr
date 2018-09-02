@@ -15,12 +15,12 @@ const signToken = (user: IUserModel) =>
     config.jwt_secret
   );
 
-export const loginHandler = (req: express.Request, res: express.Response) => {
+export const login = (req: express.Request, res: express.Response) => {
   const jwt = signToken(req.user);
   res.status(200).json({ token: jwt });
 };
 
-export const renewHandler = (req: express.Request, res: express.Response) => {
+export const renew = (req: express.Request, res: express.Response) => {
   const jwt = signToken(req.user);
   res.status(200).json({ token: jwt });
 };
