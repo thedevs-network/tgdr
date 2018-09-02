@@ -33,6 +33,17 @@
         "member-access": [
             true,
             "no-public"
+        ],
+        "max-line-length": [
+            true,
+            80
+        ],
+        "variable-name": [
+            true,
+            "check-format",
+            "allow-leading-underscore",
+            "allow-pascal-case",
+            "allow-snake-case"
         ]
     },
     "rulesDirectory": []
