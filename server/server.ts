@@ -9,6 +9,7 @@ import * as passport from 'passport';
 import config from './config';
 import authApi from './api/authApi';
 import entryApi from './api/entryApi';
+import * as errorController from './controllers/errorController';
 
 // Import Telegram bot
 import './bot';
@@ -46,6 +47,7 @@ app.prepare()
     // API
     server.use('/api/auth', authApi);
     server.use('/api/entry', entryApi);
+    server.use(errorController.send);
 
     server.get('*', (req, res) => handle(req, res));
 

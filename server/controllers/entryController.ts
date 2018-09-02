@@ -9,24 +9,20 @@ export const getDetails: express.RequestHandler = async (req, res, next) => {
   
   const isBot = /^\w+bot$/ig.test(username);
 
-  try {
-    const entryDetails = isBot 
+  const entryDetails = isBot 
       ? await botController.getBotDetails(username) 
       : await botController.getChatDetails(username);
 
-    res.locals.entry = {
-      ...entryDetails,
-      category,
-      description, 
-      title,
-      username,
-    };
+  res.locals.entry = {
+    ...entryDetails,
+    category,
+    description, 
+    title,
+    username,
+  };
 
-    next();
+  next();
 
-  } catch (error) {
-    res.status(422).json({ error });
-  }
 };
 
 export const downloadImage: express.RequestHandler = async (_req, res,next) => {
@@ -49,8 +45,6 @@ export const downloadImage: express.RequestHandler = async (_req, res,next) => {
   response.data.on('end', next);
 
   response.data.on('error', () => {
-    res.status(400).json({ error: 'An error occurred. Try again later.' });
+    throw new Error('An error occurred');
   });
-
-  res.status(400).json({ error: 'An error occurred. Try again later.' });
 };

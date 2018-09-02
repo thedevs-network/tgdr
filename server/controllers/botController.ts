@@ -17,19 +17,15 @@ export const getChatDetails = async (username: string) => {
     const message = error.code === 400 
       ? 'Chat not found.' 
       : 'An error occurred. Try again later.';
-    return Promise.reject(message);
+    throw new Error(message);
   }
 };
 
 export const getBotDetails = async (username: string) => {
-  try {
-    const { data } = await axios.get(`https://t.me/${username}`);
-    const $ = cheerio.load(data);
-    const img = $('.tgme_page_photo_image').attr('src');
-    return {
-      image: img,
-    };
-  } catch (error) {
-    return Promise.reject('An error occurred. Try again later.');
-  }
+  const { data } = await axios.get(`https://t.me/${username}`);
+  const $ = cheerio.load(data);
+  const img = $('.tgme_page_photo_image').attr('src');
+  return {
+    image: img,
+  };
 };
