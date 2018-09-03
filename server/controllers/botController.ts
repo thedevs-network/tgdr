@@ -2,6 +2,7 @@ import axios from 'axios';
 import bot from '../bot';
 import * as cheerio from 'cheerio';
 import config from '../config';
+import CustomError from '../helpers/customError';
 
 export const getChatDetails = async (username: string) => {
   username = `@${username}`;
@@ -17,7 +18,7 @@ export const getChatDetails = async (username: string) => {
     const message = error.code === 400 
       ? 'Chat not found.' 
       : 'An error occurred. Try again later.';
-    throw new Error(message);
+    throw new CustomError(message);
   }
 };
 
