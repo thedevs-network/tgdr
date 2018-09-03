@@ -42,9 +42,13 @@ export const downloadImage: express.RequestHandler = async (_req, res,next) => {
 
   response.data.pipe(fs.createWriteStream(fileLocalPath));
 
-  response.data.on('end', next);
-
-  response.data.on('error', () => {
-    throw new Error('An error occurred');
+  return new Promise((resolve, reject) => {
+    response.data.on('end', () => {
+      resolve();
+      next();
+    });
+  
+    response.data.on('error', reject);
   });
+
 };
