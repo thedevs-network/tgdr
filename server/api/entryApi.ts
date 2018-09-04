@@ -12,8 +12,10 @@ router.post(
   entryValidators,
   asyncHandler(validatorsController.entry),
   passport.authenticate('jwt', { session: false }),
+  asyncHandler(entryController.checkExistence),
   asyncHandler(entryController.getDetails),
   asyncHandler(entryController.downloadImage),
+  asyncHandler(entryController.createEntry),
 );
 
 export default router;
