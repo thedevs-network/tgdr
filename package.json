@@ -70,6 +70,7 @@
     "babel-plugin-inline-react-svg": "^0.5.3",
     "babel-plugin-styled-components": "^1.5.1",
     "nodemon": "^1.12.1",
+    "prettier": "^1.14.2",
     "ts-node": "^4.1.0",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
