@@ -10,7 +10,7 @@ export interface IUserModel extends Document {
 const userSchema: Schema = new Schema({
   created_at: { type: Date, required: true, default: () => new Date() },
   first_name: { type: String, required: true, maxlength: 32 },
-  telegram_id: { type: Number, required: true },
+  telegram_id: { type: Number, required: true, index: true },
   username: { type: String, lowercase: true, trim: true }
 });
 
