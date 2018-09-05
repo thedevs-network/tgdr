@@ -8,12 +8,13 @@ const router = express.Router();
 router.post(
   '/login',
   passport.authenticate('telegram', { session: false }),
-  asyncHandler(authController.login));
+  asyncHandler(authController.login)
+);
 
 router.post(
   '/renew',
   passport.authenticate('jwt', { session: false }),
-  asyncHandler(authController.renew),
+  asyncHandler(authController.renew)
 );
 
 export default router;

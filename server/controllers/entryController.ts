@@ -7,18 +7,18 @@ import { StatusEnum, TypeEnum } from '../../constants/entry';
 import Entry, { IEntryModel } from '../models/Entry';
 
 export const checkExistence: express.RequestHandler = async (
-  req, 
-  res, 
-  next,
+  req,
+  res,
+  next
 ) => {
   const { username } = req.body;
-  
-  const entry: IEntryModel = await Entry.findOne({username});
+
+  const entry: IEntryModel = await Entry.findOne({ username });
 
   if (entry) {
-    return res.status(422).json({ 
-      error: 'Entry is already submitted.', 
-      status: StatusEnum[entry.status] 
+    return res.status(422).json({
+      error: 'Entry is already submitted.',
+      status: StatusEnum[entry.status],
     });
   }
 
@@ -27,19 +27,19 @@ export const checkExistence: express.RequestHandler = async (
 
 export const getDetails: express.RequestHandler = async (req, res, next) => {
   const { category, description, title, username } = req.body;
-  
-  const isBot = /^\w+bot$/ig.test(username);
-  
-  const entryDetails = isBot 
-  ? await botController.getBotDetails(username) 
-  : await botController.getChatDetails(username);
+
+  const isBot = /^\w+bot$/gi.test(username);
+
+  const entryDetails = isBot
+    ? await botController.getBotDetails(username)
+    : await botController.getChatDetails(username);
 
   const entryType = isBot ? 'bot' : entryDetails.type;
 
   res.locals.entry = {
     ...entryDetails,
     category,
-    description, 
+    description,
     telegram_id: entryDetails.id,
     title,
     type: TypeEnum[entryType],
@@ -47,17 +47,20 @@ export const getDetails: express.RequestHandler = async (req, res, next) => {
   };
 
   next();
-
 };
 
-export const downloadImage: express.RequestHandler = async (_req, res,next) => {
+export const downloadImage: express.RequestHandler = async (
+  _req,
+  res,
+  next
+) => {
   const { username } = res.locals.entry;
-    
+
   const fileLocalPath = path.join(
-      __dirname, 
-      '../../static/images/entry', 
-      `${username}.jpg`
-    );
+    __dirname,
+    '../../static/images/entry',
+    `${username}.jpg`
+  );
 
   const response = await axios({
     method: 'GET',
@@ -72,7 +75,7 @@ export const downloadImage: express.RequestHandler = async (_req, res,next) => {
       resolve();
       next();
     });
-  
+
     response.data.on('error', reject);
   });
 };
@@ -80,7 +83,7 @@ export const downloadImage: express.RequestHandler = async (_req, res,next) => {
 export const createEntry: express.RequestHandler = async (_req, res) => {
   const entry = new Entry(res.locals.entry);
   await entry.save();
-  return res.status(201).json({ 
-    message: 'Entry has been submitted successfully.'
+  return res.status(201).json({
+    message: 'Entry has been submitted successfully.',
   });
 };

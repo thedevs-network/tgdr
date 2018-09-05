@@ -15,7 +15,7 @@ router.post(
   asyncHandler(entryController.checkExistence),
   asyncHandler(entryController.getDetails),
   asyncHandler(entryController.downloadImage),
-  asyncHandler(entryController.createEntry),
+  asyncHandler(entryController.createEntry)
 );
 
 export default router;

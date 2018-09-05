@@ -6,7 +6,7 @@ import differenceInDays from 'date-fns/difference_in_days';
 import { AuthStateTypes, ILoginParams, IToken } from './types';
 
 const requestLogin = (): AnyAction => ({
-  type: AuthStateTypes.LOGIN_REQUEST
+  type: AuthStateTypes.LOGIN_REQUEST,
 });
 
 const loginSuccessful = (payload: IToken & { token: string }): AnyAction => ({
@@ -26,7 +26,9 @@ const logoutSuccessful = (): AnyAction => ({
   type: AuthStateTypes.LOGOUT_REQUEST,
 });
 
-const renewTokenSuccessful = (payload: IToken & { token: string }): AnyAction => ({
+const renewTokenSuccessful = (
+  payload: IToken & { token: string }
+): AnyAction => ({
   payload,
   type: AuthStateTypes.RENEW_SUCCESS,
 });
@@ -44,7 +46,9 @@ const deleteToken = () => Cookie.remove('token');
 export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
   try {
     dispatch(requestLogin());
-    const { data: { token } } = await axios.post('/api/auth/login', params);
+    const {
+      data: { token },
+    } = await axios.post('/api/auth/login', params);
     saveToken(token);
     const decodedToken = decodeToken(token);
     dispatch(loginSuccessful({ ...decodedToken, token }));
@@ -52,20 +56,22 @@ export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
     dispatch(loginFailure());
     return Promise.reject(error);
   }
-}; 
+};
 
 export const logout = () => (dispatch: Dispatch) => {
   dispatch(requestLogout());
   deleteToken();
   dispatch(logoutSuccessful());
-}; 
+};
 
 export const renewToken = (token: string) => async (dispatch: Dispatch) => {
   try {
-    const { data: { token: newToken } } = await axios.post('/api/auth/renew', null, {
+    const {
+      data: { token: newToken },
+    } = await axios.post('/api/auth/renew', null, {
       headers: {
-        'Authorization': token,
-      }
+        Authorization: token,
+      },
     });
     saveToken(newToken);
     const decodedToken = decodeToken(newToken);

@@ -9,7 +9,7 @@ export const getChatDetails = async (username: string) => {
 
   try {
     const [details, members] = await Promise.all([
-      bot.telegram.getChat(username), 
+      bot.telegram.getChat(username),
       bot.telegram.getChatMembersCount(username),
     ]);
 
@@ -17,15 +17,16 @@ export const getChatDetails = async (username: string) => {
       details.photo.small_file_id
     );
 
-    const image = 
-      `https://api.telegram.org/file/bot${config.bot_token}/${file_path}`;
+    const image = `https://api.telegram.org/file/bot${
+      config.bot_token
+    }/${file_path}`;
 
     return { ...details, image, members };
-
   } catch (error) {
-    const message = error.code === 400 
-      ? 'Chat not found.' 
-      : 'An error occurred. Try again later.';
+    const message =
+      error.code === 400
+        ? 'Chat not found.'
+        : 'An error occurred. Try again later.';
 
     throw new CustomError(message);
   }

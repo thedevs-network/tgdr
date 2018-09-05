@@ -21,9 +21,9 @@ export interface IAuthState {
   readonly isFetched: boolean;
   readonly isLoading: boolean;
   readonly message: {
-    text: string
-    title: string
-    type: 'success' | 'error'
+    text: string;
+    title: string;
+    type: 'success' | 'error';
   };
   readonly name: string;
   readonly token: string;

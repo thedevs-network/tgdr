@@ -10,17 +10,17 @@ export const types: ICategories[] = [
   {
     icon: 'station',
     name: 'Channels',
-    slug: 'channels'
+    slug: 'channels',
   },
   {
     icon: 'robot',
     name: 'Bots',
-    slug: 'bots'
+    slug: 'bots',
   },
   {
     icon: 'messages',
     name: 'Groups',
-    slug: 'groups'
+    slug: 'groups',
   },
 ];
 

@@ -18,14 +18,9 @@ const store = (state: IAppState, action) => {
   if (action.type === AuthStateTypes.LOGOUT_REQUEST) {
     state = undefined;
   }
-  
+
   return rootReducer(state, action);
 };
 
-export const initializeStore = (initialState = {}) => createStore(
-  store,
-  initialState,
-  composeWithDevTools(
-    applyMiddleware(thunk)
-  )
-);
+export const initializeStore = (initialState = {}) =>
+  createStore(store, initialState, composeWithDevTools(applyMiddleware(thunk)));
