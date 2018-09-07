@@ -11,7 +11,7 @@ export const checkExistence: express.RequestHandler = async (
   res,
   next
 ) => {
-  const { username } = req.body;
+  const username = req.body.username.toLowerCase();
 
   const entry: IEntryModel = await Entry.findOne({ username });
 
