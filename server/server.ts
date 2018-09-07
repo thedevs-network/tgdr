@@ -53,9 +53,7 @@ app.prepare().then(() => {
   // Start server
   server.listen(config.port, err => {
     if (err) throw err;
-    console.log(
-      // tslint:disable-line:no-console
-      `> Ready on http://localhost:${config.port}`
-    );
+    // tslint:disable-next-line:no-console
+    console.log(`> Ready on http://localhost:${config.port}`);
   });
 });
