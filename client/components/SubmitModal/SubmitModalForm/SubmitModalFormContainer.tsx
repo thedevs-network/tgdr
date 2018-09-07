@@ -6,11 +6,16 @@ import { ISubmitEntryState, submitNewEntry } from '../../../store/submitEntry';
 import { Flex } from 'grid-styled';
 import Spinner from '../../elements/Spinner';
 import MessageModal from '../../MessageModal';
+import { IAppState } from '../../../store';
 
 interface IProps {
   closeModal: () => void;
   submitEntry: ISubmitEntryState;
   submitNewEntry: typeof submitNewEntry;
+}
+
+interface ISubmitEntryProps {
+  submitEntry: ISubmitEntryState;
 }
 
 class SubmitModalFormContainer extends React.Component<
@@ -111,9 +116,11 @@ const SubmitForm = reduxForm<{}, IProps>({
   validate,
 })(SubmitModalFormContainer);
 
-const mapStateToProps = ({ submitEntry }) => ({ submitEntry });
+const mapStateToProps = ({ submitEntry }: IAppState): ISubmitEntryProps => ({
+  submitEntry,
+});
 
-export default connect(
+export default connect<ISubmitEntryProps>(
   mapStateToProps,
   { submitNewEntry }
 )(SubmitForm);
