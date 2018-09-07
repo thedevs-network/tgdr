@@ -34,12 +34,37 @@ interface IMessageModal {
   closeModal?: () => void;
   text: string;
   title: string;
-  type?: 'success' | 'error';
+  type?: 'error' | 'pending' | 'success';
 }
 
-const MessageModal: React.SFC<IMessageModal> = ({ closeModal, text, title, type }) => {
-  const iconName = type === 'success' ? 'check' : 'close';
-  const color: string = type === 'success' ? '#81C784' : '#E57373';
+const MessageModal: React.SFC<IMessageModal> = ({
+  closeModal,
+  text,
+  title,
+  type,
+}) => {
+  let iconName;
+  let color;
+
+  switch (type) {
+    case 'success':
+      iconName = 'check';
+      color = '#81C784';
+      break;
+
+    case 'pending':
+      iconName = 'timerSand';
+      color = '#FFD54F';
+      break;
+
+    case 'error':
+      iconName = 'close';
+      color = '#E57373';
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <>
@@ -50,12 +75,8 @@ const MessageModal: React.SFC<IMessageModal> = ({ closeModal, text, title, type 
           </IconBox>
         </Flex>
         <Flex flexDirection="column">
-          <Title>
-            {title}
-          </Title>
-          <Text>
-            {text}
-          </Text>
+          <Title>{title}</Title>
+          <Text>{text}</Text>
         </Flex>
       </Flex>
       <Divider my={4} />
