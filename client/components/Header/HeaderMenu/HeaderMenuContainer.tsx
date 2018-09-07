@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import HeaderMenu from './HeaderMenu';
 import { IAppState } from '../../../store';
 import { logout } from '../../../store/auth/authActions';
+import { IAuthState } from '../../../store/auth';
 
 interface IProps {
   logout: typeof logout;
-  name: string;
+  auth: IAuthState;
 }
 
 interface IStoreProps {
-  name: string;
+  auth: IAuthState;
 }
 
 interface IState {
@@ -41,17 +42,16 @@ class HeaderMenuContainer extends React.Component<IProps, IState> {
   render() {
     return (
       <HeaderMenu
+        isAuthenticated={this.props.auth.isAuthenticated}
         isLogoutLoading={this.state.isLogoutLoading}
         logout={this.logout}
-        name={this.props.name}
+        name={this.props.auth.name}
       />
     );
   }
 }
 
-const mapStateToProps = ({ auth: { name } }: IAppState): IStoreProps => ({
-  name,
-});
+const mapStateToProps = ({ auth }: IAppState): IStoreProps => ({ auth });
 
 export default connect<IStoreProps>(
   mapStateToProps,

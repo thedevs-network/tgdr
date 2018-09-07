@@ -7,6 +7,7 @@ import LoginModal from '../../LoginModal';
 import SubmitModal from '../../SubmitModal';
 import Icon from '../../elements/Icon';
 import Spinner from '../../elements/Spinner';
+import { IAuthState } from '../../../store/auth';
 
 const A = styled.a`
   display: flex;
@@ -30,10 +31,16 @@ const A = styled.a`
 interface IProps {
   isLogoutLoading: boolean;
   logout: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-  name: string;
+  name: IAuthState['name'];
+  isAuthenticated: IAuthState['isAuthenticated'];
 }
 
-const HeaderMenu: React.SFC<IProps> = ({ isLogoutLoading, logout, name }) => {
+const HeaderMenu: React.SFC<IProps> = ({
+  isAuthenticated,
+  isLogoutLoading,
+  logout,
+  name,
+}) => {
   let logoutLink;
   let authLink;
 
@@ -48,7 +55,7 @@ const HeaderMenu: React.SFC<IProps> = ({ isLogoutLoading, logout, name }) => {
     );
   }
 
-  if (name) {
+  if (isAuthenticated) {
     authLink = logoutLink;
   } else {
     authLink = (
@@ -64,12 +71,17 @@ const HeaderMenu: React.SFC<IProps> = ({ isLogoutLoading, logout, name }) => {
     );
   }
 
+  const showSubmitButton = closeModal =>
+    isAuthenticated ? (
+      <SubmitModal closeModal={closeModal} />
+    ) : (
+      <LoginModal closeModal={closeModal} />
+    );
+
   return (
     <Flex align="center" is="nav">
       <Box mx={3}>
-        <Modal trigger={<Button>+ Submit</Button>}>
-          {closeModal => <SubmitModal closeModal={closeModal} />}
-        </Modal>
+        <Modal trigger={<Button>+ Submit</Button>}>{showSubmitButton}</Modal>
       </Box>
       <Box ml={2}>{authLink}</Box>
     </Flex>
