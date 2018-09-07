@@ -15,6 +15,8 @@ interface ISubmitModalForm {
 
 const getOptions = item => ({ key: item.name, value: item.slug });
 
+const replaceUnaccepted = (value: string) => value && value.replace(/\W/gi, '');
+
 const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
   closeModal,
   onSubmit,
@@ -32,7 +34,9 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
           mb={3}
           mr={3}
           name="username"
-          placeholder="@example"
+          placeholder="example"
+          prepend="@"
+          normalize={replaceUnaccepted}
         />
         <Field
           options={categoryOptions}
