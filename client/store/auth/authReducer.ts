@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
-import { AuthStateTypes, IAuthState } from './types';
+import { AuthStateTypes, IAuthState } from './authTypes';
 import { shortenLongName } from '../../utils';
+import { getAuthMessages } from '../../../constants/texts';
 
 const initialState: IAuthState = {
   isAuthenticated: false,
@@ -19,6 +20,11 @@ export const authReducer: Reducer<IAuthState> = (
   state = initialState,
   action
 ) => {
+  const messsages =
+    action.payload &&
+    action.payload.name &&
+    getAuthMessages(shortenLongName(action.payload.name, 17));
+
   switch (action.type) {
     case AuthStateTypes.LOGIN_REQUEST:
       return { ...state, isAuthenticated: false, isLoading: true };
@@ -30,11 +36,7 @@ export const authReducer: Reducer<IAuthState> = (
         isAuthenticated: true,
         isFetched: true,
         isLoading: false,
-        message: {
-          text: 'You have logged in successfully.',
-          title: `Welcome ${shortenLongName(action.payload.name, 17)}`,
-          type: 'success',
-        },
+        message: messsages.success,
         name: action.payload.name,
         token: action.payload.token,
       };
@@ -45,11 +47,7 @@ export const authReducer: Reducer<IAuthState> = (
         isAuthenticated: false,
         isFetched: true,
         isLoading: false,
-        message: {
-          text: "Coudn't login. Please try again later.",
-          title: 'Error',
-          type: 'error',
-        },
+        message: messsages.error,
       };
 
     default:

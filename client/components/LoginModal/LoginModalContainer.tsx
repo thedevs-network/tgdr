@@ -6,8 +6,7 @@ import MessageModal from '../MessageModal';
 import { login } from '../../store/auth';
 import Spinner from '../elements/Spinner';
 import { IAppState } from '../../store';
-import { IAuthState } from '../../store/auth/types';
-
+import { IAuthState } from '../../store/auth/authTypes';
 
 interface IReduxState {
   auth: IAuthState;
@@ -44,7 +43,8 @@ class LoginModalContainer extends React.Component<IProps, IState> {
     const iframe = document.querySelector('iframe');
     if (!iframe) return setTimeout(this.checkIframeLoaded, 200);
     iframe.addEventListener('load', () =>
-      this.setState({ isIframeLoading: false }));
+      this.setState({ isIframeLoading: false })
+    );
   }
 
   handleLogin(data) {
@@ -85,4 +85,7 @@ class LoginModalContainer extends React.Component<IProps, IState> {
 
 const mapStateToProps = ({ auth }: IAppState): IReduxState => ({ auth });
 
-export default connect<IReduxState>(mapStateToProps, { login })(LoginModalContainer);
+export default connect<IReduxState>(
+  mapStateToProps,
+  { login }
+)(LoginModalContainer);
