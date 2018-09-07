@@ -18,6 +18,7 @@ import Search from '../../../assets/images/search-icon.svg';
 import Station from '../../../assets/images/station-icon.svg';
 import Telegram from '../../../assets/images/telegram-icon.svg';
 import ThumbsDown from '../../../assets/images/thumbs-down-icon.svg';
+import TimerSand from '../../../assets/images/timer-sand-icon.svg';
 import Users from '../../../assets/images/users-icon.svg';
 
 export interface IIcons {
@@ -28,7 +29,6 @@ export interface IIcons {
   check: JSX.Element;
   chevronRight: JSX.Element;
   close: JSX.Element;
-  heart: JSX.Element;
   info: JSX.Element;
   logout: JSX.Element;
   messages: JSX.Element;
@@ -37,6 +37,7 @@ export interface IIcons {
   station: JSX.Element;
   telegram: JSX.Element;
   thumbsDown: JSX.Element;
+  timerSand: JSX.Element;
   users: JSX.Element;
 }
 
@@ -57,6 +58,7 @@ const icons: IIcons = {
   station: <Station />,
   telegram: <Telegram />,
   thumbsDown: <ThumbsDown />,
+  timerSand: <TimerSand />,
   users: <Users />,
 };
 
@@ -67,7 +69,7 @@ const IconWrapper = styled(Flex).attrs({
   svg {
     width: ${prop('size', 16)}px;
     height: auto;
-    
+
     path {
       fill: ${prop('fill', '#C7CFD6')};
       stroke: ${prop('stroke', 'none')};
@@ -76,13 +78,15 @@ const IconWrapper = styled(Flex).attrs({
     }
   }
 
-  ${({ hoverFill }: { hoverFill?: string }) => hoverFill && css`
-    :hover {
-      svg path {
-        fill: ${hoverFill};
+  ${({ hoverFill }: { hoverFill?: string }) =>
+    hoverFill &&
+    css`
+      :hover {
+        svg path {
+          fill: ${hoverFill};
+        }
       }
-    }
-  `}
+    `};
 `;
 
 interface IIcon {
@@ -98,9 +102,7 @@ interface IIcon {
 }
 
 const Icon: React.SFC<IIcon> = ({ name, ...props }) => (
-  <IconWrapper {...props}>
-    {icons[name]}
-  </IconWrapper>
+  <IconWrapper {...props}>{icons[name]}</IconWrapper>
 );
 
 export default Icon;
