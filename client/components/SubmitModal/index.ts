@@ -1,1 +1,1 @@
-export { default } from './SubmitModal';
+export { default } from './SubmitModalContainer';

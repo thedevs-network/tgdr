@@ -36,6 +36,9 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
         message: submitEntryMessages[action.payload],
       };
 
+    case SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR:
+      return initialState;
+
     default:
       return state;
   }
