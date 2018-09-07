@@ -10,4 +10,5 @@ export interface IInput extends Partial<WrappedFieldProps> {
   my?: number;
   name: string;
   placeholder?: string;
+  prepend?: string;
 }

@@ -1,9 +1,13 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Flex } from 'grid-styled';
 import { ifProp } from 'styled-tools';
 import { InputErrorMessage, Label } from '../../Typography';
 import { IInput } from '..';
+
+const InputWrapper = styled(Flex)`
+  position: relative;
+`;
 
 const Input = styled.input`
   width: 100%;
@@ -18,6 +22,12 @@ const Input = styled.input`
   box-sizing: border-box;
   transition: border-color 0.2s ease-out;
 
+  ${({ prepend }: { prepend?: boolean }) =>
+    prepend &&
+    css`
+      padding-left: 58px;
+    `};
+
   ::placeholder {
     font-size: 16px;
     font-style: italic;
@@ -30,8 +40,32 @@ const Input = styled.input`
   }
 `;
 
+const Prepend = styled.span`
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  font-size: 18px;
+  color: #aaa;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: #eaeaea;
+`;
+
 const TextInput: React.SFC<IInput> = props => {
-  const { label, name, placeholder, input, meta, ...restProps } = props;
+  const {
+    input,
+    label,
+    meta,
+    name,
+    placeholder,
+    prepend,
+    ...restProps
+  } = props;
   const hasError = meta.touched && meta.error;
   const errorMessage = hasError && (
     <InputErrorMessage>{meta.error}</InputErrorMessage>
@@ -40,12 +74,16 @@ const TextInput: React.SFC<IInput> = props => {
   return (
     <Flex flexDirection="column" flex="1 1 0" {...restProps}>
       <Label>{label}</Label>
-      <Input
-        name={name}
-        placeholder={placeholder}
-        {...input}
-        hasError={!!hasError}
-      />
+      <InputWrapper>
+        {prepend && <Prepend>{prepend}</Prepend>}
+        <Input
+          name={name}
+          placeholder={placeholder}
+          {...input}
+          hasError={!!hasError}
+          prepend={!!prepend}
+        />
+      </InputWrapper>
       {errorMessage}
     </Flex>
   );
