@@ -29,6 +29,7 @@ export interface IIcons {
   check: JSX.Element;
   chevronRight: JSX.Element;
   close: JSX.Element;
+  heart: JSX.Element;
   info: JSX.Element;
   logout: JSX.Element;
   messages: JSX.Element;
