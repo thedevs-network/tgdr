@@ -11,7 +11,7 @@ const Button = styled.button`
   margin: 0;
   padding: 0 6px;
   background-color: transparent;
-  border: 1px solid #64B5F6;
+  border: 1px solid #64b5f6;
   border-radius: 4px;
   cursor: pointer;
   overflow: hidden;
@@ -20,13 +20,13 @@ const Button = styled.button`
 
   span {
     font-size: 12px;
-    color: #64B5F6;
+    color: #64b5f6;
     margin-right: 2px;
     transition: color 0.3s ease-out;
   }
 
   :hover {
-    background-color:#64B5F6;
+    background-color: #64b5f6;
 
     span {
       color: white;

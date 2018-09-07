@@ -21,7 +21,7 @@ const Input = styled.input`
   ::placeholder {
     font-size: 16px;
     font-style: italic;
-    color: #B8B8B8;
+    color: #b8b8b8;
   }
 
   :focus {
@@ -30,8 +30,7 @@ const Input = styled.input`
   }
 `;
 
-
-const TextInput: React.SFC<IInput> = (props) => {
+const TextInput: React.SFC<IInput> = props => {
   const { label, name, placeholder, input, meta, ...restProps } = props;
   const hasError = meta.touched && meta.error;
   const errorMessage = hasError && (
@@ -41,7 +40,12 @@ const TextInput: React.SFC<IInput> = (props) => {
   return (
     <Flex flexDirection="column" flex="1 1 0" {...restProps}>
       <Label>{label}</Label>
-      <Input name={name} placeholder={placeholder} {...input} hasError={!!hasError} />
+      <Input
+        name={name}
+        placeholder={placeholder}
+        {...input}
+        hasError={!!hasError}
+      />
       {errorMessage}
     </Flex>
   );

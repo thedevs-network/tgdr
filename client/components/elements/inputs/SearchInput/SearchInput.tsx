@@ -23,7 +23,7 @@ const Input = styled.input.attrs({
   padding: 0 40px 0 16px;
   font-size: 14px;
   color: #666;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   border: none;
   border-radius: 8px;
   outline: none;
@@ -33,16 +33,16 @@ const Input = styled.input.attrs({
   :active {
     outline: none;
     border: none;
-    background-color: #F0F0F0;
+    background-color: #f0f0f0;
   }
-  
+
   ::placeholder {
     font-style: italic;
-    color: #888;    
+    color: #888;
   }
 `;
 
-const SearchInput: React.SFC = (props) => (
+const SearchInput: React.SFC = props => (
   <InputWrapper height={40} width={1} align="center">
     <Input placeholder="Search..." {...props} />
     <SearchInputIcon />

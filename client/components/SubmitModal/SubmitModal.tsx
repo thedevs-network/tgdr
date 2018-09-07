@@ -30,7 +30,10 @@ class SubmitModal extends React.Component<IProps, IState> {
     }
 
     return (
-      <SubmitModalNotice closeModal={this.props.closeModal} showForm={this.showForm} />
+      <SubmitModalNotice
+        closeModal={this.props.closeModal}
+        showForm={this.showForm}
+      />
     );
   }
 }

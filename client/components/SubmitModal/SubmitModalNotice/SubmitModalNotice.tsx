@@ -49,19 +49,18 @@ const Text = styled.p`
   font-size: 18px;
 `;
 
-const SubmitModalNotice: React.SFC<ISubmitModalNotice> = ({ closeModal, showForm }) => (
+const SubmitModalNotice: React.SFC<ISubmitModalNotice> = ({
+  closeModal,
+  showForm,
+}) => (
   <>
-    <Title>
-      Before you submit:
-    </Title>
+    <Title>Before you submit:</Title>
     <Divider my={3} />
     <Ul>
       {submissionInfo.map((text, index) => (
         <Li key={`submission_info_${index}`}>
           <Icon name="info" mr={3} size={18} fill="#888" />
-          <Text>
-            {text}
-          </Text>
+          <Text>{text}</Text>
         </Li>
       ))}
     </Ul>

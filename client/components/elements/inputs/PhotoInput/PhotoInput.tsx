@@ -10,23 +10,23 @@ const Dropzone = styled(ReactDropzone)`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #BBB;
+  border: 2px dashed #bbb;
   border-radius: 100%;
   cursor: pointer;
   transform: translateZ(0);
   transition: transform 0.3s ease-out, border-color 0.3s ease-out;
 
   :hover {
-    border-color: #AAA;
+    border-color: #aaa;
     transform: scale(1.01, 1.01) translateY(-2px) translateZ(0);
 
     svg path {
-      fill: #AAA;
+      fill: #aaa;
     }
   }
 `;
 
-const PhotoInput: React.SFC = (props) => (
+const PhotoInput: React.SFC = props => (
   <Flex {...props} align="center" justify="center" pb={4}>
     <Dropzone
       name="photo"

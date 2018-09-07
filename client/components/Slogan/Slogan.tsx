@@ -14,17 +14,13 @@ const SubTitle = styled.h3`
   padding: 0;
   font-size: 16px;
   font-weight: normal;
-  color: #A8A8A8;
+  color: #a8a8a8;
 `;
 
 const Slogan: React.SFC = () => (
   <Flex py={5} flexDirection="column" align="center" is="section">
-    <Title>
-      Discover the content you love on Telegram.
-    </Title>
-    <SubTitle>
-      Find top channels, bots and groups in Telegram.
-    </SubTitle>
+    <Title>Discover the content you love on Telegram.</Title>
+    <SubTitle>Find top channels, bots and groups in Telegram.</SubTitle>
   </Flex>
 );
 

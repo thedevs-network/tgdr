@@ -14,7 +14,7 @@ interface IImage {
   w?: number | number[];
 }
 
-const ImageWrapper = styled(Flex) <IImage>`
+const ImageWrapper = styled(Flex)<IImage>`
   height: ${prop('h')}px;
   background-color: #eee;
   border-radius: 50%;

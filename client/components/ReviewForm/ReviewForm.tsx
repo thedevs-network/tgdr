@@ -11,8 +11,8 @@ const Button = styled.button.attrs({
   justify-content: center;
   align-self: flex-end;
   margin-top: 16px;
-  padding: 6px 18px ;
-  border: 2px solid #D3D3D3;
+  padding: 6px 18px;
+  border: 2px solid #d3d3d3;
   border-radius: 28px;
   background-color: transparent;
   font-size: 13px;
@@ -40,9 +40,7 @@ const ReviewForm: React.SFC = () => (
       placeholder="A helpful and informative review"
       smallLabel
     />
-    <Button>
-      Submit
-    </Button>
+    <Button>Submit</Button>
   </Flex>
 );
 

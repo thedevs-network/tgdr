@@ -18,7 +18,7 @@ class Header extends React.Component {
   render() {
     return (
       <HeaderWrapper is="header">
-        <Container align="center" justify="space-between" >
+        <Container align="center" justify="space-between">
           <Logo />
           <HeaderMenu />
         </Container>

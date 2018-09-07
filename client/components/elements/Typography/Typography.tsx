@@ -12,11 +12,13 @@ export const Title = styled.h2<ITitle>`
   font-weight: bold;
   color: #666;
 
-  ${({ small }) => small && css`
-    font-size: 16px;
-    font-weight: 500;
-    margin: 0;
-  `}
+  ${({ small }) =>
+    small &&
+    css`
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+    `};
 `;
 
 export const Description = styled.p`
@@ -31,7 +33,7 @@ interface ILabel {
 }
 
 export const Label = styled.label<ILabel>`
-  font-size: ${ifProp({ smallLabel: true }, "14px", "16px")};
+  font-size: ${ifProp({ smallLabel: true }, '14px', '16px')};
   font-weight: 500;
   margin-bottom: 8px;
   padding: 0;
@@ -39,5 +41,5 @@ export const Label = styled.label<ILabel>`
 
 export const InputErrorMessage = styled.small`
   padding-top: 4px;
-  color: #F44336;
+  color: #f44336;
 `;

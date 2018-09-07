@@ -49,6 +49,11 @@ class HeaderMenuContainer extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = ({ auth: { name } }: IAppState): IStoreProps => ({ name });
+const mapStateToProps = ({ auth: { name } }: IAppState): IStoreProps => ({
+  name,
+});
 
-export default connect<IStoreProps>(mapStateToProps, { logout })(HeaderMenuContainer);
+export default connect<IStoreProps>(
+  mapStateToProps,
+  { logout }
+)(HeaderMenuContainer);

@@ -37,7 +37,7 @@ const ListLink = styled.a`
   align-items: center;
   text-decoration: none;
   font-size: 14px;
-  letter-spacing: 0.04  em;
+  letter-spacing: 0.04 em;
   color: #888;
   transition: color 0.3s ease-out;
   cursor: pointer;
@@ -56,7 +56,7 @@ const ListLink = styled.a`
     }
 
     svg path {
-      fill: #999FA5;
+      fill: #999fa5;
     }
   }
 `;
@@ -64,7 +64,7 @@ const ListLink = styled.a`
 const Count = styled.span`
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: #ACB5BC;
+  color: #acb5bc;
 `;
 
 interface ISidebarList {
@@ -74,19 +74,19 @@ interface ISidebarList {
 
 const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
   <Flex flexDirection="column" flex="1 1 auto">
-    <Title>
-      {title}
-    </Title>
+    <Title>{title}</Title>
     <List>
       {data.map(item => (
         <ListItem key={item.slug}>
           <ListLink>
-            <Icon name={item.icon || 'chevronRight'} mr={3} size={item.icon ? 16 : 6} />
+            <Icon
+              name={item.icon || 'chevronRight'}
+              mr={3}
+              size={item.icon ? 16 : 6}
+            />
             <span>{item.name}</span>
           </ListLink>
-          <Count>
-            {item.count || 0}
-          </Count>
+          <Count>{item.count || 0}</Count>
         </ListItem>
       ))}
     </List>

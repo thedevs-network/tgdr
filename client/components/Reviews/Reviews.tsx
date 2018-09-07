@@ -20,7 +20,7 @@ const Name = styled.h4`
 
 const ReviewDate = styled.span`
   font-size: 12px;
-  color: #C7CFD6;
+  color: #c7cfd6;
 `;
 
 const Body = styled.p`
@@ -32,7 +32,7 @@ const Body = styled.p`
 
 const Link = styled.a`
   font-size: 14px;
-  color: #63B3F3;
+  color: #63b3f3;
   text-decoration: none;
   transition: color 0.3s ease-out, transform 0.3s ease-out;
   transform: translateZ(0);
@@ -40,16 +40,14 @@ const Link = styled.a`
   :hover,
   :focus {
     text-decoration: none;
-    color: #42A5F5;
+    color: #42a5f5;
     transform: scaleX(1.01) translateX(-4px);
   }
 `;
 
 const Reviews: React.SFC = () => (
   <>
-    <Count>
-      Reviews (203)
-    </Count>
+    <Count>Reviews (203)</Count>
     <Flex align="flex-start" my={4}>
       <Icon name="heart" size={15} fill="#63B3F3" my={1} mx={3} />
       <Flex flexDirection="column" flex="1 1 auto">
@@ -57,7 +55,10 @@ const Reviews: React.SFC = () => (
           <Name>Johny Doesm</Name>
           <ReviewDate> Feb 06, 2018</ReviewDate>
         </Flex>
-        <Body>Tesla, reporting bigger loss, emphasizes gains in production and sales.</Body>
+        <Body>
+          Tesla, reporting bigger loss, emphasizes gains in production and
+          sales.
+        </Body>
       </Flex>
     </Flex>
     <Divider my={0} />

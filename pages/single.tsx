@@ -14,7 +14,6 @@ import Reviews from '../client/components/Reviews';
 
 const Single: React.SFC = () => (
   <Body>
-
     <LightBox p={4} flex="1 1 auto">
       <Flex width={[106]} mr={4} flexDirection="column">
         <Image w={[106]} h={106} />
@@ -23,17 +22,16 @@ const Single: React.SFC = () => (
       <Flex flexDirection="column">
         <Flex align="flex-start">
           <Flex flexDirection="column" mr={4} flex="1 1 0">
-            <Title>
-              The Devs
-          </Title>
+            <Title>The Devs</Title>
             <Description>
-              The devs is community for programmers in Telegram. The devs is community for programmers in Telegram.
-          </Description>
+              The devs is community for programmers in Telegram. The devs is
+              community for programmers in Telegram.
+            </Description>
           </Flex>
           <Flex width={[116]} align="center" flexDirection="column">
             <Button big>
               + Add
-            <Icon name="telegram" size={14} fill="#ffffff" ml={2} />
+              <Icon name="telegram" size={14} fill="#ffffff" ml={2} />
             </Button>
             <Rate />
           </Flex>

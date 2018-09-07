@@ -5,15 +5,13 @@ import Icon from '../../elements/Icon';
 
 const Rate = styled.span`
   font-size: 13px;
-  color: #87C5F6;
+  color: #87c5f6;
 `;
 
 const CardRate: React.SFC = () => (
   <Flex align="center">
     <Icon name="heart" size={14} mr={2} fill="#63B3F3" />
-    <Rate>
-      87%
-    </Rate>
+    <Rate>87%</Rate>
   </Flex>
 );
 

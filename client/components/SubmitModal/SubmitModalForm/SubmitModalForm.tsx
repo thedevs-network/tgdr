@@ -15,14 +15,17 @@ interface ISubmitModalForm {
 
 const getOptions = item => ({ key: item.name, value: item.slug });
 
-const SubmitModalForm: React.SFC<ISubmitModalForm> = ({ closeModal, onSubmit }) => {
+const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
+  closeModal,
+  onSubmit,
+}) => {
   const categoryOptions = [
     { key: 'Select a category', value: '' },
     ...categories.map(getOptions),
   ];
   return (
     <Flex is="form" onSubmit={onSubmit} flexDirection="column">
-      <Flex justifyContent="space-between" >
+      <Flex justifyContent="space-between">
         <Field
           component={TextInput}
           label="Username"

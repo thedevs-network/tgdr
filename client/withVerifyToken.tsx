@@ -58,9 +58,14 @@ const withVerifyToken = (Page: NextSFC) => {
     }
   }
 
-  const mapStateToProps = ({ auth: { isAuthenticated } }) => ({ isAuthenticated });
+  const mapStateToProps = ({ auth: { isAuthenticated } }) => ({
+    isAuthenticated,
+  });
 
-  return connect(mapStateToProps, { renewToken })(WithVerifyToken);
+  return connect(
+    mapStateToProps,
+    { renewToken }
+  )(WithVerifyToken);
 };
 
 export default withVerifyToken;

@@ -29,10 +29,10 @@ const Button = styled.button<IButton>`
   :hover,
   :focus {
     border-color: ${ifProp(
-    { isLike: true },
-    'rgba(100, 181, 246, 1)',
-    'rgba(239, 154, 154, 1)'
-  )};
+      { isLike: true },
+      'rgba(100, 181, 246, 1)',
+      'rgba(239, 154, 154, 1)'
+    )};
   };
     transform: scale(1.01, 1.01) translateY(-1px) translateZ(0);
   }
@@ -59,9 +59,7 @@ const RateButton: React.SFC<IRateButton> = ({ type }) => {
       <Button isLike={isLike}>
         <Icon name={name} size={15} fill={fill} stroke={stroke} />
       </Button>
-      <Count isLike={isLike}>
-        2145
-      </Count>
+      <Count isLike={isLike}>2145</Count>
     </Flex>
   );
 };

@@ -6,25 +6,25 @@ import Icon from '../../elements/Icon';
 const Title = styled.h3`
   font-size: 18px;
   font-weight: 400;
-  color: #85919F;
+  color: #85919f;
 `;
 
 const ViewAllLink = styled.a`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #64B5F6;
+  color: #64b5f6;
   text-decoration: none;
   transition: color 0.3s ease-out, transform 0.3s ease-out;
   transform: translateZ(0);
 
   :hover,
   :focus {
-    color: #42A5F5;
+    color: #42a5f5;
     transform: scaleX(1.01) translateX(-4px);
 
     svg path {
-      fill: #42A5F5;
+      fill: #42a5f5;
     }
   }
 `;
@@ -33,9 +33,7 @@ const CardsHeader = () => (
   <Flex justify="space-between" mb={2}>
     <Flex align="center">
       <Icon name="station" size={18} fill="#C7CFD6" mr={3} />
-      <Title>
-        Channels
-      </Title>
+      <Title>Channels</Title>
     </Flex>
     <Flex align="center">
       <ViewAllLink href="#" title="View all channels">

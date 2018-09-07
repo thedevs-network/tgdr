@@ -27,25 +27,32 @@ const Select = styled.select`
   ::placeholder {
     font-size: 16px;
     font-style: italic;
-    color: #B8B8B8;
+    color: #b8b8b8;
   }
 
   :focus {
     background-color: transparent;
     border-color: 1px solid ${ifProp({ hasError: true }, '#E57373', '#BBB')};
-
   }
 `;
 
 interface ISelectInput extends IInput {
   options: Array<{
-    key: string,
-    value: string,
+    key: string;
+    value: string;
   }>;
 }
 
-const SelectInput: React.SFC<ISelectInput> = (props) => {
-  const { label, name, placeholder, options, input, meta, ...restProps } = props;
+const SelectInput: React.SFC<ISelectInput> = props => {
+  const {
+    label,
+    name,
+    placeholder,
+    options,
+    input,
+    meta,
+    ...restProps
+  } = props;
   const hasError = meta.touched && meta.error;
   const errorMessage = hasError && (
     <InputErrorMessage>{meta.error}</InputErrorMessage>

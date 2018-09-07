@@ -18,21 +18,25 @@ const ModalContainer = styled(Flex).attrs({
   flexDirection: 'column',
   justify: 'flex-start',
   py: 5,
-}) <Partial<IState>>`
+})<Partial<IState>>`
   position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
   background-color: rgba(0, 6, 10, 0.8);
-  background: linear-gradient(to bottom, rgba(0, 6, 10, 0.8), rgba(84, 88, 91, 0.8));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 6, 10, 0.8),
+    rgba(84, 88, 91, 0.8)
+  );
   z-index: 9999;
   overflow: auto;
 `;
 
 class Modal extends React.Component<IProps, IState> {
   static defaultProps = {
-    width: [0.84, 0.8, 600]
+    width: [0.84, 0.8, 600],
   };
 
   show: boolean;

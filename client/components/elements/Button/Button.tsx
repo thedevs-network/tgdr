@@ -33,29 +33,35 @@ const Button = styled.button<IButton>`
     transform: scale(1.01, 1.01) translateY(-2px) translateZ(0);
   }
 
-  ${({ big }) => big && css`
-    padding: 11px 24px;
-  `}
+  ${({ big }) =>
+    big &&
+    css`
+      padding: 11px 24px;
+    `}
 
-  ${({ modal }) => modal && css`
-    padding: 16px 32px;
-    font-size: 16px;
-    border-radius: 8px;
-  `}
+  ${({ modal }) =>
+    modal &&
+    css`
+      padding: 16px 32px;
+      font-size: 16px;
+      border-radius: 8px;
+    `}
 
-  ${({ modalSecondary }) => modalSecondary && css`
-    padding: 14px 28px;
-    font-size: 15px;
-    border-radius: 8px;
-    color: #707070;
-    background: linear-gradient(to right, #d5d5d5, #dddddd);
-    box-shadow: 0 3px 6px rgba(50, 50, 50, 0.1);
+  ${({ modalSecondary }) =>
+    modalSecondary &&
+    css`
+      padding: 14px 28px;
+      font-size: 15px;
+      border-radius: 8px;
+      color: #707070;
+      background: linear-gradient(to right, #d5d5d5, #dddddd);
+      box-shadow: 0 3px 6px rgba(50, 50, 50, 0.1);
 
-    :hover,
-    :focus {
-      box-shadow: 0 4px 10px rgba(50, 50, 50, 0.1);
-    }
-  `}
+      :hover,
+      :focus {
+        box-shadow: 0 4px 10px rgba(50, 50, 50, 0.1);
+      }
+    `}
 `;
 
 export default Button;

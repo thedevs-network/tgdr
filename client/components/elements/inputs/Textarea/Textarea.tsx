@@ -21,7 +21,7 @@ const TextareaInput = styled.textarea`
   transition: border-color 0.2s ease-out;
 
   :focus {
-  border-color: ${ifProp({ hasError: true }, '#E57373', '#BBB')};
+    border-color: ${ifProp({ hasError: true }, '#E57373', '#BBB')};
 
     background-color: transparent;
   }
@@ -29,7 +29,7 @@ const TextareaInput = styled.textarea`
   ::placeholder {
     font-size: 14px;
     font-style: italic;
-    color: #B8B8B8;
+    color: #b8b8b8;
     opacity: 1;
   }
 `;
@@ -39,9 +39,16 @@ interface ITeaxtarea extends IInput {
   smallLabel?: boolean;
 }
 
-const Textarea: React.SFC<ITeaxtarea> = (props) => {
+const Textarea: React.SFC<ITeaxtarea> = props => {
   const {
-    label, name, placeholder, rows, smallLabel, input, meta, ...restProps
+    label,
+    name,
+    placeholder,
+    rows,
+    smallLabel,
+    input,
+    meta,
+    ...restProps
   } = props;
 
   const hasError = meta && meta.touched && meta.error;

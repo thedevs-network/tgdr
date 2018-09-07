@@ -9,8 +9,8 @@ import Image from '../../elements/Image';
 import { LightBox } from '../../elements/Layout';
 
 const CardWrapper = styled(LightBox).attrs({
-  align: "center",
-  flex: "1 1 auto",
+  align: 'center',
+  flex: '1 1 auto',
   is: 'a',
   mb: [3],
   mr: [3],
@@ -33,12 +33,8 @@ const Card = () => (
   <CardWrapper href="#" title="Card">
     <Image mr={3} />
     <Flex flexDirection="column" flex="1 1 auto">
-      <Title small>
-        The Devs
-      </Title>
-      <CardMembersCount>
-        14871 members
-      </CardMembersCount>
+      <Title small>The Devs</Title>
+      <CardMembersCount>14871 members</CardMembersCount>
       <Flex align="center" justify="space-between" mt={2}>
         <CardRate />
         <CardJoinButton />

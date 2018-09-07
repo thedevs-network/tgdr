@@ -19,10 +19,10 @@ const A = styled.a`
   :hover,
   :active,
   :focus {
-    color: #64B5F6;
+    color: #64b5f6;
 
     svg path {
-      stroke: #64B5F6;
+      stroke: #64b5f6;
     }
   }
 `;
@@ -53,11 +53,12 @@ const HeaderMenu: React.SFC<IProps> = ({ isLogoutLoading, logout, name }) => {
   } else {
     authLink = (
       <Modal
-        trigger={(
+        trigger={
           <A href="#" title="Login or sign up">
             Login / Sign Up
           </A>
-        )}>
+        }
+      >
         {closeModal => <LoginModal closeModal={closeModal} />}
       </Modal>
     );
@@ -66,18 +67,11 @@ const HeaderMenu: React.SFC<IProps> = ({ isLogoutLoading, logout, name }) => {
   return (
     <Flex align="center" is="nav">
       <Box mx={3}>
-        <Modal
-          trigger={(
-            <Button>
-              + Submit
-            </Button>
-          )}>
+        <Modal trigger={<Button>+ Submit</Button>}>
           {closeModal => <SubmitModal closeModal={closeModal} />}
         </Modal>
       </Box>
-      <Box ml={2}>
-        {authLink}
-      </Box>
+      <Box ml={2}>{authLink}</Box>
     </Flex>
   );
 };

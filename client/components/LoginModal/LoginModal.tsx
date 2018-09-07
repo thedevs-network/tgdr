@@ -19,8 +19,10 @@ interface ILoginModal {
   isIframeLoaded: boolean;
 }
 
-const LoginModal: React.SFC<ILoginModal> = ({ isIframeLoaded, handleLogin }) => {
-
+const LoginModal: React.SFC<ILoginModal> = ({
+  isIframeLoaded,
+  handleLogin,
+}) => {
   const loader = isIframeLoaded && (
     <Flex justify="center" mt={4} width={1}>
       <Spinner size={32} />
@@ -29,9 +31,7 @@ const LoginModal: React.SFC<ILoginModal> = ({ isIframeLoaded, handleLogin }) => 
 
   return (
     <Flex flexDirection="column" flex="1 1 auto">
-      <Title>
-        You can use your Telegram account to login.
-      </Title>
+      <Title>You can use your Telegram account to login.</Title>
       <Divider my={3} />
       <Flex flexDirection="column" align="center">
         <TelegramLoginButton dataOnauth={handleLogin} botName="tgdrbot" />

@@ -17,9 +17,7 @@ interface IInfoListItem {
 const InfoListItem: React.SFC<IInfoListItem> = ({ icon, size, text }) => (
   <Flex mb={2}>
     <Icon name={icon} mr={3} size={size} fill="#C7CFD6" />
-    <Text>
-      {text}
-    </Text>
+    <Text>{text}</Text>
   </Flex>
 );
 
