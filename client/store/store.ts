@@ -3,15 +3,18 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { FormStateMap, reducer as formReducer } from 'redux-form';
 import { authReducer, AuthStateTypes, IAuthState } from './auth';
+import { ISubmitEntryState, submitEntryReducer } from './submitEntry';
 
 export interface IAppState {
   auth: IAuthState;
   form: FormStateMap;
+  submitEntry: ISubmitEntryState;
 }
 
 const rootReducer = combineReducers<IAppState>({
   auth: authReducer,
   form: formReducer,
+  submitEntry: submitEntryReducer,
 });
 
 const store = (state: IAppState, action) => {
