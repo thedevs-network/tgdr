@@ -4,7 +4,8 @@ import * as express from 'express';
 import axios from 'axios';
 import * as botController from './botController';
 import { StatusEnum, TypeEnum } from '../../constants/entry';
-import Entry, { IEntryModel } from '../models/Entry';
+import { IEntryModel } from '../models/Entry';
+import * as entryQuery from '../db/entryQuery';
 
 export const checkExistence: express.RequestHandler = async (
   req,
@@ -13,7 +14,7 @@ export const checkExistence: express.RequestHandler = async (
 ) => {
   const username = req.body.username.toLowerCase();
 
-  const entry: IEntryModel = await Entry.findOne({ username });
+  const entry: IEntryModel = await entryQuery.find(username);
 
   if (entry) {
     return res.status(422).json({
@@ -54,7 +55,7 @@ export const downloadImage: express.RequestHandler = async (
   res,
   next
 ) => {
-  const { username } = res.locals.entry;
+  const { image, username } = res.locals.entry;
 
   const fileLocalPath = path.join(
     __dirname,
@@ -81,8 +82,7 @@ export const downloadImage: express.RequestHandler = async (
 };
 
 export const createEntry: express.RequestHandler = async (_req, res) => {
-  const entry = new Entry(res.locals.entry);
-  await entry.save();
+  await entryQuery.create(res.locals.entry);
   return res.status(201).json({
     message: 'Entry has been submitted successfully.',
   });
