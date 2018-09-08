@@ -8,7 +8,7 @@ export interface IEntryModel extends Document {
   likes: number;
   members?: number;
   ratio: number;
-  rejectReason?: string;
+  reject_reason?: string;
   status: number;
   telegram_id?: number;
   title: string;
@@ -30,7 +30,7 @@ const entrySchema: Schema = new Schema({
   likes: { type: Number, required: true, default: 0 },
   members: Number,
   ratio: { type: Number, required: true, default: 0 },
-  rejectReason: String,
+  reject_reason: String,
   status: { type: Number, required: true, default: 1, min: 0, max: 2 },
   telegram_id: { type: Number },
   title: {
