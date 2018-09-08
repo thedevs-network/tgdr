@@ -29,7 +29,7 @@ export const submitNewEntry = (params: ISubmitEntryParams) => async (
     await axios.post('/api/entry/submit', params);
     dispatch(submitEntrySuccess());
   } catch (error) {
-    const { status = 'error' } = error.response.data;
-    dispatch(submitEntryFailure(status));
+    const { error: errorMessage, status = 'error' } = error.response.data;
+    dispatch(submitEntryFailure({ error: errorMessage, status }));
   }
 };

@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { ISubmitEntryState, SubmitEntryStateTypes } from './submitEntryTypes';
-import { submitEntryMessages } from '../../../constants/texts';
+import { getSubmitEntryMessages } from '../../../constants/texts';
 
 const initialState: ISubmitEntryState = {
   isFetched: false,
@@ -25,7 +25,7 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
         ...state,
         isFetched: true,
         isLoading: false,
-        message: submitEntryMessages.success,
+        message: getSubmitEntryMessages().success,
       };
 
     case SubmitEntryStateTypes.SUBMIT_ENTRY_FAILURE:
@@ -33,7 +33,9 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
         ...state,
         isFetched: true,
         isLoading: false,
-        message: submitEntryMessages[action.payload],
+        message: getSubmitEntryMessages(action.payload.error)[
+          action.payload.status
+        ],
       };
 
     case SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR:

@@ -28,7 +28,7 @@ export const getAuthMessages = (name: string): IMessage => ({
   },
 });
 
-export const submitEntryMessages: IMessage = {
+export const getSubmitEntryMessages = (error?: string): IMessage => ({
   [StatusEnum[0]]: {
     text: 'Entry is already submitted and approved.',
     title: 'Already exists',
@@ -47,7 +47,7 @@ export const submitEntryMessages: IMessage = {
     type: 'error',
   },
   error: {
-    text: "Couldn't submit. Please try again later.",
+    text: error,
     title: 'Error',
     type: 'error',
   },
@@ -57,4 +57,4 @@ export const submitEntryMessages: IMessage = {
     title: 'Submitted',
     type: 'success',
   },
-};
+});
