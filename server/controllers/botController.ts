@@ -13,6 +13,10 @@ export const getChatDetails = async (username: string) => {
       bot.telegram.getChatMembersCount(username),
     ]);
 
+    if (!details.photo) {
+      return { ...details, members };
+    }
+
     const { file_path } = await bot.telegram.getFile(
       details.photo.small_file_id
     );
@@ -35,8 +39,16 @@ export const getChatDetails = async (username: string) => {
 export const getBotDetails = async (username: string) => {
   const { data } = await axios.get(`https://t.me/${username}`);
   const $ = cheerio.load(data);
+  const botUsername = $('.tgme_page_extra').text();
   const img = $('.tgme_page_photo_image').attr('src');
-  return {
-    image: img,
-  };
+
+  if (!botUsername) {
+    throw new CustomError('Bot not found.');
+  }
+
+  if (img) {
+    return {
+      image: img,
+    };
+  }
 };
