@@ -81,13 +81,13 @@ const validate = values => {
 const asyncValidate = values =>
   new Promise((resolve, reject) => {
     const errors = {} as any;
-    if (values.username && values.username.replace('@', '').length < 5) {
+    if (values.username && values.username.length < 5) {
       errors.username = 'Username must have at least 5 chars.';
     }
     if (
       values.username &&
       values.username.length > 1 &&
-      !/^@?[a-z]\w+$/gi.test(values.username)
+      !/^[a-z]\w+$/gi.test(values.username)
     ) {
       errors.username = 'Only 0-9, a-z and underscores allowed.';
     }

@@ -5,9 +5,9 @@ export const entryValidators = [
   body('username', 'Username is not valid.')
     .exists()
     .trim()
-    .isLength({ min: 6 })
+    .isLength({ min: 5 })
     .withMessage('Username must have at least 5 chars.')
-    .matches(/^[a-z]\w+$/)
+    .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid.'),
   body('category', 'Category is not valid')
     .exists()
