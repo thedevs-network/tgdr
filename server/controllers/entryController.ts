@@ -1,8 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import * as express from 'express';
-import axios from 'axios';
 import * as botController from './botController';
+import cloudinary from '../cloudinary';
 import { StatusEnum, TypeEnum } from '../../constants/entry';
 import { IEntryModel } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
@@ -57,28 +55,13 @@ export const downloadImage: express.RequestHandler = async (
 ) => {
   const { image, username } = res.locals.entry;
 
-  const fileLocalPath = path.join(
-    __dirname,
-    '../../static/images/entry',
-    `${username}.jpg`
-  );
+  if (!image) return next();
 
-  const response = await axios({
-    method: 'GET',
-    responseType: 'stream',
-    url: res.locals.entry.image,
+  await cloudinary.v2.uploader.upload(image, {
+    public_id: username.toLowerCase(),
   });
 
-  response.data.pipe(fs.createWriteStream(fileLocalPath));
-
-  return new Promise((resolve, reject) => {
-    response.data.on('end', () => {
-      resolve();
-      next();
-    });
-
-    response.data.on('error', reject);
-  });
+  next();
 };
 
 export const createEntry: express.RequestHandler = async (_req, res) => {
