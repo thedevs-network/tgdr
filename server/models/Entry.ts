@@ -72,11 +72,14 @@ entrySchema.static('getTags', async function() {
     { $project: { count: '$count', tag: '$_id' } },
   ]);
 
-  const list = data.map(item => {
-    const tag = typeof item.tag === 'number' ? TypeEnum[item.tag] : item.tag;
-    const { count } = item;
-    return { count, tag };
-  });
+  // Reduce data to show it as "tag: count"
+  const list = data.reduce(
+    (obj, { count, tag }) => ({
+      ...obj,
+      [typeof tag === 'number' ? TypeEnum[tag] : tag]: count,
+    }),
+    {}
+  );
 
   return list;
 });
