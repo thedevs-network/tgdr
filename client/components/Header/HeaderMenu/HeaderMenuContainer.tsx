@@ -5,14 +5,15 @@ import { IAppState } from '../../../store';
 import { logout } from '../../../store/auth/authActions';
 import { IAuthState } from '../../../store/auth';
 
-interface IProps {
-  logout: typeof logout;
+interface IReduxStateProps {
   auth: IAuthState;
 }
 
-interface IStoreProps {
-  auth: IAuthState;
+interface IReduxDispatchProps {
+  logout: typeof logout;
 }
+
+interface IProps extends IReduxStateProps, IReduxDispatchProps {}
 
 interface IState {
   isLogoutLoading: boolean;
@@ -51,9 +52,9 @@ class HeaderMenuContainer extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = ({ auth }: IAppState): IStoreProps => ({ auth });
+const mapStateToProps = ({ auth }: IAppState): IReduxStateProps => ({ auth });
 
-export default connect<IStoreProps>(
+export default connect<IReduxStateProps, IReduxDispatchProps>(
   mapStateToProps,
   { logout }
 )(HeaderMenuContainer);

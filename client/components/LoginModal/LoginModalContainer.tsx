@@ -8,14 +8,16 @@ import Spinner from '../elements/Spinner';
 import { IAppState } from '../../store';
 import { IAuthState } from '../../store/auth/authTypes';
 
-interface IReduxState {
+interface IReduxStateProps {
   auth: IAuthState;
 }
 
-interface IProps {
-  auth: IAuthState;
-  closeModal: () => void;
+interface IReduxDispatchProps {
   login: typeof login;
+}
+
+interface IProps extends IReduxStateProps, IReduxDispatchProps {
+  closeModal: () => void;
 }
 
 interface IState {
@@ -83,9 +85,9 @@ class LoginModalContainer extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = ({ auth }: IAppState): IReduxState => ({ auth });
+const mapStateToProps = ({ auth }: IAppState): IReduxStateProps => ({ auth });
 
-export default connect<IReduxState>(
+export default connect<IReduxStateProps, IReduxDispatchProps>(
   mapStateToProps,
   { login }
 )(LoginModalContainer);

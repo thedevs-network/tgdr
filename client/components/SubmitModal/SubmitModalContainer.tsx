@@ -4,9 +4,12 @@ import SubmitModalNotice from './SubmitModalNotice';
 import SubmitModalForm from './SubmitModalForm';
 import { submitEntryClear } from '../../store/submitEntry';
 
-interface IProps {
-  closeModal: () => void;
+interface IReduxDispatchProps {
   submitEntryClear: typeof submitEntryClear;
+}
+
+interface IProps extends IReduxDispatchProps {
+  closeModal: () => void;
 }
 
 interface IState {
@@ -45,7 +48,7 @@ class SubmitModalContainer extends React.Component<IProps, IState> {
   }
 }
 
-export default connect(
+export default connect<{}, IReduxDispatchProps>(
   null,
   { submitEntryClear }
 )(SubmitModalContainer);
