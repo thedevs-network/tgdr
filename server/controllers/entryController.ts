@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as botController from './botController';
 import cloudinary from '../cloudinary';
 import { StatusEnum, TypeEnum } from '../../constants/entry';
-import { IEntryModel } from '../models/Entry';
+import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
 
 export const checkExistence: express.RequestHandler = async (
@@ -12,7 +12,7 @@ export const checkExistence: express.RequestHandler = async (
 ) => {
   const username = req.body.username.toLowerCase();
 
-  const entry: IEntryModel = await entryQuery.find(username);
+  const entry: IEntrySchema = await entryQuery.find(username);
 
   if (entry) {
     return res.status(422).json({
@@ -69,4 +69,9 @@ export const createEntry: express.RequestHandler = async (_req, res) => {
   return res.status(201).json({
     message: 'Entry has been submitted successfully.',
   });
+};
+
+export const getTags: express.RequestHandler = async (_req, res) => {
+  const tags = await entryQuery.getTags();
+  return res.status(200).json({ data: tags });
 };

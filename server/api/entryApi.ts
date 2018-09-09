@@ -18,4 +18,6 @@ router.post(
   asyncHandler(entryController.createEntry)
 );
 
+router.get('/tags', asyncHandler(entryController.getTags));
+
 export default router;
