@@ -7,8 +7,8 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as passport from 'passport';
 import config from './config';
-import authApi from './api/authApi';
-import entryApi from './api/entryApi';
+import authRoutes from './routes/authRoutes';
+import entryRoutes from './routes/entryRoutes';
 import * as errorController from './controllers/errorController';
 
 // Import Telegram bot
@@ -44,8 +44,8 @@ app.prepare().then(() => {
   server.use(express.static('static'));
 
   // API
-  server.use('/api/auth', authApi);
-  server.use('/api/entry', entryApi);
+  server.use('/api/auth', authRoutes);
+  server.use('/api/entry', entryRoutes);
   server.use(errorController.send);
 
   server.get('*', (req, res) => handle(req, res));
