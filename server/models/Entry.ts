@@ -1,6 +1,7 @@
 import { Document, model, Model, Schema } from 'mongoose';
+import { StatusEnum, TypeEnum } from '../../constants/entry';
 
-export interface IEntryModel extends Document {
+export interface IEntrySchema extends Document {
   category: string;
   created_at: Date;
   description: string;
@@ -14,6 +15,13 @@ export interface IEntryModel extends Document {
   title: string;
   type: number;
   username: string;
+}
+
+export interface IEntryModel extends Model<IEntrySchema> {
+  getTags(): Array<{
+    count: number;
+    tag: string;
+  }>;
 }
 
 const entrySchema: Schema = new Schema({
@@ -50,11 +58,32 @@ const entrySchema: Schema = new Schema({
   },
 });
 
-entrySchema.pre<IEntryModel>('save', function(next) {
+entrySchema.pre<IEntrySchema>('save', function(next) {
   this.ratio = Math.round((this.likes / (this.likes + this.dislikes)) * 100);
   next();
 });
 
-const Entry: Model<IEntryModel> = model<IEntryModel>('Entry', entrySchema);
+entrySchema.static('getTags', async function() {
+  const data = await this.aggregate([
+    { $match: { status: StatusEnum.active } },
+    { $project: { tagList: ['$type', '$category'] } },
+    { $unwind: '$tagList' },
+    { $group: { _id: '$tagList', count: { $sum: 1 } } },
+    { $project: { count: '$count', tag: '$_id' } },
+  ]);
+
+  const list = data.map(item => {
+    const tag = typeof item.tag === 'number' ? TypeEnum[item.tag] : item.tag;
+    const { count } = item;
+    return { count, tag };
+  });
+
+  return list;
+});
+
+const Entry: IEntryModel = model<IEntrySchema, IEntryModel>(
+  'Entry',
+  entrySchema
+);
 
 export default Entry;
