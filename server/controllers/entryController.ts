@@ -70,8 +70,3 @@ export const createEntry: express.RequestHandler = async (_req, res) => {
     message: 'Entry has been submitted successfully.',
   });
 };
-
-export const getTags: express.RequestHandler = async (_req, res) => {
-  const tags = await entryQuery.getTags();
-  return res.status(200).json({ data: tags });
-};
