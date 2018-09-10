@@ -1,20 +1,36 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import {
+  Action,
+  applyMiddleware,
+  combineReducers,
+  createStore,
+  Store,
+} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import { FormStateMap, reducer as formReducer } from 'redux-form';
 import { authReducer, AuthStateTypes, IAuthState } from './auth';
 import { ISubmitEntryState, submitEntryReducer } from './submitEntry';
+import { ITagsState, tagsReducer } from './tags';
+import { NextContext } from 'next';
 
 export interface IAppState {
   auth: IAuthState;
   form: FormStateMap;
   submitEntry: ISubmitEntryState;
+  tags: ITagsState;
+}
+
+export interface INextContextWithRedux extends NextContext {
+  reduxStore: Store & {
+    dispatch: ThunkDispatch<IAppState, void, Action>;
+  };
 }
 
 const rootReducer = combineReducers<IAppState>({
   auth: authReducer,
   form: formReducer,
   submitEntry: submitEntryReducer,
+  tags: tagsReducer,
 });
 
 const store = (state: IAppState, action) => {
