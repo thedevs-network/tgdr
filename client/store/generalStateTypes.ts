@@ -1,3 +1,5 @@
+import { IAppState } from './store';
+
 export interface IMessage {
   readonly message: {
     readonly text: string;
@@ -5,3 +7,5 @@ export interface IMessage {
     readonly type: 'error' | 'pending' | 'success';
   };
 }
+
+export type getStateType = () => IAppState;
