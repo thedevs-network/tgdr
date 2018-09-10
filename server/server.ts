@@ -9,6 +9,8 @@ import * as passport from 'passport';
 import config from './config';
 import authRoutes from './routes/authRoutes';
 import entryRoutes from './routes/entryRoutes';
+import tagsRoutes from './routes/tagsRoutes';
+import appRoutes from './routes/appRoutes';
 import * as errorController from './controllers/errorController';
 
 // Import Telegram bot
@@ -46,6 +48,8 @@ app.prepare().then(() => {
   // API
   server.use('/api/auth', authRoutes);
   server.use('/api/entry', entryRoutes);
+  server.use('/api/tags', tagsRoutes);
+  server.use('/', appRoutes(app));
   server.use(errorController.send);
 
   server.get('*', (req, res) => handle(req, res));
