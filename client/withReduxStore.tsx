@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { NextContext } from 'next';
-import { initializeStore } from './store';
+import { INextContextWithRedux, initializeStore } from './store';
 
 interface IApp extends React.ComponentClass<any, any> {
-  getInitialProps?: (ctx: NextContext) => Promise<any>;
+  getInitialProps?: (ctx: INextContextWithRedux) => { [key: string]: any };
 }
 
 const isServer: boolean = typeof window === 'undefined';
