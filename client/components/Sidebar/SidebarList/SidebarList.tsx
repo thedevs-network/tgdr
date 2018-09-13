@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import * as categories from '../../../../constants/categories';
+import { ICategories } from '../../../../constants/categories';
 import Icon from '../../elements/Icon';
 
 const Title = styled.h4`
@@ -69,7 +69,7 @@ const Count = styled.span`
 
 interface ISidebarList {
   title: string;
-  data: Array<categories.ICategories & { count?: number }>;
+  data: ICategories[];
 }
 
 const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
@@ -86,7 +86,7 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
             />
             <span>{item.name}</span>
           </ListLink>
-          <Count>{item.count || 0}</Count>
+          <Count>{item.count}</Count>
         </ListItem>
       ))}
     </List>

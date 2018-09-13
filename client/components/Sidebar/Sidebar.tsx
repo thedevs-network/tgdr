@@ -4,19 +4,24 @@ import SearchInput from '../elements/inputs/SearchInput';
 import { LightBox } from '../elements/Layout';
 import Divider from '../elements/Divider';
 import SidebarList from './SidebarList';
-import * as categories from '../../../constants/categories';
+import { ICategories } from '../../../constants/categories';
 
-const Sidebar: React.SFC = () => (
+interface IProps {
+  types: ICategories[];
+  categories: ICategories[];
+}
+
+const Sidebar: React.SFC<IProps> = ({ categories, types }) => (
   <LightBox mr={4} p={4} width={[3 / 12]} flexDirection="column">
     <Flex mb={4}>
       <SearchInput />
     </Flex>
     <Flex>
-      <SidebarList title="Types" data={categories.types} />
+      <SidebarList title="Types" data={types} />
     </Flex>
     <Divider />
     <Flex>
-      <SidebarList title="Categories" data={categories.categories} />
+      <SidebarList title="Categories" data={categories} />
     </Flex>
   </LightBox>
 );

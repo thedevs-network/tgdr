@@ -1,6 +1,7 @@
 import { IIcons } from '../client/components/elements/Icon';
 
 export interface ICategories {
+  count?: number;
   icon?: keyof IIcons;
   name: string;
   slug: string;
@@ -10,17 +11,17 @@ export const types: ICategories[] = [
   {
     icon: 'station',
     name: 'Channels',
-    slug: 'channels',
+    slug: 'channel',
   },
   {
     icon: 'robot',
     name: 'Bots',
-    slug: 'bots',
+    slug: 'bot',
   },
   {
     icon: 'messages',
     name: 'Groups',
-    slug: 'groups',
+    slug: 'group',
   },
 ];
 
