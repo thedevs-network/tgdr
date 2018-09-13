@@ -1,12 +1,11 @@
-import { AnyAction, Dispatch } from 'redux';
+import { Dispatch } from 'redux';
+import { action } from 'typesafe-actions';
 import axios from 'axios';
-import { TagsStateTypes } from './tagsTypes';
-import { getStateType } from '../generalStateTypes';
+import { ITags, TagsStateTypes } from './tagsTypes';
+import { getStateType } from '../storeTypes';
 
-const loadTags = (payload): AnyAction => ({
-  payload,
-  type: TagsStateTypes.TAGS_LOAD,
-});
+export const loadTags = (payload: ITags[]) =>
+  action(TagsStateTypes.TAGS_LOAD, payload);
 
 export const getTags = () => async (
   dispatch: Dispatch,
@@ -15,6 +14,8 @@ export const getTags = () => async (
   const { isFetched } = getState().tags;
   if (isFetched) return null;
 
-  const { data } = await axios.get('/api/tags');
+  const {
+    data: { data },
+  } = await axios.get('/api/tags');
   dispatch(loadTags(data));
 };

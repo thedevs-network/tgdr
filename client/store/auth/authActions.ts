@@ -1,37 +1,24 @@
-import { AnyAction, Dispatch } from 'redux';
+import { Dispatch } from 'redux';
+import { action } from 'typesafe-actions';
 import axios from 'axios';
 import * as Cookie from 'js-cookie';
 import * as jwtDecode from 'jwt-decode';
 import differenceInDays from 'date-fns/difference_in_days';
 import { AuthStateTypes, ILoginParams, IToken } from './authTypes';
 
-const requestLogin = (): AnyAction => ({
-  type: AuthStateTypes.LOGIN_REQUEST,
-});
+export const requestLogin = () => action(AuthStateTypes.LOGIN_REQUEST);
 
-const loginSuccessful = (payload: IToken & { token: string }): AnyAction => ({
-  payload,
-  type: AuthStateTypes.LOGIN_SUCCESS,
-});
+export const loginSuccessful = (payload: IToken) =>
+  action(AuthStateTypes.LOGIN_SUCCESS, payload);
 
-const loginFailure = (): AnyAction => ({
-  type: AuthStateTypes.LOGIN_FAILURE,
-});
+export const loginFailure = () => action(AuthStateTypes.LOGIN_FAILURE);
 
-const requestLogout = (): AnyAction => ({
-  type: AuthStateTypes.LOGOUT_REQUEST,
-});
+export const requestLogout = () => action(AuthStateTypes.LOGOUT_REQUEST);
 
-const logoutSuccessful = (): AnyAction => ({
-  type: AuthStateTypes.LOGOUT_REQUEST,
-});
+export const logoutSuccessful = () => action(AuthStateTypes.LOGOUT_REQUEST);
 
-const renewTokenSuccessful = (
-  payload: IToken & { token: string }
-): AnyAction => ({
-  payload,
-  type: AuthStateTypes.RENEW_SUCCESS,
-});
+export const renewTokenSuccessful = (payload: IToken) =>
+  action(AuthStateTypes.RENEW_SUCCESS, payload);
 
 const decodeToken = (token: string): IToken => jwtDecode(token);
 

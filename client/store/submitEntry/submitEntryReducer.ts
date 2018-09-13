@@ -1,6 +1,9 @@
 import { Reducer } from 'redux';
-import { ISubmitEntryState, SubmitEntryStateTypes } from './submitEntryTypes';
+import { getType } from 'typesafe-actions';
+import * as submitEntryActions from './submitEntryActions';
+import { ISubmitEntryState } from './submitEntryTypes';
 import { getSubmitEntryMessages } from '../../../constants/texts';
+import { RootAction } from '../storeTypes';
 
 const initialState: ISubmitEntryState = {
   isFetched: false,
@@ -14,13 +17,13 @@ const initialState: ISubmitEntryState = {
 
 export const submitEntryReducer: Reducer<ISubmitEntryState> = (
   state = initialState,
-  action
+  action: RootAction
 ) => {
   switch (action.type) {
-    case SubmitEntryStateTypes.SUBMIT_ENTRY_REQUEST:
+    case getType(submitEntryActions.submitEntryRequest):
       return { ...state, isLoading: true };
 
-    case SubmitEntryStateTypes.SUBMIT_ENTRY_SUCCESS:
+    case getType(submitEntryActions.submitEntrySuccess):
       return {
         ...state,
         isFetched: true,
@@ -28,7 +31,7 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
         message: getSubmitEntryMessages().success,
       };
 
-    case SubmitEntryStateTypes.SUBMIT_ENTRY_FAILURE:
+    case getType(submitEntryActions.submitEntryFailure):
       return {
         ...state,
         isFetched: true,
@@ -38,7 +41,7 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
         ],
       };
 
-    case SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR:
+    case getType(submitEntryActions.submitEntryClear):
       return initialState;
 
     default:

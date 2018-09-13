@@ -1,4 +1,4 @@
-import { IMessage } from '../generalStateTypes';
+import { IMessage } from '../storeTypes';
 
 export enum AuthStateTypes {
   LOGIN_FAILURE = '@@auth/LOGIN_FAILURE',
@@ -18,17 +18,21 @@ export interface ILoginParams {
   username: string;
 }
 
-export interface IAuthState extends IMessage {
-  readonly isAuthenticated: boolean;
-  readonly isFetched: boolean;
-  readonly isLoading: boolean;
-  readonly name: string;
-  readonly token: string;
-}
+export interface IAuthState
+  extends IMessage,
+    Readonly<{
+      isAuthenticated: boolean;
+      isFetched: boolean;
+      isLoading: boolean;
+      name: string;
+      token: string;
+    }> {}
 
 export interface IToken {
   exp: number;
   iat: number;
   iss: string;
   sub: string;
+  name: string;
+  token?: string;
 }

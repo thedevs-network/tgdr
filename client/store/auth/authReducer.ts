@@ -1,5 +1,8 @@
 import { Reducer } from 'redux';
-import { AuthStateTypes, IAuthState } from './authTypes';
+import { getType } from 'typesafe-actions';
+import { RootAction } from '../storeTypes';
+import * as authActions from './authActions';
+import { IAuthState } from './authTypes';
 import { shortenLongName } from '../../utils';
 import { getAuthMessages } from '../../../constants/texts';
 
@@ -18,36 +21,32 @@ const initialState: IAuthState = {
 
 export const authReducer: Reducer<IAuthState> = (
   state = initialState,
-  action
+  action: RootAction
 ) => {
-  const messsages =
-    action.payload &&
-    action.payload.name &&
-    getAuthMessages(shortenLongName(action.payload.name, 17));
-
   switch (action.type) {
-    case AuthStateTypes.LOGIN_REQUEST:
+    case getType(authActions.requestLogin):
       return { ...state, isAuthenticated: false, isLoading: true };
 
-    case AuthStateTypes.LOGIN_SUCCESS:
-    case AuthStateTypes.RENEW_SUCCESS:
+    case getType(authActions.loginSuccessful):
+    case getType(authActions.renewTokenSuccessful):
       return {
         ...state,
         isAuthenticated: true,
         isFetched: true,
         isLoading: false,
-        message: messsages.success,
+        message: getAuthMessages(shortenLongName(action.payload.name, 17))
+          .success,
         name: action.payload.name,
         token: action.payload.token,
       };
 
-    case AuthStateTypes.LOGIN_FAILURE:
+    case getType(authActions.loginFailure):
       return {
         ...state,
         isAuthenticated: false,
         isFetched: true,
         isLoading: false,
-        message: messsages.error,
+        message: getAuthMessages(null).error,
       };
 
     default:

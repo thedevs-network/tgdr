@@ -1,4 +1,4 @@
-import { IMessage } from '../generalStateTypes';
+import { IMessage } from '../storeTypes';
 
 export enum SubmitEntryStateTypes {
   SUBMIT_ENTRY_REQUEST = '@@submit/SUBMIT_ENTRY_REQUEST',
@@ -7,10 +7,12 @@ export enum SubmitEntryStateTypes {
   SUBMIT_ENTRY_CLEAR = '@@submit/SUBMIT_ENTRY_CLEAR',
 }
 
-export interface ISubmitEntryState extends IMessage {
-  readonly isFetched: boolean;
-  readonly isLoading: boolean;
-}
+export interface ISubmitEntryState
+  extends IMessage,
+    Readonly<{
+      isFetched: boolean;
+      isLoading: boolean;
+    }> {}
 
 export interface ISubmitEntryParams {
   username: string;

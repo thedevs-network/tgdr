@@ -1,5 +1,8 @@
 import { Reducer } from 'redux';
-import { ITagsState, TagsStateTypes } from './tagsTypes';
+import { getType } from 'typesafe-actions';
+import * as typeActions from './tagsActions';
+import { ITagsState } from './tagsTypes';
+import { RootAction } from '../storeTypes';
 
 const initialState: ITagsState = {
   data: null,
@@ -8,10 +11,10 @@ const initialState: ITagsState = {
 
 export const tagsReducer: Reducer<ITagsState> = (
   state = initialState,
-  action
+  action: RootAction
 ) => {
   switch (action.type) {
-    case TagsStateTypes.TAGS_LOAD:
+    case getType(typeActions.loadTags):
       return { ...state, data: action.payload, isFetched: true };
 
     default:
