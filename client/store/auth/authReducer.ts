@@ -1,8 +1,7 @@
 import { Reducer } from 'redux';
-import { getType } from 'typesafe-actions';
+import produce from 'immer';
 import { RootAction } from '../storeTypes';
-import * as authActions from './authActions';
-import { IAuthState } from './authTypes';
+import { AuthStateTypes, IAuthState } from './authTypes';
 import { shortenLongName } from '../../utils';
 import { getAuthMessages } from '../../../constants/texts';
 
@@ -22,34 +21,31 @@ const initialState: IAuthState = {
 export const authReducer: Reducer<IAuthState> = (
   state = initialState,
   action: RootAction
-) => {
-  switch (action.type) {
-    case getType(authActions.requestLogin):
-      return { ...state, isAuthenticated: false, isLoading: true };
+) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case AuthStateTypes.LOGIN_REQUEST:
+        draft.isAuthenticated = false;
+        draft.isLoading = true;
+        return;
 
-    case getType(authActions.loginSuccessful):
-    case getType(authActions.renewTokenSuccessful):
-      return {
-        ...state,
-        isAuthenticated: true,
-        isFetched: true,
-        isLoading: false,
-        message: getAuthMessages(shortenLongName(action.payload.name, 17))
-          .success,
-        name: action.payload.name,
-        token: action.payload.token,
-      };
+      case AuthStateTypes.LOGIN_SUCCESS:
+      case AuthStateTypes.RENEW_SUCCESS:
+        draft.isAuthenticated = true;
+        draft.isFetched = true;
+        draft.isLoading = false;
+        draft.message = getAuthMessages(
+          shortenLongName(action.payload.name, 17)
+        ).success;
+        draft.name = action.payload.name;
+        draft.token = action.payload.token;
+        return;
 
-    case getType(authActions.loginFailure):
-      return {
-        ...state,
-        isAuthenticated: false,
-        isFetched: true,
-        isLoading: false,
-        message: getAuthMessages(null).error,
-      };
-
-    default:
-      return state;
-  }
-};
+      case AuthStateTypes.LOGIN_FAILURE:
+        draft.isAuthenticated = false;
+        draft.isFetched = true;
+        draft.isLoading = false;
+        draft.message = getAuthMessages(null).error;
+        return;
+    }
+  });

@@ -1,7 +1,6 @@
 import { Reducer } from 'redux';
-import { getType } from 'typesafe-actions';
-import * as submitEntryActions from './submitEntryActions';
-import { ISubmitEntryState } from './submitEntryTypes';
+import produce from 'immer';
+import { ISubmitEntryState, SubmitEntryStateTypes } from './submitEntryTypes';
 import { getSubmitEntryMessages } from '../../../constants/texts';
 import { RootAction } from '../storeTypes';
 
@@ -18,33 +17,28 @@ const initialState: ISubmitEntryState = {
 export const submitEntryReducer: Reducer<ISubmitEntryState> = (
   state = initialState,
   action: RootAction
-) => {
-  switch (action.type) {
-    case getType(submitEntryActions.submitEntryRequest):
-      return { ...state, isLoading: true };
+) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case SubmitEntryStateTypes.SUBMIT_ENTRY_REQUEST:
+        draft.isLoading = true;
+        return;
 
-    case getType(submitEntryActions.submitEntrySuccess):
-      return {
-        ...state,
-        isFetched: true,
-        isLoading: false,
-        message: getSubmitEntryMessages().success,
-      };
+      case SubmitEntryStateTypes.SUBMIT_ENTRY_SUCCESS:
+        draft.isFetched = true;
+        draft.isLoading = false;
+        draft.message = getSubmitEntryMessages().success;
+        return;
 
-    case getType(submitEntryActions.submitEntryFailure):
-      return {
-        ...state,
-        isFetched: true,
-        isLoading: false,
-        message: getSubmitEntryMessages(action.payload.error)[
+      case SubmitEntryStateTypes.SUBMIT_ENTRY_FAILURE:
+        draft.isFetched = true;
+        draft.isLoading = false;
+        draft.message = getSubmitEntryMessages(action.payload.error)[
           action.payload.status
-        ],
-      };
+        ];
+        return;
 
-    case getType(submitEntryActions.submitEntryClear):
-      return initialState;
-
-    default:
-      return state;
-  }
-};
+      case SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR:
+        return initialState;
+    }
+  });
