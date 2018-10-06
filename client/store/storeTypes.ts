@@ -1,3 +1,5 @@
+import { Action, ActionCreator } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import { ActionType } from 'typesafe-actions';
 import { IAppState } from './store';
 import * as authActions from './auth/authActions';
@@ -13,7 +15,9 @@ export interface IMessage
       }>;
     }> {}
 
-export type getStateType = () => IAppState;
+export type AsyncAction = ActionCreator<
+  ThunkAction<Promise<void> | void, IAppState, void, Action<any>>
+>;
 
 export type RootAction =
   | ActionType<typeof authActions>
