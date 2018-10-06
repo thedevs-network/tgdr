@@ -1,10 +1,14 @@
-import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 import axios from 'axios';
 import * as Cookie from 'js-cookie';
 import * as jwtDecode from 'jwt-decode';
 import differenceInDays from 'date-fns/difference_in_days';
 import { AuthStateTypes, ILoginParams, IToken } from './authTypes';
+import { AsyncAction } from '../storeTypes';
+import { getAuthHeader } from '../../utils';
+
+export const authenticateUser = (payload: string) =>
+  action(AuthStateTypes.AUTHENTICATE, payload);
 
 export const requestLogin = () => action(AuthStateTypes.LOGIN_REQUEST);
 
@@ -26,12 +30,11 @@ const saveToken = (token: string) => {
   const decodedToken = decodeToken(token);
   const daysToExpire = differenceInDays(decodedToken.exp, decodedToken.iat);
   Cookie.set('token', token, { expires: daysToExpire });
-  axios.defaults.headers.common.Authorization = token;
 };
 
 const deleteToken = () => Cookie.remove('token');
 
-export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
+export const login: AsyncAction = (params: ILoginParams) => async dispatch => {
   try {
     dispatch(requestLogin());
     const {
@@ -45,24 +48,19 @@ export const login = (params: ILoginParams) => async (dispatch: Dispatch) => {
   }
 };
 
-export const logout = () => (dispatch: Dispatch) => {
+export const logout: AsyncAction = () => dispatch => {
   dispatch(requestLogout());
   deleteToken();
-  axios.defaults.headers.common.Authorization = null;
   dispatch(logoutSuccessful());
 };
 
-export const renewToken = (token: string) => async (dispatch: Dispatch) => {
+export const renewToken: AsyncAction = () => async (dispatch, getState) => {
   try {
     const {
-      data: { token: newToken },
-    } = await axios.post('/api/auth/renew', null, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    saveToken(newToken);
-    const decodedToken = decodeToken(newToken);
+      data: { token },
+    } = await axios.post('/api/auth/renew', null, getAuthHeader(getState));
+    saveToken(token);
+    const decodedToken = decodeToken(token);
     dispatch(renewTokenSuccessful({ ...decodedToken, token }));
   } catch (error) {
     deleteToken();

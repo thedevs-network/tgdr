@@ -1,8 +1,8 @@
-import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 import axios from 'axios';
 import { ISubmitEntryParams, SubmitEntryStateTypes } from './submitEntryTypes';
-import { wait } from '../../utils';
+import { getAuthHeader, wait } from '../../utils';
+import { AsyncAction } from '../storeTypes';
 
 export const submitEntryRequest = () =>
   action(SubmitEntryStateTypes.SUBMIT_ENTRY_REQUEST);
@@ -18,13 +18,14 @@ export const submitEntryFailure = (payload: {
 export const submitEntryClear = () =>
   action(SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR);
 
-export const submitNewEntry = (params: ISubmitEntryParams) => async (
-  dispatch: Dispatch
-) => {
+export const submitNewEntry: AsyncAction = (
+  params: ISubmitEntryParams,
+  getState
+) => async dispatch => {
   try {
     dispatch(submitEntryRequest());
     await wait(500);
-    await axios.post('/api/entry/submit', params);
+    await axios.post('/api/entry/submit', params, getAuthHeader(getState));
     dispatch(submitEntrySuccess());
   } catch (error) {
     const { error: errorMessage, status = 'error' } = error.response.data;

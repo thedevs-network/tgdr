@@ -24,6 +24,11 @@ export const authReducer: Reducer<IAuthState> = (
 ) =>
   produce(state, draft => {
     switch (action.type) {
+      case AuthStateTypes.AUTHENTICATE:
+        draft.isAuthenticated = true;
+        draft.token = action.payload;
+        return;
+
       case AuthStateTypes.LOGIN_REQUEST:
         draft.isAuthenticated = false;
         draft.isLoading = true;
