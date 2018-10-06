@@ -20,10 +20,12 @@ export interface IAppState {
   tags: ITagsState;
 }
 
+export interface IReduxStore extends Store<IAppState> {
+  dispatch: ThunkDispatch<IAppState, void, Action>;
+}
+
 export interface INextContextWithRedux extends NextContext {
-  reduxStore: Store & {
-    dispatch: ThunkDispatch<IAppState, void, Action>;
-  };
+  reduxStore: IReduxStore;
 }
 
 const rootReducer = combineReducers<IAppState>({

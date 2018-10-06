@@ -1,9 +1,5 @@
 import * as React from 'react';
-import { INextContextWithRedux, initializeStore } from './store';
-
-interface IApp extends React.ComponentClass<any, any> {
-  getInitialProps?: (ctx: INextContextWithRedux) => { [key: string]: any };
-}
+import { initializeStore } from './store';
 
 const isServer: boolean = typeof window === 'undefined';
 const __NEXT_REDUX_STORE__: '__NEXT_REDUX_STORE__' = '__NEXT_REDUX_STORE__';
@@ -19,7 +15,7 @@ function getOrCreateStore(initialState?: {}) {
   return window[__NEXT_REDUX_STORE__];
 }
 
-const withReduxStore = (App: IApp) => {
+const withReduxStore = App => {
   return class AppWithRedux extends React.Component {
     static async getInitialProps(appContext) {
       const reduxStore = getOrCreateStore();
