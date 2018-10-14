@@ -1,5 +1,3 @@
-import { StatusEnum } from './entry';
-
 export const submissionInfo = [
   'Submission must be in English language.',
   "We don't accept anything related to adult contents.",
@@ -29,26 +27,26 @@ export const getAuthMessages = (name: string): IMessage => ({
 });
 
 export const getSubmitEntryMessages = (error?: string): IMessage => ({
-  [StatusEnum[0]]: {
+  approved: {
     text: 'Entry is already submitted and approved.',
     title: 'Already exists',
     type: 'success',
   },
-  [StatusEnum[1]]: {
+  error: {
+    text: error,
+    title: 'Error',
+    type: 'error',
+  },
+  pending: {
     text:
       'Entry is already submitted and is waiting for review.' +
       'Please check back later.',
     title: 'Under review',
     type: 'pending',
   },
-  [StatusEnum[2]]: {
+  rejected: {
     text: 'Submissions has been rejected.',
     title: 'Rejected',
-    type: 'error',
-  },
-  error: {
-    text: error,
-    title: 'Error',
     type: 'error',
   },
   success: {

@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as botController from './botController';
 import cloudinary from '../cloudinary';
-import { StatusEnum, TypeEnum } from '../../constants/entry';
 import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
 
@@ -17,7 +16,7 @@ export const checkExistence: express.RequestHandler = async (
   if (entry) {
     return res.status(422).json({
       error: 'Entry is already submitted.',
-      status: StatusEnum[entry.status],
+      status: entry.status,
     });
   }
 
@@ -41,7 +40,7 @@ export const getDetails: express.RequestHandler = async (req, res, next) => {
     description,
     telegram_id: entryDetails.id,
     title,
-    type: TypeEnum[entryType],
+    type: entryType,
     username,
   };
 
@@ -69,4 +68,9 @@ export const createEntry: express.RequestHandler = async (_req, res) => {
   return res.status(201).json({
     message: 'Entry has been submitted successfully.',
   });
+};
+
+export const getEntries: express.RequestHandler = async (req, res) => {
+  const entries = await entryQuery.get(req.query);
+  return res.status(201).json(entries);
 };
