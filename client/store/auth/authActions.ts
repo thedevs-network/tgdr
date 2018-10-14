@@ -7,7 +7,7 @@ import { AuthStateTypes, ILoginParams, IToken } from './authTypes';
 import { AsyncAction } from '../storeTypes';
 import { getAuthHeader } from '../../utils';
 
-export const authenticateUser = (payload: string) =>
+export const authenticateUser = (payload: IToken) =>
   action(AuthStateTypes.AUTHENTICATE, payload);
 
 export const requestLogin = () => action(AuthStateTypes.LOGIN_REQUEST);
@@ -24,7 +24,9 @@ export const logoutSuccessful = () => action(AuthStateTypes.LOGOUT_REQUEST);
 export const renewTokenSuccessful = (payload: IToken) =>
   action(AuthStateTypes.RENEW_SUCCESS, payload);
 
-const decodeToken = (token: string): IToken => jwtDecode(token);
+export const renewTokenFailure = () => action(AuthStateTypes.RENEW_FAILURE);
+
+export const decodeToken = (token: string): IToken => jwtDecode(token);
 
 const saveToken = (token: string) => {
   const decodedToken = decodeToken(token);
@@ -64,5 +66,6 @@ export const renewToken: AsyncAction = () => async (dispatch, getState) => {
     dispatch(renewTokenSuccessful({ ...decodedToken, token }));
   } catch (error) {
     deleteToken();
+    dispatch(renewTokenFailure());
   }
 };

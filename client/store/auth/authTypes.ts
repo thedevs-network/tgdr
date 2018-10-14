@@ -8,6 +8,7 @@ export enum AuthStateTypes {
   LOGOUT_REQUEST = '@@auth/LOGOUT_REQUEST',
   LOGOUT_SUCCESS = '@@auth/LOGOUT_SUCCESS',
   RENEW_SUCCESS = '@@auth/RENEW_SUCCESS',
+  RENEW_FAILURE = '@@auth/RENEW_FAILURE',
 }
 
 export interface ILoginParams {

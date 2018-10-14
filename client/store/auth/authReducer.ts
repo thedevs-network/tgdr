@@ -26,12 +26,14 @@ export const authReducer: Reducer<IAuthState> = (
     switch (action.type) {
       case AuthStateTypes.AUTHENTICATE:
         draft.isAuthenticated = true;
-        draft.token = action.payload;
+        draft.name = action.payload.name;
+        draft.token = action.payload.token;
         return;
 
       case AuthStateTypes.LOGIN_REQUEST:
         draft.isAuthenticated = false;
         draft.isLoading = true;
+        draft.isFetched = false;
         return;
 
       case AuthStateTypes.LOGIN_SUCCESS:
@@ -44,6 +46,10 @@ export const authReducer: Reducer<IAuthState> = (
         ).success;
         draft.name = action.payload.name;
         draft.token = action.payload.token;
+        return;
+
+      case AuthStateTypes.RENEW_FAILURE:
+        draft.isAuthenticated = false;
         return;
 
       case AuthStateTypes.LOGIN_FAILURE:
