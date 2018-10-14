@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ITags, TagsStateTypes } from './tagsTypes';
 import { AsyncAction } from '../storeTypes';
 
-export const loadTags = (payload: ITags[]) =>
+export const loadTags = (payload: ITags) =>
   action(TagsStateTypes.TAGS_LOAD, payload);
 
 export const getTags: AsyncAction = () => async (dispatch, getState) => {

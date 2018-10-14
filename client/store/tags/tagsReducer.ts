@@ -4,7 +4,7 @@ import { ITagsState, TagsStateTypes } from './tagsTypes';
 import { RootAction } from '../storeTypes';
 
 const initialState: ITagsState = {
-  data: null,
+  data: {},
   isFetched: false,
 };
 
