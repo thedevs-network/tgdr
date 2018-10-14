@@ -1,7 +1,7 @@
 export enum StatusEnum {
-  pending,
-  active,
   rejected,
+  active,
+  pending,
 }
 
 export enum TypeEnum {
