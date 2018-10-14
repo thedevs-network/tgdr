@@ -9,15 +9,13 @@ const router = express.Router();
 
 router.post(
   '/submit',
+  passport.authenticate('jwt', { session: false }),
   entryValidators,
   asyncHandler(validatorsController.entry),
-  passport.authenticate('jwt', { session: false }),
   asyncHandler(entryController.checkExistence),
   asyncHandler(entryController.getDetails),
   asyncHandler(entryController.downloadImage),
   asyncHandler(entryController.createEntry)
 );
-
-router.get('/tags', asyncHandler(entryController.getTags));
 
 export default router;
