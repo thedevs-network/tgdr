@@ -19,9 +19,8 @@ export const submitEntryClear = () =>
   action(SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR);
 
 export const submitNewEntry: AsyncAction = (
-  params: ISubmitEntryParams,
-  getState
-) => async dispatch => {
+  params: ISubmitEntryParams
+) => async (dispatch, getState) => {
   try {
     dispatch(submitEntryRequest());
     await wait(500);
