@@ -1,6 +1,6 @@
 export enum StatusEnum {
-  active,
   pending,
+  active,
   rejected,
 }
 

@@ -39,7 +39,7 @@ const entrySchema: Schema = new Schema({
   members: Number,
   ratio: { type: Number, required: true, default: 0 },
   reject_reason: String,
-  status: { type: Number, required: true, default: 1, min: 0, max: 2 },
+  status: { type: Number, required: true, default: 0, min: 0, max: 2 },
   telegram_id: { type: Number },
   title: {
     maxlength: 54,
