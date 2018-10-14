@@ -18,4 +18,9 @@ router.post(
   asyncHandler(entryController.createEntry)
 );
 
+router.get(
+  '/',
+  asyncHandler(entryController.getEntries),
+);
+
 export default router;

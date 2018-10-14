@@ -1,5 +1,12 @@
 import { Document, model, Model, Schema } from 'mongoose';
-import { StatusEnum, TypeEnum } from '../../constants/entry';
+import { IEntryQuery } from '../types';
+import {
+  getLimit,
+  getMatches,
+  getOrder,
+  getSkip,
+  getSort,
+} from '../utils/dbUtils';
 
 export interface IEntrySchema extends Document {
   category: string;
@@ -22,6 +29,7 @@ export interface IEntryModel extends Model<IEntrySchema> {
     count: number;
     tag: string;
   }>;
+  getEntries(query: IEntryQuery): IEntrySchema[];
 }
 
 const entrySchema: Schema = new Schema({
@@ -39,7 +47,12 @@ const entrySchema: Schema = new Schema({
   members: Number,
   ratio: { type: Number, required: true, default: 0 },
   reject_reason: String,
-  status: { type: Number, required: true, default: 0, min: 0, max: 2 },
+  status: {
+    default: 'pending',
+    enum: ['pending', 'approved', 'rejected'],
+    required: true,
+    type: String,
+  },
   telegram_id: { type: Number },
   title: {
     maxlength: 54,
@@ -48,7 +61,11 @@ const entrySchema: Schema = new Schema({
     trim: true,
     type: String,
   },
-  type: { type: Number, required: true, min: 0, max: 2 },
+  type: {
+    enum: ['channel', 'bot', 'supergroup'],
+    required: true,
+    type: String,
+  },
   username: {
     index: true,
     lowercase: true,
@@ -63,9 +80,45 @@ entrySchema.pre<IEntrySchema>('save', function(next) {
   next();
 });
 
+entrySchema.static('getEntries', async function(query: IEntryQuery) {
+  const $match = getMatches(query);
+  const $limit = getLimit(query);
+  const $skip = getSkip(query);
+  const order = getOrder(query);
+  const sort = getSort(query);
+
+  const data = await this.aggregate([
+    { $match },
+    { $project: { _id: 0, __v: 0 } },
+    {
+      $addFields: {
+        ratio: {
+          $cond: [
+            { $eq: ['$likes', 0] },
+            0,
+            {
+              $trunc: {
+                $multiply: [
+                  { $divide: ['$likes', { $add: ['$likes', '$dislikes'] }] },
+                  100,
+                ],
+              },
+            },
+          ],
+        },
+      },
+    },
+    { $sort: { [sort]: order } },
+    { $skip },
+    { $limit },
+  ]);
+
+  return data;
+});
+
 entrySchema.static('getTags', async function() {
   const data = await this.aggregate([
-    { $match: { status: StatusEnum.active } },
+    { $match: { status: 'approved' } },
     { $project: { tagList: ['$type', '$category'] } },
     { $unwind: '$tagList' },
     { $group: { _id: '$tagList', count: { $sum: 1 } } },
@@ -76,7 +129,7 @@ entrySchema.static('getTags', async function() {
   const list = data.reduce(
     (obj, { count, tag }) => ({
       ...obj,
-      [typeof tag === 'number' ? TypeEnum[tag] : tag]: count,
+      [tag]: count,
     }),
     {}
   );
