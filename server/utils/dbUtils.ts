@@ -2,10 +2,9 @@ import * as R from 'ramda';
 import * as subDays from 'date-fns/sub_days';
 
 export const getMatches = R.pipe(
-  R.ifElse(
+  R.when(
     R.propEq('sort', 'hot'),
     R.assocPath(['created_at', '$gt'], subDays(new Date(), 30)),
-    R.identity,
   ),
   R.pick(['category', 'status', 'type', 'created_at'])
 );
