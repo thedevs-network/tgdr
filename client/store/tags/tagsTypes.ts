@@ -1,5 +1,5 @@
 export enum TagsStateTypes {
-  TAGS_LOAD = '@@tags/TAGS_LOAD',
+  LOAD = '@@tags/LOAD',
 }
 
 export interface ITags extends Readonly<Record<string, number>> {}

@@ -20,17 +20,17 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
 ) =>
   produce(state, draft => {
     switch (action.type) {
-      case SubmitEntryStateTypes.SUBMIT_ENTRY_REQUEST:
+      case SubmitEntryStateTypes.REQUEST:
         draft.isLoading = true;
         return;
 
-      case SubmitEntryStateTypes.SUBMIT_ENTRY_SUCCESS:
+      case SubmitEntryStateTypes.SUCCESS:
         draft.isFetched = true;
         draft.isLoading = false;
         draft.message = getSubmitEntryMessages().success;
         return;
 
-      case SubmitEntryStateTypes.SUBMIT_ENTRY_FAILURE:
+      case SubmitEntryStateTypes.FAILURE:
         draft.isFetched = true;
         draft.isLoading = false;
         draft.message = getSubmitEntryMessages(action.payload.error)[
@@ -38,7 +38,7 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
         ];
         return;
 
-      case SubmitEntryStateTypes.SUBMIT_ENTRY_CLEAR:
+      case SubmitEntryStateTypes.CLEAR:
         return initialState;
     }
   });

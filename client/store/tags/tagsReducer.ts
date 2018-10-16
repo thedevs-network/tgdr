@@ -14,7 +14,7 @@ export const tagsReducer: Reducer<ITagsState> = (
 ) =>
   producer(state, draft => {
     switch (action.type) {
-      case TagsStateTypes.TAGS_LOAD:
+      case TagsStateTypes.LOAD:
         draft.data = action.payload;
         draft.isFetched = true;
         return;

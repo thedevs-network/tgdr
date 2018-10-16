@@ -4,7 +4,7 @@ import { ITags, TagsStateTypes } from './tagsTypes';
 import { AsyncAction } from '../storeTypes';
 
 export const loadTags = (payload: ITags) =>
-  action(TagsStateTypes.TAGS_LOAD, payload);
+  action(TagsStateTypes.LOAD, payload);
 
 export const getTags: AsyncAction = () => async (dispatch, getState) => {
   const { isFetched } = getState().tags;
