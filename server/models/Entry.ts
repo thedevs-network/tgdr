@@ -90,24 +90,6 @@ entrySchema.static('getEntries', async function(query: IEntryQuery) {
   const data = await this.aggregate([
     { $match },
     { $project: { _id: 0, __v: 0 } },
-    {
-      $addFields: {
-        ratio: {
-          $cond: [
-            { $eq: ['$likes', 0] },
-            0,
-            {
-              $trunc: {
-                $multiply: [
-                  { $divide: ['$likes', { $add: ['$likes', '$dislikes'] }] },
-                  100,
-                ],
-              },
-            },
-          ],
-        },
-      },
-    },
     { $sort: { [sort]: order } },
     { $skip },
     { $limit },
