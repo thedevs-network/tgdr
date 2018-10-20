@@ -27,7 +27,7 @@ export const getAuthMessages = (name: string): IMessage => ({
 });
 
 export const getSubmitEntryMessages = (error?: string): IMessage => ({
-  approved: {
+  active: {
     text: 'Entry is already submitted and approved.',
     title: 'Already exists',
     type: 'success',
