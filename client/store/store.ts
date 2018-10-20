@@ -9,12 +9,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { FormStateMap, reducer as formReducer } from 'redux-form';
 import { authReducer, AuthStateTypes, IAuthState } from './auth';
+import { entriesReducer, IEntriesState } from './entries';
 import { ISubmitEntryState, submitEntryReducer } from './submitEntry';
 import { ITagsState, tagsReducer } from './tags';
 import { NextContext } from 'next';
 
 export interface IAppState {
   auth: IAuthState;
+  entries: IEntriesState;
   form: FormStateMap;
   submitEntry: ISubmitEntryState;
   tags: ITagsState;
@@ -30,6 +32,7 @@ export interface INextContextWithRedux extends NextContext {
 
 const rootReducer = combineReducers<IAppState>({
   auth: authReducer,
+  entries: entriesReducer,
   form: formReducer,
   submitEntry: submitEntryReducer,
   tags: tagsReducer,
