@@ -4,5 +4,6 @@ export interface IEntryQuery {
   search?: string,
   skip?: number,
   sort?: 'top' | 'hot' | 'new',
-  type: 'channel' | 'group' | 'bot',
+  status?: 'active' | 'pending' | 'rejected',
+  type?: 'channel' | 'group' | 'bot',
 }
