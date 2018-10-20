@@ -3,6 +3,7 @@ import * as botController from './botController';
 import cloudinary from '../cloudinary';
 import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
+import { getEntryQuery } from '../utils';
 
 export const checkExistence: express.RequestHandler = async (
   req,
@@ -71,6 +72,7 @@ export const createEntry: express.RequestHandler = async (_req, res) => {
 };
 
 export const getEntries: express.RequestHandler = async (req, res) => {
-  const entries = await entryQuery.get(req.query);
+  const query = getEntryQuery(req.query);
+  const entries = await entryQuery.get(query);
   return res.status(201).json(entries);
 };
