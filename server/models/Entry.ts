@@ -3,10 +3,9 @@ import { IEntryQuery } from '../types';
 import {
   getLimit,
   getMatches,
-  getOrder,
   getSkip,
   getSort,
-} from '../utils/dbUtils';
+} from '../utils';
 
 export interface IEntrySchema extends Document {
   category: string;
@@ -84,23 +83,27 @@ entrySchema.static('getEntries', async function(query: IEntryQuery) {
   const $match = getMatches(query);
   const $limit = getLimit(query);
   const $skip = getSkip(query);
-  const order = getOrder(query);
   const sort = getSort(query);
 
   const data = await this.aggregate([
     { $match },
     { $project: { _id: 0, __v: 0 } },
-    { $sort: { [sort]: order } },
+    { $sort: { [sort]: -1 } },
     { $skip },
     { $limit },
   ]);
 
-  return data;
+  return {
+    data,
+    ...query,
+    limit: $limit,
+    skip: $skip,
+  };
 });
 
 entrySchema.static('getTags', async function() {
   const data = await this.aggregate([
-    { $match: { status: 'approved' } },
+    { $match: { status: 'active' } },
     { $project: { tagList: ['$type', '$category'] } },
     { $unwind: '$tagList' },
     { $group: { _id: '$tagList', count: { $sum: 1 } } },

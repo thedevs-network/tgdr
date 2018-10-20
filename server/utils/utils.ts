@@ -1,6 +1,16 @@
 import * as R from 'ramda';
 import * as subDays from 'date-fns/sub_days';
 
+export const getEntryQuery = R.pipe(
+  R.pick(['category', 'limit', 'skip', 'sort', 'status', 'type']),
+  R.merge({
+    limit: 9,
+    skip: 0,
+    sort: 'top',
+    status: 'active',
+  })
+);
+
 export const getMatches = R.pipe(
   R.when(
     R.propEq('sort', 'hot'),
@@ -10,24 +20,20 @@ export const getMatches = R.pipe(
 );
 
 export const getLimit = R.pipe(
-  R.propOr(9, 'limit'),
+  R.prop('limit'),
   Number
 );
 
 export const getSkip = R.pipe(
-  R.propOr(0, 'skip'),
+  R.prop('skip'),
   Number
 );
 
 export const getSort = R.pipe(
-  R.propOr('new', 'sort'),
+  R.prop('sort'),
   R.cond([
     [R.equals('new'), R.always('created_at')],
     [R.or(R.equals('top'), R.equals('hot')), R.always('ratio')],
   ])
 );
 
-export const getOrder = R.pipe(
-  R.propOr(-1, 'order'),
-  Number
-);
