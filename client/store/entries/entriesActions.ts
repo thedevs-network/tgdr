@@ -23,7 +23,7 @@ export const getEntries: AsyncAction = (
   try {
     const {
       data: { data },
-    } = await axios.get(`/api/entries?${query}`);
+    } = await axios.get(`/api/etnry?${query}`);
     dispatch(entriesSuccess(data));
   } catch (error) {
     dispatch(entriesFailure());
