@@ -17,10 +17,10 @@ export interface IEntrySchema extends Document {
   members?: number;
   ratio: number;
   reject_reason?: string;
-  status: number;
+  status: 'pending' | 'active' | 'rejected';
   telegram_id?: number;
   title: string;
-  type: number;
+  type: 'channel' | 'bot' | 'supergroup';
   username: string;
 }
 
@@ -49,7 +49,7 @@ const entrySchema: Schema = new Schema({
   reject_reason: String,
   status: {
     default: 'pending',
-    enum: ['pending', 'approved', 'rejected'],
+    enum: ['pending', 'active', 'rejected'],
     required: true,
     type: String,
   },
