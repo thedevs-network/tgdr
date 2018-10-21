@@ -7,6 +7,7 @@ import CardRate from './CardRate';
 import { Title } from '../../elements/Typography';
 import Image from '../../elements/Image';
 import { LightBox } from '../../elements/Layout';
+import { IEntry } from 'client/store/storeTypes';
 
 const CardWrapper = styled(LightBox).attrs({
   align: 'center',
@@ -29,12 +30,18 @@ const CardWrapper = styled(LightBox).attrs({
   }
 `;
 
-const Card = () => (
+interface IProps {
+  entry: IEntry;
+}
+
+const Card = ({ entry }: IProps) => (
   <CardWrapper href="#" title="Card">
-    <Image mr={3} />
+    <Image username={entry.username} mr={3} />
     <Flex flexDirection="column" flex="1 1 auto">
-      <Title small>The Devs</Title>
-      <CardMembersCount>14871 members</CardMembersCount>
+      <Title small>{entry.title}</Title>
+      {entry.members && (
+        <CardMembersCount>{entry.members} members</CardMembersCount>
+      )}
       <Flex align="center" justify="space-between" mt={2}>
         <CardRate />
         <CardJoinButton />

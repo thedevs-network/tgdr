@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import Icon from '../../elements/Icon';
+import * as categories from '../../../../constants/categories';
+import { capitalizeFirstLetter } from '../../../utils';
 
 const Title = styled.h3`
   font-size: 18px;
@@ -29,19 +31,27 @@ const ViewAllLink = styled.a`
   }
 `;
 
-const CardsHeader = () => (
+interface IProps {
+  sort: 'hot' | 'top' | 'new';
+  type: 'bot' | 'channel' | 'supergroup';
+}
+
+const CardsHeader: React.SFC<IProps> = ({ sort, type }) => {
+  
+  const sectionType = categories.types.find(item => item.slug === type);
+  return (
   <Flex justify="space-between" mb={2}>
     <Flex align="center">
-      <Icon name="station" size={18} fill="#C7CFD6" mr={3} />
-      <Title>Channels</Title>
+      <Icon name={sectionType.icon} size={18} fill="#C7CFD6" mr={3} />
+      <Title>{capitalizeFirstLetter(sort)} {sectionType.name}</Title>
     </Flex>
     <Flex align="center">
-      <ViewAllLink href="#" title="View all channels">
+      <ViewAllLink href="#" title={`View all ${type}s`}>
         <span>View all</span>
         <Icon name="arrowRight" size={10} fill="#64B5F6" ml={10} />
       </ViewAllLink>
     </Flex>
   </Flex>
-);
+)};
 
 export default CardsHeader;
