@@ -21,7 +21,7 @@ export const types: ICategories[] = [
   {
     icon: 'messages',
     name: 'Groups',
-    slug: 'group',
+    slug: 'supergroup',
   },
 ];
 
