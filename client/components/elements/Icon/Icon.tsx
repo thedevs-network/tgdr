@@ -4,11 +4,14 @@ import { Flex } from 'grid-styled';
 import { prop } from 'styled-tools';
 import ArrowRight from '../../../assets/images/arrow-right-icon.svg';
 import At from '../../../assets/images/at-icon.svg';
+import BarChart from '../../../assets/images/bar-chart-icon.svg';
 import Calendar from '../../../assets/images/calendar-icon.svg';
 import Camera from '../../../assets/images/camera-icon.svg';
 import Check from '../../../assets/images/check-icon.svg';
 import ChevronRight from '../../../assets/images/chevron-right-icon.svg';
+import Clock from '../../../assets/images/clock-icon.svg';
 import Close from '../../../assets/images/close-icon.svg';
+import Flame from '../../../assets/images/flame-icon.svg';
 import Heart from '../../../assets/images/heart-icon.svg';
 import Info from '../../../assets/images/info-icon.svg';
 import Logout from '../../../assets/images/log-out-icon.svg';
@@ -24,11 +27,14 @@ import Users from '../../../assets/images/users-icon.svg';
 export interface IIcons {
   arrowRight: JSX.Element;
   at: JSX.Element;
+  barChart: JSX.Element;
   calendar: JSX.Element;
   camera: JSX.Element;
   check: JSX.Element;
   chevronRight: JSX.Element;
+  clock: JSX.Element;
   close: JSX.Element;
+  flame: JSX.Element;
   heart: JSX.Element;
   info: JSX.Element;
   logout: JSX.Element;
@@ -45,11 +51,14 @@ export interface IIcons {
 const icons: IIcons = {
   arrowRight: <ArrowRight />,
   at: <At />,
+  barChart: <BarChart />,
   calendar: <Calendar />,
   camera: <Camera />,
   check: <Check />,
   chevronRight: <ChevronRight />,
+  clock: <Clock />,
   close: <Close />,
+  flame: <Flame />,
   heart: <Heart />,
   info: <Info />,
   logout: <Logout />,
