@@ -1,7 +1,7 @@
 import App, { Container } from 'next/app';
 import React from 'react';
-import withReduxStore from '../client/withReduxStore';
 import { Provider } from 'react-redux';
+import withReduxStore from '../client/withReduxStore';
 import {
   authenticateUser,
   decodeToken,
@@ -21,10 +21,12 @@ class MyApp extends App<IProps> {
 
     // Authenticate user and save token to redux store
     if (!isAuthenticated && cookies.token) {
-      reduxStore.dispatch(authenticateUser({
-        ...decodeToken(cookies.token),
-        token: cookies.token,
-      }));
+      reduxStore.dispatch(
+        authenticateUser({
+          ...decodeToken(cookies.token),
+          token: cookies.token,
+        })
+      );
     }
 
     let pageProps;
