@@ -1,6 +1,5 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import styled, { ServerStyleSheet } from 'styled-components';
-import 'normalize.css';
 
 const Body = styled.body`
   font: 16px/1.5 'Rubik', sans-serif;
