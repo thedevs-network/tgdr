@@ -1,6 +1,8 @@
 import App, { Container } from 'next/app';
+import Router from 'next/router';
 import React from 'react';
 import { Provider } from 'react-redux';
+import nprogress from 'nprogress';
 import withReduxStore from '../client/withReduxStore';
 import {
   authenticateUser,
@@ -8,6 +10,8 @@ import {
   renewToken,
 } from '../client/store/auth';
 import { IReduxStore } from '../client/store';
+import 'normalize.css';
+import 'nprogress/nprogress.css';
 
 interface IProps {
   reduxStore?: IReduxStore;
@@ -45,6 +49,12 @@ class MyApp extends App<IProps> {
     if (isAuthenticated && !isFetched) {
       reduxStore.dispatch(renewToken());
     }
+    
+    nprogress.done()
+
+    Router.events.on('routeChangeStart', () => nprogress.start());
+    Router.events.on('routeChangeComplete', () => nprogress.done());
+    Router.events.on('routeChangeError', () => nprogress.done());
   }
 
   render() {
