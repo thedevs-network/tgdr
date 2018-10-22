@@ -7,6 +7,24 @@ export interface ICategories {
   slug: string;
 }
 
+export const sorts: ICategories[] = [
+  {
+    icon: 'barChart',
+    name: 'Top',
+    slug: 'top',
+  },
+  {
+    icon: 'flame',
+    name: 'Hot',
+    slug: 'hot',
+  },
+  {
+    icon: 'clock',
+    name: 'New',
+    slug: 'new',
+  },
+];
+
 export const types: ICategories[] = [
   {
     icon: 'station',
@@ -103,3 +121,8 @@ export const categories: ICategories[] = [
     slug: 'other',
   },
 ];
+
+export type AllCategoriesType = Record<
+  'sorts' | 'types' | 'categories',
+  ICategories[]
+>;

@@ -21,12 +21,16 @@ export const getEntries: AsyncAction = (
 ) => async (dispatch, getState) => {
   const { entries } = getState();
 
-  const paramsEqual = areParamsEqual(params, entries);
+  const paramsWithDefaults = {
+    limit: getState().entries.limit,
+    ...params,
+  }
+  const paramsEqual = areParamsEqual(paramsWithDefaults, entries);
   
   if (paramsEqual) return null;
   
-  const query = queryString.stringify(params);
-  dispatch(entriesRequest(params));
+  const query = queryString.stringify(paramsWithDefaults);
+  dispatch(entriesRequest(paramsWithDefaults));
   try {
     const { data } = await axios.get(`/api/entry?${query}`);
     dispatch(entriesSuccess(data));

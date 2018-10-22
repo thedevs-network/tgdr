@@ -4,6 +4,7 @@ import { Flex } from 'grid-styled';
 import Card from './Card';
 import CardsHeader from './CardsHeader';
 import { IEntry } from 'client/store/storeTypes';
+import { IGetEntriesParams } from 'client/store/entries';
 
 const CardsWrapper = styled(Flex)`
   > * {
@@ -15,19 +16,35 @@ const CardsWrapper = styled(Flex)`
   }
 `;
 
-interface IProps {
+interface IProps extends IGetEntriesParams {
   data: IEntry[];
-  sort: 'hot' | 'top' | 'new';
-  type: 'bot' | 'channel' | 'supergroup';
+  differentSorts?: boolean;
 }
 
-const Cards: React.SFC<IProps> = ({ data, sort, type }) => (
+const Cards: React.SFC<IProps> = ({
+  data,
+  differentSorts,
+  category,
+  sort,
+  type,
+}) => (
   <>
-    <CardsHeader sort={sort} type={type} />
+    <CardsHeader
+      category={category}
+      sort={sort}
+      type={type}
+      useSortIcons={differentSorts}
+    />
     <CardsWrapper flexWrap="wrap">
-      {data.map(entry => <Card key={entry.username} entry={entry} />)}
+      {data.map(entry => (
+        <Card key={entry.username} entry={entry} />
+      ))}
     </CardsWrapper>
   </>
 );
+
+Cards.defaultProps = {
+  differentSorts: false,
+};
 
 export default Cards;

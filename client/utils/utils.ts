@@ -32,3 +32,43 @@ export const areParamsEqual = (
   (params.category || state.category
     ? params.category === state.category
     : true);
+
+export const getParamsFromQueries = ({
+  category,
+  sort,
+  type,
+}: IGetEntriesParams): IGetEntriesParams[] => {
+  if (type && !category) {
+    return [
+      { sort: 'top', type },
+      { sort: 'hot', type },
+      { sort: 'new', type },
+    ];
+  }
+
+  if (sort) {
+    return [
+      { sort, type: 'channel' },
+      { sort, type: 'bot' },
+      { sort, type: 'supergroup' },
+    ];
+  }
+
+  if (category && !type) {
+    return [
+      { category, sort: 'top', type: 'channel' },
+      { category, sort: 'top', type: 'bot' },
+      { category, sort: 'top', type: 'supergroup' },
+    ];
+  }
+
+  if (category && type) {
+    return [
+      { category, sort: 'top', type },
+      { category, sort: 'hot', type },
+      { category, sort: 'new', type },
+    ];  
+  }
+
+  return [{}, {}, {}];
+};

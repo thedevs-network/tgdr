@@ -33,8 +33,8 @@ export interface IEntriesState
 export interface IGetEntriesParams {
   category?: string;
   limit?: number;
-  sort: 'hot' | 'new' | 'top';
-  type: 'bot' | 'channel' | 'supergroup';
+  sort?: 'hot' | 'new' | 'top';
+  type?: 'bot' | 'channel' | 'supergroup';
 }
 
 export interface IGetEntriesResponse {

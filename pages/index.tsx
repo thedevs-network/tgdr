@@ -1,40 +1,44 @@
 import * as React from 'react';
-import { NextStatelessComponent } from 'next';
+import { NextSFC } from 'next';
 import withVerifyToken from '../client/withVerifyToken';
 import Body from '../client/components/Body';
 import Cards from '../client/components/Cards';
 import { getTags } from '../client/store/tags';
-import { getEntries } from '../client/store/entries';
-import { INextContextWithRedux } from 'client/store';
+import { getEntries, IGetEntriesParams } from '../client/store/entries';
+import { INextContextWithRedux } from '../client/store';
+import { getParamsFromQueries } from '../client/utils';
 
-const Homepage: NextStatelessComponent = () => (
-  <Body>
-    <Cards sort="top" type="channel" />
-    <Cards sort="top" type="bot" />
-    <Cards sort="top" type="supergroup" />
-  </Body>
-);
+interface IProps {
+  params: IGetEntriesParams[];
+}
 
-Homepage.getInitialProps = async ({ reduxStore }: INextContextWithRedux) => {
+const Homepage: NextSFC<IProps> = ({ params }) => {
+  const differentSorts = params[0].sort !== params[1].sort;
+  return (
+    <Body>
+      {params.map((item, index) => (
+        <Cards
+          category={item.category}
+          key={index}
+          sort={item.sort}
+          type={item.type}
+          differentSorts={differentSorts}
+        />
+      ))}
+    </Body>
+  );
+};
+
+Homepage.getInitialProps = async ({
+  reduxStore,
+  query,
+}: INextContextWithRedux) => {
+  const params = getParamsFromQueries(query);
   await Promise.all([
-    await reduxStore.dispatch(getTags()),
-    await reduxStore.dispatch(getEntries({
-      limit: 9,
-      sort: 'top',
-      type: 'channel',
-    })),
-    await reduxStore.dispatch(getEntries({
-      limit: 9,
-      sort: 'top',
-      type: 'bot',
-    })),
-    await reduxStore.dispatch(getEntries({
-      limit: 9,
-      sort: 'top',
-      type: 'supergroup',
-    })),
-  ])
-  return {};
+    reduxStore.dispatch(getTags()),
+    ...params.map(async item => await reduxStore.dispatch(getEntries(item))),
+  ]);
+  return { params };
 };
 
 export default withVerifyToken(Homepage);

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getEntries, IEntriesState } from '../../store/entries';
+import {
+  getEntries,
+  IEntriesState,
+  IGetEntriesParams,
+} from '../../store/entries';
 import Cards from './Cards';
 import { IAppState } from 'client/store';
 
@@ -12,17 +16,18 @@ interface IReduxDispatchProps {
   getEntries: typeof getEntries;
 }
 
-interface IProps extends IReduxStateProps, IReduxDispatchProps {
+interface IProps
+  extends IReduxStateProps,
+    IReduxDispatchProps,
+    IGetEntriesParams {
   allowLoadMore?: boolean;
-  category?: string;
-  limit?: number;
-  sort: 'hot' | 'top' | 'new';
-  type: 'bot' | 'channel' | 'supergroup';
+  differentSorts?: boolean;
 }
 
 class CardsContainer extends React.Component<IProps> {
   static defaultProps = {
     allowLoadMore: false,
+    differentSorts: false,
     limit: 9,
   };
 
@@ -37,13 +42,15 @@ class CardsContainer extends React.Component<IProps> {
   }
 
   render() {
-    const { entries, type, sort } = this.props;
+    const { differentSorts, entries, category, type, sort } = this.props;
     const data = entries.data[type][sort];
     return (
       <Cards
         data={data}
+        category={category}
         sort={sort}
         type={type}
+        differentSorts={differentSorts}
       />
     );
   }
