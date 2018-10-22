@@ -7,8 +7,8 @@ import SidebarList from './SidebarList';
 import { ICategories } from '../../../constants/categories';
 
 interface IProps {
-  types: ICategories[];
   categories: ICategories[];
+  types: ICategories[];
 }
 
 const Sidebar: React.SFC<IProps> = ({ categories, types }) => (

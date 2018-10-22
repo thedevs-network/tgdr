@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import { ITagsState } from '../../store/tags';
 import { IAppState } from '../../store';
-import { categories, ICategories, types } from '../../../constants/categories';
+import {
+  categories,
+  ICategories,
+  types,
+} from '../../../constants/categories';
 
 interface IReduxStateProps {
   tags: ITagsState;
@@ -25,7 +29,7 @@ class SidebarContainer extends React.Component<IReduxStateProps> {
   render() {
     const catsData = categories.map(this.addCount);
     const typesData = types.map(this.addCount);
-    return <Sidebar categories={catsData} types={typesData} />;
+    return <Sidebar types={typesData} categories={catsData} />;
   }
 }
 
