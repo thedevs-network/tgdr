@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import * as subDays from 'date-fns/sub_days';
+import { AllCategoriesType } from 'constants/categories';
 
 export const getEntryQuery = R.pipe(
   R.pick(['category', 'limit', 'skip', 'sort', 'status', 'type']),
@@ -14,7 +15,7 @@ export const getEntryQuery = R.pipe(
 export const getMatches = R.pipe(
   R.when(
     R.propEq('sort', 'hot'),
-    R.assocPath(['created_at', '$gt'], subDays(new Date(), 30)),
+    R.assocPath(['created_at', '$gt'], subDays(new Date(), 30))
   ),
   R.pick(['category', 'status', 'type', 'created_at'])
 );
@@ -37,3 +38,11 @@ export const getSort = R.pipe(
   ])
 );
 
+export const getLength = R.pipe(
+  R.values,
+  R.length
+);
+
+export const findCategory = (categories: AllCategoriesType, param: string) => (
+  cat: keyof AllCategoriesType
+) => categories[cat].find(item => item.slug === param) && param;
