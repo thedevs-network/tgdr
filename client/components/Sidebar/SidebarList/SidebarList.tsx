@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import { ICategories } from '../../../../constants/categories';
@@ -78,14 +79,16 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
     <List>
       {data.map(item => (
         <ListItem key={item.slug}>
-          <ListLink>
-            <Icon
-              name={item.icon || 'chevronRight'}
-              mr={3}
-              size={item.icon ? 16 : 6}
-            />
-            <span>{item.name}</span>
-          </ListLink>
+          <Link href={`/${item.slug}`} passHref>
+            <ListLink title={item.name}>
+              <Icon
+                name={item.icon || 'chevronRight'}
+                mr={3}
+                size={item.icon ? 16 : 6}
+              />
+              <span>{item.name}</span>
+            </ListLink>
+          </Link>
           <Count>{item.count}</Count>
         </ListItem>
       ))}
