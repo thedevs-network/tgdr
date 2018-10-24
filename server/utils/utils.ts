@@ -40,6 +40,7 @@ export const getSort = R.pipe(
 
 export const getLength = R.pipe(
   R.values,
+  R.filter(Boolean),
   R.length
 );
 

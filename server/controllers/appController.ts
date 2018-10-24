@@ -20,13 +20,11 @@ export const renderOneLevel = (app: Next.Server) => (
   const { cat } = req.params;
 
   const findIn = findCategory(categories, cat);
-  const params = {
+  const query = {
     category: findIn('categories'),
     sort: findIn('sorts'),
     type: findIn('types'),
   };
-
-  const query = R.pick(['category', 'sort', 'type'], params);
 
   const size = getLength(query);
   if (!size) return next();
@@ -41,28 +39,20 @@ export const renderTwoLevel = (app: Next.Server) => (
 ) => {
   const { first, second } = req.params;
 
+  if (first === '_next') return next();
+
   const findFirstIn = findCategory(categories, first);
   const findSecondIn = findCategory(categories, second);
 
-  const params = {
+  const query = {
     category: findSecondIn('categories'),
     sort: findSecondIn('sorts'),
     type: findFirstIn('types'),
   };
 
-  const query = R.pick(['category', 'sort', 'type'], params);
-
-  if (query.type && query.sort) {
-    return app.render(req, res, '/list', query);
-  }
-
-  if (query.type && query.category) {
-    return app.render(req, res, '/', query);
-  }
-
-  return next();
+  if (!query.type || (!query.sort && !query.category)) return next();
+  return app.render(req, res, '/', query);
 };
-
 
 export const renderThreeLevel = (app: Next.Server) => (
   req: express.Request,
@@ -71,16 +61,14 @@ export const renderThreeLevel = (app: Next.Server) => (
 ) => {
   const { category, sort, type } = req.params;
 
-  const params = {
+  const query = {
     category: findCategory(categories, category)('categories'),
     sort: findCategory(categories, sort)('sorts'),
     type: findCategory(categories, type)('types'),
   };
 
-  const query = R.pick(['category', 'sort', 'type'], params);
-
   const size = getLength(query);
   if (size !== 3) return next();
 
-  return app.render(req, res, '/list', query);
+  return app.render(req, res, '/', query);
 };
