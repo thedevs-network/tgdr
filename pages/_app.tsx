@@ -20,7 +20,8 @@ interface IProps {
 class MyApp extends App<IProps> {
   static async getInitialProps({ Component, ctx }) {
     const reduxStore: IReduxStore = ctx.reduxStore;
-    const { cookies } = ctx.req;
+  
+    const { cookies = {} } = ctx.req || {};
     const { isAuthenticated } = reduxStore.getState().auth;
 
     // Authenticate user and save token to redux store
