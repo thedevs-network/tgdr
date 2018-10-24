@@ -17,11 +17,11 @@ const Sidebar: React.SFC<IProps> = ({ categories, types }) => (
       <SearchInput />
     </Flex>
     <Flex>
-      <SidebarList title="Types" data={types} />
+      <SidebarList title="Types" data={types} queryName="type" />
     </Flex>
     <Divider />
     <Flex>
-      <SidebarList title="Categories" data={categories} />
+      <SidebarList title="Categories" data={categories} queryName="category" />
     </Flex>
   </LightBox>
 );

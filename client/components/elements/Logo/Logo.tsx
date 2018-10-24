@@ -12,7 +12,7 @@ const Image = styled.img`
 `;
 
 const Logo: React.SFC = () => (
-  <Link href="/" prefetch>
+  <Link href="/?sort=top" as="/">
     <a title="Telegram Directory">
       <Image src={LogoImage} alt="Telegram Directory" />
     </a>

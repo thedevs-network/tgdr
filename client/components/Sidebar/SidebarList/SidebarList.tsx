@@ -71,15 +71,21 @@ const Count = styled.span`
 interface ISidebarList {
   title: string;
   data: ICategories[];
+  queryName: 'category' | 'type';
 }
 
-const SidebarList: React.SFC<ISidebarList> = ({ title, data }) => (
+const SidebarList: React.SFC<ISidebarList> = ({ title, data, queryName }) => (
   <Flex flexDirection="column" flex="1 1 auto">
     <Title>{title}</Title>
     <List>
       {data.map(item => (
         <ListItem key={item.slug}>
-          <Link href={`/${item.slug}`} passHref>
+          <Link
+            as={`/${item.slug}`}
+            href={`/?${queryName}=${item.slug}`}
+            passHref
+            scroll={false}
+          >
             <ListLink title={item.name}>
               <Icon
                 name={item.icon || 'chevronRight'}
