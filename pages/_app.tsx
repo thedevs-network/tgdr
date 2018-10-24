@@ -11,7 +11,7 @@ import {
 } from '../client/store/auth';
 import { IReduxStore } from '../client/store';
 import 'normalize.css';
-import 'nprogress/nprogress.css';
+import '../client/assets/css/nprogress.css';
 
 interface IProps {
   reduxStore?: IReduxStore;
