@@ -8,19 +8,16 @@ const initialState: IEntriesState = {
   data: {
     bot: {
       hot: [],
-      isLoading: false,
       new: [],
       top: [],
     },
     channel: {
       hot: [],
-      isLoading: false,
       new: [],
       top: [],
     },
     supergroup: {
       hot: [],
-      isLoading: false,
       new: [],
       top: [],
     },

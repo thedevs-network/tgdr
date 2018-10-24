@@ -11,7 +11,6 @@ export interface IEachEntriesData
       hot: IEntry[];
       new: IEntry[];
       top: IEntry[];
-      isLoading: boolean;
     }> {}
 
 export interface IEntriesData
