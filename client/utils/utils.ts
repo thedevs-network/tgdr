@@ -38,19 +38,20 @@ export const getParamsFromQueries = ({
   sort,
   type,
 }: IGetEntriesParams): IGetEntriesParams[] => {
+
+  if (category && sort && type) {
+    return [{ category, sort, type }];  
+  }
+
+  if (sort && type) {
+    return [{ sort, type }];  
+  }
+  
   if (type && !category) {
     return [
       { sort: 'top', type },
       { sort: 'hot', type },
       { sort: 'new', type },
-    ];
-  }
-
-  if (sort) {
-    return [
-      { sort, type: 'channel' },
-      { sort, type: 'bot' },
-      { sort, type: 'supergroup' },
     ];
   }
 
@@ -70,5 +71,13 @@ export const getParamsFromQueries = ({
     ];  
   }
 
-  return [{}, {}, {}];
+  if (sort) {
+    return [
+      { sort, type: 'channel' },
+      { sort, type: 'bot' },
+      { sort, type: 'supergroup' },
+    ];
+  }
+
+  return [];
 };
