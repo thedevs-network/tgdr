@@ -12,7 +12,7 @@ interface IProps {
   params: IGetEntriesParams[];
 }
 
-const Homepage: NextSFC<IProps> = ({ params = [] }) => {
+const Homepage: NextSFC<IProps> = ({ params }) => {
   const differentSorts = params.length > 1 && params[0].sort !== params[1].sort;
   return (
     <Body>
