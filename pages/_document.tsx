@@ -21,10 +21,6 @@ class DocumentPage extends Document {
     return (
       <html>
         <Head>
-          <title>
-            Telegram Directory | Find the best Telegram channels, bots and
-            groups.
-          </title>
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link
             // tslint:disable-next-line:max-line-length
