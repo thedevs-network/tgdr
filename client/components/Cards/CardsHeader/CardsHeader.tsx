@@ -32,12 +32,14 @@ const ViewAllLink = styled.a`
 `;
 
 interface IProps extends IGetEntriesParams {
+  showViewAllLink?: boolean,
   useSortIcons?: boolean,
 }
 
 const CardsHeader: React.SFC<IProps> = ({
   category,
   sort,
+  showViewAllLink,
   type,
   useSortIcons,
 }) => {
@@ -61,16 +63,19 @@ const CardsHeader: React.SFC<IProps> = ({
         </Title>
       </Flex>
       <Flex align="center">
-        <ViewAllLink href="#" title={`View all ${type}s`}>
-          <span>View all</span>
-          <Icon name="arrowRight" size={10} fill="#64B5F6" ml={10} />
-        </ViewAllLink>
+        {showViewAllLink && (
+          <ViewAllLink href="#" title={`View all ${type}s`}>
+            <span>View all</span>
+            <Icon name="arrowRight" size={10} fill="#64B5F6" ml={10} />
+          </ViewAllLink>
+        )}
       </Flex>
     </Flex>
   );
 };
 
 CardsHeader.defaultProps= {
+  showViewAllLink: true,
   useSortIcons: false,
 }
 

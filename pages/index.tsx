@@ -14,6 +14,7 @@ interface IProps {
 
 const Homepage: NextSFC<IProps> = ({ params }) => {
   const differentSorts = params.length > 1 && params[0].sort !== params[1].sort;
+  const loadMore = params.length === 1;
   return (
     <Body>
       {params.map((item, index) => (
@@ -23,6 +24,7 @@ const Homepage: NextSFC<IProps> = ({ params }) => {
           sort={item.sort}
           type={item.type}
           differentSorts={differentSorts}
+          loadMore={loadMore}
         />
       ))}
     </Body>

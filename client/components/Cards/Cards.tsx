@@ -19,12 +19,14 @@ const CardsWrapper = styled(Flex)`
 interface IProps extends IGetEntriesParams {
   data: IEntry[];
   differentSorts?: boolean;
+  loadMore?: boolean;
 }
 
 const Cards: React.SFC<IProps> = ({
   data,
   differentSorts,
   category,
+  loadMore,
   sort,
   type,
 }) => (
@@ -34,6 +36,7 @@ const Cards: React.SFC<IProps> = ({
       sort={sort}
       type={type}
       useSortIcons={differentSorts}
+      showViewAllLink={!loadMore}
     />
     <CardsWrapper flexWrap="wrap">
       {data.map(entry => (
@@ -45,6 +48,7 @@ const Cards: React.SFC<IProps> = ({
 
 Cards.defaultProps = {
   differentSorts: false,
+  loadMore: false,
 };
 
 export default Cards;

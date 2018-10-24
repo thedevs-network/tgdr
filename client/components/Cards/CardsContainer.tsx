@@ -22,6 +22,7 @@ interface IProps
     IGetEntriesParams {
   allowLoadMore?: boolean;
   differentSorts?: boolean;
+  loadMore?: boolean;
 }
 
 class CardsContainer extends React.Component<IProps> {
@@ -29,6 +30,7 @@ class CardsContainer extends React.Component<IProps> {
     allowLoadMore: false,
     differentSorts: false,
     limit: 9,
+    loadMore: false,
   };
 
   componentDidMount() {
@@ -42,7 +44,14 @@ class CardsContainer extends React.Component<IProps> {
   }
 
   render() {
-    const { differentSorts, entries, category, type, sort } = this.props;
+    const {
+      differentSorts,
+      entries,
+      category,
+      loadMore,
+      type,
+      sort,
+    } = this.props;
     const data = entries.data[type][sort];
     return (
       <Cards
@@ -51,6 +60,7 @@ class CardsContainer extends React.Component<IProps> {
         sort={sort}
         type={type}
         differentSorts={differentSorts}
+        loadMore={loadMore}
       />
     );
   }
