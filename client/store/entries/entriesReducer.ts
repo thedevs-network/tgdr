@@ -34,7 +34,6 @@ export const entriesReducer: Reducer<IEntriesState> = (
   produce(state, draft => {
     switch (action.type) {
       case EntriesStateTypes.REQUEST:
-        draft.data[action.payload.type].isLoading = true;
         return;
 
       case EntriesStateTypes.SUCCESS:
@@ -42,7 +41,6 @@ export const entriesReducer: Reducer<IEntriesState> = (
         draft.skip = action.payload.skip;
         draft.category = action.payload.category;
         draft.hasError = false;
-        draft.data[action.payload.type].isLoading = false;
         draft.data[action.payload.type][action.payload.sort] =
           action.payload.data;
         return;
