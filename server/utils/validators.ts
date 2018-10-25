@@ -1,7 +1,7 @@
-import { body } from 'express-validator/check';
+import { body, param } from 'express-validator/check';
 import { categories } from '../../constants/categories';
 
-export const entryValidators = [
+export const newEntryValidators = [
   body('username', 'Username is not valid.')
     .exists()
     .trim()
@@ -22,4 +22,14 @@ export const entryValidators = [
     .trim()
     .isLength({ min: 20, max: 800 })
     .withMessage('Description must be between 20 and 800 chars.'),
+];
+
+export const entryValidator = [
+  param('username', 'Username is not valid.')
+    .exists()
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Username must have at least 6 chars.')
+    .matches(/^[a-z]\w+$/i)
+    .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
