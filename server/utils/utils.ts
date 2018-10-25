@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import * as subDays from 'date-fns/sub_days';
-import { AllCategoriesType } from 'constants/categories';
+import { AllCategoriesType } from '../../constants/categories';
 
 export const getEntryQuery = R.pipe(
   R.pick(['category', 'limit', 'skip', 'sort', 'status', 'type']),
@@ -47,3 +47,6 @@ export const getLength = R.pipe(
 export const findCategory = (categories: AllCategoriesType, param: string) => (
   cat: keyof AllCategoriesType
 ) => categories[cat].find(item => item.slug === param) && param;
+
+export const omitExtraFields = (document: {}) =>
+  R.omit(['_id', '__v'], document);
