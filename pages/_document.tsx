@@ -7,7 +7,11 @@ const Body = styled.body`
   background-color: #f4f5f7;
 `;
 
-class DocumentPage extends Document {
+interface IProps {
+  styleTags: any;
+}
+
+class DocumentPage extends Document<IProps> {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
     const page = renderPage(App => props =>
