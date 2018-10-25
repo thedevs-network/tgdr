@@ -76,3 +76,9 @@ export const getEntries: express.RequestHandler = async (req, res) => {
   const entries = await entryQuery.get(query);
   return res.status(201).json(entries);
 };
+
+export const getEntry: express.RequestHandler = async (req, res) => {
+  const { username } = req.params;
+  const entry = await entryQuery.getSingle(username);
+  return res.status(201).json(entry);
+};
