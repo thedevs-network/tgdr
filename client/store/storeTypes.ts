@@ -23,15 +23,17 @@ export interface IEntry
       created_at: Date;
       description: string;
       dislikes: number;
+      featured?: boolean;
       likes: number;
       members?: number;
       ratio: number;
       reject_reason?: string;
-      status: number;
+      status: 'active', 'pending', 'rejected';
       telegram_id?: number;
       title: string;
-      type: number;
+      type: 'bot', 'channel', 'supergroup';
       username: string;
+      verified?: boolean;
     }> {}
 
 export type AsyncAction = ActionCreator<
