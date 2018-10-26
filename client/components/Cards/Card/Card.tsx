@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Flex } from 'grid-styled';
 import CardJoinButton from './CardJoinButton';
 import CardMembersCount from './CardMembersCount';
@@ -35,19 +36,21 @@ interface IProps {
 }
 
 const Card = ({ entry }: IProps) => (
-  <CardWrapper href="#" title="Card">
-    <Image username={entry.username} mr={3} />
-    <Flex flexDirection="column" flex="1 1 auto">
-      <Title small>{entry.title}</Title>
-      {entry.members && (
-        <CardMembersCount>{entry.members} members</CardMembersCount>
-      )}
-      <Flex align="center" justify="space-between" mt={2}>
-        <CardRate />
-        <CardJoinButton />
+  <Link href={`/@${entry.username}`} scroll={false}>
+    <CardWrapper title="Card">
+      <Image username={entry.username} mr={3} />
+      <Flex flexDirection="column" flex="1 1 auto">
+        <Title small>{entry.title}</Title>
+        {entry.members && (
+          <CardMembersCount>{entry.members} members</CardMembersCount>
+        )}
+        <Flex align="center" justify="space-between" mt={2}>
+          <CardRate />
+          <CardJoinButton />
+        </Flex>
       </Flex>
-    </Flex>
-  </CardWrapper>
+    </CardWrapper>
+  </Link>
 );
 
 export default Card;
