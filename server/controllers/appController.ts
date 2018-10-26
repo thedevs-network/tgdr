@@ -72,3 +72,8 @@ export const renderThreeLevel = (app: Next.Server) => (
 
   return app.render(req, res, '/', query);
 };
+
+export const renderSingle = (app: Next.Server) => (
+  req: express.Request,
+  res: express.Response
+) => app.render(req, res, '/single', req.params);
