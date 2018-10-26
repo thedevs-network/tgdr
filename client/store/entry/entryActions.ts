@@ -15,7 +15,7 @@ export const getEntry: AsyncAction = (username: string) => async dispatch => {
   try {
     const {
       data: { data },
-    } = await axios.get(`/api/entry/${username}`);
+    } = await axios.get(`/api/entry/${username.replace('@', '')}`);
     dispatch(entrySuccess(data));
   } catch (error) {
     dispatch(entryFailure());
