@@ -18,7 +18,9 @@ import Logout from '../../../assets/images/log-out-icon.svg';
 import Message from '../../../assets/images/messages-icon.svg';
 import Robot from '../../../assets/images/robot-icon.svg';
 import Search from '../../../assets/images/search-icon.svg';
+import Star from '../../../assets/images/star-icon.svg';
 import Station from '../../../assets/images/station-icon.svg';
+import Tag from '../../../assets/images/tag-icon.svg';
 import Telegram from '../../../assets/images/telegram-icon.svg';
 import ThumbsDown from '../../../assets/images/thumbs-down-icon.svg';
 import TimerSand from '../../../assets/images/timer-sand-icon.svg';
@@ -41,7 +43,9 @@ export interface IIcons {
   messages: JSX.Element;
   robot: JSX.Element;
   search: JSX.Element;
+  star: JSX.Element;
   station: JSX.Element;
+  tag: JSX.Element;
   telegram: JSX.Element;
   thumbsDown: JSX.Element;
   timerSand: JSX.Element;
@@ -65,7 +69,9 @@ const icons: IIcons = {
   messages: <Message />,
   robot: <Robot />,
   search: <Search />,
+  star: <Star />,
   station: <Station />,
+  tag: <Tag />,
   telegram: <Telegram />,
   thumbsDown: <ThumbsDown />,
   timerSand: <TimerSand />,
