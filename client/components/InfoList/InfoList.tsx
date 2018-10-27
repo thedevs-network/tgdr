@@ -3,7 +3,6 @@ import { Flex } from 'grid-styled';
 import InfoListItem from './InfoListItem';
 import { IEntry } from '../../store/storeTypes';
 import { categories, types } from '../../../constants/categories';
-import { capitalizeFirstLetter } from '../../utils';
 
 interface IProps {
   entry: IEntry;
@@ -22,7 +21,7 @@ const InfoList: React.SFC<IProps> = ({ entry }) => {
         <InfoListItem icon="star" text="Featured" color="#F9A825" size={15} />
       )}
       <InfoListItem icon="at" text={username} size={15} />
-      <InfoListItem icon={type.icon} text={capitalizeFirstLetter(type.slug)} />
+      <InfoListItem icon={type.icon} text={type.name.replace('s', '')} />
       {category && <InfoListItem icon="tag" text={category.name} />}
       {members && <InfoListItem icon="users" text={members} />}
     </Flex>
