@@ -1,9 +1,12 @@
 import * as React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import queryString from 'query-string';
 import Icon from '../../elements/Icon';
 import * as categories from '../../../../constants/categories';
-import { IGetEntriesParams } from 'client/store/entries';
+import { IGetEntriesParams } from '../../../store/entries';
+import { getViewMoreLinkURL } from '../../../utils';
 
 const Title = styled.h3`
   font-size: 18px;
@@ -32,8 +35,8 @@ const ViewAllLink = styled.a`
 `;
 
 interface IProps extends IGetEntriesParams {
-  showViewAllLink?: boolean,
-  useSortIcons?: boolean,
+  showViewAllLink?: boolean;
+  useSortIcons?: boolean;
 }
 
 const CardsHeader: React.SFC<IProps> = ({
@@ -48,6 +51,9 @@ const CardsHeader: React.SFC<IProps> = ({
   );
   const sectionSort = categories.sorts.find(item => item.slug === sort);
   const sectionType = categories.types.find(item => item.slug === type);
+  const params = { category, sort, type };
+  const query = queryString.stringify(params);
+  const linkURL = getViewMoreLinkURL(params);
   return (
     <Flex justify="space-between" mb={2}>
       <Flex align="center">
@@ -64,19 +70,21 @@ const CardsHeader: React.SFC<IProps> = ({
       </Flex>
       <Flex align="center">
         {showViewAllLink && (
-          <ViewAllLink href="#" title={`View all ${type}s`}>
-            <span>View all</span>
-            <Icon name="arrowRight" size={10} fill="#64B5F6" ml={10} />
-          </ViewAllLink>
+          <Link href={`/${query}`} as={`/${linkURL}`} passHref scroll={false}>
+            <ViewAllLink href="#" title={`View all ${type}s`}>
+              <span>View all</span>
+              <Icon name="arrowRight" size={10} fill="#64B5F6" ml={10} />
+            </ViewAllLink>
+          </Link>
         )}
       </Flex>
     </Flex>
   );
 };
 
-CardsHeader.defaultProps= {
+CardsHeader.defaultProps = {
   showViewAllLink: true,
   useSortIcons: false,
-}
+};
 
 export default CardsHeader;
