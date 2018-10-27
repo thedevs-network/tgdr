@@ -38,15 +38,14 @@ export const getParamsFromQueries = ({
   sort,
   type,
 }: IGetEntriesParams): IGetEntriesParams[] => {
-
   if (category && sort && type) {
-    return [{ category, sort, type }];  
+    return [{ category, sort, type }];
   }
 
   if (sort && type) {
-    return [{ sort, type }];  
+    return [{ sort, type }];
   }
-  
+
   if (type && !category) {
     return [
       { sort: 'top', type },
@@ -68,7 +67,7 @@ export const getParamsFromQueries = ({
       { category, sort: 'top', type },
       { category, sort: 'hot', type },
       { category, sort: 'new', type },
-    ];  
+    ];
   }
 
   if (sort) {
@@ -80,4 +79,33 @@ export const getParamsFromQueries = ({
   }
 
   return [];
+};
+
+export const getViewMoreLinkURL = ({
+  category,
+  sort,
+  type,
+}: IGetEntriesParams): string => {
+  switch (true) {
+    case !!category && !!sort && !!type:
+      return `${type}/${category}/${sort}`;
+
+    case !!sort && !!type:
+      return `${type}/${sort}`;
+
+    case !!type && !category:
+      return type;
+      
+    case !!category && !type:
+      return category;
+
+    case !!category && !!type:
+      return `${type}/${category}`;
+
+    case !!sort:
+      return sort;
+
+    default:
+      return '';
+  }
 };
