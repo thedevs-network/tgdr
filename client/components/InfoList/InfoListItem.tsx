@@ -4,11 +4,17 @@ import { Flex } from 'grid-styled';
 import { prop } from 'styled-tools';
 import Icon, { IIcons } from '../elements/Icon';
 
+const Wrapepr = styled(Flex)`
+  > *:first-child {
+    margin-top: 2px;
+  }
+`;
+
 const Text = styled.span`
   min-width: 50%;
   flex: 1 0 0;
   font-size: 14px;
-  color: ${prop('color', '#888888')};
+  color: ${prop('color')};
   word-wrap: break-word;
 `;
 
@@ -26,10 +32,10 @@ const InfoListItem: React.SFC<IInfoListItem> = ({
   size,
   text,
 }) => (
-  <Flex mb={2}>
+  <Wrapepr mb={2} align="flex-start">
     <Icon name={icon} mr={2} size={size} fill={color || '#C7CFD6'} />
-    <Text color={color}>{text}</Text>
-  </Flex>
+    <Text color={color || '#888888'}>{text}</Text>
+  </Wrapepr>
 );
 
 InfoListItem.defaultProps = {
