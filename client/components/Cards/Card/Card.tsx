@@ -36,7 +36,11 @@ interface IProps {
 }
 
 const Card = ({ entry }: IProps) => (
-  <Link href={`/@${entry.username}`} scroll={false}>
+  <Link
+    href={`/single?username=@${entry.username}`}
+    as={`/@${entry.username}`}
+    scroll={false}
+  > 
     <CardWrapper title="Card">
       <Image username={entry.username} mr={3} />
       <Flex flexDirection="column" flex="1 1 auto">
