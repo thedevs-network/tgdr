@@ -7,3 +7,10 @@ export interface IEntryQuery {
   status?: 'active' | 'pending' | 'rejected',
   type?: 'channel' | 'group' | 'bot',
 }
+
+export interface IReviewQuery {
+  entryId: string;
+  liked: boolean;
+  text?: string;
+  userId: string;
+}
