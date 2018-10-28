@@ -3,7 +3,7 @@ import * as botController from './botController';
 import cloudinary from '../cloudinary';
 import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
-import { getEntryQuery } from '../utils';
+import { getEntryQuery, omitExtraFields } from '../utils';
 
 export const checkExistence: express.RequestHandler = async (
   req,
@@ -64,21 +64,22 @@ export const downloadImage: express.RequestHandler = async (
   next();
 };
 
-export const createEntry: express.RequestHandler = async (_req, res) => {
+export const create: express.RequestHandler = async (_req, res) => {
   await entryQuery.create(res.locals.entry);
   return res.status(201).json({
     message: 'Entry has been submitted successfully.',
   });
 };
 
-export const getEntries: express.RequestHandler = async (req, res) => {
+export const get: express.RequestHandler = async (req, res) => {
   const query = getEntryQuery(req.query);
   const entries = await entryQuery.get(query);
-  return res.status(201).json(entries);
+  return res.status(200).json(entries);
 };
 
-export const getEntry: express.RequestHandler = async (req, res) => {
+export const getSingle: express.RequestHandler = async (req, res) => {
   const { username } = req.params;
   const entry = await entryQuery.getSingle(username);
-  return res.status(201).json(entry);
+  const data = omitExtraFields(entry);
+  return res.status(200).json({ data });
 };

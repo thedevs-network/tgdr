@@ -5,7 +5,6 @@ import {
   getMatches,
   getSkip,
   getSort,
-  omitExtraFields,
 } from '../utils';
 import CustomError from '../helpers/customError';
 
@@ -26,18 +25,22 @@ export interface IEntrySchema extends Document {
 }
 
 export interface IEntryModel extends Model<IEntrySchema> {
-  getTags(): Array<{
-    count: number;
-    tag: string;
-  }>;
+  getTags(): Promise<
+    Array<{
+      count: number;
+      tag: string;
+    }>
+  >;
   getEntries(
     query: IEntryQuery
-  ): {
-    data: IEntrySchema[];
-    limit: number;
-    skip: number;
-  } & IEntryQuery;
-  getEntry(username: string): { data: IEntrySchema };
+  ): Promise<
+    {
+      data: IEntrySchema[];
+      limit: number;
+      skip: number;
+    } & IEntryQuery
+  >;
+  getEntry(username: string): Promise<IEntrySchema>;
 }
 
 const entrySchema: Schema = new Schema({
@@ -90,11 +93,8 @@ entrySchema.pre<IEntrySchema>('save', function(next) {
 
 entrySchema.static('getEntry', async function(username: string) {
   const entry = await this.findOne({ username }).lean();
-  if (!entry) throw new CustomError('Couldn\'t find the entry.');
-  const data = omitExtraFields(entry);
-  return {
-    data,
-  };
+  if (!entry) throw new CustomError("Couldn't find the entry.");
+  return entry;
 });
 
 entrySchema.static('getEntries', async function(query: IEntryQuery) {

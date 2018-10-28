@@ -6,7 +6,11 @@ interface IError {
   msg: string;
 }
 
-export const entry: express.RequestHandler = async (req, _res, next) => {
+export const checkForErrors: express.RequestHandler = async (
+  req,
+  _res,
+  next
+) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const messages = errors.array().map((item: IError) => item.msg);

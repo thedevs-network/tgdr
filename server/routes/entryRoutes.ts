@@ -11,20 +11,20 @@ router.post(
   '/submit',
   passport.authenticate('jwt', { session: false }),
   newEntryValidators,
-  asyncHandler(validatorsController.entry),
+  asyncHandler(validatorsController.checkForErrors),
   asyncHandler(entryController.checkExistence),
   asyncHandler(entryController.getDetails),
   asyncHandler(entryController.downloadImage),
-  asyncHandler(entryController.createEntry)
+  asyncHandler(entryController.create)
 );
 
-router.get('/', asyncHandler(entryController.getEntries));
+router.get('/', asyncHandler(entryController.get));
 
 router.get(
   '/:username',
   entryValidator,
-  asyncHandler(validatorsController.entry),
-  asyncHandler(entryController.getEntry)
+  asyncHandler(validatorsController.checkForErrors),
+  asyncHandler(entryController.getSingle)
 );
 
 export default router;
