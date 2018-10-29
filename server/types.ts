@@ -9,8 +9,14 @@ export interface IEntryQuery {
 }
 
 export interface IReviewQuery {
-  entryId: string;
-  liked: boolean;
+  disliked?: boolean;
+  entry?: string | {};
+  liked?: boolean;
   text?: string;
+  user?: string | {};
+}
+
+export interface IRemoveReviewQuery {
+  entryId: string;
   userId: string;
 }
