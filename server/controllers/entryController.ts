@@ -4,6 +4,7 @@ import cloudinary from '../cloudinary';
 import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
 import { getEntryQuery, omitExtraFields } from '../utils';
+import CustomError from '../helpers/customError';
 
 export const checkExistence: express.RequestHandler = async (
   req,
@@ -79,7 +80,10 @@ export const get: express.RequestHandler = async (req, res) => {
 
 export const getSingle: express.RequestHandler = async (req, res) => {
   const { username } = req.params;
-  const entry = await entryQuery.getSingle(username);
+  const entry = await entryQuery.find(username);
+
+  if (!entry) throw new CustomError("Couldn't find the entry");
+  
   const data = omitExtraFields(entry);
   return res.status(200).json({ data });
 };

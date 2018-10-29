@@ -1,6 +1,11 @@
 import * as R from 'ramda';
+import * as decay from 'decay';
 import * as subDays from 'date-fns/sub_days';
 import { AllCategoriesType } from '../../constants/categories';
+import { IReviewSchema } from '../models/Review';
+import { IEntrySchema } from '../models/Entry';
+
+const wilsonScore = decay.wilsonScore();
 
 export const getEntryQuery = R.pipe(
   R.pick(['category', 'limit', 'skip', 'sort', 'status', 'type']),
@@ -34,7 +39,7 @@ export const getSort = R.pipe(
   R.prop('sort'),
   R.cond([
     [R.equals('new'), R.always('created_at')],
-    [R.or(R.equals('top'), R.equals('hot')), R.always('ratio')],
+    [R.or(R.equals('top'), R.equals('hot')), R.always('score')],
   ])
 );
 
@@ -50,3 +55,76 @@ export const findCategory = (categories: AllCategoriesType, param: string) => (
 
 export const omitExtraFields = (document: {}) =>
   R.omit(['_id', '__v'], document);
+
+export const getEntryUpdates = body => {
+  const feedbacks = R.pipe(
+    R.pick(['dislikes', 'likes']),
+    R.ifElse(
+      R.pipe(
+        R.values,
+        R.length,
+        R.lt(0)
+      ),
+      R.objOf('$inc'),
+      R.always({})
+    )
+  )(body);
+
+  const setParams = R.pipe(
+    R.pick([
+      'category',
+      'description',
+      'reject_reason',
+      'score',
+      'status',
+      'title',
+    ]),
+    R.ifElse(
+      R.pipe(
+        R.values,
+        R.length,
+        R.lt(0)
+      ),
+      R.objOf('$set'),
+      R.always({})
+    )
+  )(body);
+
+  return R.merge(feedbacks, setParams);
+};
+
+export const getEntryFeedback = (
+  review: IReviewSchema,
+  disliked: boolean,
+  liked: boolean
+) => {
+  const likes = liked && {
+    likes: 1,
+    ...(review && review.disliked && { dislikes: -1 }),
+  };
+  const dislikes = disliked && {
+    dislikes: 1,
+    ...(review && review.liked && { likes: -1 }),
+  };
+  return { ...dislikes, ...likes };
+};
+
+export const getEntryRemoveFeedback = (liked: boolean) =>
+  liked ? { likes: -1 } : { dislikes: -1 };
+
+export const getScore = (
+  entry: IEntrySchema,
+  feedback: { likes?: number; dislikes?: number }
+) =>
+  wilsonScore(
+    entry.likes + (feedback.likes || 0),
+    entry.dislikes + (feedback.dislikes || 0)
+  );
+
+export const getReviewUpdate = R.pick([
+  'disliked',
+  'entry',
+  'liked',
+  'text',
+  'user',
+])

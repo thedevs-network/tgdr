@@ -1,12 +1,6 @@
 import { Document, model, Model, Schema } from 'mongoose';
 import { IEntryQuery } from '../types';
-import {
-  getLimit,
-  getMatches,
-  getSkip,
-  getSort,
-} from '../utils';
-import CustomError from '../helpers/customError';
+import { getLimit, getMatches, getSkip, getSort } from '../utils';
 
 export interface IEntrySchema extends Document {
   category: string;
@@ -17,6 +11,7 @@ export interface IEntrySchema extends Document {
   members?: number;
   ratio: number;
   reject_reason?: string;
+  score?: number;
   status: 'pending' | 'active' | 'rejected';
   telegram_id?: number;
   title: string;
@@ -40,7 +35,6 @@ export interface IEntryModel extends Model<IEntrySchema> {
       skip: number;
     } & IEntryQuery
   >;
-  getEntry(username: string): Promise<IEntrySchema>;
 }
 
 const entrySchema: Schema = new Schema({
@@ -56,8 +50,8 @@ const entrySchema: Schema = new Schema({
   dislikes: { type: Number, required: true, default: 0 },
   likes: { type: Number, required: true, default: 0 },
   members: Number,
-  ratio: { type: Number, required: true, default: 0 },
   reject_reason: String,
+  score: Number,
   status: {
     default: 'pending',
     enum: ['pending', 'active', 'rejected'],
@@ -86,15 +80,11 @@ const entrySchema: Schema = new Schema({
   },
 });
 
-entrySchema.pre<IEntrySchema>('save', function(next) {
-  this.ratio = Math.round((this.likes / (this.likes + this.dislikes)) * 100);
-  next();
-});
 
-entrySchema.static('getEntry', async function(username: string) {
-  const entry = await this.findOne({ username }).lean();
-  if (!entry) throw new CustomError("Couldn't find the entry.");
-  return entry;
+entrySchema.virtual('ratio').set(function() {
+  const all = this.likes + this.dislikes;
+  if (all === 0) return 0;
+  return Math.round((this.likes / all) * 100);
 });
 
 entrySchema.static('getEntries', async function(query: IEntryQuery) {
