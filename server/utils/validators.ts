@@ -35,13 +35,22 @@ export const entryValidator = [
 ];
 
 export const reviewValidator = [
-  body('liked', 'Liked parameter is missing.')
-    .exists(),
   body('text', 'Liked parameter is missing.')
+    .optional()
     .trim()
     .isLength({ min: 20, max: 400 })
     .withMessage('Text must be between 20 and 400 chars.'),
-  param('username', 'Username is not valid.')
+  body('username', 'Username is not valid.')
+    .exists()
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Username must have at least 5 chars.')
+    .matches(/^[a-z]\w+$/i)
+    .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
+];
+
+export const removeReviewValidator = [
+  body('username', 'Username is not valid.')
     .exists()
     .trim()
     .isLength({ min: 5 })
