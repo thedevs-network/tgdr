@@ -35,6 +35,18 @@ export const entryValidator = [
 ];
 
 export const reviewValidator = [
+  body('disliked')
+    .optional()
+    .custom(value => typeof value === 'boolean')
+    .withMessage('Disliekd must be boolean.')
+    .custom((_v, { req }) => !req.body.liked)
+    .withMessage('Can not both like and dislike an entry.'),
+  body('liked')
+    .optional()
+    .custom(value => typeof value === 'boolean')
+    .withMessage('Liked must be boolean.')
+    .custom((_v, { req }) => !req.body.disliked)
+    .withMessage('Can not both like and dislike an entry.'),
   body('text', 'Liked parameter is missing.')
     .optional()
     .trim()
