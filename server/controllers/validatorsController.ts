@@ -18,3 +18,18 @@ export const checkForErrors: express.RequestHandler = async (
   }
   return next();
 };
+
+export const createReview: express.RequestHandler = (req, res, next) => {
+  const { review } = res.locals;
+  const { disliked, liked } = req.body;
+  
+  if (!liked && !disliked) {
+    throw new CustomError("Couldn't find liked or disliked value.");
+  }
+  
+  if (review && ((review.disliked && disliked) || (review.liked && liked))) {
+    return res.status(200).json({ message: 'Already submitted.' });
+  }
+
+  return next();
+}

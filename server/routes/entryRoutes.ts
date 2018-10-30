@@ -24,6 +24,7 @@ router.get(
   '/:username',
   entryValidator,
   asyncHandler(validatorsController.checkForErrors),
+  asyncHandler(entryController.withEntry),
   asyncHandler(entryController.getSingle)
 );
 

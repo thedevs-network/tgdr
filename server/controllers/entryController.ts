@@ -78,12 +78,18 @@ export const get: express.RequestHandler = async (req, res) => {
   return res.status(200).json(entries);
 };
 
-export const getSingle: express.RequestHandler = async (req, res) => {
-  const { username } = req.params;
+export const withEntry: express.RequestHandler = async (req, res, next) => {
+  const username = req.body.username || req.params.username;
   const entry = await entryQuery.find(username);
 
   if (!entry) throw new CustomError("Couldn't find the entry");
-  
-  const data = omitExtraFields(entry);
+
+  res.locals.entry = entry;
+
+  return next();
+};
+
+export const getSingle: express.RequestHandler = async (_req, res) => {
+  const data = omitExtraFields(res.locals.entry);
   return res.status(200).json({ data });
 };

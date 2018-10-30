@@ -4,30 +4,21 @@ import * as reviewQuery from '../db/reviewQuery';
 import CustomError from '../helpers/customError';
 import { getEntryFeedback, getEntryRemoveFeedback, getScore } from '../utils';
 
-export const create: express.RequestHandler = async (req, res) => {
-  const { disliked, liked, username } = req.body;
-  if (!liked && !disliked) {
-    throw new CustomError("Couldn't liked or disliked values.");
-  }
-
-  if (liked && disliked) {
-    throw new CustomError('Can not both like and dislike an entry.');
-  }
-
-  const entry = await entryQuery.find(username);
-
-  if (!entry) throw new CustomError("Couldn't find the entry");
-
+export const withReview: express.RequestHandler = async (req, res, next) => {
   const review = await reviewQuery.findOne({
-    entry,
+    entry: res.locals.entry,
     user: req.user,
   });
 
-  
-  if (review && ((review.disliked && disliked) || (review.liked && liked))) {
-    return res.status(200).json({ message: 'Already submitted.' });
-  }
-  
+  res.locals.review = review;
+
+  return next();
+};
+
+export const create: express.RequestHandler = async (req, res) => {
+  const { entry, review } = res.locals;
+  const { disliked, liked, username } = req.body;
+
   await reviewQuery.create({
     ...req.body,
     disliked: !!disliked,
@@ -46,15 +37,8 @@ export const create: express.RequestHandler = async (req, res) => {
 };
 
 export const remove: express.RequestHandler = async (req, res) => {
+  const { review } = res.locals;
   const { username } = req.body;
-  const entry = await entryQuery.find(username);
-
-  if (!entry) throw new CustomError("Couldn't find the entry");
-
-  const review = await reviewQuery.findOne({
-    entry,
-    user: req.user,
-  });
 
   if (!review) throw new CustomError("Couldn't find the review");
 
