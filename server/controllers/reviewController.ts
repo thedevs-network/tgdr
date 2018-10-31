@@ -2,7 +2,12 @@ import * as express from 'express';
 import * as entryQuery from '../db/entryQuery';
 import * as reviewQuery from '../db/reviewQuery';
 import CustomError from '../helpers/customError';
-import { getEntryFeedback, getEntryRemoveFeedback, getScore } from '../utils';
+import {
+  getEntryFeedback,
+  getEntryRemoveFeedback,
+  getReviewsQuery,
+  getScore,
+} from '../utils';
 
 export const withReview: express.RequestHandler = async (req, res, next) => {
   const review = await reviewQuery.findOne({
@@ -13,6 +18,15 @@ export const withReview: express.RequestHandler = async (req, res, next) => {
   res.locals.review = review;
 
   return next();
+};
+
+export const get: express.RequestHandler = async (req, res) => {
+  const query = getReviewsQuery({
+    ...req.query,
+    entryId: res.locals.entry._id,
+  });
+  const reiews = await reviewQuery.get(query);
+  return res.status(200).json(reiews);
 };
 
 export const create: express.RequestHandler = async (req, res) => {

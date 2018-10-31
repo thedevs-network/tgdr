@@ -70,3 +70,13 @@ export const removeReviewValidator = [
     .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
+
+export const getReviewsValidator = [
+  param('username', 'Username is not valid.')
+    .exists()
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Username must have at least 5 chars.')
+    .matches(/^[a-z]\w+$/i)
+    .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
+];

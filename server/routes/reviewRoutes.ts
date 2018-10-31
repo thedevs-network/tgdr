@@ -3,10 +3,22 @@ import * as passport from 'passport';
 import * as asyncHandler from 'express-async-handler';
 import * as reviewController from '../controllers/reviewController';
 import * as entryController from '../controllers/entryController';
-import { removeReviewValidator, reviewValidator } from '../utils';
+import {
+  getReviewsValidator,
+  removeReviewValidator,
+  reviewValidator,
+} from '../utils';
 import * as validatorsController from '../controllers/validatorsController';
 
 const router = express.Router();
+
+router.get(
+  '/:username',
+  getReviewsValidator,
+  asyncHandler(validatorsController.checkForErrors),
+  asyncHandler(entryController.withEntry),
+  asyncHandler(reviewController.get)
+);
 
 router.post(
   '/',

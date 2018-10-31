@@ -8,6 +8,12 @@ export interface IEntryQuery {
   type?: 'channel' | 'group' | 'bot',
 }
 
+export interface IGetReviewsQuery {
+  entryId: string,
+  limit?: number,
+  skip?: number,
+}
+
 export interface IReviewQuery {
   disliked?: boolean;
   entry?: string | {};

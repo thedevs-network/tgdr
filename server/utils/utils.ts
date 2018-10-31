@@ -17,6 +17,15 @@ export const getEntryQuery = R.pipe(
   })
 );
 
+export const getReviewsQuery = R.pipe(
+  R.pick(['entryId', 'limit', 'skip']),
+  R.merge({
+    entryId: '',
+    limit: 4,
+    skip: 0,
+  })
+);
+
 export const getMatches = R.pipe(
   R.when(
     R.propEq('sort', 'hot'),
