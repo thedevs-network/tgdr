@@ -5,6 +5,7 @@ import { IAppState } from './store';
 import * as authActions from './auth/authActions';
 import * as entriesActions from './entries/entriesActions';
 import * as entryActions from './entry/entryActions';
+import * as reviewsActions from './reviews/reviewsActions';
 import * as submitEntryActions from './submitEntry/submitEntryActions';
 import * as tagsActions from './tags/tagsActions';
 
@@ -17,6 +18,12 @@ export interface IMessage
       }>;
     }> {}
 
+export interface IReview {
+  disliked?: boolean;
+  liked?: boolean;
+  text?: string;
+}
+
 export interface IEntry
   extends Readonly<{
       category: string;
@@ -28,10 +35,12 @@ export interface IEntry
       members?: number;
       ratio: number;
       reject_reason?: string;
-      status: 'active', 'pending', 'rejected';
+      review?: IReview;
+      score: number;
+      status: 'active' | 'pending' | 'rejected';
       telegram_id?: number;
       title: string;
-      type: 'bot', 'channel', 'supergroup';
+      type: 'bot' | 'channel' | 'supergroup';
       username: string;
       verified?: boolean;
     }> {}
@@ -44,5 +53,6 @@ export type RootAction =
   | ActionType<typeof authActions>
   | ActionType<typeof entriesActions>
   | ActionType<typeof entryActions>
+  | ActionType<typeof reviewsActions>
   | ActionType<typeof submitEntryActions>
   | ActionType<typeof tagsActions>;
