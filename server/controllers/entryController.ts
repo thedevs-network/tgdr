@@ -90,6 +90,7 @@ export const withEntry: express.RequestHandler = async (req, res, next) => {
 };
 
 export const getSingle: express.RequestHandler = async (_req, res) => {
-  const data = omitExtraFields(res.locals.entry);
+  const { entry, review } = res.locals;
+  const data = omitExtraFields({...entry, review});
   return res.status(200).json({ data });
 };

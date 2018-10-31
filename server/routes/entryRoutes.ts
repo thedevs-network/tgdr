@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as asyncHandler from 'express-async-handler';
 import * as entryController from '../controllers/entryController';
+import * as reviewController from '../controllers/reviewController';
 import { entryValidator, newEntryValidators } from '../utils';
 import * as validatorsController from '../controllers/validatorsController';
 
@@ -25,6 +26,7 @@ router.get(
   entryValidator,
   asyncHandler(validatorsController.checkForErrors),
   asyncHandler(entryController.withEntry),
+  asyncHandler(reviewController.withReview),
   asyncHandler(entryController.getSingle)
 );
 
