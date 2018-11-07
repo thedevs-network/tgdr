@@ -1,3 +1,4 @@
+import * as express from 'express';
 import axios from 'axios';
 import bot from '../bot';
 import * as cheerio from 'cheerio';
@@ -51,4 +52,31 @@ export const getBotDetails = async (username: string) => {
       image: img,
     };
   }
+};
+
+export const sendReport: express.RequestHandler = async (req, res) => {
+  const {
+    entry: { username },
+    review,
+  } = res.locals;
+  const { info, reason } = req.body;
+  const { first_name, telegram_id } = req.user;
+
+  const usernameText = `<b>Entry:</b>\n@${username}\n\n`;
+  const reasonText = `<b>Reason:</b>\n<code>${reason}</code>\n\n`;
+  const infoText = info ? `<b>Info:</b>\n<code>${info}</code>\n\n` : '';
+  const reviewText = review
+    ? `<b>Review:</b>\n<code>${review.text}</code>\n\n`
+    : '';
+  const userText = `<b>By:</b>\n<code>${telegram_id} - ${first_name}</code>`;
+
+  const text = usernameText + reasonText + infoText + reviewText + userText;
+
+  await bot.telegram.sendMessage(config.admin_id, text, {
+    parse_mode: 'HTML',
+  });
+
+  return res
+    .status(200)
+    .json({ message: 'Report has been sent successfully.' });
 };
