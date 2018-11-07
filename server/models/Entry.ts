@@ -7,6 +7,7 @@ export interface IEntrySchema extends Document {
   created_at: Date;
   description: string;
   dislikes: number;
+  featured?: boolean;
   likes: number;
   members?: number;
   ratio: number;
@@ -17,6 +18,7 @@ export interface IEntrySchema extends Document {
   title: string;
   type: 'channel' | 'bot' | 'supergroup';
   username: string;
+  verified?: boolean;
 }
 
 export interface IEntryModel extends Model<IEntrySchema> {
@@ -39,7 +41,7 @@ export interface IEntryModel extends Model<IEntrySchema> {
 
 const entrySchema: Schema = new Schema({
   category: { type: String, required: true },
-  created_at: { type: Date, required: true, default: () => new Date() },
+  created_at: { type: Date, required: true, default: Date.now },
   description: {
     maxlength: 800,
     minlength: 20,
@@ -48,6 +50,7 @@ const entrySchema: Schema = new Schema({
     type: String,
   },
   dislikes: { type: Number, required: true, default: 0 },
+  featured: { type: Boolean, default: false },
   likes: { type: Number, required: true, default: 0 },
   members: Number,
   reject_reason: String,
@@ -78,8 +81,8 @@ const entrySchema: Schema = new Schema({
     trim: true,
     type: String,
   },
+  verified: { type: Boolean, default: false },
 });
-
 
 entrySchema.virtual('ratio').set(function() {
   const all = this.likes + this.dislikes;
@@ -93,12 +96,42 @@ entrySchema.static('getEntries', async function(query: IEntryQuery) {
   const $skip = getSkip(query);
   const sort = getSort(query);
 
-  const data = await this.aggregate([
+  const [{ data, info }] = await this.aggregate([
     { $match },
-    { $project: { _id: 0, __v: 0 } },
-    { $sort: { [sort]: -1 } },
-    { $skip },
-    { $limit },
+    {
+      $facet: {
+        data: [
+          { $sort: { [sort]: -1 } },
+          { $skip },
+          { $limit },
+          { $project: { _id: 0, __v: 0 } },
+          {
+            $addFields: {
+              ratio: {
+                $cond: [
+                  { $eq: ['$likes', 0] },
+                  0,
+                  {
+                    $trunc: {
+                      $multiply: [
+                        {
+                          $divide: [
+                            '$likes',
+                            { $add: ['$likes', '$dislikes'] },
+                          ],
+                        },
+                        100,
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
+        info: [{ $count: 'total' }],
+      },
+    },
   ]);
 
   return {
@@ -106,6 +139,7 @@ entrySchema.static('getEntries', async function(query: IEntryQuery) {
     ...query,
     limit: $limit,
     skip: $skip,
+    total: info[0] ? info[0].total : 0,
   };
 });
 
