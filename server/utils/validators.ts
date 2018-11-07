@@ -1,5 +1,6 @@
 import { body, param } from 'express-validator/check';
 import { categories } from '../../constants/categories';
+import { hasAd } from './utils';
 
 export const newEntryValidators = [
   body('username', 'Username is not valid.')
@@ -39,19 +40,23 @@ export const reviewValidator = [
     .optional()
     .custom(value => typeof value === 'boolean')
     .withMessage('Disliekd must be boolean.')
-    .custom((_v, { req }) => !req.body.liked)
+    .custom((_v, { req }) => (req.body.disliked ? !req.body.liked : true))
     .withMessage('Can not both like and dislike an entry.'),
   body('liked')
     .optional()
     .custom(value => typeof value === 'boolean')
     .withMessage('Liked must be boolean.')
-    .custom((_v, { req }) => !req.body.disliked)
+    .custom((_v, { req }) => (req.body.liked ? !req.body.disliked : true))
     .withMessage('Can not both like and dislike an entry.'),
   body('text', 'Liked parameter is missing.')
     .optional()
     .trim()
     .isLength({ min: 20, max: 400 })
-    .withMessage('Text must be between 20 and 400 chars.'),
+    .withMessage('Text must be between 20 and 400 chars.')
+    .custom(value => !hasAd(value))
+    .withMessage(
+      'Text must not contain any links or ads. Violators will be banned.'
+    ),
   body('username', 'Username is not valid.')
     .exists()
     .trim()
@@ -62,7 +67,7 @@ export const reviewValidator = [
 ];
 
 export const removeReviewValidator = [
-  body('username', 'Username is not valid.')
+  param('username', 'Username is not valid.')
     .exists()
     .trim()
     .isLength({ min: 5 })
@@ -80,3 +85,20 @@ export const getReviewsValidator = [
     .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
+
+export const reportValidator = [
+  body('username', 'Username is not valid.')
+    .exists()
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Username must have at least 5 chars.')
+    .matches(/^[a-z]\w+$/i)
+    .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
+  body('reason', 'Reason field is not valid.')
+    .exists()
+    .trim(),
+  body('info')
+    .optional()
+    .isLength({ max: 400 })
+    .withMessage('Info is too long. Should be less than 400 chars.'),
+]
