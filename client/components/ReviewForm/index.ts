@@ -1,1 +1,1 @@
-export { default } from './ReviewForm';
+export { default } from './ReviewFormContainer';

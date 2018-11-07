@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import Textarea from '../elements/inputs/Textarea';
@@ -32,15 +33,29 @@ const Button = styled.button.attrs({
   }
 `;
 
-const ReviewForm: React.SFC = () => (
-  <Flex flexDirection="column" flex="1 1 auto" is="form" mb={3}>
-    <Textarea
+interface IProps {
+  submitting: boolean;
+  onSubmit(values: any): Promise<any>;
+}
+
+const ReviewForm: React.SFC<IProps> = ({ submitting, onSubmit }) => (
+  <Flex
+    flexDirection="column"
+    flex="1 1 auto"
+    is="form"
+    mb={3}
+    onSubmit={onSubmit}
+  >
+    <Field
       label="Write a review"
-      name="review"
+      name="text"
       placeholder="A helpful and informative review"
+      component={Textarea}
       smallLabel
     />
-    <Button>Submit</Button>
+    <Button disabled={submitting}>
+      {submitting ? 'Submitting...' : 'Submit'}
+    </Button>
   </Flex>
 );
 
