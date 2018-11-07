@@ -19,12 +19,14 @@ export const submitEntryClear = () =>
   action(SubmitEntryStateTypes.CLEAR);
 
 export const submitNewEntry: AsyncAction = (
-  params: ISubmitEntryParams
+  params: ISubmitEntryParams,
+  isEdit?: boolean
 ) => async (dispatch, getState) => {
   try {
+    const method = isEdit ? 'put' : 'post';
     dispatch(submitEntryRequest());
     await wait(500);
-    await axios.post('/api/entry/submit', params, getAuthHeader(getState));
+    await axios[method]('/api/entry', params, getAuthHeader(getState));
     dispatch(submitEntrySuccess());
   } catch (error) {
     const { error: errorMessage, status = 'error' } = error.response.data;

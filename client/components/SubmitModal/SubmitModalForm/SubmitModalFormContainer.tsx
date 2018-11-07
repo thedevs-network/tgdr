@@ -7,8 +7,10 @@ import { Flex } from 'grid-styled';
 import Spinner from '../../elements/Spinner';
 import MessageModal from '../../MessageModal';
 import { IAppState } from '../../../store';
+import { IEntry } from '../../../store/storeTypes';
 
 interface IReduxStateProps {
+  entry: IEntry;
   submitEntry: ISubmitEntryState;
 }
 
@@ -18,22 +20,35 @@ interface IReduxDispatchProps {
 
 interface IProps extends IReduxStateProps, IReduxDispatchProps {
   closeModal: () => void;
+  isEdit?: boolean;
 }
 
 class SubmitModalFormContainer extends React.Component<
   IProps & InjectedFormProps<{}, IProps>
 > {
+  static defaultProps = {
+    isEdit: false,
+  };
+
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
   }
 
+  componentDidMount() {
+    const { entry, initialize, isEdit } = this.props;
+    if (isEdit) {
+      initialize(entry);
+    }
+  }
+
   submit(values) {
-    this.props.submitNewEntry(values);
+    const { isEdit, submitNewEntry: submit } = this.props;
+    submit(values, isEdit);
   }
 
   render() {
-    const { closeModal, handleSubmit, submitEntry } = this.props;
+    const { closeModal, isEdit, handleSubmit, submitEntry } = this.props;
 
     if (submitEntry.isLoading) {
       return (
@@ -56,6 +71,7 @@ class SubmitModalFormContainer extends React.Component<
 
     return (
       <SubmitModalForm
+        isEdit={isEdit}
         onSubmit={handleSubmit(this.submit)}
         closeModal={closeModal}
       />
@@ -118,7 +134,11 @@ const SubmitForm = reduxForm<{}, IProps>({
   validate,
 })(SubmitModalFormContainer);
 
-const mapStateToProps = ({ submitEntry }: IAppState): IReduxStateProps => ({
+const mapStateToProps = ({
+  entry,
+  submitEntry,
+}: IAppState): IReduxStateProps => ({
+  entry: entry.data,
   submitEntry,
 });
 

@@ -10,6 +10,7 @@ interface IReduxDispatchProps {
 
 interface IProps extends IReduxDispatchProps {
   closeModal: () => void;
+  isEdit?: boolean;
 }
 
 interface IState {
@@ -17,6 +18,10 @@ interface IState {
 }
 
 class SubmitModalContainer extends React.Component<IProps, IState> {
+  static defaultProps = {
+    isEdit: false,
+  };
+
   isFormVisible: boolean;
   constructor(props) {
     super(props);
@@ -35,8 +40,12 @@ class SubmitModalContainer extends React.Component<IProps, IState> {
   }
 
   render() {
+    const { isEdit } = this.props;
+
     if (this.state.isFormVisible) {
-      return <SubmitModalForm closeModal={this.props.closeModal} />;
+      return (
+        <SubmitModalForm closeModal={this.props.closeModal} isEdit={isEdit} />
+      );
     }
 
     return (
