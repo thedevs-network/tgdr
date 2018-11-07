@@ -8,10 +8,14 @@ const Rate = styled.span`
   color: #87c5f6;
 `;
 
-const CardRate: React.SFC = () => (
+interface IProps {
+  ratio: number
+}
+
+const CardRate: React.SFC<IProps> = ({ ratio }) => (
   <Flex align="center">
     <Icon name="heart" size={14} mr={2} fill="#63B3F3" />
-    <Rate>87%</Rate>
+    <Rate>{`${ratio}%`}</Rate>
   </Flex>
 );
 

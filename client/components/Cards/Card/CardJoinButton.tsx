@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Icon from '../../elements/Icon';
+import { getOpenLink } from '../../../utils';
 
 const Button = styled.button`
   position: relative;
@@ -38,8 +39,12 @@ const Button = styled.button`
   }
 `;
 
-const CardJoinButton: React.SFC = () => (
-  <Button>
+interface IProps {
+  username: string;
+}
+
+const CardJoinButton: React.SFC<IProps> = ({ username }) => (
+  <Button onClick={getOpenLink(username)}>
     <span>+</span>
     <Icon name="telegram" size={12} fill="#64B5F6" />
   </Button>

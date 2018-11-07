@@ -5,6 +5,7 @@ import Card from './Card';
 import CardsHeader from './CardsHeader';
 import { IEntry } from 'client/store/storeTypes';
 import { IGetEntriesParams } from 'client/store/entries';
+import { Link } from '../elements/Typography';
 
 const CardsWrapper = styled(Flex)`
   > * {
@@ -20,6 +21,8 @@ interface IProps extends IGetEntriesParams {
   data: IEntry[];
   differentSorts?: boolean;
   loadMore?: boolean;
+  total: number;
+  onLoadMore(e: React.MouseEvent<HTMLAnchorElement>): void;
 }
 
 const Cards: React.SFC<IProps> = ({
@@ -28,7 +31,9 @@ const Cards: React.SFC<IProps> = ({
   category,
   loadMore,
   sort,
+  total,
   type,
+  onLoadMore,
 }) => (
   <>
     <CardsHeader
@@ -43,6 +48,13 @@ const Cards: React.SFC<IProps> = ({
         <Card key={entry.username} entry={entry} />
       ))}
     </CardsWrapper>
+    {total > data.length && loadMore && (
+      <Flex justify="flex-end" mt={3}>
+        <Link href="#" title="Load more entries" onClick={onLoadMore} big>
+          + Load More
+        </Link>
+      </Flex>
+    )}
   </>
 );
 

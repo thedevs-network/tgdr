@@ -49,8 +49,8 @@ const Card = ({ entry }: IProps) => (
           <CardMembersCount>{entry.members} members</CardMembersCount>
         )}
         <Flex align="center" justify="space-between" mt={2}>
-          <CardRate />
-          <CardJoinButton />
+          <CardRate ratio={entry.ratio} />
+          <CardJoinButton username={entry.username} />
         </Flex>
       </Flex>
     </CardWrapper>

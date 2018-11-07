@@ -33,14 +33,15 @@ class CardsContainer extends React.Component<IProps> {
     loadMore: false,
   };
 
-  componentDidMount() {
-    const { category, limit, sort, type } = this.props;
-    this.props.getEntries({
-      category,
-      limit,
-      sort,
-      type,
-    });
+  constructor(props) {
+    super(props);
+    this.onLoadMore = this.onLoadMore.bind(this);
+  }
+
+  onLoadMore(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    const { category, sort, type, getEntries: getEntriesList } = this.props;
+    getEntriesList({ category, sort, type, loadMore: true });
   }
 
   render() {
@@ -53,14 +54,17 @@ class CardsContainer extends React.Component<IProps> {
       sort,
     } = this.props;
     const data = entries.data[type][sort];
+    const total = entries.total;
     return (
       <Cards
         data={data}
         category={category}
         sort={sort}
+        total={total}
         type={type}
         differentSorts={differentSorts}
         loadMore={loadMore}
+        onLoadMore={this.onLoadMore}
       />
     );
   }
