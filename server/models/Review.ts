@@ -12,15 +12,18 @@ export interface IReviewSchema extends Document {
 }
 
 export interface IReviewModel extends Model<IReviewSchema> {
-  getReviews(query: IGetReviewsQuery): Promise<{
+  getReviews(
+    query: IGetReviewsQuery
+  ): Promise<{
     data: IReviewSchema[];
     limit: number;
     skip: number;
-  }>; 
+  }>;
+  getSingle(body: Partial<IReviewSchema>): Promise<IReviewSchema>;
 }
 
 const reviewSchema: Schema = new Schema({
-  created_at: { type: Date, required: true, default: () => new Date() },
+  created_at: { type: Date, required: true, default: Date.now },
   disliked: { type: Boolean, required: true },
   entry: { type: Schema.Types.ObjectId, ref: 'Entry' },
   liked: { type: Boolean, required: true },
@@ -28,24 +31,86 @@ const reviewSchema: Schema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
-
 reviewSchema.static('getReviews', async function(query: IGetReviewsQuery) {
   const $limit = getLimit(query);
   const $skip = getSkip(query);
 
-  const data = await this.aggregate([
-    { $match: { entry: query.entryId } },
-    { $project: { _id: 0, __v: 0, entry: 0, user: 0 } },
-    { $sort: { created_at: -1 } },
-    { $skip },
-    { $limit },
+  const [{ data, info }] = await this.aggregate([
+    { $match: { entry: query.entryId, text: { $exists: true } } },
+    {
+      $facet: {
+        data: [
+          { $sort: { created_at: -1 } },
+          { $skip },
+          { $limit },
+          {
+            $lookup: {
+              as: 'users',
+              foreignField: '_id',
+              from: 'users',
+              localField: 'user',
+            },
+          },
+          {
+            $addFields: {
+              user: { $arrayElemAt: ['$users', 0] },
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              created_at: 1,
+              disliked: 1,
+              first_name: '$user.first_name',
+              last_name: '$user.last_name',
+              liked: 1,
+              text: 1,
+            },
+          },
+        ],
+        info: [{ $count: 'total' }],
+      },
+    },
   ]);
 
   return {
     data,
     limit: $limit,
     skip: $skip,
+    total: info[0] ? info[0].total : 0,
   };
+});
+
+reviewSchema.static('getSingle', async function(body: Partial<IReviewSchema>) {
+  const [data] = await this.aggregate([
+    { $match: body },
+    {
+      $lookup: {
+        as: 'users',
+        foreignField: '_id',
+        from: 'users',
+        localField: 'user',
+      },
+    },
+    {
+      $addFields: {
+        user: { $arrayElemAt: ['$users', 0] },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        created_at: 1,
+        disliked: 1,
+        first_name: '$user.first_name',
+        last_name: '$user.last_name',
+        liked: 1,
+        text: 1,
+      },
+    },
+  ]);
+
+  return data || {};
 });
 
 const Review: IReviewModel = model<IReviewSchema, IReviewModel>(
