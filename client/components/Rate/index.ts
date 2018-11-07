@@ -1,1 +1,1 @@
-export { default } from './Rate';
+export { default } from './RateContainer';
