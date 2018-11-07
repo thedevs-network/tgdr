@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 interface IConfig {
+  admin_id: number;
   bot_token: string;
   cloudinary_api_key: string;
   cloudinary_api_secret: string;
@@ -14,6 +15,7 @@ interface IConfig {
 }
 
 const config: IConfig = {
+  admin_id: Number(process.env.ADMIN_ID),
   bot_token: process.env.BOT_TOKEN,
   cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
   cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
