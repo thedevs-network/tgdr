@@ -23,6 +23,7 @@ export interface ILoginParams {
 export interface IAuthState
   extends IMessage,
     Readonly<{
+      isAdmin: boolean;
       isAuthenticated: boolean;
       isFetched: boolean;
       isLoading: boolean;
@@ -31,6 +32,7 @@ export interface IAuthState
     }> {}
 
 export interface IToken {
+  admin: boolean;
   exp: number;
   iat: number;
   iss: string;

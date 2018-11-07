@@ -6,6 +6,7 @@ import { shortenLongName } from '../../utils';
 import { getAuthMessages } from '../../../constants/texts';
 
 const initialState: IAuthState = {
+  isAdmin: false,
   isAuthenticated: false,
   isFetched: false,
   isLoading: false,
@@ -25,6 +26,7 @@ export const authReducer: Reducer<IAuthState> = (
   produce(state, draft => {
     switch (action.type) {
       case AuthStateTypes.AUTHENTICATE:
+        draft.isAdmin = action.payload.admin;
         draft.isAuthenticated = true;
         draft.name = action.payload.name;
         draft.token = action.payload.token;
@@ -45,6 +47,7 @@ export const authReducer: Reducer<IAuthState> = (
           shortenLongName(action.payload.name, 17)
         ).success;
         draft.name = action.payload.name;
+        draft.isAdmin = action.payload.admin;
         draft.token = action.payload.token;
         return;
 
