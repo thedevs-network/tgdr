@@ -19,7 +19,11 @@ export interface IMessage
     }> {}
 
 export interface IReview {
+  _id?: string;
+  created_at?: string;
   disliked?: boolean;
+  first_name?: string;
+  last_name?: string;
   liked?: boolean;
   text?: string;
 }
@@ -46,7 +50,12 @@ export interface IEntry
     }> {}
 
 export type AsyncAction = ActionCreator<
-  ThunkAction<Promise<void> | void, IAppState, void, Action<any>>
+  ThunkAction<
+    Promise<any> | void,
+    IAppState,
+    Promise<any> | void,
+    Action<any>
+  >
 >;
 
 export type RootAction =
