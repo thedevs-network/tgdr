@@ -72,6 +72,13 @@ export const create: express.RequestHandler = async (_req, res) => {
   });
 };
 
+export const update: express.RequestHandler = async (req, res) => {
+  await entryQuery.update(req.body.username, req.body, req.user.isAdmin);
+  return res.status(200).json({
+    message: 'Entry has been updated successfully.',
+  });
+};
+
 export const get: express.RequestHandler = async (req, res) => {
   const query = getEntryQuery(req.query);
   const entries = await entryQuery.get(query);
@@ -91,6 +98,6 @@ export const withEntry: express.RequestHandler = async (req, res, next) => {
 
 export const getSingle: express.RequestHandler = async (_req, res) => {
   const { entry, review } = res.locals;
-  const data = omitExtraFields({...entry, review});
+  const data = omitExtraFields({ ...entry, review });
   return res.status(200).json({ data });
 };
