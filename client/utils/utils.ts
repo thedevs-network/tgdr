@@ -21,6 +21,17 @@ export const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
+export const getOpenLink = (username: string) => () => {
+  window.open(`https://t.me/${username}`, '_blank');
+  window.focus();
+};
+
+export const hasAd = (text: string) =>
+  // tslint:disable-next-line:max-line-length
+  /((http(s)?(\:\/\/))?(www\.)?([\w\-\.\/])*(\.[a-zA-Z]{2,3}\/?))[^\s\b\n|]*[^.,;:\?\!\@\^\$ -]/gi.test(
+    text
+  ) || /(@\w+)/gi.test(text);
+
 export const areParamsEqual = (
   params: IGetEntriesParams,
   state: IEntriesState
@@ -95,7 +106,7 @@ export const getViewMoreLinkURL = ({
 
     case !!type && !category:
       return type;
-      
+
     case !!category && !type:
       return category;
 
