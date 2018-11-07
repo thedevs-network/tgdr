@@ -14,12 +14,14 @@ import { entryReducer, IEntryState } from './entry';
 import { ISubmitEntryState, submitEntryReducer } from './submitEntry';
 import { ITagsState, tagsReducer } from './tags';
 import { NextContext } from 'next';
+import { IReviewsState, reviewsReducer } from './reviews';
 
 export interface IAppState {
   auth: IAuthState;
   entries: IEntriesState;
   entry: IEntryState;
   form: FormStateMap;
+  reviews: IReviewsState;
   submitEntry: ISubmitEntryState;
   tags: ITagsState;
 }
@@ -37,6 +39,7 @@ const rootReducer = combineReducers<IAppState>({
   entries: entriesReducer,
   entry: entryReducer,
   form: formReducer,
+  reviews: reviewsReducer,
   submitEntry: submitEntryReducer,
   tags: tagsReducer,
 });

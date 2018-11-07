@@ -8,9 +8,10 @@ const initialState: IReviewsState = {
   isLoading: false,
   limit: 4,
   skip: 0,
+  total: 0,
 };
 
-export const rviewsReducer: Reducer<IReviewsState> = (
+export const reviewsReducer: Reducer<IReviewsState> = (
   state = initialState,
   action: RootAction
 ) =>
@@ -22,7 +23,11 @@ export const rviewsReducer: Reducer<IReviewsState> = (
         return;
 
       case ReviewsStateTypes.SUCCESS:
-        draft.data = action.payload;
+        draft.data = action.payload.loadMore
+          ? [...draft.data, ...action.payload.data]
+          : action.payload.data;
+        draft.skip = action.payload.skip;
+        draft.total = action.payload.total;
         draft.isLoading = false;
         return;
 

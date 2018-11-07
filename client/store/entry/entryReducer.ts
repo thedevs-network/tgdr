@@ -2,6 +2,7 @@ import { Reducer } from 'redux';
 import produce from 'immer';
 import { EntryStateTypes, IEntryState } from './entryTypes';
 import { RootAction } from '../storeTypes';
+import { ReviewsStateTypes } from '../reviews';
 
 const initialState: IEntryState = {
   data: null,
@@ -29,6 +30,35 @@ export const entryReducer: Reducer<IEntryState> = (
       case EntryStateTypes.FAILURE:
         draft.hasError = true;
         draft.isLoading = false;
+        return;
+
+      case ReviewsStateTypes.SUBMIT_REQUEST:
+        const liked = action.payload && action.payload.liked;
+        const disliked = action.payload && action.payload.disliked;
+        if (
+          draft.data.review.liked === liked &&
+          draft.data.review.disliked === disliked
+        ) {
+          return;
+        }
+        if (!liked && !disliked) {
+          draft.data.likes =
+            draft.data.likes - (draft.data.review.liked ? 1 : 0);
+          draft.data.dislikes =
+            draft.data.dislikes - (draft.data.review.disliked ? 1 : 0);
+        }
+        if (liked) {
+          draft.data.likes = draft.data.likes + 1;
+          draft.data.dislikes =
+            draft.data.dislikes - (draft.data.review.disliked ? 1 : 0);
+        }
+        if (disliked) {
+          draft.data.dislikes = draft.data.dislikes + 1;
+          draft.data.likes =
+            draft.data.likes - (draft.data.review.liked ? 1 : 0);
+        }
+        draft.data.review.liked = liked;
+        draft.data.review.disliked = disliked;
         return;
     }
   });
