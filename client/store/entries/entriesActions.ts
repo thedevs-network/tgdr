@@ -7,7 +7,6 @@ import {
   IGetEntriesResponse,
 } from './entriesTypes';
 import { AsyncAction } from '../storeTypes';
-import { areParamsEqual } from '../../utils';
 
 export const entriesRequest = (payload: IGetEntriesParams) =>
   action(EntriesStateTypes.REQUEST, payload);
@@ -19,21 +18,20 @@ export const entriesFailure = () => action(EntriesStateTypes.FAILURE);
 export const getEntries: AsyncAction = (
   params: IGetEntriesParams
 ) => async (dispatch, getState) => {
-  const { entries } = getState();
+  const { limit, skip } = getState().entries;
 
   const paramsWithDefaults = {
-    limit: getState().entries.limit,
+    limit,
     ...params,
   }
-  const paramsEqual = areParamsEqual(paramsWithDefaults, entries);
-  
-  if (paramsEqual) return null;
-  
+
+  const newSkip = params.loadMore ? limit + skip : 0;
+    
   const query = queryString.stringify(paramsWithDefaults);
   dispatch(entriesRequest(paramsWithDefaults));
   try {
-    const { data } = await axios.get(`/api/entry?${query}`);
-    dispatch(entriesSuccess(data));
+    const { data } = await axios.get(`/api/entry?skip=${newSkip}&${query}`);
+    dispatch(entriesSuccess({ ...data, loadMore: params.loadMore }));
   } catch (error) {
     dispatch(entriesFailure());
   }

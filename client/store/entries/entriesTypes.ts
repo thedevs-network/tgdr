@@ -24,24 +24,28 @@ export interface IEntriesState
   extends Readonly<{
       category: string;
       data: IEntriesData;
-      hasError: boolean,
+      hasError: boolean;
       limit: number;
       skip: number;
+      total: number;
     }> {}
 
 export interface IGetEntriesParams {
   category?: string;
   limit?: number;
+  loadMore?: boolean;
   sort?: 'hot' | 'new' | 'top';
   type?: 'bot' | 'channel' | 'supergroup';
 }
 
 export interface IGetEntriesResponse {
   category: string;
-  data: IEntry[],
+  data: IEntry[];
   limit: number;
+  loadMore?: boolean;
   skip: number;
   sort: 'hot' | 'new' | 'top';
   status: 'active' | 'pending' | 'rejected';
+  total: number;
   type: 'bot' | 'channel' | 'supergroup';
 }

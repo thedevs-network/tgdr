@@ -25,6 +25,7 @@ const initialState: IEntriesState = {
   hasError: false,
   limit: 9,
   skip: 0,
+  total: 0,
 };
 
 export const entriesReducer: Reducer<IEntriesState> = (
@@ -37,12 +38,18 @@ export const entriesReducer: Reducer<IEntriesState> = (
         return;
 
       case EntriesStateTypes.SUCCESS:
+        draft.category = action.payload.category;
         draft.limit = action.payload.limit;
         draft.skip = action.payload.skip;
-        draft.category = action.payload.category;
+        draft.total = action.payload.total;
         draft.hasError = false;
-        draft.data[action.payload.type][action.payload.sort] =
-          action.payload.data;
+        draft.data[action.payload.type][action.payload.sort] = action.payload
+          .loadMore
+          ? [
+              ...draft.data[action.payload.type][action.payload.sort],
+              ...action.payload.data,
+            ]
+          : action.payload.data;
         return;
 
       case EntriesStateTypes.FAILURE:
