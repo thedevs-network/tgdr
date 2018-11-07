@@ -1,8 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import format from 'date-fns/format';
+import ReportModal from '../ReportModal';
+import LoginModal from '../LoginModal';
 import Icon from '../elements/Icon';
 import Divider from '../elements/Divider';
+import { IReviewsState } from '../../store/reviews';
+import { Link } from '../elements/Typography';
+import Modal from '../elements/Modal';
 
 const Count = styled.h5`
   margin: 0 0 8px;
@@ -30,44 +36,84 @@ const Body = styled.p`
   color: #808080;
 `;
 
-const Link = styled.a`
-  font-size: 14px;
-  color: #63b3f3;
-  text-decoration: none;
-  transition: color 0.3s ease-out, transform 0.3s ease-out;
-  transform: translateZ(0);
+interface IProps {
+  reviews: IReviewsState;
+  isAuthenticated: boolean;
+  onLoadMore(e: React.MouseEvent<HTMLAnchorElement>): void;
+}
 
-  :hover,
-  :focus {
-    text-decoration: none;
-    color: #42a5f5;
-    transform: scaleX(1.01) translateX(-4px);
-  }
-`;
+const Reviews: React.SFC<IProps> = ({
+  isAuthenticated,
+  reviews,
+  onLoadMore,
+}) => {
+  const reviewsList = reviews.data.map((review, index) => {
+    const iconColor = review.liked
+      ? { fill: '#63B3F3' }
+      : { fill: 'transparent', stroke: '#EF9A9A' };
+    const iconName = review.liked ? 'heart' : 'thumbsDown';
 
-const Reviews: React.SFC = () => (
-  <>
-    <Count>Reviews (203)</Count>
-    <Flex align="flex-start" my={4}>
-      <Icon name="heart" size={15} fill="#63B3F3" my={1} mx={3} />
-      <Flex flexDirection="column" flex="1 1 auto">
-        <Flex width={1} justify="space-between">
-          <Name>Johny Doesm</Name>
-          <ReviewDate> Feb 06, 2018</ReviewDate>
+    const reviewModal = closeModal => (
+      <ReportModal
+        closeModal={closeModal}
+        reviewId={review._id}
+        withInfo={false}
+        withReviewOptions
+      />
+    );
+
+    const report = isAuthenticated
+      ? reviewModal
+      : closeModal => <LoginModal closeModal={closeModal} />;
+
+    return (
+      <div key={index}>
+        <Flex align="flex-start" my={4}>
+          <Icon name={iconName} {...iconColor} size={15} my={1} mx={3} />
+          <Flex flexDirection="column" flex="1 1 auto">
+            <Flex width={1} justify="space-between">
+              <Name>{`${review.first_name} ${review.last_name || ''}`}</Name>
+              <Flex align="center">
+                <Modal
+                  trigger={
+                    <Link href="#" title="Report" secondary small>
+                      Report
+                    </Link>
+                  }
+                >
+                  {report}
+                </Modal>
+                <Flex mx={2}>
+                  <ReviewDate>᛫</ReviewDate>
+                </Flex>
+                <ReviewDate>
+                  {format(review.created_at, 'MMM DD, YYYY')}
+                </ReviewDate>
+              </Flex>
+            </Flex>
+            <Body>{review.text}</Body>
+          </Flex>
         </Flex>
-        <Body>
-          Tesla, reporting bigger loss, emphasizes gains in production and
-          sales.
-        </Body>
-      </Flex>
-    </Flex>
-    <Divider my={0} />
-    <Flex alignSelf="flex-end" mt={4}>
-      <Link href="#" title="Load more review">
-        + Load more
-      </Link>
-    </Flex>
-  </>
-);
+        <Divider my={0} />
+      </div>
+    );
+  });
+
+  if (!reviews.data.length) return null;
+
+  return (
+    <>
+      <Count>Reviews ({reviews.total})</Count>
+      {reviewsList}
+      {reviews.total > reviews.data.length && (
+        <Flex alignSelf="flex-end" mt={4}>
+          <Link href="#" title="Load more reviews" onClick={onLoadMore}>
+            + Load more
+          </Link>
+        </Flex>
+      )}
+    </>
+  );
+};
 
 export default Reviews;
