@@ -4,8 +4,17 @@ import * as subDays from 'date-fns/sub_days';
 import { AllCategoriesType } from '../../constants/categories';
 import { IReviewSchema } from '../models/Review';
 import { IEntrySchema } from '../models/Entry';
+import config from '../config';
 
 const wilsonScore = decay.wilsonScore();
+
+export const isAdmin = (id: number) => id === config.admin_id;
+
+export const hasAd = (text: string) =>
+  // tslint:disable-next-line:max-line-length
+  /((http(s)?(\:\/\/))?(www\.)?([\w\-\.\/])*(\.[a-zA-Z]{2,3}\/?))[^\s\b\n|]*[^.,;:\?\!\@\^\$ -]/gi.test(
+    text
+  ) || /(@\w+)/gi.test(text);
 
 export const getEntryQuery = R.pipe(
   R.pick(['category', 'limit', 'skip', 'sort', 'status', 'type']),
@@ -65,7 +74,7 @@ export const findCategory = (categories: AllCategoriesType, param: string) => (
 export const omitExtraFields = (document: {}) =>
   R.omit(['_id', '__v'], document);
 
-export const getEntryUpdates = body => {
+export const getEntryUpdates = (body, admin?: boolean) => {
   const feedbacks = R.pipe(
     R.pick(['dislikes', 'likes']),
     R.ifElse(
@@ -81,12 +90,17 @@ export const getEntryUpdates = body => {
 
   const setParams = R.pipe(
     R.pick([
-      'category',
-      'description',
-      'reject_reason',
       'score',
-      'status',
-      'title',
+      ...(admin && [
+        'category',
+        'description',
+        'featured',
+        'reject_reason',
+        'status',
+        'title',
+        'type',
+        'verified',
+      ]),
     ]),
     R.ifElse(
       R.pipe(
@@ -131,9 +145,10 @@ export const getScore = (
   );
 
 export const getReviewUpdate = R.pick([
+  'created_at',
   'disliked',
   'entry',
   'liked',
   'text',
   'user',
-])
+]);
