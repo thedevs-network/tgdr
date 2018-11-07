@@ -32,7 +32,7 @@ router.post(
 );
 
 router.delete(
-  '/',
+  '/:username',
   passport.authenticate('jwt', { session: false }),
   removeReviewValidator,
   asyncHandler(validatorsController.checkForErrors),
