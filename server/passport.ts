@@ -11,8 +11,9 @@ passport.use(
     },
     async (profile, cb) => {
       try {
-        const user = await authQuery.findAndUpdate(profile.id, {
+        const user = await authQuery.create(profile.id, {
           first_name: profile.first_name.slice(0, 32),
+          last_name: profile.last_name ? profile.last_name.slice(0, 32) : null,
           telegram_id: profile.id,
           username: profile.username,
         });
