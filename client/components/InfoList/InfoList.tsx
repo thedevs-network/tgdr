@@ -13,7 +13,7 @@ const InfoList: React.SFC<IProps> = ({ entry }) => {
   const type = types.find(item => item.slug === entry.type);
   const category = categories.find(item => item.slug === entry.category);
   return (
-    <Flex mt={4} width={1} flexDirection="column">
+    <Flex mt={4} mb={3} width={1} flexDirection="column">
       {verified && (
         <InfoListItem icon="star" text="Verified" color="#63B3F3" size={15} />
       )}
