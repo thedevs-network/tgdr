@@ -6,17 +6,30 @@ interface ITitle {
 }
 
 export const Title = styled.h2<ITitle>`
+  position: relative;
+  display: flex;
+  align-items: center;
   margin: 0 0 12px;
   padding: 0;
   font-size: 26px;
-  font-weight: bold;
+  font-weight: 500;
   color: #666;
+  white-space: nowrap;
+
+  :after {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 16px;
+    display: block;
+    background: linear-gradient(to left, white, transparent);
+  }
 
   ${({ small }) =>
     small &&
     css`
       font-size: 16px;
-      font-weight: 500;
       margin: 0;
     `};
 `;
@@ -77,5 +90,25 @@ export const Link = styled.a<ILink>`
       'translateZ(0)',
       'scaleX(1.01) translateX(-4px)'
     )};
+  }
+`;
+
+export const ViewAllLink = styled.a`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #64b5f6;
+  text-decoration: none;
+  transition: color 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateZ(0);
+
+  :hover,
+  :focus {
+    color: #42a5f5;
+    transform: scaleX(1.01) translateX(-4px);
+
+    svg path {
+      fill: #42a5f5;
+    }
   }
 `;

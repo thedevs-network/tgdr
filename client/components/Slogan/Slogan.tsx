@@ -5,7 +5,8 @@ import { Flex } from 'grid-styled';
 const Title = styled.h2`
   margin: 8px 0;
   padding: 0;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 500;
   color: #808080;
 `;
 
