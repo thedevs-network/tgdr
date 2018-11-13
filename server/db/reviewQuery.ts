@@ -5,6 +5,8 @@ import { getReviewUpdate } from '../utils';
 
 export const get = (query: IGetReviewsQuery) => Review.getReviews(query);
 
+export const find = (body: Partial<IReviewSchema>) => Review.find(body);
+
 export const findById = (id: string) => Review.findById(id);
 
 export const findOne = (body: Partial<IReviewSchema>) => Review.getSingle(body);
