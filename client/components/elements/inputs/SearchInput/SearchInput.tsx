@@ -42,9 +42,14 @@ const Input = styled.input.attrs({
   }
 `;
 
-const SearchInput: React.SFC = props => (
+interface IProps {
+  value: string;
+  onChange(e: React.ChangeEvent<HTMLInputElement>): Promise<void> | void;
+}
+
+const SearchInput: React.SFC<IProps> = ({ value, onChange }) => (
   <InputWrapper height={40} width={1} align="center">
-    <Input placeholder="Search..." {...props} />
+    <Input placeholder="Search..." value={value} onChange={onChange} />
     <SearchInputIcon />
   </InputWrapper>
 );

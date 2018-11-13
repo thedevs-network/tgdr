@@ -21,7 +21,10 @@ export const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
-export const getOpenLink = (username: string) => () => {
+export const getOpenLink = (username: string) => (
+  e: React.MouseEvent<HTMLElement>
+) => {
+  e.stopPropagation();
   window.open(`https://t.me/${username}`, '_blank');
   window.focus();
 };
@@ -48,7 +51,10 @@ export const getParamsFromQueries = ({
   category,
   sort,
   type,
-}: IGetEntriesParams): IGetEntriesParams[] => {
+  search,
+}: IGetEntriesParams): IGetEntriesParams[] => {  
+  const searchParam = search && { search };
+  
   if (category && sort && type) {
     return [{ category, sort, type }];
   }
@@ -83,9 +89,9 @@ export const getParamsFromQueries = ({
 
   if (sort) {
     return [
-      { sort, type: 'channel' },
-      { sort, type: 'bot' },
-      { sort, type: 'supergroup' },
+      { ...searchParam, sort, type: 'channel' },
+      { ...searchParam, sort, type: 'bot' },
+      { ...searchParam, sort, type: 'supergroup' },
     ];
   }
 

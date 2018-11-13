@@ -1,6 +1,6 @@
 import { Document, model, Model, Schema } from 'mongoose';
 import { IEntryQuery } from '../types';
-import { getLimit, getMatches, getSkip, getSort } from '../utils';
+import { getLimit, getMatches, getSearch, getSkip, getSort } from '../utils';
 
 export interface IEntrySchema extends Document {
   category: string;
@@ -54,6 +54,7 @@ const entrySchema: Schema = new Schema({
   featured: { type: Boolean, default: false },
   likes: { type: Number, required: true, default: 0 },
   members: Number,
+  nophoto: Boolean,
   reject_reason: String,
   score: Number,
   status: {
@@ -85,6 +86,23 @@ const entrySchema: Schema = new Schema({
   verified: { type: Boolean, default: false },
 });
 
+entrySchema.index(
+  {
+    category: 'text',
+    description: 'text',
+    title: 'text',
+    username: 'text',
+  },
+  {
+    weights: {
+      category: 1,
+      description: 2,
+      title: 3,
+      username: 4,
+    },
+  }
+);
+
 entrySchema.virtual('ratio').set(function() {
   const all = this.likes + this.dislikes;
   if (all === 0) return 0;
@@ -92,17 +110,18 @@ entrySchema.virtual('ratio').set(function() {
 });
 
 entrySchema.static('getEntries', async function(query: IEntryQuery) {
-  const $match = getMatches(query);
+  const search = getSearch(query);
+  const match = getMatches(query);
   const $limit = getLimit(query);
   const $skip = getSkip(query);
-  const sort = getSort(query);
+  const $sort = getSort(query);
 
   const [{ data, info }] = await this.aggregate([
-    { $match },
+    { $match: { ...match, ...search } },
     {
       $facet: {
         data: [
-          { $sort: { [sort]: -1 } },
+          { $sort },
           { $skip },
           { $limit },
           { $project: { _id: 0, __v: 0 } },

@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as Next from 'next';
-import * as R from 'ramda';
 import * as categories from '../../constants/categories';
 import { findCategory, getLength } from '../utils';
 
@@ -8,7 +7,9 @@ export const renderHomepage = (app: Next.Server) => (
   req: express.Request,
   res: express.Response
 ) => {
-  const defaultQuery = { sort: 'top' };
+  const { search } = req.query;
+  const searchQuery = search && { search };
+  const defaultQuery = { ...searchQuery, sort: 'top' };
   return app.render(req, res, '/', defaultQuery);
 };
 

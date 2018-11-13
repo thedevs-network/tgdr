@@ -24,6 +24,7 @@ const initialState: IEntriesState = {
   },
   hasError: false,
   limit: 9,
+  search: null,
   skip: 0,
   total: 0,
 };
@@ -40,6 +41,7 @@ export const entriesReducer: Reducer<IEntriesState> = (
       case EntriesStateTypes.SUCCESS:
         draft.category = action.payload.category;
         draft.limit = action.payload.limit;
+        draft.search = action.payload.search;
         draft.skip = action.payload.skip;
         draft.total = action.payload.total;
         draft.hasError = false;

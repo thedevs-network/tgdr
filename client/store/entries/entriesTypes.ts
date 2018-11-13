@@ -26,6 +26,7 @@ export interface IEntriesState
       data: IEntriesData;
       hasError: boolean;
       limit: number;
+      search: string;
       skip: number;
       total: number;
     }> {}
@@ -34,6 +35,7 @@ export interface IGetEntriesParams {
   category?: string;
   limit?: number;
   loadMore?: boolean;
+  search?: string;
   sort?: 'hot' | 'new' | 'top';
   type?: 'bot' | 'channel' | 'supergroup';
 }
@@ -43,6 +45,7 @@ export interface IGetEntriesResponse {
   data: IEntry[];
   limit: number;
   loadMore?: boolean;
+  search?: string;
   skip: number;
   sort: 'hot' | 'new' | 'top';
   status: 'active' | 'pending' | 'rejected';

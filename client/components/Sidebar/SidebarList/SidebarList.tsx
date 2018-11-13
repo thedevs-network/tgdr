@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { ifProp } from 'styled-tools';
 import { Flex } from 'grid-styled';
 import { ICategories } from '../../../../constants/categories';
 import Icon from '../../elements/Icon';
@@ -33,7 +34,11 @@ const ListItem = styled.li`
   }
 `;
 
-const ListLink = styled.a`
+interface ILinkProps {
+  isActive: boolean;
+}
+
+const ListLink = styled.a<ILinkProps>`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -60,6 +65,21 @@ const ListLink = styled.a`
       fill: #999fa5;
     }
   }
+
+  ${ifProp(
+    'isActive',
+    css`
+      color: #111;
+
+      span {
+        transform: translateX(3px);
+      }
+
+      svg path {
+        fill: #6d7277;
+      }
+    `
+  )};
 `;
 
 const Count = styled.span`
@@ -69,12 +89,18 @@ const Count = styled.span`
 `;
 
 interface ISidebarList {
+  actives: string[];
   title: string;
   data: ICategories[];
   queryName: 'category' | 'type';
 }
 
-const SidebarList: React.SFC<ISidebarList> = ({ title, data, queryName }) => (
+const SidebarList: React.SFC<ISidebarList> = ({
+  actives,
+  title,
+  data,
+  queryName,
+}) => (
   <Flex flexDirection="column" flex="1 1 auto">
     <Title>{title}</Title>
     <List>
@@ -86,7 +112,7 @@ const SidebarList: React.SFC<ISidebarList> = ({ title, data, queryName }) => (
             passHref
             scroll={false}
           >
-            <ListLink title={item.name}>
+            <ListLink isActive={actives.includes(item.slug)} title={item.name}>
               <Icon
                 name={item.icon || 'chevronRight'}
                 mr={3}
