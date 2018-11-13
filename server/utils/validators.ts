@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator/check';
+import { body, param, query } from 'express-validator/check';
 import { categories } from '../../constants/categories';
 import { hasAd } from './utils';
 
@@ -35,6 +35,33 @@ export const entryValidator = [
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
 
+export const entriesValidator = [
+  query('category')
+    .optional()
+    .custom(value => categories.some(cat => cat.slug === value))
+    .withMessage('Category does not exist.'),
+  query('limit')
+    .optional()
+    .custom(value => Number(value) < 50)
+    .withMessage('Limit should be a number less than 20.'),
+  query('sort')
+    .optional()
+    .custom(value => value === 'hot' || value === 'new' || value === 'top')
+    .withMessage('Sort should be one of top, hot or new.'),
+  query('status')
+    .optional()
+    .custom(
+      value => value === 'active' || value === 'pending' || value === 'rejected'
+    )
+    .withMessage('Status should be one of active, pending or rejected.'),
+  query('type')
+    .optional()
+    .custom(
+      value => value === 'channel' || value === 'bot' || value === 'supergroup'
+    )
+    .withMessage('Type should be one of channel, bot or supergroup.'),
+];
+
 export const reviewValidator = [
   body('disliked')
     .optional()
@@ -66,26 +93,6 @@ export const reviewValidator = [
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
 
-export const removeReviewValidator = [
-  param('username', 'Username is not valid.')
-    .exists()
-    .trim()
-    .isLength({ min: 5 })
-    .withMessage('Username must have at least 5 chars.')
-    .matches(/^[a-z]\w+$/i)
-    .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
-];
-
-export const getReviewsValidator = [
-  param('username', 'Username is not valid.')
-    .exists()
-    .trim()
-    .isLength({ min: 5 })
-    .withMessage('Username must have at least 5 chars.')
-    .matches(/^[a-z]\w+$/i)
-    .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
-];
-
 export const reportValidator = [
   body('username', 'Username is not valid.')
     .exists()
@@ -101,4 +108,4 @@ export const reportValidator = [
     .optional()
     .isLength({ max: 400 })
     .withMessage('Info is too long. Should be less than 400 chars.'),
-]
+];
