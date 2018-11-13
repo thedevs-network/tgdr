@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'grid-styled';
 import { prop } from 'styled-tools';
+import ArrowLeft from '../../../assets/images/arrow-left-icon.svg';
 import ArrowRight from '../../../assets/images/arrow-right-icon.svg';
 import At from '../../../assets/images/at-icon.svg';
 import BarChart from '../../../assets/images/bar-chart-icon.svg';
@@ -27,6 +28,7 @@ import TimerSand from '../../../assets/images/timer-sand-icon.svg';
 import Users from '../../../assets/images/users-icon.svg';
 
 export interface IIcons {
+  arrowLeft: JSX.Element;
   arrowRight: JSX.Element;
   at: JSX.Element;
   barChart: JSX.Element;
@@ -53,6 +55,7 @@ export interface IIcons {
 }
 
 const icons: IIcons = {
+  arrowLeft: <ArrowLeft />,
   arrowRight: <ArrowRight />,
   at: <At />,
   barChart: <BarChart />,
