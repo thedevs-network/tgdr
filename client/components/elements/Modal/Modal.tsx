@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Flex } from 'grid-styled';
 import { LightBox } from '../../elements/Layout';
 
@@ -32,6 +32,20 @@ const ModalContainer = styled(Flex).attrs({
   );
   z-index: 9999;
   overflow: auto;
+`;
+
+const anime = keyframes`
+  from {
+    transform: translateY(-40%) scale(0.5, 0.5);
+  }
+
+  to {
+    transform: translateY(0) scale(1, 1);
+  }
+`;
+
+const ModalBox = styled(LightBox)`
+  animation: ${anime} 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 `;
 
 class Modal extends React.Component<IProps, IState> {
@@ -78,7 +92,7 @@ class Modal extends React.Component<IProps, IState> {
         })}
         {this.state.show && (
           <ModalContainer id="modal" onClick={this.handleOutsideClick}>
-            <LightBox
+            <ModalBox
               px={[16, 32]}
               py={[32, 48]}
               width={this.props.width}
@@ -86,7 +100,7 @@ class Modal extends React.Component<IProps, IState> {
               flex="0 0 auto"
             >
               {this.props.children(this.closeModal)}
-            </LightBox>
+            </ModalBox>
           </ModalContainer>
         )}
       </>
