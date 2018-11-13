@@ -5,7 +5,12 @@ import * as authController from '../controllers/authController';
 import * as botController from '../controllers/botController';
 import * as entryController from '../controllers/entryController';
 import * as reviewController from '../controllers/reviewController';
-import { entryValidator, newEntryValidators, reportValidator } from '../utils';
+import {
+  entriesValidator,
+  entryValidator,
+  newEntryValidators,
+  reportValidator,
+} from '../utils';
 import * as validatorsController from '../controllers/validatorsController';
 
 const router = express.Router();
@@ -32,7 +37,7 @@ router.put(
   asyncHandler(entryController.update)
 );
 
-router.get('/', asyncHandler(entryController.get));
+router.get('/', entriesValidator, asyncHandler(entryController.get));
 
 router.get(
   '/:username',
@@ -44,7 +49,6 @@ router.get(
   asyncHandler(entryController.getSingle)
 );
 
-
 router.post(
   '/report',
   passport.authenticate('jwt', { session: false }),
@@ -52,7 +56,7 @@ router.post(
   asyncHandler(validatorsController.checkForErrors),
   asyncHandler(entryController.withEntry),
   asyncHandler(reviewController.withReviewById),
-  asyncHandler(botController.sendReport),
+  asyncHandler(botController.sendReport)
 );
 
 export default router;
