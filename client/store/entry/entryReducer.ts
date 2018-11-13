@@ -3,6 +3,7 @@ import produce from 'immer';
 import { EntryStateTypes, IEntryState } from './entryTypes';
 import { RootAction } from '../storeTypes';
 import { ReviewsStateTypes } from '../reviews';
+import { AuthStateTypes } from '../auth';
 
 const initialState: IEntryState = {
   data: null,
@@ -30,6 +31,12 @@ export const entryReducer: Reducer<IEntryState> = (
       case EntryStateTypes.FAILURE:
         draft.hasError = true;
         draft.isLoading = false;
+        return;
+
+      case AuthStateTypes.LOGOUT_REQUEST:
+        if(draft.data) {
+          draft.data.review = {};
+        }
         return;
 
       case ReviewsStateTypes.SUBMIT_REQUEST:
