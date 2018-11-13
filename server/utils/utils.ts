@@ -17,7 +17,7 @@ export const hasAd = (text: string) =>
   ) || /(@\w+)/gi.test(text);
 
 export const getEntryQuery = R.pipe(
-  R.pick(['category', 'limit', 'skip', 'sort', 'status', 'type']),
+  R.pick(['category', 'limit', 'skip', 'search', 'sort', 'status', 'type']),
   R.merge({
     limit: 9,
     skip: 0,
@@ -40,8 +40,11 @@ export const getMatches = R.pipe(
     R.propEq('sort', 'hot'),
     R.assocPath(['created_at', '$gt'], subDays(new Date(), 30))
   ),
-  R.pick(['category', 'status', 'type', 'created_at'])
+  R.pick(['category', 'status', 'type', 'created_at', '$text'])
 );
+
+export const getSearch = query =>
+  query.search ? { $text: { $search: query.search } } : {};
 
 export const getLimit = R.pipe(
   R.prop('limit'),
@@ -56,8 +59,10 @@ export const getSkip = R.pipe(
 export const getSort = R.pipe(
   R.prop('sort'),
   R.cond([
-    [R.equals('new'), R.always('created_at')],
-    [R.or(R.equals('top'), R.equals('hot')), R.always('score')],
+    [R.equals('new'), R.always({ created_at: -1 })],
+    [R.equals('top'), R.always({ featured: -1, verified: -1, score: -1 })],
+    [R.equals('hot'), R.always({ featured: -1, verified: -1, score: -1 })],
+    [R.always(true), R.always({})],
   ])
 );
 
@@ -91,16 +96,20 @@ export const getEntryUpdates = (body, admin?: boolean) => {
   const setParams = R.pipe(
     R.pick([
       'score',
-      ...(admin && [
-        'category',
-        'description',
-        'featured',
-        'reject_reason',
-        'status',
-        'title',
-        'type',
-        'verified',
-      ]),
+      ...(admin
+        ? [
+            'category',
+            'description',
+            'featured',
+            'members',
+            'nophoto',
+            'reject_reason',
+            'status',
+            'title',
+            'type',
+            'verified',
+          ]
+        : []),
     ]),
     R.ifElse(
       R.pipe(
@@ -132,8 +141,8 @@ export const getEntryFeedback = (
   return { ...dislikes, ...likes };
 };
 
-export const getEntryRemoveFeedback = (liked: boolean) =>
-  liked ? { likes: -1 } : { dislikes: -1 };
+export const getEntryRemoveFeedback = (review: IReviewSchema) =>
+  review.liked ? { likes: -1 } : { dislikes: -1 };
 
 export const getScore = (
   entry: IEntrySchema,
