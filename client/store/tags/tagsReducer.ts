@@ -4,6 +4,7 @@ import { ITagsState, TagsStateTypes } from './tagsTypes';
 import { RootAction } from '../storeTypes';
 
 const initialState: ITagsState = {
+  actives: [],
   data: {},
   isFetched: false,
 };
@@ -17,6 +18,10 @@ export const tagsReducer: Reducer<ITagsState> = (
       case TagsStateTypes.LOAD:
         draft.data = action.payload;
         draft.isFetched = true;
+        return;
+
+      case TagsStateTypes.SET_ACTIVES:
+        draft.actives = action.payload;
         return;
     }
   });

@@ -10,6 +10,7 @@ import {
   renewToken,
 } from '../client/store/auth';
 import { IReduxStore } from '../client/store';
+import { setActiveTags } from '../client/store/tags';
 import 'normalize.css';
 import '../client/assets/css/nprogress.css';
 
@@ -50,11 +51,19 @@ class MyApp extends App<IProps> {
     if (isAuthenticated && !isFetched) {
       reduxStore.dispatch(renewToken());
     }
+
+    // Set active tags
+    const activeTags = window.location.pathname.split('/');
+    reduxStore.dispatch(setActiveTags(activeTags));
     
     nprogress.done()
-
+    
     Router.events.on('routeChangeStart', () => nprogress.start());
-    Router.events.on('routeChangeComplete', () => nprogress.done());
+    Router.events.on('routeChangeComplete', () => {
+      nprogress.done();
+      const newActiveTags = window.location.pathname.split('/');
+      reduxStore.dispatch(setActiveTags(newActiveTags));
+    });
     Router.events.on('routeChangeError', () => nprogress.done());
   }
 
