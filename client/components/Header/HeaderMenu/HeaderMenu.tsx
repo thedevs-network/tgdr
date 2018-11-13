@@ -9,6 +9,12 @@ import Icon from '../../elements/Icon';
 import Spinner from '../../elements/Spinner';
 import { IAuthState } from '../../../store/auth';
 
+const Name = styled.span`
+  padding-right: 16px;
+  font-size: 14px;
+  color: #888;
+`;
+
 const A = styled.a`
   display: flex;
   align-items: center;
@@ -49,8 +55,8 @@ const HeaderMenu: React.SFC<IProps> = ({
   } else {
     logoutLink = (
       <A href="#" title="Logout" onClick={logout}>
-        {name},
-        <Icon name="logout" size={14} fill="transparent" stroke="#666" ml={2} />
+        <Icon name="logout" size={14} fill="transparent" stroke="#666" mr={1} />
+        Log out
       </A>
     );
   }
@@ -83,7 +89,10 @@ const HeaderMenu: React.SFC<IProps> = ({
       <Box mx={3}>
         <Modal trigger={<Button>+ Submit</Button>}>{showSubmitButton}</Modal>
       </Box>
-      <Box ml={2}>{authLink}</Box>
+      <Flex ml={2} align="center">
+        {name && <Name>{name},</Name>}
+        {authLink}
+      </Flex>
     </Flex>
   );
 };
