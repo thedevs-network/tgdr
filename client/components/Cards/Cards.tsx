@@ -17,6 +17,13 @@ const CardsWrapper = styled(Flex)`
   }
 `;
 
+const Text = styled.p`
+  margin: -8px 0 16px;
+  padding: 0;
+  font-size: 15px;
+  color: #aaa;
+`;
+
 interface IProps extends IGetEntriesParams {
   data: IEntry[];
   differentSorts?: boolean;
@@ -44,17 +51,20 @@ const Cards: React.SFC<IProps> = ({
       showViewAllLink={!loadMore}
     />
     <CardsWrapper flexWrap="wrap">
-      {data.map(entry => (
-        <Card key={entry.username} entry={entry} />
-      ))}
+      {data.length ? (
+        data.map(entry => <Card key={entry.username} entry={entry} />)
+      ) : (
+        <Text>Nothing to show yet.</Text>
+      )}
     </CardsWrapper>
-    {total > data.length && loadMore && (
-      <Flex justify="flex-end" mt={3}>
-        <Link href="#" title="Load more entries" onClick={onLoadMore} big>
-          + Load More
-        </Link>
-      </Flex>
-    )}
+    {total > data.length &&
+      loadMore && (
+        <Flex justify="flex-end" mt={3}>
+          <Link href="#" title="Load more entries" onClick={onLoadMore} big>
+            + Load More
+          </Link>
+        </Flex>
+      )}
   </>
 );
 
