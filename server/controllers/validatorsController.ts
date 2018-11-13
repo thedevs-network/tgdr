@@ -22,14 +22,24 @@ export const checkForErrors: express.RequestHandler = async (
 export const createReview: express.RequestHandler = (req, res, next) => {
   const { review } = res.locals;
   const { disliked, liked } = req.body;
-  
+
   if (!liked && !disliked) {
     throw new CustomError("Couldn't find liked or disliked value.");
   }
-  
+
   if (review && ((review.disliked && disliked) || (review.liked && liked))) {
     return res.status(200).json({ message: 'Already submitted.' });
   }
 
   return next();
-}
+};
+
+export const ban: express.RequestHandler = (req, _res, next) => {
+  const { userId, reviewId } = req.body;
+
+  if (!userId && !reviewId) {
+    throw new CustomError('Need userId or reviewId value.');
+  }
+
+  return next();
+};

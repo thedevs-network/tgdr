@@ -67,13 +67,14 @@ export const create: express.RequestHandler = async (req, res) => {
 
 export const remove: express.RequestHandler = async (_req, res) => {
   const { entry, review } = res.locals;
-
+ 
   if (!review) throw new CustomError("Couldn't find the review");
 
   await reviewQuery.remove(review);
 
-  const feedbackQuery = getEntryRemoveFeedback(review.liked);
-  await entryQuery.update(entry.username, feedbackQuery);
+  const feedbacks = getEntryRemoveFeedback(review);
+  const score = getScore(entry, feedbacks);
+  await entryQuery.update(entry.username, { ...feedbacks, score });
 
   return res
     .status(200)

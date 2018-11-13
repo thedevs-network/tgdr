@@ -1,7 +1,9 @@
 export interface IUserQuery {
-  first_name: string;
+  banned?: boolean;
+  commanding?: boolean;
+  first_name?: string;
   last_name?: string;
-  telegram_id: number;
+  telegram_id?: number;
   username?: string;
 }
 
