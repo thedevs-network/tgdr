@@ -37,6 +37,7 @@ export interface IEntry
       featured?: boolean;
       likes: number;
       members?: number;
+      nophoto?: boolean;
       ratio: number;
       reject_reason?: string;
       review?: IReview;

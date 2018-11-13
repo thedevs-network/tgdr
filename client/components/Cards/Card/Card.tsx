@@ -41,9 +41,8 @@ const Card = ({ entry }: IProps) => (
     as={`/@${entry.username}`}
     scroll={false}
   > 
-    <CardWrapper title="Card">
-      <Image username={entry.username} mr={3} />
-      <Flex flexDirection="column" flex="1 1 auto">
+      <Image nophoto={entry.nophoto} username={entry.username} mr={3} />
+      <InfoWrapper>
         <Title small>{entry.title}</Title>
         {entry.members && (
           <CardMembersCount>{entry.members} members</CardMembersCount>

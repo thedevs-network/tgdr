@@ -1,5 +1,6 @@
-import Button from '../client/components/elements/Button';
 import * as React from 'react';
+import { NextSFC } from 'next';
+import Router from 'next/router';
 import { Flex } from 'grid-styled';
 import { getEntry } from '../client/store/entry';
 import withVerifyToken from '../client/withVerifyToken';
@@ -10,9 +11,10 @@ import {
   Description,
   Link,
   Title,
+  ViewAllLink,
 } from '../client/components/elements/Typography';
 import Image from '../client/components/elements/Image';
-import { NextSFC } from 'next';
+import Button from '../client/components/elements/Button';
 import Icon from '../client/components/elements/Icon';
 import Divider from '../client/components/elements/Divider';
 import Rate from '../client/components/Rate';
@@ -34,17 +36,20 @@ interface IProps {
 }
 
 const Single: NextSFC<IProps> = ({ entry, auth }) => {
-  const report = auth.isAuthenticated ? (
-    closeModal => <ReportModal closeModal={closeModal} />
-  ) : (
-    closeModal => <LoginModal closeModal={closeModal} />
-  );
-  
+  const report = auth.isAuthenticated
+    ? closeModal => <ReportModal closeModal={closeModal} />
+    : closeModal => <LoginModal closeModal={closeModal} />;
+
   return (
     <Body>
       <LightBox p={4} flex="1 1 auto">
         <Flex width={[106]} mr={4} flexDirection="column">
-          <Image w={[106]} h={106} username={entry.username} />
+          <Image
+            w={[106]}
+            h={106}
+            nophoto={entry.nophoto}
+            username={entry.username}
+          />
           <InfoList entry={entry} />
           <Modal
             trigger={

@@ -47,11 +47,9 @@ export const getBotDetails = async (username: string) => {
     throw new CustomError('Bot not found.');
   }
 
-  if (img) {
-    return {
-      image: img,
-    };
-  }
+  return {
+    image: img,
+  };
 };
 
 export const sendReport: express.RequestHandler = async (req, res) => {

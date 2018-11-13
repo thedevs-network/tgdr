@@ -56,7 +56,10 @@ export const downloadImage: express.RequestHandler = async (
 ) => {
   const { image, username } = res.locals.entry;
 
-  if (!image) return next();
+  if (!image) {
+    res.locals.entry.nophoto = true;
+    return next()
+  };
 
   await cloudinary.v2.uploader.upload(image, {
     public_id: username.toLowerCase(),

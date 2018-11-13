@@ -5,6 +5,7 @@ import { Flex } from 'grid-styled';
 import { Image as CloudinaryImage } from 'cloudinary-react';
 
 interface IProps {
+  nophoto?: boolean;
   username: string;
   h?: number | number[];
   mb?: number | number[];
@@ -16,7 +17,7 @@ interface IProps {
   w?: number | number[];
 }
 
-const ImageWrapper = styled(Flex)<IProps>`
+const ImageWrapper = styled(Flex)<Partial<IProps>>`
   height: ${prop('h')}px;
   background-color: #eee;
   border-radius: 50%;
@@ -26,16 +27,24 @@ const ImageWrapper = styled(Flex)<IProps>`
 const Img = styled(CloudinaryImage)`
   width: 100%;
   height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
-const Image: React.SFC<IProps> = ({ w, h, ...props }) => (
+const Image: React.SFC<IProps> = ({ w, h, nophoto, username, ...props }) => (
   <ImageWrapper h={h} w={w} {...props}>
-    <Img cloudName="the-devs" publicId={props.username} alt={props.username} />
+    <Img
+      cloudName="the-devs"
+      publicId={nophoto ? '__placeholder__' : username}
+      alt={username}
+    />
   </ImageWrapper>
 );
 
 Image.defaultProps = {
   h: 68,
+  nophoto: false,
   w: 68,
 };
 

@@ -10,6 +10,7 @@ export interface IEntrySchema extends Document {
   featured?: boolean;
   likes: number;
   members?: number;
+  nophoto?: boolean;
   ratio: number;
   reject_reason?: string;
   score?: number;
