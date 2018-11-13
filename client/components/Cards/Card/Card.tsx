@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+import Router from 'next/router';
 import { Flex } from 'grid-styled';
 import CardJoinButton from './CardJoinButton';
 import CardMembersCount from './CardMembersCount';
@@ -9,6 +9,7 @@ import { Title } from '../../elements/Typography';
 import Image from '../../elements/Image';
 import { LightBox } from '../../elements/Layout';
 import { IEntry } from 'client/store/storeTypes';
+import Icon from '../../elements/Icon';
 
 const CardWrapper = styled(LightBox).attrs({
   align: 'center',
@@ -31,16 +32,30 @@ const CardWrapper = styled(LightBox).attrs({
   }
 `;
 
+const InfoWrapper = styled(Flex).attrs({
+  flex: '1 1 auto',
+  flexDirection: 'column',
+})`
+  padding: 1px 0;
+  overflow: hidden;
+`;
+
 interface IProps {
   entry: IEntry;
 }
 
-const Card = ({ entry }: IProps) => (
-  <Link
-    href={`/single?username=@${entry.username}`}
-    as={`/@${entry.username}`}
-    scroll={false}
-  > 
+const Card = ({ entry }: IProps) => {
+  const goToEntry = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    Router.push(`/single?username=@${entry.username}`, `/@${entry.username}`);
+  };
+
+  return (
+    <CardWrapper
+      title={entry.username}
+      onClick={goToEntry}
+      href={`/@${entry.username}`}
+    >
       <Image nophoto={entry.nophoto} username={entry.username} mr={3} />
       <InfoWrapper>
         <Title small>{entry.title}</Title>
@@ -49,11 +64,19 @@ const Card = ({ entry }: IProps) => (
         )}
         <Flex align="center" justify="space-between" mt={2}>
           <CardRate ratio={entry.ratio} />
-          <CardJoinButton username={entry.username} />
+          <Flex align="center">
+            {entry.featured && (
+              <Icon name="star" mr={2} size={17} fill="#F9A825" />
+            )}
+            {entry.verified && (
+              <Icon name="star" mr={2} size={17} fill="#63B3F3" />
+            )}
+            <CardJoinButton username={entry.username} />
+          </Flex>
         </Flex>
-      </Flex>
+      </InfoWrapper>
     </CardWrapper>
-  </Link>
-);
+  );
+};
 
 export default Card;
