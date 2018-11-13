@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { NextSFC } from 'next';
-import Router from 'next/router';
 import { Flex } from 'grid-styled';
 import { getEntry } from '../client/store/entry';
 import withVerifyToken from '../client/withVerifyToken';
@@ -11,7 +10,6 @@ import {
   Description,
   Link,
   Title,
-  ViewAllLink,
 } from '../client/components/elements/Typography';
 import Image from '../client/components/elements/Image';
 import Button from '../client/components/elements/Button';
