@@ -46,7 +46,7 @@ const rootReducer = combineReducers<IAppState>({
 
 const store = (state: IAppState, action) => {
   if (action.type === AuthStateTypes.LOGOUT_REQUEST) {
-    state = undefined;
+    state.auth = undefined;
   }
 
   return rootReducer(state, action);
