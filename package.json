@@ -28,6 +28,7 @@
     "lodash.debounce": "^4.0.8",
     "mongoose": "^5.2.4",
     "morgan": "^1.9.0",
+    "ms": "^2.1.1",
     "next": "^7.0.2",
     "normalize.css": "^8.0.0",
     "nprogress": "^0.2.0",
