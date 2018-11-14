@@ -48,11 +48,10 @@ const HeaderMenu: React.SFC<IProps> = ({
   name,
 }) => {
   let logoutLink;
-  let authLink;
 
-  if (isLogoutLoading) {
+  if (isAuthenticated && isLogoutLoading) {
     logoutLink = <Spinner size={16} />;
-  } else {
+  } else if (isAuthenticated) {
     logoutLink = (
       <A href="#" title="Logout" onClick={logout}>
         <Icon name="logout" size={14} fill="transparent" stroke="#666" mr={1} />
@@ -61,23 +60,21 @@ const HeaderMenu: React.SFC<IProps> = ({
     );
   }
 
-  if (isAuthenticated) {
-    authLink = logoutLink;
-  } else {
-    authLink = (
-      <Modal
-        trigger={
+  const login = (
+    <Modal
+      trigger={
+        isAuthenticated ? null : (
           <A href="#" title="Login or sign up">
             Login / Sign Up
           </A>
-        }
-      >
-        {closeModal => <LoginModal closeModal={closeModal} />}
-      </Modal>
-    );
-  }
+        )
+      }
+    >
+      {closeModal => <LoginModal closeModal={closeModal} />}
+    </Modal>
+  );
 
-  const showSubmitButton = closeModal =>
+  const showSubmit = closeModal =>
     isAuthenticated ? (
       <SubmitModal closeModal={closeModal} />
     ) : (
@@ -87,11 +84,12 @@ const HeaderMenu: React.SFC<IProps> = ({
   return (
     <Flex align="center" is="nav">
       <Box mx={3}>
-        <Modal trigger={<Button>+ Submit</Button>}>{showSubmitButton}</Modal>
+        <Modal trigger={<Button>+ Submit</Button>}>{showSubmit}</Modal>
       </Box>
       <Flex ml={2} align="center">
         {name && <Name>{name},</Name>}
-        {authLink}
+        {logoutLink}
+        {login}
       </Flex>
     </Flex>
   );
