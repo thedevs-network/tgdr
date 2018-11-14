@@ -58,7 +58,7 @@ class Modal extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      show: false,
+      show: null,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -85,21 +85,24 @@ class Modal extends React.Component<IProps, IState> {
   }
 
   render() {
+    const { show } = this.state;
+    const { children, trigger, width } = this.props;
+
     return (
       <>
-        {React.cloneElement(this.props.trigger, {
+        {trigger && React.cloneElement(trigger, {
           onClick: this.openModal,
         })}
-        {this.state.show && (
+        {show && (
           <ModalContainer id="modal" onClick={this.handleOutsideClick}>
             <ModalBox
               px={[16, 32]}
               py={[32, 48]}
-              width={this.props.width}
+              width={width}
               flexDirection="column"
               flex="0 0 auto"
             >
-              {this.props.children(this.closeModal)}
+              {children(this.closeModal)}
             </ModalBox>
           </ModalContainer>
         )}
