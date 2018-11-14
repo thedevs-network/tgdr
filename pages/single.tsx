@@ -1,9 +1,11 @@
+import Icon from '../client/components/elements/Icon';
 import * as React from 'react';
 import { NextSFC } from 'next';
 import { Flex } from 'grid-styled';
+import Error from './_error';
 import { getEntry } from '../client/store/entry';
 import withVerifyToken from '../client/withVerifyToken';
-import { INextContextWithRedux } from '../client/store';
+import { IAppState, INextContextWithRedux } from '../client/store';
 import Body from '../client/components/Body';
 import { LightBox } from '../client/components/elements/Layout';
 import {
@@ -13,7 +15,7 @@ import {
 } from '../client/components/elements/Typography';
 import Image from '../client/components/elements/Image';
 import Button from '../client/components/elements/Button';
-import Icon from '../client/components/elements/Icon';
+import { connect } from 'react-redux';
 import Divider from '../client/components/elements/Divider';
 import Rate from '../client/components/Rate';
 import InfoList from '../client/components/InfoList';
@@ -28,12 +30,14 @@ import ReportModal from '../client/components/ReportModal';
 import { IAuthState } from '../client/store/auth';
 import LoginModal from '../client/components/LoginModal';
 
-interface IProps {
+interface IReduxProps {
   auth: IAuthState;
   entry: IEntry;
 }
 
-const Single: NextSFC<IProps> = ({ entry, auth }) => {
+const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
+  if (!entry) return <Error statusCode={404} />;
+
   const report = auth.isAuthenticated
     ? closeModal => <ReportModal closeModal={closeModal} />
     : closeModal => <LoginModal closeModal={closeModal} />;
@@ -95,6 +99,7 @@ const Single: NextSFC<IProps> = ({ entry, auth }) => {
 
 Single.getInitialProps = async ({
   reduxStore,
+  res,
   query: { username },
 }: INextContextWithRedux) => {
   await Promise.all([
@@ -102,7 +107,13 @@ Single.getInitialProps = async ({
     reduxStore.dispatch(getReviews(username)),
   ]);
   const { auth, entry } = reduxStore.getState();
+  if (!entry.data) res.statusCode = 404;
   return { entry: entry.data, auth };
 };
 
-export default withVerifyToken(Single);
+const mapStateToProps = ({ auth, entry }: IAppState): IReduxProps => ({
+  auth,
+  entry: entry.data,
+});
+
+export default connect<IReduxProps>(mapStateToProps)(withVerifyToken(Single));

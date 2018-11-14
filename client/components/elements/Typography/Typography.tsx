@@ -61,6 +61,23 @@ export const InputErrorMessage = styled.small`
   color: #f44336;
 `;
 
+
+export const SloganTitle = styled.h2`
+  margin: 8px 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 500;
+  color: #808080;
+`;
+
+export const SloganSubTitle = styled.h3`
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: normal;
+  color: #a8a8a8;
+`;
+
 interface ILink {
   big?: boolean;
   secondary?: boolean;
