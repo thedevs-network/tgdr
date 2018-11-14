@@ -5,6 +5,9 @@ import * as cheerio from 'cheerio';
 import config from '../config';
 import CustomError from '../helpers/customError';
 
+export const getChatMembers = async (username: string) =>
+  bot.telegram.getChatMembersCount(`@${username}`);
+
 export const getChatDetails = async (username: string) => {
   username = `@${username}`;
 

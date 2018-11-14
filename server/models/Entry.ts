@@ -38,6 +38,7 @@ export interface IEntryModel extends Model<IEntrySchema> {
       skip: number;
     } & IEntryQuery
   >;
+  getNonBots(): Promise<IEntrySchema[]>;
 }
 
 const entrySchema: Schema = new Schema({
@@ -182,6 +183,13 @@ entrySchema.static('getTags', async function() {
   );
 
   return list;
+});
+
+entrySchema.static('getNonBots', async function() {
+  const data = await this.aggregate([
+    { $match: { $or: [{ type: 'channel'}, { type: 'supergroup' }] } },
+  ]);
+  return data;
 });
 
 const Entry: IEntryModel = model<IEntrySchema, IEntryModel>(

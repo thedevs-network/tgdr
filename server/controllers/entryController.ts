@@ -13,7 +13,7 @@ export const checkExistence: express.RequestHandler = async (
 ) => {
   const username = req.body.username.toLowerCase();
 
-  const entry: IEntrySchema = await entryQuery.find(username);
+  const entry: IEntrySchema = await entryQuery.findOne(username);
 
   if (entry) {
     return res.status(422).json({
@@ -90,7 +90,7 @@ export const get: express.RequestHandler = async (req, res) => {
 
 export const withEntry: express.RequestHandler = async (req, res, next) => {
   const username = req.body.username || req.params.username;
-  const entry = await entryQuery.find(username);
+  const entry = await entryQuery.findOne(username);
 
   if (!entry) throw new CustomError("Couldn't find the entry");
 

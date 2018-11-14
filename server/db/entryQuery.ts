@@ -3,7 +3,9 @@ import Entry, { IEntryModel } from '../models/Entry';
 import { IEntryQuery } from '../types';
 import { getEntryUpdates } from '../utils';
 
-export const find = (username: string) => Entry.findOne({ username }).lean();
+export const getNonBots = () => Entry.getNonBots();
+
+export const findOne = (username: string) => Entry.findOne({ username }).lean();
 
 export const findById = (entry: string | Document) =>
   Entry.findById(entry).lean();

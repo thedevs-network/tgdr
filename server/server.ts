@@ -20,6 +20,9 @@ import './bot';
 // Import passport strategies
 import './passport';
 
+// Import cron jobs
+import './cron';
+
 const app = next({ dev: config.is_dev });
 const handle = app.getRequestHandler();
 mongoose.connect(config.db_uri);
