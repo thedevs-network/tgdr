@@ -51,6 +51,7 @@ app.prepare().then(() => {
   server.use('/api/entry', entryRoutes);
   server.use('/api/review', reviewRoutes);
   server.use('/api/tags', tagsRoutes);
+  server.use('/api', errorController.notFound);
   server.use('/', appRoutes(app));
   server.use(errorController.send);
 

@@ -12,3 +12,6 @@ export const send: express.ErrorRequestHandler = (error, _req, res, _next) => {
 
   res.status(422).json({ error: message });
 };
+
+export const notFound: express.RequestHandler = (_req, res) =>
+  res.status(404).json({ message: 'Not found.' });
