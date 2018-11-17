@@ -79,19 +79,21 @@ export const findCategory = (categories: AllCategoriesType, param: string) => (
 export const omitExtraFields = (document: {}) =>
   R.omit(['_id', '__v'], document);
 
+export const getFeedbackUpdates = R.pipe(
+  R.pick(['dislikes', 'likes']),
+  R.ifElse(
+    R.pipe(
+      R.values,
+      R.length,
+      R.lt(0)
+    ),
+    R.objOf('$inc'),
+    R.always({})
+  )
+);
+
 export const getEntryUpdates = (body, admin?: boolean) => {
-  const feedbacks = R.pipe(
-    R.pick(['dislikes', 'likes']),
-    R.ifElse(
-      R.pipe(
-        R.values,
-        R.length,
-        R.lt(0)
-      ),
-      R.objOf('$inc'),
-      R.always({})
-    )
-  )(body);
+  const feedbacks = getFeedbackUpdates(body);
 
   const setParams = R.pipe(
     R.pick([
