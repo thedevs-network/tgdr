@@ -12,7 +12,9 @@ import Check from '../../../assets/images/check-icon.svg';
 import ChevronRight from '../../../assets/images/chevron-right-icon.svg';
 import Clock from '../../../assets/images/clock-icon.svg';
 import Close from '../../../assets/images/close-icon.svg';
+import Envelope from '../../../assets/images/envelope-icon.svg';
 import Flame from '../../../assets/images/flame-icon.svg';
+import GitHub from '../../../assets/images/github-icon.svg';
 import Heart from '../../../assets/images/heart-icon.svg';
 import Info from '../../../assets/images/info-icon.svg';
 import Logout from '../../../assets/images/log-out-icon.svg';
@@ -25,6 +27,7 @@ import Tag from '../../../assets/images/tag-icon.svg';
 import Telegram from '../../../assets/images/telegram-icon.svg';
 import ThumbsDown from '../../../assets/images/thumbs-down-icon.svg';
 import TimerSand from '../../../assets/images/timer-sand-icon.svg';
+import Twitter from '../../../assets/images/twitter-icon.svg';
 import Users from '../../../assets/images/users-icon.svg';
 
 export interface IIcons {
@@ -38,7 +41,9 @@ export interface IIcons {
   chevronRight: JSX.Element;
   clock: JSX.Element;
   close: JSX.Element;
+  envelope: JSX.Element;
   flame: JSX.Element;
+  github: JSX.Element;
   heart: JSX.Element;
   info: JSX.Element;
   logout: JSX.Element;
@@ -51,6 +56,7 @@ export interface IIcons {
   telegram: JSX.Element;
   thumbsDown: JSX.Element;
   timerSand: JSX.Element;
+  twitter: JSX.Element;
   users: JSX.Element;
 }
 
@@ -65,7 +71,9 @@ const icons: IIcons = {
   chevronRight: <ChevronRight />,
   clock: <Clock />,
   close: <Close />,
+  envelope: <Envelope />,
   flame: <Flame />,
+  github: <GitHub />,
   heart: <Heart />,
   info: <Info />,
   logout: <Logout />,
@@ -78,6 +86,7 @@ const icons: IIcons = {
   telegram: <Telegram />,
   thumbsDown: <ThumbsDown />,
   timerSand: <TimerSand />,
+  twitter: <Twitter />,
   users: <Users />,
 };
 
