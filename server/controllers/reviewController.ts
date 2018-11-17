@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as entryQuery from '../db/entryQuery';
+import * as authQuery from '../db/authQuery';
 import * as reviewQuery from '../db/reviewQuery';
 import CustomError from '../helpers/customError';
 import {
@@ -8,6 +9,7 @@ import {
   getReviewsQuery,
   getScore,
 } from '../utils';
+import { sendUserSpamReport } from './botController';
 
 export const withReview: express.RequestHandler = async (req, res, next) => {
   const review = await reviewQuery.findOne({
@@ -44,6 +46,7 @@ export const get: express.RequestHandler = async (req, res) => {
 export const create: express.RequestHandler = async (req, res) => {
   const { entry, review } = res.locals;
   const { disliked, liked, username } = req.body;
+  const { user } = req;
 
   await reviewQuery.create({
     ...req.body,
@@ -51,13 +54,18 @@ export const create: express.RequestHandler = async (req, res) => {
     disliked: !!disliked,
     entry,
     liked: !!liked,
-    user: req.user,
+    user,
   });
 
   if (!(review.liked === liked && review.disliked === disliked)) {
     const feedbacks = getEntryFeedback(review, disliked, liked);
     const score = getScore(entry, feedbacks);
     await entryQuery.update(username, { ...feedbacks, score });
+    const updatedUser = await authQuery.updateLikes(
+      user.telegram_id,
+      feedbacks
+    );
+    sendUserSpamReport(updatedUser);
   }
 
   return res
@@ -65,9 +73,9 @@ export const create: express.RequestHandler = async (req, res) => {
     .json({ message: 'Review has been submitted successfully.' });
 };
 
-export const remove: express.RequestHandler = async (_req, res) => {
+export const remove: express.RequestHandler = async (req, res) => {
   const { entry, review } = res.locals;
- 
+
   if (!review) throw new CustomError("Couldn't find the review");
 
   await reviewQuery.remove(review);
@@ -75,6 +83,11 @@ export const remove: express.RequestHandler = async (_req, res) => {
   const feedbacks = getEntryRemoveFeedback(review);
   const score = getScore(entry, feedbacks);
   await entryQuery.update(entry.username, { ...feedbacks, score });
+  const updatedUser = await authQuery.updateLikes(
+    req.user.telegram_id,
+    feedbacks
+  );
+  sendUserSpamReport(updatedUser);
 
   return res
     .status(200)
