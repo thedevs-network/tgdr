@@ -28,7 +28,11 @@ export const ban = async (ctx: ContextMessageUpdate, next) => {
     return ctx.reply("Couldn't find user.");
   }
 
-  await authQuery.create(user.telegram_id, { banned: true });
+  await authQuery.create(user.telegram_id, {
+    banned: true,
+    dislikes: 0,
+    likes: 0,
+  });
 
   const reviews = await reviewQuery.find({ user }).lean();
 
@@ -43,6 +47,20 @@ export const ban = async (ctx: ContextMessageUpdate, next) => {
   );
 
   ctx.reply('✅ User has been banned.');
+
+  return next();
+};
+
+export const unban = async (ctx: ContextMessageUpdate, next) => {
+  const [id] = ctx.message.text
+    .trim()
+    .split(' ')
+    .reverse();
+  const telegram_id = Number(id);
+
+  await authQuery.create(telegram_id, { banned: false });
+
+  ctx.reply('✅ User has been unbanned.');
 
   return next();
 };
