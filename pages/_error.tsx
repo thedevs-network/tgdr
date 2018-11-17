@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Header from '../client/components/Header';
+import Head from 'next/head';
 import Link from 'next/link';
 import { Flex } from 'grid-styled';
+import Header from '../client/components/Header';
+import Footer from '../client/components/Footer';
 import Button from '../client/components/elements/Button';
 import Modal from '../client/components/elements/Modal';
 import LoginModal from '../client/components/LoginModal';
@@ -14,6 +16,7 @@ import {
   SloganTitle,
   ViewAllLink,
 } from '../client/components/elements/Typography';
+import { AppWrapper } from '../client/components/elements/Layout';
 
 interface IReduxProps {
   isAuthenticated: boolean;
@@ -60,20 +63,28 @@ class ErrorPage extends React.Component<IProps> {
 
     return (
       <>
-        <Header />
-        <Flex py={5} flexDirection="column" align="center" is="section">
-          <SloganTitle>{title}</SloganTitle>
-          {subtitle}
-          <Flex mt={4} align="center" justify="center">
-            <Link href="/?sort=top" as="/" passHref>
-              <ViewAllLink title="Back to homepage">
-                <Icon name="arrowLeft" size={15} fill="#64B5F6" mr={10} />
-                Homepage
-              </ViewAllLink>
-            </Link>
-            {submit}
+        <Head>
+          <title>Telegram Directory | 404 Not Found</title>
+        </Head>
+        <AppWrapper>
+          <Flex flex="1 1 auto" flexDirection="column">
+            <Header />
+            <Flex py={5} flexDirection="column" align="center" is="section">
+              <SloganTitle>{title}</SloganTitle>
+              {subtitle}
+              <Flex mt={4} align="center" justify="center">
+                <Link href="/?sort=top" as="/" passHref>
+                  <ViewAllLink title="Back to homepage">
+                    <Icon name="arrowLeft" size={15} fill="#64B5F6" mr={10} />
+                    Homepage
+                  </ViewAllLink>
+                </Link>
+                {submit}
+              </Flex>
+            </Flex>
           </Flex>
-        </Flex>
+          <Footer />
+        </AppWrapper>
       </>
     );
   }
