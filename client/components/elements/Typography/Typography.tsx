@@ -129,3 +129,14 @@ export const ViewAllLink = styled.a`
     }
   }
 `;
+
+export const FooterLink = styled.a`
+  font-size: 13px  ;
+  color: #7990A2;
+  text-decoration: none;
+  transition: color 0.3s ease-out, transform 0.3s ease-out;
+  
+  :hover {
+    color: #63B3F3;
+  }
+`;
