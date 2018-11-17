@@ -15,6 +15,14 @@ export const AppLoadingWrapper = styled(Flex).attrs({
   height: 100%;
 `;
 
+export const AppWrapper = styled(Flex).attrs({
+  flex: '1 1 auto',
+  flexDirection: 'column',
+  justify: 'space-between',
+})`
+  min-height: 100vh;
+`;
+
 export const Container = styled(Flex).attrs({
   px: 15,
   w: [540, 720, 960, 1140],
