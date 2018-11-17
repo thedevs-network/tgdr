@@ -16,6 +16,14 @@ export const shortenLongName = (name: string, maxChars: number) =>
 export const capitalizeFirstLetter = (text: string): string =>
   text[0].toUpperCase() + text.slice(1);
 
+const beautifySort = (sort: string) => capitalizeFirstLetter(sort);
+
+const beautifyType = (type: string) =>
+  `${capitalizeFirstLetter(type.replace('supergroup', 'group'))}s`;
+
+const beautifyCat = (category: string) =>
+  capitalizeFirstLetter(category.replace('-', '/'));
+
 export const wait = (ms: number) =>
   new Promise(resolve => {
     setTimeout(resolve, ms);
@@ -52,9 +60,9 @@ export const getParamsFromQueries = ({
   sort,
   type,
   search,
-}: IGetEntriesParams): IGetEntriesParams[] => {  
+}: IGetEntriesParams): IGetEntriesParams[] => {
   const searchParam = search && { search };
-  
+
   if (category && sort && type) {
     return [{ category, sort, type }];
   }
@@ -124,5 +132,36 @@ export const getViewMoreLinkURL = ({
 
     default:
       return '';
+  }
+};
+
+export const getPageTitle = ({
+  category,
+  sort,
+  type,
+}: IGetEntriesParams): string => {
+  switch (true) {
+    case !!category && !!sort && !!type:
+      return `${beautifySort(sort)} Telegram ${beautifyCat(
+        category
+      )} ${beautifyType(type)}`;
+
+    case !!sort && !!type:
+      return `${beautifySort(sort)} Telegram ${beautifyType(type)}`;
+
+    case !!type && !category:
+      return `Top Telegram ${beautifyType(type)}`;
+
+    case !!category && !type:
+      return `Top Telegram ${beautifyCat(category)} Channels, Bots and Groups`;
+
+    case !!category && !!type:
+      return `Top Telegram ${beautifyCat(category)} ${beautifyType(type)}`;
+
+    case !!sort:
+      return `${beautifySort(sort)} Telegram Channels, Bots and Groups`;
+
+    default:
+      return 'Top Telegram Channels, Bots and Groups';
   }
 };
