@@ -1,6 +1,7 @@
 import Icon from '../client/components/elements/Icon';
 import * as React from 'react';
 import { NextSFC } from 'next';
+import Head from 'next/head';
 import { Flex } from 'grid-styled';
 import Error from './_error';
 import { getEntry } from '../client/store/entry';
@@ -43,57 +44,62 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
     : closeModal => <LoginModal closeModal={closeModal} />;
 
   return (
-    <Body>
-      <LightBox p={4} flex="1 1 auto">
-        <Flex width={[106]} mr={4} flexDirection="column">
-          <Image
-            w={[106]}
-            h={106}
-            nophoto={entry.nophoto}
-            username={entry.username}
-          />
-          <InfoList entry={entry} />
-          <Modal
-            trigger={
-              <Link href="#" title="Report" secondary small>
-                Report
-              </Link>
-            }
-          >
-            {report}
-          </Modal>
-          {auth.isAdmin && (
+    <>
+      <Head>
+        <title>Telegram Directory | {entry.title} (@{entry.username})</title>
+      </Head>
+      <Body>
+        <LightBox p={4} flex="1 1 auto">
+          <Flex width={[106]} mr={4} flexDirection="column">
+            <Image
+              w={[106]}
+              h={106}
+              nophoto={entry.nophoto}
+              username={entry.username}
+            />
+            <InfoList entry={entry} />
             <Modal
               trigger={
-                <Link href="#" title="Edit" secondary small>
-                  Edit
+                <Link href="#" title="Report" secondary small>
+                  Report
                 </Link>
               }
             >
-              {closeModal => <SubmitModal closeModal={closeModal} isEdit />}
+              {report}
             </Modal>
-          )}
-        </Flex>
-        <Flex flexDirection="column" flex="1 1 0">
-          <Flex align="flex-start">
-            <Flex flexDirection="column" mr={4} flex="1 1 0">
-              <Title>{entry.title}</Title>
-              <Description>{entry.description}</Description>
-            </Flex>
-            <Flex width={[116]} align="center" flexDirection="column">
-              <Button big onClick={getOpenLink(entry.username)}>
-                + Add
-                <Icon name="telegram" size={14} fill="#ffffff" ml={2} />
-              </Button>
-              <Rate />
-            </Flex>
+            {auth.isAdmin && (
+              <Modal
+                trigger={
+                  <Link href="#" title="Edit" secondary small>
+                    Edit
+                  </Link>
+                }
+              >
+                {closeModal => <SubmitModal closeModal={closeModal} isEdit />}
+              </Modal>
+            )}
           </Flex>
-          <Divider my={4} />
-          <ReviewForm />
-          <Reviews />
-        </Flex>
-      </LightBox>
-    </Body>
+          <Flex flexDirection="column" flex="1 1 0">
+            <Flex align="flex-start">
+              <Flex flexDirection="column" mr={4} flex="1 1 0">
+                <Title>{entry.title}</Title>
+                <Description>{entry.description}</Description>
+              </Flex>
+              <Flex width={[116]} align="center" flexDirection="column">
+                <Button big onClick={getOpenLink(entry.username)}>
+                  + Add
+                  <Icon name="telegram" size={14} fill="#ffffff" ml={2} />
+                </Button>
+                <Rate />
+              </Flex>
+            </Flex>
+            <Divider my={4} />
+            <ReviewForm />
+            <Reviews />
+          </Flex>
+        </LightBox>
+      </Body>
+    </>
   );
 };
 
