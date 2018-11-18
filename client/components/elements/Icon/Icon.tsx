@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'grid-styled';
 import { prop } from 'styled-tools';
+import media from 'styled-media-query';
 import ArrowLeft from '../../../assets/images/arrow-left-icon.svg';
 import ArrowRight from '../../../assets/images/arrow-right-icon.svg';
 import At from '../../../assets/images/at-icon.svg';
@@ -18,6 +19,7 @@ import GitHub from '../../../assets/images/github-icon.svg';
 import Heart from '../../../assets/images/heart-icon.svg';
 import Info from '../../../assets/images/info-icon.svg';
 import Logout from '../../../assets/images/log-out-icon.svg';
+import Menu from '../../../assets/images/menu-icon.svg';
 import Message from '../../../assets/images/messages-icon.svg';
 import Robot from '../../../assets/images/robot-icon.svg';
 import Search from '../../../assets/images/search-icon.svg';
@@ -47,6 +49,7 @@ export interface IIcons {
   heart: JSX.Element;
   info: JSX.Element;
   logout: JSX.Element;
+  menu: JSX.Element;
   messages: JSX.Element;
   robot: JSX.Element;
   search: JSX.Element;
@@ -77,6 +80,7 @@ const icons: IIcons = {
   heart: <Heart />,
   info: <Info />,
   logout: <Logout />,
+  menu: <Menu />,
   messages: <Message />,
   robot: <Robot />,
   search: <Search />,
@@ -115,16 +119,22 @@ const IconWrapper = styled(Flex).attrs({
         }
       }
     `};
+
+  ${media.lessThan('470px')`
+    svg {
+      width: ${({ size }) => size ? size - 1 : 15}px;
+    }
+  `}
 `;
 
 interface IIcon {
   fill?: string;
   stroke?: string;
   hoverFill?: string;
-  ml?: number;
-  mr?: number;
-  mx?: number;
-  my?: number;
+  ml?: number[] | number;
+  mr?: number[] | number;
+  mx?: number[] | number;
+  my?: number[] | number;
   name: keyof IIcons;
   size?: number;
 }
