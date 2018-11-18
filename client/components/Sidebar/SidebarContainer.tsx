@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import debounce from 'lodash.debounce';
+import queryString from 'query-string';
 import Sidebar from './Sidebar';
 import { ITagsState } from '../../store/tags';
 import { IAppState } from '../../store';
@@ -35,12 +36,16 @@ class SidebarContainer extends React.Component<IReduxStateProps, IState> {
   }
 
   componentDidMount() {
-    this.setState({ isMobile: window.innerWidth < 840 });
+    const query = queryString.parse(window.location.search);
+    this.setState({
+      isMobile: window.innerWidth < 840,
+      search: query.search ? (query.search as string).replace('+', ' ') : '',
+    });
     window.addEventListener('resize', this.onResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);    
+    window.removeEventListener('resize', this.onResize);
   }
 
   async onSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -49,7 +54,8 @@ class SidebarContainer extends React.Component<IReduxStateProps, IState> {
   }
 
   onSearch(value) {
-    Router.push(`/?sort=top&search=${value}`, `/?search=${value}`);
+    const search = value.replace(/\s+/, '+');
+    Router.push(`/?sort=top&search=${search}`, `/?search=${search}`);
   }
 
   onMenuToggle(e) {

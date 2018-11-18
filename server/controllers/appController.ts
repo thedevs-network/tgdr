@@ -8,7 +8,7 @@ export const renderHomepage = (app: Next.Server) => (
   res: express.Response
 ) => {
   const { search } = req.query;
-  const searchQuery = search && { search };
+  const searchQuery = search && { search: search.replace('+', ' ') };
   const defaultQuery = { ...searchQuery, sort: 'top' };
   return app.render(req, res, '/', defaultQuery);
 };
