@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Flex } from 'grid-styled';
 import Link from 'next/link';
+import media from 'styled-media-query';
 import { Container } from '../elements/Layout';
 import Logo from '../elements/Logo';
 import { FooterLink } from '../elements/Typography';
@@ -11,9 +12,14 @@ const List = styled(Flex).attrs({
   align: 'center',
   is: 'ul',
 })`
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  ${media.lessThan('470px')`
+    margin-top: 16px;
+  `};
 `;
 
 const ListItem = styled(Flex).attrs({
@@ -27,16 +33,35 @@ const ListItem = styled(Flex).attrs({
   :last-child {
     padding-right: 0;
   }
+
+  ${media.lessThan('470px')`
+    padding: 0 10px 0;
+  `};
 `;
 
 const Separator = styled.span`
   font-size: 14px;
   color: #d6dde2;
+
+  ${media.lessThan('470px')`
+    font-size: 13px;
+  `};
 `;
 
 const Footer: React.SFC = () => (
-  <Flex align="center" justify="center" is="footer" pb={4} pt={6} flex="0 0 0">
-    <Container align="center" justify="space-between">
+  <Flex
+    align="center"
+    justify="center"
+    is="footer"
+    pb={4}
+    pt={[4, 6]}
+    flex="0 0 0"
+  >
+    <Container
+      align="center"
+      justify="space-between"
+      flexDirection={['column', 'row']}
+    >
       <Logo />
       <List>
         <ListItem>
@@ -76,7 +101,7 @@ const Footer: React.SFC = () => (
           </a>
         </ListItem>
         <ListItem>
-          <a href="mailto:pouria@thedevs.network" title="Contact Email">
+          <a href="mailto:support@tgdr.io" title="Contact Email">
             <Icon
               size={16}
               name="envelope"

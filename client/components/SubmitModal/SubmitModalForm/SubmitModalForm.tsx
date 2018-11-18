@@ -34,12 +34,12 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
 
   return (
     <Flex is="form" onSubmit={onSubmit} flexDirection="column">
-      <Flex justify="space-between">
+      <Flex justify="space-between" flexDirection={['column', 'row']}>
         <Field
           component={TextInput}
           label="Username"
           mb={3}
-          mr={3}
+          mr={[0, 3]}
           name="username"
           placeholder="example"
           prepend="@"
@@ -62,7 +62,7 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
           placeholder="Example"
         />
       </Flex>
-      <Flex mb={4}>
+      <Flex mb={[3, 4]}>
         <Field
           component={Textarea}
           label="Description"
@@ -119,7 +119,7 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
         </>
       )}
       <Button modal>
-        <Icon name="telegram" fill="#f5f5f5" size={14} mr={3} />
+        <Icon name="telegram" fill="#f5f5f5" size={14} mr={[2, 3]} />
         Submit
       </Button>
       <Flex mt={3} flexDirection="column">

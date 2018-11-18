@@ -9,6 +9,7 @@ const InputWrapper = styled(Flex).attrs({
   width: 1,
 })`
   position: relative;
+  min-width: 0;
 `;
 
 const Input = styled.input.attrs({

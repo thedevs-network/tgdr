@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { ifProp } from 'styled-tools';
 import { Flex } from 'grid-styled';
+import media from 'styled-media-query';
 import { ICategories } from '../../../../constants/categories';
 import Icon from '../../elements/Icon';
 
@@ -43,7 +44,7 @@ const ListLink = styled.a<ILinkProps>`
   align-items: center;
   text-decoration: none;
   font-size: 14px;
-  letter-spacing: 0.04 em;
+  letter-spacing: 0.04em;
   color: #888;
   transition: color 0.3s ease-out;
   cursor: pointer;
@@ -80,6 +81,10 @@ const ListLink = styled.a<ILinkProps>`
       }
     `
   )};
+
+  ${media.lessThan('470px')`
+    letter-spacing: 0;
+  `}
 `;
 
 const Count = styled.span`

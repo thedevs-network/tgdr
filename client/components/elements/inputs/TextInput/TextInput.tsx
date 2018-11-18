@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'grid-styled';
 import { ifProp } from 'styled-tools';
+import media from 'styled-media-query';
 import { InputErrorMessage, Label } from '../../Typography';
 import { IInput } from '..';
 
@@ -38,6 +39,22 @@ const Input = styled.input`
     background: transparent;
     border-color: 1px solid ${ifProp({ hasError: true }, '#E57373', '#BBB')};
   }
+
+  ${media.lessThan('470px')`
+    height: 44px;
+    padding: 0 10px;
+    font-size: 15px;
+
+    ::placeholder {
+      font-size: 15px;
+    }
+
+    ${({ prepend }: { prepend?: boolean }) =>
+      prepend &&
+      css`
+        padding-left: 48px;
+      `};
+  `};
 `;
 
 const Prepend = styled.span`
@@ -54,6 +71,11 @@ const Prepend = styled.span`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   background-color: #eaeaea;
+
+  ${media.lessThan('470px')`
+    padding: 0 12px;
+    font-size: 16px;
+  `};
 `;
 
 const TextInput: React.SFC<IInput> = props => {

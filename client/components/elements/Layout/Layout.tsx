@@ -24,9 +24,11 @@ export const AppWrapper = styled(Flex).attrs({
 `;
 
 export const Container = styled(Flex).attrs({
-  px: 15,
+  px: [10, 15],
   w: [540, 720, 960, 1140],
-})``;
+})`
+  max-width: 100%;
+`;
 
 export const LightBox = styled(Flex)`
   background-color: white;

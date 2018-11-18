@@ -1,4 +1,5 @@
 import App, { Container } from 'next/app';
+import Head from 'next/head';
 import Router from 'next/router';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -21,7 +22,7 @@ interface IProps {
 class MyApp extends App<IProps> {
   static async getInitialProps({ Component, ctx }) {
     const reduxStore: IReduxStore = ctx.reduxStore;
-  
+
     const { cookies = {} } = ctx.req || {};
     const { isAuthenticated } = reduxStore.getState().auth;
 
@@ -55,9 +56,9 @@ class MyApp extends App<IProps> {
     // Set active tags
     const activeTags = window.location.pathname.split('/');
     reduxStore.dispatch(setActiveTags(activeTags));
-    
-    nprogress.done()
-    
+
+    nprogress.done();
+
     Router.events.on('routeChangeStart', () => nprogress.start());
     Router.events.on('routeChangeComplete', () => {
       nprogress.done();
@@ -70,11 +71,19 @@ class MyApp extends App<IProps> {
   render() {
     const { Component, pageProps, reduxStore } = this.props;
     return (
-      <Container>
-        <Provider store={reduxStore}>
-          <Component {...pageProps} />
-        </Provider>
-      </Container>
+      <>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        <Container>
+          <Provider store={reduxStore}>
+            <Component {...pageProps} />
+          </Provider>
+        </Container>
+      </>
     );
   }
 }

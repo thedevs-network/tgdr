@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { ifProp } from 'styled-tools';
+import { ifProp, prop } from 'styled-tools';
+import media from 'styled-media-query';
 
 interface ITitle {
   small?: boolean;
@@ -9,15 +10,16 @@ export const Title = styled.h2<ITitle>`
   position: relative;
   display: flex;
   align-items: center;
-  margin: 0 0 12px;
+  margin: 0;
+  margin-bottom: ${ifProp('small', 0, '12px')};
   padding: 0;
-  font-size: 26px;
+  font-size: ${ifProp('small', '16px', '26px')};
   font-weight: 500;
   color: #666;
-  white-space: nowrap;
+  white-space: ${ifProp('small', 'nowrap', 'normal')};
 
   :after {
-    content: "";
+    content: '';
     position: absolute;
     right: 0;
     height: 100%;
@@ -26,12 +28,13 @@ export const Title = styled.h2<ITitle>`
     background: linear-gradient(to left, white, transparent);
   }
 
-  ${({ small }) =>
-    small &&
-    css`
-      font-size: 16px;
-      margin: 0;
-    `};
+  ${media.lessThan('470px')`
+    margin-bottom: ${ifProp('small', 0, '8px')};
+
+    :after {
+      display: none;
+    }
+  `};
 `;
 
 export const Description = styled.p`
@@ -39,6 +42,10 @@ export const Description = styled.p`
   padding: 0;
   font-size: 16px;
   color: #808080;
+
+  ${media.lessThan('470px')`
+    font-size: 15px;
+  `};
 `;
 
 interface ILabel {
@@ -46,10 +53,15 @@ interface ILabel {
 }
 
 export const Label = styled.label<ILabel>`
-  font-size: ${ifProp('smallLabel', '14px', '16px')};
-  font-weight: 500;
   margin-bottom: 8px;
   padding: 0;
+  font-size: ${ifProp('smallLabel', '14px', '16px')};
+  font-weight: 500;
+
+  ${media.lessThan('470px')`
+    margin-bottom: 6px;
+    font-size: ${ifProp('smallLabel', '13px', '15px')};
+  `};
 `;
 
 export const CheckboxLabel = styled.label`
@@ -61,21 +73,34 @@ export const InputErrorMessage = styled.small`
   color: #f44336;
 `;
 
+interface ISlogan {
+  textAlign?: 'center' | 'left' | 'right';
+}
 
-export const SloganTitle = styled.h2`
+export const SloganTitle = styled.h2<ISlogan>`
+  text-align: ${prop('textAlign', 'left')};
   margin: 8px 0;
   padding: 0;
   font-size: 22px;
   font-weight: 500;
   color: #808080;
+
+  ${media.lessThan('medium')`
+    font-size: 20px;
+  `};
 `;
 
-export const SloganSubTitle = styled.h3`
+export const SloganSubTitle = styled.h3<ISlogan>`
+  text-align: ${prop('textAlign', 'left')};
   margin: 0;
-  padding: 0;
+  padding: 0 16px;
   font-size: 16px;
   font-weight: normal;
   color: #a8a8a8;
+
+  ${media.lessThan('medium')`
+    font-size: 15px;
+  `};
 `;
 
 interface ILink {
@@ -131,12 +156,16 @@ export const ViewAllLink = styled.a`
 `;
 
 export const FooterLink = styled.a`
-  font-size: 13px  ;
-  color: #7990A2;
+  font-size: 13px;
+  color: #7990a2;
   text-decoration: none;
   transition: color 0.3s ease-out, transform 0.3s ease-out;
-  
+
   :hover {
-    color: #63B3F3;
+    color: #63b3f3;
   }
+
+  ${media.lessThan('470px')`
+    font-size: 12px;
+  `};
 `;

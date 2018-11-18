@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import { ifProp } from 'styled-tools';
+import media from 'styled-media-query';
 import { InputErrorMessage, Label } from '../../Typography';
 import { IInput } from '..';
 
@@ -34,6 +35,17 @@ const Select = styled.select`
     background-color: transparent;
     border-color: 1px solid ${ifProp({ hasError: true }, '#E57373', '#BBB')};
   }
+
+  ${media.lessThan('470px')`
+    height: 44px;
+    padding: 0 10px;
+    font-size: 15px;
+    background-position: calc(100% - 10px) 12px;
+
+    ::placeholder {
+      font-size: 15px;
+    }
+  `};
 `;
 
 interface ISelectInput extends IInput {

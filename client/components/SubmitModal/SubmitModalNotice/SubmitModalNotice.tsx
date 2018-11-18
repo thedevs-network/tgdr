@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import media from 'styled-media-query';
 import Icon from '../../elements/Icon';
 import { submissionInfo } from '../../../../constants/texts';
 import Divider from '../../elements/Divider';
@@ -16,6 +17,10 @@ const Title = styled.h2`
   padding: 0;
   font-size: 22px;
   font-weight: 500;
+
+  ${media.lessThan('470px')`
+    font-size: 18px;
+  `}
 `;
 
 const Ul = styled(Flex).attrs({
@@ -41,12 +46,20 @@ const Li = styled(Flex).attrs({
   :last-of-type {
     margin-bottom: 0;
   }
+
+  ${media.lessThan('470px')`
+    margin-bottom: 16px;
+  `}
 `;
 
 const Text = styled.p`
   margin: 0;
   padding: 0;
   font-size: 18px;
+
+  ${media.lessThan('470px')`
+    font-size: 15px;
+  `}
 `;
 
 const SubmitModalNotice: React.SFC<ISubmitModalNotice> = ({
@@ -59,7 +72,7 @@ const SubmitModalNotice: React.SFC<ISubmitModalNotice> = ({
     <Ul>
       {submissionInfo.map((text, index) => (
         <Li key={`submission_info_${index}`}>
-          <Icon name="info" mr={3} size={18} fill="#888" />
+          <Icon name="info" mr={[2, 3]} size={18} fill="#888" />
           <Text>{text}</Text>
         </Li>
       ))}
@@ -67,7 +80,7 @@ const SubmitModalNotice: React.SFC<ISubmitModalNotice> = ({
     <Divider my={3} />
     <Button onClick={showForm} modal>
       Ok, let's go!
-      <Icon name="arrowRight" fill="#f5f5f5" size={14} ml={3} />
+      <Icon name="arrowRight" fill="#f5f5f5" size={14} ml={[2, 3]} />
     </Button>
     <Flex mt={3} flexDirection="column">
       <Button onClick={closeModal} modalSecondary>

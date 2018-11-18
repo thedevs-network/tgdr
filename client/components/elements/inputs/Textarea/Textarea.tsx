@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import { ifProp } from 'styled-tools';
+import media from 'styled-media-query';
 import { InputErrorMessage, Label } from '../../Typography';
 import { IInput } from '..';
 
@@ -32,6 +33,11 @@ const TextareaInput = styled.textarea`
     color: #b8b8b8;
     opacity: 1;
   }
+
+  ${media.lessThan('470px')`
+    padding: 10px;
+    font-size: 15px;
+  `};
 `;
 
 interface ITeaxtarea extends IInput {

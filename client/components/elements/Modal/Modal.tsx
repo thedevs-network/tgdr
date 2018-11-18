@@ -50,7 +50,7 @@ const ModalBox = styled(LightBox)`
 
 class Modal extends React.Component<IProps, IState> {
   static defaultProps = {
-    width: [0.84, 0.8, 600],
+    width: [0.95, 0.8, 600],
   };
 
   show: boolean;
@@ -97,7 +97,7 @@ class Modal extends React.Component<IProps, IState> {
           <ModalContainer id="modal" onClick={this.handleOutsideClick}>
             <ModalBox
               px={[16, 32]}
-              py={[32, 48]}
+              py={[16, 32, 48]}
               width={width}
               flexDirection="column"
               flex="0 0 auto"

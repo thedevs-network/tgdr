@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Box, Flex } from 'grid-styled';
+import media from 'styled-media-query';
 import Button from '../../elements/Button';
 import Modal from '../../elements/Modal';
 import LoginModal from '../../LoginModal';
@@ -13,6 +14,11 @@ const Name = styled.span`
   padding-right: 16px;
   font-size: 14px;
   color: #888;
+
+  ${media.lessThan('470px')`
+    font-size: 13px;
+    padding-right: 10px;
+  `}
 `;
 
 const A = styled.a`
@@ -32,6 +38,10 @@ const A = styled.a`
       stroke: #64b5f6;
     }
   }
+
+  ${media.lessThan('470px')`
+    font-size: 13px;
+  `}
 `;
 
 interface IProps {
@@ -65,7 +75,7 @@ const HeaderMenu: React.SFC<IProps> = ({
       trigger={
         isAuthenticated ? null : (
           <A href="#" title="Login or sign up">
-            Login / Sign Up
+            Log in / Sign Up
           </A>
         )
       }
@@ -82,11 +92,17 @@ const HeaderMenu: React.SFC<IProps> = ({
     );
 
   return (
-    <Flex align="center" is="nav">
-      <Box mx={3}>
-        <Modal trigger={<Button>+ Submit</Button>}>{showSubmit}</Modal>
+    <Flex
+      align={['flex-end', 'center']}
+      flexDirection={['column', 'row']}
+      is="nav"
+    >
+      <Box mx={[0, 3]}>
+        <Modal trigger={<Button responsive>+ Submit</Button>}>
+          {showSubmit}
+        </Modal>
       </Box>
-      <Flex ml={2} align="center">
+      <Flex ml={[0, 2]} mt={[2, 0]} align={['flex-end', 'center']}>
         {name && <Name>{name},</Name>}
         {logoutLink}
         {login}

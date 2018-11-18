@@ -11,9 +11,9 @@ const Body: React.SFC = ({ children }) => (
     <Header />
     <Slogan />
     <Flex justify="center">
-      <Container align="flex-start">
+      <Container align="flex-start" flexDirection={['column', 'column', 'row']}>
         <Sidebar />
-        <Flex width={[9 / 12]} flexDirection="column">
+        <Flex width={[1, 1, 9 / 12]} flexDirection="column">
           {children}
         </Flex>
       </Container>

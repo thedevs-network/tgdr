@@ -1,19 +1,16 @@
-import Icon from '../client/components/elements/Icon';
-import * as React from 'react';
+import styled from 'styled-components';
 import { NextSFC } from 'next';
 import Head from 'next/head';
-import { Flex } from 'grid-styled';
+import { Box, Flex } from 'grid-styled';
 import Error from './_error';
+import { Description, Title } from '../client/components/elements/Typography';
+import Icon from '../client/components/elements/Icon';
 import { getEntry } from '../client/store/entry';
 import withVerifyToken from '../client/withVerifyToken';
 import { IAppState, INextContextWithRedux } from '../client/store';
 import Body from '../client/components/Body';
 import { LightBox } from '../client/components/elements/Layout';
-import {
-  Description,
-  Link,
-  Title,
-} from '../client/components/elements/Typography';
+import * as React from 'react';
 import Image from '../client/components/elements/Image';
 import Button from '../client/components/elements/Button';
 import { connect } from 'react-redux';
@@ -24,12 +21,16 @@ import ReviewForm from '../client/components/ReviewForm';
 import Reviews from '../client/components/Reviews';
 import { getReviews } from '../client/store/reviews';
 import { getOpenLink } from '../client/utils';
-import Modal from '../client/components/elements/Modal';
-import SubmitModal from '../client/components/SubmitModal';
 import { IEntry } from '../client/store/storeTypes';
-import ReportModal from '../client/components/ReportModal';
 import { IAuthState } from '../client/store/auth';
-import LoginModal from '../client/components/LoginModal';
+
+const TitleWrapper = styled(Flex).attrs({
+  flex: '1 1 0',
+  flexDirection: 'column',
+  mr: [2, 4],
+})`
+  min-width: 0;
+`;
 
 interface IReduxProps {
   auth: IAuthState;
@@ -39,54 +40,38 @@ interface IReduxProps {
 const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
   if (!entry) return <Error statusCode={404} />;
 
-  const report = auth.isAuthenticated
-    ? closeModal => <ReportModal closeModal={closeModal} />
-    : closeModal => <LoginModal closeModal={closeModal} />;
-
   return (
     <>
       <Head>
-        <title>Telegram Directory | {entry.title} (@{entry.username})</title>
+        <title>
+          Telegram Directory | {entry.title} (@
+          {entry.username})
+        </title>
       </Head>
       <Body>
-        <LightBox p={4} flex="1 1 auto">
-          <Flex width={[106]} mr={4} flexDirection="column">
+        <LightBox p={[3, 4]} flex="1 1 auto" flexDirection={['column', 'row']}>
+          <Flex
+            mr={[0, 4]}
+            width={[1, 106]}
+            align={['center', 'flex-start']}
+            flexDirection="column"
+          >
             <Image
               w={[106]}
               h={106}
               nophoto={entry.nophoto}
               username={entry.username}
             />
-            <InfoList entry={entry} />
-            <Modal
-              trigger={
-                <Link href="#" title="Report" secondary small>
-                  Report
-                </Link>
-              }
-            >
-              {report}
-            </Modal>
-            {auth.isAdmin && (
-              <Modal
-                trigger={
-                  <Link href="#" title="Edit" secondary small>
-                    Edit
-                  </Link>
-                }
-              >
-                {closeModal => <SubmitModal closeModal={closeModal} isEdit />}
-              </Modal>
-            )}
+            <InfoList entry={entry} auth={auth} />
           </Flex>
-          <Flex flexDirection="column" flex="1 1 0">
+          <Box mt={[3, 0]}>
             <Flex align="flex-start">
-              <Flex flexDirection="column" mr={4} flex="1 1 0">
+              <TitleWrapper>
                 <Title>{entry.title}</Title>
                 <Description>{entry.description}</Description>
-              </Flex>
-              <Flex width={[116]} align="center" flexDirection="column">
-                <Button big onClick={getOpenLink(entry.username)}>
+              </TitleWrapper>
+              <Flex width={[102, 116]} align="center" flexDirection="column">
+                <Button big responsive onClick={getOpenLink(entry.username)}>
                   + Add
                   <Icon name="telegram" size={14} fill="#ffffff" ml={2} />
                 </Button>
@@ -96,7 +81,7 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
             <Divider my={4} />
             <ReviewForm />
             <Reviews />
-          </Flex>
+          </Box>
         </LightBox>
       </Body>
     </>

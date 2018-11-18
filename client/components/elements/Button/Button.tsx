@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 interface IButton {
   big?: boolean;
   modal?: boolean;
   modalSecondary?: boolean;
+  responsive?: boolean;
 }
 
 const Button = styled.button<IButton>`
@@ -61,6 +63,23 @@ const Button = styled.button<IButton>`
       :focus {
         box-shadow: 0 4px 10px rgba(50, 50, 50, 0.1);
       }
+    `}
+
+    ${({ responsive }) =>
+      responsive &&
+      media.lessThan('470px')`
+        padding: 6px 16px;
+      `}
+
+    ${({ big, responsive }) =>
+      big &&
+      responsive &&
+      media.lessThan('470px')`
+        padding: 9px 20px;
+      `}
+
+    ${media.lessThan('470px')`
+      letter-spacing: 0;
     `}
 `;
 

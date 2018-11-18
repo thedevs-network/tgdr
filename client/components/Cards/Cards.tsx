@@ -1,13 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import media from 'styled-media-query';
 import Card from './Card';
 import CardsHeader from './CardsHeader';
 import { IEntry } from 'client/store/storeTypes';
 import { IGetEntriesParams } from 'client/store/entries';
 import { Link } from '../elements/Typography';
 
-const CardsWrapper = styled(Flex)`
+const CardsWrapper = styled(Flex).attrs({
+  flexDirection: ['column', 'row'],
+})`
   > * {
     max-width: calc(33.33333333% - 11px);
   }
@@ -15,6 +18,13 @@ const CardsWrapper = styled(Flex)`
   > *:nth-child(3n) {
     margin-right: 0;
   }
+
+  ${media.lessThan('medium')`
+    > * {
+      max-width: 100%;
+      margin-right: 0;
+    }
+  `};
 `;
 
 const Text = styled.p`

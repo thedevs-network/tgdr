@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { prop } from 'styled-tools';
 import { Flex } from 'grid-styled';
 import { Image as CloudinaryImage } from 'cloudinary-react';
+import media from 'styled-media-query';
 
 interface IProps {
   nophoto?: boolean;
@@ -22,6 +23,13 @@ const ImageWrapper = styled(Flex)<Partial<IProps>>`
   background-color: #eee;
   border-radius: 50%;
   overflow: hidden;
+
+  ${props =>
+    props.h &&
+    media.lessThan('470px')`
+    height: ${p => p.h / 1.1}px;
+    width: ${p => p.h / 1.1}px;
+  `};
 `;
 
 const Img = styled(CloudinaryImage)`

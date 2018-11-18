@@ -43,7 +43,7 @@ const ReportEntryModal: React.SFC<IProps> = ({
       )}
     </Flex>
     <Button modal>
-      <Icon name="telegram" fill="#f5f5f5" size={14} mr={3} />
+      <Icon name="telegram" fill="#f5f5f5" size={14} mr={[2, 3]} />
       Submit report
     </Button>
     <Flex mt={3} flexDirection="column">

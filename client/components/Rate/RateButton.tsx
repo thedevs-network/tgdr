@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'grid-styled';
 import { ifProp } from 'styled-tools';
+import media from 'styled-media-query';
 import Icon from '../elements/Icon';
 import LoginModal from '../LoginModal';
 import Modal from '../elements/Modal';
@@ -46,6 +47,11 @@ const Button = styled.button<IButton>`
       )};
     `
   )};
+
+  ${media.lessThan('470px')`
+    width: 44px;
+    height: 26px;
+  `}
 `;
 
 const Count = styled.span<IButton>`

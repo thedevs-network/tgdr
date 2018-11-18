@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import { prop } from 'styled-tools';
+import media from 'styled-media-query';
 import Icon, { IIcons } from '../elements/Icon';
 
 const Wrapepr = styled(Flex)`
@@ -16,6 +17,10 @@ const Text = styled.span`
   font-size: 14px;
   color: ${prop('color')};
   word-wrap: break-word;
+
+  ${media.lessThan('470px')`
+    font-size: 13px;
+  `}
 `;
 
 interface IInfoListItem {
@@ -32,8 +37,8 @@ const InfoListItem: React.SFC<IInfoListItem> = ({
   size,
   text,
 }) => (
-  <Wrapepr mb={2} align="flex-start">
-    <Icon name={icon} mr={2} size={size} fill={color || '#C7CFD6'} />
+  <Wrapepr mb={2} mr={[2, 0]} align="flex-start">
+    <Icon name={icon} mr={[1, 2]} size={size} fill={color || '#C7CFD6'} />
     <Text color={color || '#888888'}>{text}</Text>
   </Wrapepr>
 );

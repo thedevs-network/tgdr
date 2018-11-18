@@ -16,9 +16,9 @@ const CardWrapper = styled(LightBox).attrs({
   flex: '1 1 auto',
   is: 'a',
   mb: [3],
-  mr: [3],
+  mr: [0, 0, 3],
   p: 3,
-  width: [4 / 12],
+  width: [1, 1, 4 / 12],
 })`
   text-decoration: none;
   color: inherit;
