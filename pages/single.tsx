@@ -64,7 +64,7 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
             />
             <InfoList entry={entry} auth={auth} />
           </Flex>
-          <Box mt={[3, 0]}>
+          <Box mt={[3, 0]} flex="1 1 auto">
             <Flex align="flex-start">
               <TitleWrapper>
                 <Title>{entry.title}</Title>
