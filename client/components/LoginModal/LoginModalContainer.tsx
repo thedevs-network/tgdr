@@ -6,7 +6,7 @@ import MessageModal from '../MessageModal';
 import { login } from '../../store/auth';
 import Spinner from '../elements/Spinner';
 import { IAppState } from '../../store';
-import { IAuthState } from '../../store/auth/authTypes';
+import { IAuthState, loginClear } from '../../store/auth';
 
 interface IReduxStateProps {
   auth: IAuthState;
@@ -14,6 +14,7 @@ interface IReduxStateProps {
 
 interface IReduxDispatchProps {
   login: typeof login;
+  loginClear: typeof loginClear;
 }
 
 interface IProps extends IReduxStateProps, IReduxDispatchProps {
@@ -38,6 +39,7 @@ class LoginModalContainer extends React.Component<IProps, IState> {
   }
 
   componentDidMount() {
+    this.props.loginClear();
     this.checkIframeLoaded();
   }
 
@@ -89,5 +91,5 @@ const mapStateToProps = ({ auth }: IAppState): IReduxStateProps => ({ auth });
 
 export default connect<IReduxStateProps, IReduxDispatchProps>(
   mapStateToProps,
-  { login }
+  { login, loginClear }
 )(LoginModalContainer);
