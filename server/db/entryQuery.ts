@@ -1,11 +1,26 @@
 import { Document } from 'mongoose';
-import Entry, { IEntryModel } from '../models/Entry';
+import * as redis from '../redis';
+import Entry, { IEntryModel, IEntrySchema } from '../models/Entry';
 import { IEntryQuery } from '../types';
-import { getEntryUpdates } from '../utils';
+import { getEntryUpdates, stringifyValues } from '../utils';
 
 export const getNonBots = () => Entry.getNonBots();
 
-export const findOne = (username: string) => Entry.findOne({ username }).lean();
+export const findOne = async (query: Partial<IEntrySchema>) => {
+  const queryString = stringifyValues(query);
+
+  if (query.status) {
+    const cachedEntry = await redis.get(queryString);
+  
+    if (cachedEntry) return JSON.parse(cachedEntry);
+  }
+
+  const entry = await Entry.findOne(query).lean();
+  if (entry && query.status) {
+    await redis.set(queryString, JSON.stringify(entry), 'EX', 60 * 60 * 6);
+  }
+  return entry;
+};
 
 export const findById = (entry: string | Document) =>
   Entry.findById(entry).lean();
@@ -18,10 +33,27 @@ export const update = async (
   isAdmin = false
 ) => {
   const updates = getEntryUpdates(body, isAdmin);
-  await Entry.updateOne({ username }, updates, {
+  const entry = await Entry.findOneAndUpdate({ username }, updates, {
+    new: true,
     runValidators: true,
     setDefaultsOnInsert: true,
   });
+  const queryString = stringifyValues({
+    status: entry.status,
+    username: entry.username,
+  });
+  await redis.set(queryString, JSON.stringify(entry), 'EX', 60 * 60 * 6);
+  return entry;
 };
 
-export const get = (query: IEntryQuery) => Entry.getEntries(query);
+export const get = async (query: IEntryQuery) => {
+  const queryString = stringifyValues(query);
+
+  const cachedEntries = await redis.get(queryString);
+
+  if (cachedEntries) return JSON.parse(cachedEntries);
+
+  const entries = await Entry.getEntries(query);
+  await redis.set(queryString, JSON.stringify(entries), 'EX', 60 * 60 * 6);
+  return entries;
+};
