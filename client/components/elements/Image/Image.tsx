@@ -46,6 +46,7 @@ const Image: React.SFC<IProps> = ({ w, h, nophoto, username, ...props }) => (
       cloudName="the-devs"
       publicId={nophoto ? '__placeholder__' : username}
       alt={username}
+      secure
     />
   </ImageWrapper>
 );
