@@ -187,7 +187,12 @@ entrySchema.static('getTags', async function() {
 
 entrySchema.static('getNonBots', async function() {
   const data = await this.aggregate([
-    { $match: { $or: [{ type: 'channel'}, { type: 'supergroup' }] } },
+    {
+      $match: {
+        $or: [{ type: 'channel' }, { type: 'supergroup' }],
+        status: 'active',
+      },
+    },
   ]);
   return data;
 });
