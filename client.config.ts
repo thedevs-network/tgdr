@@ -1,5 +1,5 @@
 const config = {
-  port: 8888,
+  baseURL: 'https://tgdr.io',
 };
 
 export default config;
