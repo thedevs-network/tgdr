@@ -1,4 +1,5 @@
 node_modules
 static/images/entry
+production-server
 .next
 .env
