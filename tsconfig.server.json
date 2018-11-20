@@ -7,5 +7,5 @@
     "outDir": "production-server/",
     "sourceMap": false
   },
-  "include": ["server/*.ts", "server/**/*.ts", "index.d.ts"]
+  "include": ["server/**/*.ts", "index.d.ts"]
 }
