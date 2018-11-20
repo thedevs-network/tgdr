@@ -23,7 +23,8 @@ router.post(
   asyncHandler(entryController.checkExistence),
   asyncHandler(entryController.getDetails),
   asyncHandler(entryController.downloadImage),
-  asyncHandler(entryController.create)
+  asyncHandler(entryController.create),
+  asyncHandler(botController.sendNewEntry),
 );
 
 router.put(

@@ -127,3 +127,33 @@ export const sendUserSpamReport = async (user: IUserModel) => {
 
   return;
 };
+
+
+export const sendNewEntry: express.RequestHandler = async (req, res) => {
+  const {
+    entry,
+  } = res.locals;
+  const { first_name, last_name, telegram_id } = req.user;
+
+  const title = '✅ <b>Entry submitted:</b>\n\n';
+  const entryUsername = `<b>Entry:</b>\n@${entry.username}\n\n`;
+  const entryTitle = `<b>Title:</b>\n<code>${entry.title}</code>\n\n`;
+  const entryType = `<b>Type:</b>\n<code>${entry.type}</code>\n\n`;
+  const entryCategory = `<b>Category:</b>\n<code>${entry.category}</code>\n\n`;
+  const userUsername = req.user.username ? `-  @${req.user.username}` : '';
+  const userText =
+    `<b>By:</b>\n<code>${telegram_id} - ` +
+    `${first_name} ${last_name || ''} ${userUsername}</code>`;
+
+  const text =
+    title + entryUsername + entryTitle + entryType + entryCategory + userText;
+
+  await bot.telegram.sendMessage(config.admin_id, text, {
+    // @ts-ignore
+    parse_mode: 'HTML',
+  });
+
+  return res
+    .status(201)
+    .json({ message: 'Entry has been submitted successfully.' });
+};

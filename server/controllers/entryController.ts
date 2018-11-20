@@ -3,7 +3,7 @@ import * as botController from './botController';
 import cloudinary from '../cloudinary';
 import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
-import { getEntryQuery, omitExtraFields } from '../utils';
+import { getEntryQuery, isAdmin, omitExtraFields } from '../utils';
 import CustomError from '../helpers/customError';
 
 export const checkExistence: express.RequestHandler = async (
@@ -13,12 +13,13 @@ export const checkExistence: express.RequestHandler = async (
 ) => {
   const username = req.body.username.toLowerCase();
 
-  const entry: IEntrySchema = await entryQuery.findOne(username);
+  const entry: IEntrySchema = await entryQuery.findOne({ username });
 
   if (entry) {
     return res.status(422).json({
       error: 'Entry is already submitted.',
       status: entry.status,
+      ...(entry.reject_reason && { reject_reason: entry.reject_reason }),
     });
   }
 
@@ -58,8 +59,8 @@ export const downloadImage: express.RequestHandler = async (
 
   if (!image) {
     res.locals.entry.nophoto = true;
-    return next()
-  };
+    return next();
+  }
 
   await cloudinary.v2.uploader.upload(image, {
     public_id: username.toLowerCase(),
@@ -68,11 +69,9 @@ export const downloadImage: express.RequestHandler = async (
   next();
 };
 
-export const create: express.RequestHandler = async (_req, res) => {
+export const create: express.RequestHandler = async (_req, res, next) => {
   await entryQuery.create(res.locals.entry);
-  return res.status(201).json({
-    message: 'Entry has been submitted successfully.',
-  });
+  next();
 };
 
 export const update: express.RequestHandler = async (req, res) => {
@@ -90,7 +89,13 @@ export const get: express.RequestHandler = async (req, res) => {
 
 export const withEntry: express.RequestHandler = async (req, res, next) => {
   const username = req.body.username || req.params.username;
-  const entry = await entryQuery.findOne(username);
+  const admin = req.user && isAdmin(req.user.telegram_id);
+  const query = {
+    username,
+    ...(!admin && { status: req.body.status || req.params.status || 'active' }),
+  };
+
+  const entry = await entryQuery.findOne(query);
 
   if (!entry) throw new CustomError("Couldn't find the entry");
 
