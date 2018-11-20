@@ -67,14 +67,14 @@ const Button = styled.button<IButton>`
 
     ${({ responsive }) =>
       responsive &&
-      media.lessThan('470px')`
+      media.lessThan('medium')`
         padding: 6px 16px;
       `}
 
     ${({ big, responsive }) =>
       big &&
       responsive &&
-      media.lessThan('470px')`
+      media.lessThan('medium')`
         padding: 9px 20px;
       `}
 

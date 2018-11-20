@@ -48,7 +48,7 @@ const Button = styled.button<IButton>`
     `
   )};
 
-  ${media.lessThan('470px')`
+  ${media.lessThan('medium')`
     width: 44px;
     height: 26px;
   `}
