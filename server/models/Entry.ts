@@ -89,17 +89,15 @@ const entrySchema: Schema = new Schema({
 
 entrySchema.index(
   {
-    category: 'text',
     description: 'text',
     title: 'text',
     username: 'text',
   },
   {
     weights: {
-      category: 1,
-      description: 2,
-      title: 3,
-      username: 4,
+      description: 1,
+      title: 2,
+      username: 3,
     },
   }
 );
