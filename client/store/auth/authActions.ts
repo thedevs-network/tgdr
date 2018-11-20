@@ -2,7 +2,7 @@ import { action } from 'typesafe-actions';
 import * as Cookie from 'js-cookie';
 import * as jwtDecode from 'jwt-decode';
 import differenceInDays from 'date-fns/difference_in_days';
-import Axios from '../../utils/axios';
+import { Axios } from '../../utils';
 import { AuthStateTypes, ILoginParams, IToken } from './authTypes';
 import { AsyncAction } from '../storeTypes';
 import { getAuthHeader } from '../../utils';
@@ -49,6 +49,7 @@ export const login: AsyncAction = (params: ILoginParams) => async dispatch => {
     const decodedToken = decodeToken(token);
     dispatch(loginSuccessful({ ...decodedToken, token }));
   } catch (error) {
+    console.log(error);
     const { error: messaege } = error.response.data;
     dispatch(loginFailure(messaege));
   }

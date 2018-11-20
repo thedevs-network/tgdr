@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import Axios from '../../utils/axios';
+import { Axios } from '../../utils';
 import { ISubmitEntryParams, SubmitEntryStateTypes } from './submitEntryTypes';
 import { getAuthHeader, wait } from '../../utils';
 import { AsyncAction } from '../storeTypes';

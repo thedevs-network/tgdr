@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import Axios from '../../utils/axios';
+import { Axios } from '../../utils';
 import { EntryStateTypes } from './entryTypes';
 import { AsyncAction, IEntry } from '../storeTypes';
 import { getAuthHeader } from '../../utils';

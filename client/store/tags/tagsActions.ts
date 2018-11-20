@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import Axios from '../../utils/axios';
+import { Axios } from '../../utils';
 import { ITags, TagsStateTypes } from './tagsTypes';
 import { AsyncAction } from '../storeTypes';
 

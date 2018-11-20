@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions';
 import queryString from 'query-string';
-import Axios from '../../utils/axios';
+import { Axios } from '../../utils';
 import {
   EntriesStateTypes,
   IGetEntriesParams,
