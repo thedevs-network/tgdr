@@ -94,10 +94,9 @@ const icons: IIcons = {
   users: <Users />,
 };
 
-const IconWrapper = styled(Flex).attrs({
-  align: 'center',
-  justify: 'center',
-})`
+const IconWrapper = styled(({ hoverFill, ...rest }: { hoverFill?: string }) => (
+  <Flex {...rest} align="center" justify="center" />
+))`
   svg {
     width: ${prop('size', 16)}px;
     height: auto;
@@ -122,9 +121,9 @@ const IconWrapper = styled(Flex).attrs({
 
   ${media.lessThan('470px')`
     svg {
-      width: ${({ size }) => size ? size - 1 : 15}px;
+      width: ${({ size }) => (size ? size - 1 : 15)}px;
     }
-  `}
+  `};
 `;
 
 interface IIcon {
