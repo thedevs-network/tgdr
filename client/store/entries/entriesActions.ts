@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions';
-import axios from 'axios';
 import queryString from 'query-string';
+import Axios from '../../utils/axios';
 import {
   EntriesStateTypes,
   IGetEntriesParams,
@@ -30,7 +30,7 @@ export const getEntries: AsyncAction = (
   const query = queryString.stringify(paramsWithDefaults);
   dispatch(entriesRequest(paramsWithDefaults));
   try {
-    const { data } = await axios.get(`/api/entry?skip=${newSkip}&${query}`);
+    const { data } = await Axios.get(`/api/entry?skip=${newSkip}&${query}`);
     dispatch(entriesSuccess({ ...data, loadMore: params.loadMore }));
   } catch (error) {
     dispatch(entriesFailure());

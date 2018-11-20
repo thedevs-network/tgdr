@@ -1,8 +1,8 @@
 import { action } from 'typesafe-actions';
-import axios from 'axios';
 import * as Cookie from 'js-cookie';
 import * as jwtDecode from 'jwt-decode';
 import differenceInDays from 'date-fns/difference_in_days';
+import Axios from '../../utils/axios';
 import { AuthStateTypes, ILoginParams, IToken } from './authTypes';
 import { AsyncAction } from '../storeTypes';
 import { getAuthHeader } from '../../utils';
@@ -44,7 +44,7 @@ export const login: AsyncAction = (params: ILoginParams) => async dispatch => {
     dispatch(requestLogin());
     const {
       data: { token },
-    } = await axios.post('/api/auth/login', params);
+    } = await Axios.post('/api/auth/login', params);
     saveToken(token);
     const decodedToken = decodeToken(token);
     dispatch(loginSuccessful({ ...decodedToken, token }));
@@ -64,7 +64,7 @@ export const renewToken: AsyncAction = () => async (dispatch, getState) => {
   try {
     const {
       data: { token },
-    } = await axios.post('/api/auth/renew', null, getAuthHeader(getState));
+    } = await Axios.post('/api/auth/renew', null, getAuthHeader(getState));
     saveToken(token);
     const decodedToken = decodeToken(token);
     dispatch(renewTokenSuccessful({ ...decodedToken, token }));

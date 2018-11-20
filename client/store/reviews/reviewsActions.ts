@@ -1,11 +1,11 @@
 import { action } from 'typesafe-actions';
+import Axios from '../../utils/axios';
 import {
   IReviewsState,
   ISubmitReviewParams,
   ReviewsStateTypes,
 } from './reviewsTypes';
 import { AsyncAction } from '../storeTypes';
-import axios from 'axios';
 import { getAuthHeader } from '../../utils';
 
 export const reviewsRequest = (skip: number) =>
@@ -34,7 +34,7 @@ export const getReviews: AsyncAction = (
   const newSkip = loadMore ? limit + skip : 0;
   dispatch(reviewsRequest(newSkip));
   try {
-    const { data } = await axios.get(
+    const { data } = await Axios.get(
       `/api/review/${username.replace('@', '')}?skip=${newSkip}`,
       getAuthHeader(getState)
     );
@@ -51,12 +51,12 @@ export const submitReview: AsyncAction = (
   try {
     const isDelete = !params.liked && !params.disliked;
     if (isDelete) {
-      await axios.delete(
+      await Axios.delete(
         `/api/review/${params.username}`,
         getAuthHeader(getState)
       );
     } else {
-      await axios.post('/api/review', params, getAuthHeader(getState));
+      await Axios.post('/api/review', params, getAuthHeader(getState));
     }
     dispatch(submitReviewSuccess(params));
   } catch (error) {

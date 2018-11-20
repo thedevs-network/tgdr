@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import axios from 'axios';
+import Axios from '../../utils/axios';
 import { ITags, TagsStateTypes } from './tagsTypes';
 import { AsyncAction } from '../storeTypes';
 
@@ -15,6 +15,6 @@ export const getTags: AsyncAction = () => async (dispatch, getState) => {
 
   const {
     data: { data },
-  } = await axios.get('/api/tags');
+  } = await Axios.get('/api/tags');
   dispatch(loadTags(data));
 };

@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import axios from 'axios';
+import Axios from '../../utils/axios';
 import { ISubmitEntryParams, SubmitEntryStateTypes } from './submitEntryTypes';
 import { getAuthHeader, wait } from '../../utils';
 import { AsyncAction } from '../storeTypes';
@@ -24,7 +24,7 @@ export const submitNewEntry: AsyncAction = (
     const method = isEdit ? 'put' : 'post';
     dispatch(submitEntryRequest());
     await wait(500);
-    await axios[method]('/api/entry', params, getAuthHeader(getState));
+    await Axios[method]('/api/entry', params, getAuthHeader(getState));
     dispatch(submitEntrySuccess());
   } catch (error) {
     const {

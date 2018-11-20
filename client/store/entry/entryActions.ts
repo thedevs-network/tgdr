@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import axios from 'axios';
+import Axios from '../../utils/axios';
 import { EntryStateTypes } from './entryTypes';
 import { AsyncAction, IEntry } from '../storeTypes';
 import { getAuthHeader } from '../../utils';
@@ -19,7 +19,7 @@ export const getEntry: AsyncAction = (username: string) => async (
   try {
     const {
       data: { data },
-    } = await axios.get(
+    } = await Axios.get(
       `/api/entry/${username.replace('@', '')}`,
       getAuthHeader(getState)
     );
@@ -42,5 +42,5 @@ export const reportEntry: AsyncAction = (values: {
     username,
   };
   
-  return axios.post('/api/entry/report', data, getAuthHeader(getState));
+  return Axios.post('/api/entry/report', data, getAuthHeader(getState));
 };
