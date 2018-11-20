@@ -36,7 +36,7 @@ class ErrorPage extends React.Component<IProps> {
     const { isAuthenticated, statusCode } = this.props;
     const title =
       statusCode === 404
-        ? "404. The page you're looking for does not exist"
+        ? "404. The page you're looking for does not exist."
         : 'Something went wrong.';
 
     const subtitle = statusCode === 404 && (
