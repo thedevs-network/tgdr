@@ -23,8 +23,12 @@ class DocumentPage extends Document<IProps> {
 
   render() {
     return (
-      <html>
+      <html lang="en">
         <Head>
+          <meta
+            name="description"
+            content="Find top and the best Telegram channels, bots and groups."
+          />
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link
             // tslint:disable-next-line:max-line-length
