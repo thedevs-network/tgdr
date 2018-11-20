@@ -35,7 +35,8 @@ export const getReviews: AsyncAction = (
   dispatch(reviewsRequest(newSkip));
   try {
     const { data } = await axios.get(
-      `/api/review/${username.replace('@', '')}?skip=${newSkip}`
+      `/api/review/${username.replace('@', '')}?skip=${newSkip}`,
+      getAuthHeader(getState)
     );
     dispatch(reviewsSuccess({ ...data, loadMore }));
   } catch (error) {
