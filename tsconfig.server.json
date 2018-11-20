@@ -3,8 +3,9 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
-    "outDir": "production-server/"
+    "noEmit": false,
+    "outDir": "production-server/",
+    "sourceMap": false
   },
-  "include": ["server/**/*.ts", "index.d.ts"],
-  "typeRoots": ["./node_modules/@types"]
+  "include": ["server/*.ts", "server/**/*.ts", "index.d.ts"]
 }
