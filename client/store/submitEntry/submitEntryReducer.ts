@@ -33,9 +33,10 @@ export const submitEntryReducer: Reducer<ISubmitEntryState> = (
       case SubmitEntryStateTypes.FAILURE:
         draft.isFetched = true;
         draft.isLoading = false;
-        draft.message = getSubmitEntryMessages(action.payload.error)[
-          action.payload.status
-        ];
+        draft.message = getSubmitEntryMessages(
+          action.payload.error,
+          action.payload.reject_reason
+        )[action.payload.status];
         return;
 
       case SubmitEntryStateTypes.CLEAR:
