@@ -8,7 +8,7 @@ import CardRate from './CardRate';
 import { Title } from '../../elements/Typography';
 import Image from '../../elements/Image';
 import { LightBox } from '../../elements/Layout';
-import { IEntry } from 'client/store/storeTypes';
+import { IEntry } from '../../../store/storeTypes';
 import Icon from '../../elements/Icon';
 
 const CardWrapper = styled(LightBox).attrs({

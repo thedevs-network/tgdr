@@ -4,8 +4,8 @@ import { Flex } from 'grid-styled';
 import media from 'styled-media-query';
 import Card from './Card';
 import CardsHeader from './CardsHeader';
-import { IEntry } from 'client/store/storeTypes';
-import { IGetEntriesParams } from 'client/store/entries';
+import { IEntry } from '../../store/storeTypes';
+import { IGetEntriesParams } from '../../store/entries';
 import { Link } from '../elements/Typography';
 
 const CardsWrapper = styled(Flex).attrs({

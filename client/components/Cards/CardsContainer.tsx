@@ -6,7 +6,7 @@ import {
   IGetEntriesParams,
 } from '../../store/entries';
 import Cards from './Cards';
-import { IAppState } from 'client/store';
+import { IAppState } from '../../store';
 
 interface IReduxStateProps {
   entries: IEntriesState;
