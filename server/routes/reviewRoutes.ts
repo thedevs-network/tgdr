@@ -1,8 +1,9 @@
 import * as express from 'express';
 import * as passport from 'passport';
 import * as asyncHandler from 'express-async-handler';
-import * as reviewController from '../controllers/reviewController';
+import * as authController from '../controllers/authController';
 import * as entryController from '../controllers/entryController';
+import * as reviewController from '../controllers/reviewController';
 import { entryValidator, reviewValidator } from '../utils';
 import * as validatorsController from '../controllers/validatorsController';
 
@@ -10,6 +11,7 @@ const router = express.Router();
 
 router.get(
   '/:username',
+  authController.optionalJwt,
   entryValidator,
   asyncHandler(validatorsController.checkForErrors),
   asyncHandler(entryController.withEntry),
