@@ -35,15 +35,12 @@ export const getDetails: express.RequestHandler = async (req, res, next) => {
     ? await botController.getBotDetails(username)
     : await botController.getChatDetails(username);
 
-  const entryType = isBot ? 'bot' : entryDetails.type;
-
   res.locals.entry = {
     ...entryDetails,
     category,
     description,
     telegram_id: entryDetails.id,
     title,
-    type: entryType,
     username,
   };
 

@@ -55,7 +55,9 @@ export const getBotDetails = async (username: string) => {
   }
 
   return {
+    id: null,
     image: img,
+    type: 'bot',
   };
 };
 
