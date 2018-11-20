@@ -51,15 +51,15 @@ export const authReducer: Reducer<IAuthState> = (
         draft.token = action.payload.token;
         return;
 
+      case AuthStateTypes.CLEAR:
       case AuthStateTypes.RENEW_FAILURE:
-        draft.isAuthenticated = false;
-        return;
+        return initialState;
 
       case AuthStateTypes.LOGIN_FAILURE:
         draft.isAuthenticated = false;
         draft.isFetched = true;
         draft.isLoading = false;
-        draft.message = getAuthMessages(null).error;
+        draft.message = getAuthMessages(action.payload).error;
         return;
     }
   });

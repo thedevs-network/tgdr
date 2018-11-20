@@ -13,20 +13,23 @@ interface IMessage {
   };
 }
 
-export const getAuthMessages = (name: string): IMessage => ({
+export const getAuthMessages = (payload: string): IMessage => ({
   error: {
-    text: "Couldn't login. Please try again later.",
+    text: payload || "Couldn't login. Please try again later.",
     title: 'Error',
     type: 'error',
   },
   success: {
     text: 'You have logged in successfully.',
-    title: `Welcome ${name}.`,
+    title: `Welcome ${payload}.`,
     type: 'success',
   },
 });
 
-export const getSubmitEntryMessages = (error?: string): IMessage => ({
+export const getSubmitEntryMessages = (
+  error?: string,
+  reject_reason?: string
+): IMessage => ({
   active: {
     text: 'Entry is already submitted and approved.',
     title: 'Already exists',
@@ -39,13 +42,15 @@ export const getSubmitEntryMessages = (error?: string): IMessage => ({
   },
   pending: {
     text:
-      'Entry is already submitted and is waiting for review.' +
+      'Entry is already submitted and is waiting for review. ' +
       'Please check back later.',
     title: 'Under review',
     type: 'pending',
   },
   rejected: {
-    text: 'Submissions has been rejected.',
+    text: `Submissions has been rejected. ${
+      reject_reason ? ` Reason: "${reject_reason}"` : ''
+    }`,
     title: 'Rejected',
     type: 'error',
   },
@@ -68,7 +73,7 @@ export const reportMessages: IMessage = {
     title: 'Reported',
     type: 'success',
   },
-}
+};
 
 export const reportOptions: string[] = [
   'Information is wrong',
@@ -76,7 +81,7 @@ export const reportOptions: string[] = [
   'No longer working (bot)',
   'Not English',
   'Adult/Spam content',
-  'Other'
+  'Other',
 ];
 
 export const reportReviewOptions: string[] = [

@@ -15,7 +15,10 @@ export const requestLogin = () => action(AuthStateTypes.LOGIN_REQUEST);
 export const loginSuccessful = (payload: IToken) =>
   action(AuthStateTypes.LOGIN_SUCCESS, payload);
 
-export const loginFailure = () => action(AuthStateTypes.LOGIN_FAILURE);
+export const loginFailure = (payload: string) =>
+  action(AuthStateTypes.LOGIN_FAILURE, payload);
+
+export const loginClear = () => action(AuthStateTypes.CLEAR);
 
 export const requestLogout = () => action(AuthStateTypes.LOGOUT_REQUEST);
 
@@ -46,7 +49,8 @@ export const login: AsyncAction = (params: ILoginParams) => async dispatch => {
     const decodedToken = decodeToken(token);
     dispatch(loginSuccessful({ ...decodedToken, token }));
   } catch (error) {
-    dispatch(loginFailure());
+    const { error: messaege } = error.response.data;
+    dispatch(loginFailure(messaege));
   }
 };
 
