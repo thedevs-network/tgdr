@@ -71,7 +71,7 @@ const SelectInput: React.SFC<ISelectInput> = props => {
   );
 
   return (
-    <Flex flexDirection="column" flex="1 1 0" {...restProps}>
+    <Flex flexDirection="column" flex={["1 1 auto", "1 1 0"]} {...restProps}>
       <Label>{label}</Label>
       <Select name={name} {...input} hasError={!!hasError}>
         {options.map(item => (

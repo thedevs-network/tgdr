@@ -94,7 +94,7 @@ const TextInput: React.SFC<IInput> = props => {
   );
 
   return (
-    <Flex flexDirection="column" flex="1 1 0" {...restProps}>
+    <Flex flexDirection="column" flex={["1 1 auto", "1 1 0"]} {...restProps}>
       <Label>{label}</Label>
       <InputWrapper>
         {prepend && <Prepend>{prepend}</Prepend>}

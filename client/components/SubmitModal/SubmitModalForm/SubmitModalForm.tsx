@@ -34,7 +34,11 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
 
   return (
     <Flex is="form" onSubmit={onSubmit} flexDirection="column">
-      <Flex justify="space-between" flexDirection={['column', 'row']}>
+      <Flex
+        justify="space-between"
+        flexDirection={['column', 'row']}
+        flex="1 1 auto"
+      >
         <Field
           component={TextInput}
           label="Username"
