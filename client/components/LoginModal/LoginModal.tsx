@@ -24,7 +24,7 @@ const LoginModal: React.SFC<ILoginModal> = ({
   handleLogin,
 }) => {
   const loader = isIframeLoaded && (
-    <Flex justify="center" mt={4} width={1}>
+    <Flex justify="center" mt={[3, 4]} width={1}>
       <Spinner size={32} />
     </Flex>
   );
@@ -32,7 +32,7 @@ const LoginModal: React.SFC<ILoginModal> = ({
   return (
     <Flex flexDirection="column" flex="1 1 auto">
       <Title>You can use your Telegram account to login.</Title>
-      <Divider my={3} />
+      <Divider my={[2, 3]} />
       <Flex flexDirection="column" align="center">
         <TelegramLoginButton dataOnauth={handleLogin} botName="tgdrbot" />
       </Flex>

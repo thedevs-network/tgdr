@@ -121,7 +121,7 @@ const IconWrapper = styled(({ hoverFill, ...rest }: { hoverFill?: string }) => (
 
   ${media.lessThan('470px')`
     svg {
-      width: ${({ size }) => (size ? size - 1 : 15)}px;
+      width: ${({ size }) => (size ? size * 0.9 : 15)}px;
     }
   `};
 `;
