@@ -47,17 +47,18 @@ export const create: express.RequestHandler = async (req, res) => {
   const { entry, review } = res.locals;
   const { disliked, liked, username } = req.body;
   const { user } = req;
+  
+  if (!(review.liked === !!liked && review.disliked === !!disliked)) {
 
-  await reviewQuery.create({
-    ...req.body,
-    created_at: new Date(),
-    disliked: !!disliked,
-    entry,
-    liked: !!liked,
-    user,
-  });
-
-  if (!(review.liked === liked && review.disliked === disliked)) {
+    await reviewQuery.create({
+      ...req.body,
+      created_at: new Date(),
+      disliked: !!disliked,
+      entry,
+      liked: !!liked,
+      user,
+    });
+    
     const feedbacks = getEntryFeedback(review, disliked, liked);
     const score = getScore(entry, feedbacks);
     await entryQuery.update(username, { ...feedbacks, score });
