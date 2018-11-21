@@ -166,6 +166,6 @@ export const FooterLink = styled.a`
   }
 
   ${media.lessThan('470px')`
-    font-size: 12px;
+    font-size: 11px;
   `};
 `;

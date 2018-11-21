@@ -34,8 +34,12 @@ const ListItem = styled(Flex).attrs({
     padding-right: 0;
   }
 
+  span {
+    display: flex;
+  }
+
   ${media.lessThan('470px')`
-    padding: 0 10px 0;
+    padding: 0 8px 0;
   `};
 `;
 
@@ -54,7 +58,7 @@ const Footer: React.SFC = () => (
     justify="center"
     is="footer"
     pb={4}
-    pt={[4, 6]}
+    pt={[5, 6]}
     flex="0 0 0"
   >
     <Container
@@ -76,14 +80,6 @@ const Footer: React.SFC = () => (
         </ListItem>
         <ListItem>
           <Separator>|</Separator>
-        </ListItem>
-        <ListItem>
-          <a
-            href="https://github.com/thedevs-network/telegram-directory"
-            title="GitHub"
-          >
-            <Icon size={16} name="github" fill="#7990A2" hoverFill="#63B3F3" />
-          </a>
         </ListItem>
         <ListItem>
           <a href="https://t.me/tgdr_io" title="Telegram">
@@ -108,6 +104,16 @@ const Footer: React.SFC = () => (
               fill="#7990A2"
               hoverFill="#63B3F3"
             />
+          </a>
+        </ListItem>
+        <ListItem>
+          <a
+            className="github-button"
+            href="https://github.com/thedevs-network/telegram-directory"
+            data-show-count="true"
+            aria-label="Star thedevs-network/telegram-directory on GitHub"
+          >
+            Star
           </a>
         </ListItem>
       </List>
