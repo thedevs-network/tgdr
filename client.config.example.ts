@@ -1,5 +1,5 @@
 const config = {
-  BASE_URL: '',
+  BASE_URL: '', // Leave empty if on localhost
   GOOGLE_ANALYTICS_ID: '',
 };
 
