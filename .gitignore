@@ -1,5 +1,6 @@
 node_modules
 static/images/entry
 production-server
+client.config.ts
 .next
 .env
