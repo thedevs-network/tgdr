@@ -49,7 +49,6 @@ export const login: AsyncAction = (params: ILoginParams) => async dispatch => {
     const decodedToken = decodeToken(token);
     dispatch(loginSuccessful({ ...decodedToken, token }));
   } catch (error) {
-    console.log(error);
     const { error: messaege } = error.response.data;
     dispatch(loginFailure(messaege));
   }
