@@ -1,14 +1,14 @@
-import { Document, model, Model, Schema } from 'mongoose';
+import { Document, model, Model, Schema, Types } from 'mongoose';
 import { IGetReviewsQuery } from '../types';
 import { getLimit, getSkip } from '../utils';
 
 export interface IReviewSchema extends Document {
   created_at: Date;
-  entry: string;
+  entry: Types.ObjectId;
   liked: boolean;
   disliked: boolean;
   text?: string;
-  user: string;
+  user: Types.ObjectId;
 }
 
 export interface IReviewModel extends Model<IReviewSchema> {

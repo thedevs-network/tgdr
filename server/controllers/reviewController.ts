@@ -10,11 +10,12 @@ import {
   getScore,
 } from '../utils';
 import { sendUserSpamReport } from './botController';
+import { Types } from 'mongoose';
 
 export const withReview: express.RequestHandler = async (req, res, next) => {
   const review = await reviewQuery.findOne({
-    entry: res.locals.entry && res.locals.entry._id,
-    user: req.user && req.user._id,
+    entry: res.locals.entry && Types.ObjectId(res.locals.entry._id.toString()),
+    user: req.user && Types.ObjectId(req.user._id.toString()),
   });
 
   res.locals.review = review;
@@ -37,7 +38,7 @@ export const withReviewById: express.RequestHandler = async (
 export const get: express.RequestHandler = async (req, res) => {
   const query = getReviewsQuery({
     ...req.query,
-    entryId: res.locals.entry._id,
+    entryId: Types.ObjectId(res.locals.entry._id),
   });
   const reiews = await reviewQuery.get(query);
   return res.status(200).json(reiews);
@@ -47,18 +48,17 @@ export const create: express.RequestHandler = async (req, res) => {
   const { entry, review } = res.locals;
   const { disliked, liked, username } = req.body;
   const { user } = req;
+
+  await reviewQuery.create({
+    ...req.body,
+    created_at: new Date(),
+    disliked: !!disliked,
+    entry: Types.ObjectId(entry._id),
+    liked: !!liked,
+    user: Types.ObjectId(user._id),
+  });
   
   if (!(review.liked === !!liked && review.disliked === !!disliked)) {
-
-    await reviewQuery.create({
-      ...req.body,
-      created_at: new Date(),
-      disliked: !!disliked,
-      entry,
-      liked: !!liked,
-      user,
-    });
-    
     const feedbacks = getEntryFeedback(review, disliked, liked);
     const score = getScore(entry, feedbacks);
     await entryQuery.update(username, { ...feedbacks, score });

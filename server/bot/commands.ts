@@ -3,6 +3,7 @@ import * as authQuery from '../db/authQuery';
 import * as entryQuery from '../db/entryQuery';
 import * as reviewQuery from '../db/reviewQuery';
 import { getEntryRemoveFeedback, getScore } from '../utils';
+import { Types } from 'mongoose';
 
 export const ban = async (ctx: ContextMessageUpdate, next) => {
   const [id] = ctx.message.text
@@ -34,7 +35,9 @@ export const ban = async (ctx: ContextMessageUpdate, next) => {
     likes: 0,
   });
 
-  const reviews = await reviewQuery.find({ user }).lean();
+  const reviews = await reviewQuery
+    .find({ user: Types.ObjectId(user._id) })
+    .lean();
 
   await Promise.all(
     reviews.map(async review => {
