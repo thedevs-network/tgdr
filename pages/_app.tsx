@@ -14,6 +14,8 @@ import { IReduxStore } from '../client/store';
 import { setActiveTags } from '../client/store/tags';
 import 'normalize.css';
 import '../client/assets/css/nprogress.css';
+import config from '../client.config';
+import { initGA, logPageView } from '../client/utils';
 
 interface IProps {
   reduxStore?: IReduxStore;
@@ -57,6 +59,15 @@ class MyApp extends App<IProps> {
     const activeTags = window.location.pathname.split('/');
     reduxStore.dispatch(setActiveTags(activeTags));
 
+    // Set analytics
+    if (config.GOOGLE_ANALYTICS_ID) {
+      if (!(window as any).GA_INITIALIZED) {
+        initGA();
+        (window as any).GA_INITIALIZED = true;
+      }
+      logPageView();
+    }
+
     nprogress.done();
 
     Router.events.on('routeChangeStart', () => nprogress.start());
@@ -64,6 +75,7 @@ class MyApp extends App<IProps> {
       nprogress.done();
       const newActiveTags = window.location.pathname.split('/');
       reduxStore.dispatch(setActiveTags(newActiveTags));
+      logPageView();
     });
     Router.events.on('routeChangeError', () => nprogress.done());
   }
