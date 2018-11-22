@@ -20,6 +20,7 @@ import InfoList from '../client/components/InfoList';
 import ReviewForm from '../client/components/ReviewForm';
 import Reviews from '../client/components/Reviews';
 import { getReviews } from '../client/store/reviews';
+import { getTags } from '../client/store/tags';
 import { getOpenLink } from '../client/utils';
 import { IEntry } from '../client/store/storeTypes';
 import { IAuthState } from '../client/store/auth';
@@ -94,6 +95,7 @@ Single.getInitialProps = async ({
   query: { username },
 }: INextContextWithRedux) => {
   await Promise.all([
+    reduxStore.dispatch(getTags()),
     reduxStore.dispatch(getEntry(username)),
     reduxStore.dispatch(getReviews(username)),
   ]);
