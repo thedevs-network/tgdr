@@ -7,6 +7,6 @@ export const getTags = async () => {
   if (cachedTags) return JSON.parse(cachedTags);
 
   const tags = await Entry.getTags();
-  await redis.set('tags', JSON.stringify(tags), 'EX', 60 * 60 * 6);
+  await redis.set('tags', JSON.stringify(tags), 'EX', 60 * 60 * 1);
   return tags;
 };

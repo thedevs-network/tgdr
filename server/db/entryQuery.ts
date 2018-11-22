@@ -17,7 +17,7 @@ export const findOne = async (query: Partial<IEntrySchema>) => {
 
   const entry = await Entry.findOne(query).lean();
   if (entry && query.status) {
-    await redis.set(queryString, JSON.stringify(entry), 'EX', 60 * 60 * 6);
+    await redis.set(queryString, JSON.stringify(entry), 'EX', 60 * 60 * 1);
   }
   return entry;
 };
@@ -42,7 +42,7 @@ export const update = async (
     status: entry.status,
     username: entry.username,
   });
-  await redis.set(queryString, JSON.stringify(entry), 'EX', 60 * 60 * 6);
+  await redis.set(queryString, JSON.stringify(entry), 'EX', 60 * 60 * 1);
   return entry;
 };
 
@@ -54,6 +54,6 @@ export const get = async (query: IEntryQuery) => {
   if (cachedEntries) return JSON.parse(cachedEntries);
 
   const entries = await Entry.getEntries(query);
-  await redis.set(queryString, JSON.stringify(entries), 'EX', 60 * 60 * 6);
+  await redis.set(queryString, JSON.stringify(entries), 'EX', 60 * 60 * 1);
   return entries;
 };
