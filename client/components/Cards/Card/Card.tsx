@@ -33,7 +33,7 @@ const CardWrapper = styled(LightBox).attrs({
 `;
 
 const InfoWrapper = styled(Flex).attrs({
-  flex: '1 1 auto',
+  flex: '1 1 0',
   flexDirection: 'column',
 })`
   padding: 1px 0;
