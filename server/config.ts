@@ -12,6 +12,7 @@ interface IConfig {
   is_dev: boolean;
   jwt_secret: string;
   port: number;
+  report_chat_id?: number;
 }
 
 const config: IConfig = {
@@ -24,6 +25,7 @@ const config: IConfig = {
   is_dev: process.env.NODE_ENV !== 'production',
   jwt_secret: process.env.JWT_SECRET,
   port: parseInt(process.env.PORT, 10) || 3000,
+  report_chat_id: Number(process.env.REPORT_CHAT_ID),
 };
 
 export default config;

@@ -7,6 +7,7 @@ import * as authQuery from '../db/authQuery';
 import config from '../config';
 import CustomError from '../helpers/customError';
 import { IUserModel } from '../models/User';
+import { getReportChat } from '../utils';
 
 export const getChatMembers = async (username: string) =>
   bot.telegram.getChatMembersCount(`@${username}`);
@@ -84,7 +85,7 @@ export const sendReport: express.RequestHandler = async (req, res) => {
   const text =
     title + usernameText + reasonText + infoText + reviewText + userText;
 
-  await bot.telegram.sendMessage(config.admin_id, text, {
+  await bot.telegram.sendMessage(getReportChat(), text, {
     // @ts-ignore
     parse_mode: 'HTML',
   });
@@ -122,7 +123,7 @@ export const sendUserSpamReport = async (user: IUserModel) => {
 
   await authQuery.create(user.telegram_id, { spamReportDate: new Date() });
 
-  await bot.telegram.sendMessage(config.admin_id, text, {
+  await bot.telegram.sendMessage(getReportChat(), text, {
     // @ts-ignore
     parse_mode: 'HTML',
   });
@@ -150,7 +151,7 @@ export const sendNewEntry: express.RequestHandler = async (req, res) => {
   const text =
     title + entryUsername + entryTitle + entryType + entryCategory + userText;
 
-  await bot.telegram.sendMessage(config.admin_id, text, {
+  await bot.telegram.sendMessage(getReportChat(), text, {
     // @ts-ignore
     parse_mode: 'HTML',
   });

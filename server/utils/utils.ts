@@ -10,6 +10,9 @@ const wilsonScore = decay.wilsonScore();
 
 export const isAdmin = (id: number) => id === config.admin_id;
 
+export const getReportChat = (): number => 
+  config.report_chat_id || config.admin_id;
+
 export const hasAd = (text: string) =>
   // tslint:disable-next-line:max-line-length
   /((http(s)?(\:\/\/))?(www\.)?([\w\-\.\/])*(\.[a-zA-Z]{2,3}\/?))[^\s\b\n|]*[^.,;:\?\!\@\^\$ -]/gi.test(
