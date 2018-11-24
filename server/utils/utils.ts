@@ -68,8 +68,8 @@ export const getSort = R.pipe(
   R.prop('sort'),
   R.cond([
     [R.equals('new'), R.always({ created_at: -1 })],
-    [R.equals('top'), R.always({ featured: -1, verified: -1, score: -1 })],
-    [R.equals('hot'), R.always({ featured: -1, verified: -1, score: -1 })],
+    [R.equals('top'), R.always({ featured: -1, score: -1 })],
+    [R.equals('hot'), R.always({ featured: -1, score: -1 })],
     [R.always(true), R.always({})],
   ])
 );
