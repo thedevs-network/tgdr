@@ -46,7 +46,7 @@ export const getReviewsQuery = R.pipe(
 export const getMatches = R.pipe(
   R.when(
     R.propEq('sort', 'hot'),
-    R.assocPath(['created_at', '$gt'], subDays(new Date(), 30))
+    R.assocPath(['created_at', '$gt'], subDays(new Date(), 15))
   ),
   R.pick(['category', 'status', 'type', 'created_at', '$text'])
 );
