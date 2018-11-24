@@ -18,7 +18,9 @@ interface IProps {
   w?: number | number[];
 }
 
-const ImageWrapper = styled(Flex)<Partial<IProps>>`
+const ImageWrapper = styled(({ h, w, ...rest }: Partial<IProps>) => (
+  <Flex {...rest} />
+))`
   height: ${prop('h')}px;
   background-color: #eee;
   border-radius: 50%;

@@ -14,7 +14,7 @@ import Modal from '../elements/Modal';
 const Count = styled.h5`
   margin: 0 0 8px;
   padding: 0;
-  font-size: 14;
+  font-size: 14px;
   font-weight: 500;
 `;
 

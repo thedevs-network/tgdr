@@ -11,7 +11,9 @@ const Wrapepr = styled(Flex)`
   }
 `;
 
-const Text = styled.span`
+const Text = styled(({ color, ...rest }: { color: string }) => (
+  <span {...rest} />
+))`
   min-width: 50%;
   flex: 1 0 0;
   font-size: 14px;
@@ -20,7 +22,7 @@ const Text = styled.span`
 
   ${media.lessThan('470px')`
     font-size: 13px;
-  `}
+  `};
 `;
 
 interface IInfoListItem {

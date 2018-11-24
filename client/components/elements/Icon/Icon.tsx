@@ -94,9 +94,23 @@ const icons: IIcons = {
   users: <Users />,
 };
 
-const IconWrapper = styled(({ hoverFill, ...rest }: { hoverFill?: string }) => (
-  <Flex {...rest} align="center" justify="center" />
-))`
+interface IIcon {
+  fill?: string;
+  stroke?: string;
+  hoverFill?: string;
+  ml?: number[] | number;
+  mr?: number[] | number;
+  mx?: number[] | number;
+  my?: number[] | number;
+  name: keyof IIcons;
+  size?: number;
+}
+
+const IconWrapper = styled(
+  ({ fill, hoverFill, size, stroke, ...rest }: Partial<IIcon>) => (
+    <Flex {...rest} align="center" justify="center" is="span" />
+  )
+)`
   svg {
     width: ${prop('size', 16)}px;
     height: auto;
@@ -125,18 +139,6 @@ const IconWrapper = styled(({ hoverFill, ...rest }: { hoverFill?: string }) => (
     }
   `};
 `;
-
-interface IIcon {
-  fill?: string;
-  stroke?: string;
-  hoverFill?: string;
-  ml?: number[] | number;
-  mr?: number[] | number;
-  mx?: number[] | number;
-  my?: number[] | number;
-  name: keyof IIcons;
-  size?: number;
-}
 
 const Icon: React.SFC<IIcon> = ({ name, ...props }) => (
   <IconWrapper {...props}>{icons[name]}</IconWrapper>
