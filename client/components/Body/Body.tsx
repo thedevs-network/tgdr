@@ -13,7 +13,7 @@ const Body: React.SFC = ({ children }) => (
     <Flex justify="center">
       <Container align="flex-start" flexDirection={['column', 'column', 'row']}>
         <Sidebar />
-        <Flex width={[1, 1, 9 / 12]} flexDirection="column">
+        <Flex width={[1, 1, 9 / 12]} flexDirection="column" is="main">
           {children}
         </Flex>
       </Container>

@@ -52,7 +52,7 @@ const Cards: React.SFC<IProps> = ({
   type,
   onLoadMore,
 }) => (
-  <>
+  <Flex flexDirection="column" is="section">
     <CardsHeader
       category={category}
       sort={sort}
@@ -75,7 +75,7 @@ const Cards: React.SFC<IProps> = ({
           </Link>
         </Flex>
       )}
-  </>
+  </Flex>
 );
 
 Cards.defaultProps = {

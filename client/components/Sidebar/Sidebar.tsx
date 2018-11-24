@@ -45,6 +45,7 @@ const Sidebar: React.SFC<IProps> = ({
       p={[16, 4]}
       width={[1, 1, 3 / 12]}
       flexDirection="column"
+      is="aside"
     >
       <Flex mb={[0, 0, 4]} align="center" justify="space-evenly">
         <SearchInput value={search} onChange={onSearchChange} />

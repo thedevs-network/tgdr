@@ -106,7 +106,7 @@ const SidebarList: React.SFC<ISidebarList> = ({
   data,
   queryName,
 }) => (
-  <Flex flexDirection="column" flex="1 1 auto">
+  <Flex flexDirection="column" flex="1 1 auto" is="nav">
     <Title>{title}</Title>
     <List>
       {data.map(item => (
