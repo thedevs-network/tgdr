@@ -25,7 +25,7 @@ export const getEntries: AsyncAction = (
     ...params,
   }
 
-  const newSkip = params.loadMore ? limit + skip : 0;
+  const newSkip = params.loadMore ? paramsWithDefaults.limit + skip : 0;
     
   const query = queryString.stringify(paramsWithDefaults);
   dispatch(entriesRequest(paramsWithDefaults));

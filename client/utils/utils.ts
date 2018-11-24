@@ -64,42 +64,42 @@ export const getParamsFromQueries = ({
   const searchParam = search && { search };
 
   if (category && sort && type) {
-    return [{ category, sort, type }];
+    return [{ category, limit: 18, sort, type }];
   }
 
   if (sort && type) {
-    return [{ sort, type }];
+    return [{ limit: 18, sort, type }];
   }
 
   if (type && !category) {
     return [
-      { sort: 'top', type },
-      { sort: 'hot', type },
-      { sort: 'new', type },
+      { limit: 9, sort: 'top', type },
+      { limit: 9, sort: 'hot', type },
+      { limit: 9, sort: 'new', type },
     ];
   }
 
   if (category && !type) {
     return [
-      { category, sort: 'top', type: 'channel' },
-      { category, sort: 'top', type: 'bot' },
-      { category, sort: 'top', type: 'supergroup' },
+      { category, limit: 9, sort: 'top', type: 'channel' },
+      { category, limit: 9, sort: 'top', type: 'bot' },
+      { category, limit: 9, sort: 'top', type: 'supergroup' },
     ];
   }
 
   if (category && type) {
     return [
-      { category, sort: 'top', type },
-      { category, sort: 'hot', type },
-      { category, sort: 'new', type },
+      { category, limit: 9, sort: 'top', type },
+      { category, limit: 9, sort: 'hot', type },
+      { category, limit: 9, sort: 'new', type },
     ];
   }
 
   if (sort) {
     return [
-      { ...searchParam, sort, type: 'channel' },
-      { ...searchParam, sort, type: 'bot' },
-      { ...searchParam, sort, type: 'supergroup' },
+      { ...searchParam, limit: 9, sort, type: 'channel' },
+      { ...searchParam, limit: 9, sort, type: 'bot' },
+      { ...searchParam, limit: 9, sort, type: 'supergroup' },
     ];
   }
 
