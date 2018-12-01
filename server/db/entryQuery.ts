@@ -46,14 +46,4 @@ export const update = async (
   return entry;
 };
 
-export const get = async (query: IEntryQuery) => {
-  const queryString = stringifyValues(query);
-
-  const cachedEntries = await redis.get(queryString);
-
-  if (cachedEntries) return JSON.parse(cachedEntries);
-
-  const entries = await Entry.getEntries(query);
-  await redis.set(queryString, JSON.stringify(entries), 'EX', 60 * 60 * 1);
-  return entries;
-};
+export const get = async (query: IEntryQuery) => Entry.getEntries(query);
