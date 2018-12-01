@@ -6,6 +6,11 @@
     "lint": "tslint -p tsconfig.json",
     "lint:fix": "tslint -p tsconfig.json --fix"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
@@ -27,7 +32,7 @@
     "jwt-decode": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "mongoose": "^5.2.4",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "ms": "^2.1.1",
     "next": "^7.0.2",
     "normalize.css": "^8.0.0",
@@ -88,13 +93,14 @@
     "@zeit/next-typescript": "^1.1.1",
     "babel-plugin-inline-react-svg": "^0.5.3",
     "babel-plugin-styled-components": "^1.5.1",
+    "husky": "^1.2.0",
     "next-images": "^1.0.1",
     "nodemon": "^1.12.1",
     "prettier": "^1.14.2",
     "ts-node": "^4.1.0",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "tslint-eslint-rules": "^5.3.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0"
   }
 }
