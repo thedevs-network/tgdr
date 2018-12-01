@@ -1,4 +1,14 @@
 {
+  "name": "tgdr",
+  "description": "Telegram directory to discover channels, bots and groups.",
+  "version": "0.0.0",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thedevs-network/tgdr.git"
+  },
+  "homepage": "https://github.com/thedevs-network/tgdr#readme",
+  "author": "Pouria Ezzati <ezzati.upt@gmail.com>",
   "scripts": {
     "dev": "nodemon server/server.ts",
     "build": "next build && tsc --project tsconfig.server.json",
