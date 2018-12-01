@@ -3,6 +3,7 @@ import { NextSFC } from 'next';
 import Head from 'next/head';
 import { Box, Flex } from 'grid-styled';
 import Error from './_error';
+import config from '../client.config';
 import { Description, Title } from '../client/components/elements/Typography';
 import Icon from '../client/components/elements/Icon';
 import { getEntry } from '../client/store/entry';
@@ -48,6 +49,23 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
           Telegram Directory | {entry.title} (@
           {entry.username})
         </title>
+        <meta
+          name="twitter:title"
+          content={`Telegram Directory | ${entry.title} (@${entry.username})`}
+        />
+        <meta
+          name="og:title"
+          content={`Telegram Directory | ${entry.title} (@${entry.username})`}
+        />
+        <meta name="og:url" content={`https://tgdr.io/@${entry.username}`} />
+        <meta
+          name="twitter:image:src"
+          content={config.CLOUDINARY_PATH + entry.username}
+        />
+        <meta
+          name="og:image"
+          content={config.CLOUDINARY_PATH + entry.username}
+        />
       </Head>
       <Body>
         <LightBox p={[3, 4]} flex="1 1 auto" flexDirection={['column', 'row']}>

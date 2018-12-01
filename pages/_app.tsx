@@ -89,6 +89,17 @@ class MyApp extends App<IProps> {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <meta name="twitter:card" content="summary" />
+          <meta
+            name="twitter:description"
+            content="Top Telegram Channles, Bots and Groups"
+          />
+          <meta
+            name="og:description"
+            content="Top Telegram Channles, Bots and Groups"
+          />
+          <meta name="og:site_name" content="Telegram Directory" />
+          <meta name="og:type" content="website" />
         </Head>
         <Container>
           <Provider store={reduxStore}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NextSFC } from 'next';
 import Head from 'next/head';
+import config from '../client.config';
 import withVerifyToken from '../client/withVerifyToken';
 import Body from '../client/components/Body';
 import Cards from '../client/components/Cards';
@@ -21,6 +22,20 @@ const Homepage: NextSFC<IProps> = ({ pageTitle, params }) => {
     <>
       <Head>
         <title>Telegram Directory | {pageTitle}</title>
+        <meta
+          name="twitter:title"
+          content={`Telegram Directory | ${pageTitle}`}
+        />
+        <meta name="og:title" content={`Telegram Directory | ${pageTitle}`} />
+        <meta name="og:url" content="https://tgdr.io" />
+        <meta
+          name="twitter:image:src"
+          content={`${config.CLOUDINARY_PATH}__tgdr_twitter.png`}
+        />
+        <meta
+          name="og:image"
+          content={`${config.CLOUDINARY_PATH}__tgdr_og.png`}
+        />
       </Head>
       <Body>
         {params.map((item, index) => (
