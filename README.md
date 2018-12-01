@@ -6,7 +6,7 @@ Telegram Directory (TGDR) is a website that helps you discover channels, bots an
 
 [https://tgdr.io](https://tgdr.io)
 
-[![Build Status](https://travis-ci.org/thedevs-network/kutt.svg?branch=develop)](https://travis-ci.org/thedevs-network/tgdr)
+[![Build Status](https://travis-ci.org/thedevs-network/tgdr.svg?branch=develop)](https://travis-ci.org/thedevs-network/tgdr)
 [![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/thedevs-network/tgdr/#contributing)
 [![GitHub license](https://img.shields.io/github/license/thedevs-network/tgdr.svg)](https://github.com/thedevs-network/tgdr/blob/develop/LICENSE)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/thedevs-network/tgdr/.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fthedevs-network%2Ftgdr%2F)
