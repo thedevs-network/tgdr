@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - "10"
+
+before_install:
+  - cp ./client.config.example.ts ./client.config.ts
+  - cp ./.example.env ./.env
+
+script:
+  - npm run lint
+  - npm run build
