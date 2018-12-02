@@ -19,6 +19,8 @@ export const hasAd = (text: string) =>
     text
   ) || /(@\w+)/gi.test(text);
 
+export const getDbName = id => 'bot.' + id;
+
 export const stringifyValues = (query: Record<string, any>): string =>
   Object.keys(query)
     .sort((a, b) => (a > b ? 1 : -1))
