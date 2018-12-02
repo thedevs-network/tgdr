@@ -1,5 +1,16 @@
+import * as redis from '../redis';
 import * as authQuery from '../db/authQuery';
-import { isAdmin } from '../utils';
+import { getDbName, isAdmin } from '../utils';
+import { ContextMessageUpdate } from 'telegraf';
+
+export const onlyPrivate = (ctx: ContextMessageUpdate, next) =>
+  ctx.chat.type === 'private' ? next() : null;
+
+export const clear = async (ctx: ContextMessageUpdate, next) => {
+  const { id } = ctx.from;
+  await redis.del(getDbName(id));
+  next();
+};
 
 export const register = async (ctx, next) => {
   const { id, is_bot, first_name, last_name, username } = ctx.from;
@@ -18,6 +29,8 @@ export const register = async (ctx, next) => {
   if (user.banned) {
     return ctx.reply('❌ You have been banned. Contact support for more info.');
   }
+
+  ctx.state.user = user;
 
   next();
 };
@@ -39,7 +52,6 @@ export const adminCheck = async (ctx, next) => {
 
 export const setCommandingFlag = (status: boolean) => async (ctx, next) => {
   const id = Number(ctx.from.id);
-  if (!ctx.state.isAdmin) return next();
   await authQuery.create(id, { commanding: status });
   if (status) next();
 };
