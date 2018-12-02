@@ -3,6 +3,7 @@ import { IEntryQuery } from '../types';
 import { getLimit, getMatches, getSearch, getSkip, getSort } from '../utils';
 
 export interface IEntrySchema extends Document {
+  _id: string;
   category: string;
   created_at: Date;
   description: string;
