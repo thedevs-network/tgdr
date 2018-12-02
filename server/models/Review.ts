@@ -36,7 +36,7 @@ reviewSchema.static('getReviews', async function(query: IGetReviewsQuery) {
   const $skip = getSkip(query);
 
   const [{ data, info }] = await this.aggregate([
-    { $match: { entry: query.entryId, text: { $exists: true } } },
+    { $match: { entry: query.entryId, text: { $exists: true, $ne: null } } },
     {
       $facet: {
         data: [
