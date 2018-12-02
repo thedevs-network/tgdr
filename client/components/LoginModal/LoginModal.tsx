@@ -1,9 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import Divider from '../elements/Divider';
 import TelegramLoginButton from 'react-telegram-login';
+import Divider from '../elements/Divider';
 import Spinner from '../elements/Spinner';
+import config from '../../../client.config';
 
 const Title = styled.h2`
   margin: 0;
@@ -34,7 +35,10 @@ const LoginModal: React.SFC<ILoginModal> = ({
       <Title>You can use your Telegram account to login.</Title>
       <Divider my={[2, 3]} />
       <Flex flexDirection="column" align="center">
-        <TelegramLoginButton dataOnauth={handleLogin} botName="tgdrbot" />
+        <TelegramLoginButton
+          dataOnauth={handleLogin}
+          botName={config.LOGIN_BOT_USERNAME}
+        />
       </Flex>
       {loader}
     </Flex>
