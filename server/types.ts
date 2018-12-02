@@ -24,6 +24,7 @@ export interface IGetReviewsQuery {
 }
 
 export interface IReviewQuery {
+  created_at: Date;
   disliked?: boolean;
   entry?: string | {};
   liked?: boolean;
