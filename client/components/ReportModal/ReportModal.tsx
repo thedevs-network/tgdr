@@ -26,6 +26,7 @@ const ReportEntryModal: React.SFC<IProps> = ({
           { key: 'Select a reason', value: '' },
           ...reasonOptions.map(item => ({ key: item, value: item })),
         ]}
+        flex="1 1 auto"
         mb={3}
         name="reason"
         component={SelectInput}
