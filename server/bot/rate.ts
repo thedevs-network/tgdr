@@ -138,10 +138,14 @@ export const submit = async ctx => {
 
   await redis.del(getDbName(id));
 
-  return ctx.reply(
+  return ctx.replyWithHTML(
     '✅ Review has been submitted successfully!\n\n' +
-      'Check your review here:' +
-      `https://tgdr.io/@${username}`
+      'Check your review here:\n' +
+      `https://tgdr.io/@${username}\n\n` +
+      `Share link to rate <code>@${username}</code>:\n` +
+      `https://t.me/tgdrbot?start=${username}\n\n` +
+      'Join Telegram Directory:\n' +
+      '@tgdr_io'
   );
 };
 
