@@ -8,6 +8,7 @@ export interface IUserModel extends Document {
   first_name: string;
   last_name: string;
   likes: number;
+  reviewing?: boolean;
   spamReportDate: Date;
   telegram_id: number;
   username?: string;
@@ -21,6 +22,7 @@ const userSchema: Schema = new Schema({
   first_name: { type: String, required: true, maxlength: 32 },
   last_name: { type: String, maxlength: 32 },
   likes: { Type: Number, default: 0 },
+  reviewing: { type: Boolean },
   spamReportDate: { Type: Date },
   telegram_id: { type: Number, required: true, index: true },
   username: { type: String, lowercase: true, trim: true },

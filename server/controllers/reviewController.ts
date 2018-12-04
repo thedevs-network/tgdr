@@ -49,6 +49,12 @@ export const create: express.RequestHandler = async (req, res) => {
   const { disliked, liked, username } = req.body;
   const { user } = req;
 
+  const userReviewing = await authQuery.setReviewingFlag(user.telegram_id);
+
+  if (!userReviewing) {
+    throw new CustomError("Can't review multiple times at once");
+  }
+
   await reviewQuery.create({
     ...req.body,
     created_at: new Date(),

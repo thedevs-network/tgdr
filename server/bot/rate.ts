@@ -49,7 +49,7 @@ export const init = async (ctx: ContextMessageUpdate, username: string) => {
       .resize()
       .extra()
   );
-}
+};
 
 export const start = async (ctx: ContextMessageUpdate) => {
   const { id } = ctx.from;
@@ -111,6 +111,12 @@ export const submit = async ctx => {
     return ctx.reply('❌ An error occurred.');
   }
 
+  const userReviewing = await authQuery.setReviewingFlag(id);
+
+  if (!userReviewing) {
+    return ctx.reply("❌ Can't review multiple times at once.");
+  }
+
   const review = await reviewQuery.findOne({
     entry: Types.ObjectId(entry._id.toString()),
     user: Types.ObjectId(ctx.state.user._id.toString()),
@@ -165,12 +171,12 @@ export const reviewText = async (ctx, next) => {
     if (!username) {
       return ctx.reply('ℹ️ Please enter a username.');
     }
-    
+
     return init(ctx, username);
   }
 
   if (!rate.username || typeof rate.liked !== 'boolean') return next();
-  
+
   // If is not a username, then consider it as review text
   if (text.length < 20 || text.length > 400) {
     return ctx.reply('ℹ️ Review text must be between 20 and 400 chars.');
