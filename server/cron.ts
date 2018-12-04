@@ -11,7 +11,7 @@ setInterval(async () => {
     const entries = await entryQuery.getNonBots();
     for (const entry of entries) {
       try {
-        await wait(2000);
+        await wait(5000);
         const members = await botController.getChatMembers(entry.username);
         await entryQuery.update(entry.username, { members }, true);
       } catch (error) {
