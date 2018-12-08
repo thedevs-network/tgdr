@@ -29,6 +29,30 @@ class DocumentPage extends Document<IProps> {
             name="description"
             content="Find top and the best Telegram channels, bots and groups."
           />
+          <link rel="icon" sizes="192x192" href="android-icon.png" />
+          <link rel="apple-touch-icon" href="apple-icon.png" />
+          <meta
+            name="msapplication-square310x310logo"
+            content="ms-icon-310x310.png"
+          />
+          <link rel="apple-touch-icon" href="apple-icon.png" />
+          <link
+            rel="apple-touch-icon"
+            sizes="76x76"
+            href="apple-icon-76x76.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="120x120"
+            href="apple-icon-120x120.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="apple-icon-152x152.png"
+          />
+          <meta name="theme-color" content="#7e9cb4" />
+
           <link
             // tslint:disable-next-line:max-line-length
             href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,700"
