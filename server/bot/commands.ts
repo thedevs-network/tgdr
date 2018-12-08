@@ -15,6 +15,7 @@ export const help = (ctx: ContextMessageUpdate) => {
       '/help - <code>Help</code>\n' +
       '/rate - <code>Rate an entry</code>\n\n' +
       '<b>Support:</b>\n' +
+      '@tgdrsupport\n' +
       'support@tgdr.io\n\n' +
       '<b>Channel:</b>\n' +
       '@tgdr_io\n\n' +
