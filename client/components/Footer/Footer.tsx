@@ -82,6 +82,16 @@ const Footer: React.SFC = () => (
           <Separator>|</Separator>
         </ListItem>
         <ListItem>
+          <a
+            href="https://github.com/thedevs-network/telegram-directory"
+            title="GitHub"
+            target="_blank"
+            rel="nofollow noopener"
+          >
+            <Icon size={16} name="github" fill="#7990A2" hoverFill="#63B3F3" />
+          </a>
+        </ListItem>
+        <ListItem>
           <a href="tg://resolve?domain=tgdr_io" title="Telegram">
             <Icon
               size={14}
@@ -92,7 +102,12 @@ const Footer: React.SFC = () => (
           </a>
         </ListItem>
         <ListItem>
-          <a href="https://twitter.com/tgdr_io" title="Twitter">
+          <a
+            href="https://twitter.com/tgdr_io"
+            title="Twitter"
+            target="_blank"
+            rel="nofollow noopener"
+          >
             <Icon size={16} name="twitter" fill="#7990A2" hoverFill="#63B3F3" />
           </a>
         </ListItem>
@@ -104,16 +119,6 @@ const Footer: React.SFC = () => (
               fill="#7990A2"
               hoverFill="#63B3F3"
             />
-          </a>
-        </ListItem>
-        <ListItem>
-          <a
-            className="github-button"
-            href="https://github.com/thedevs-network/telegram-directory"
-            data-show-count="true"
-            aria-label="Star thedevs-network/telegram-directory on GitHub"
-          >
-            Star
           </a>
         </ListItem>
       </List>

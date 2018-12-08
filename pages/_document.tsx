@@ -59,7 +59,6 @@ class DocumentPage extends Document<IProps> {
             rel="stylesheet"
           />
           {this.props.styleTags}
-          <script async defer src="https://buttons.github.io/buttons.js" />
         </Head>
         <Body>
           <Main />
