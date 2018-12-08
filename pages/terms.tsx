@@ -20,7 +20,7 @@ const Terms: NextSFC = () => (
           <Container justify="flex-start" flexDirection="column">
             <SloganTitle>Terms of Service</SloganTitle>
             <h3>1. Terms</h3>
-            <p>By accessing the website at 
+            <p>By accessing the website at{' '}
               <a href="https://tgdr.io">
                 https://tgdr.io
               </a>,
