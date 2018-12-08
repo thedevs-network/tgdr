@@ -29,7 +29,6 @@ class DocumentPage extends Document<IProps> {
             name="description"
             content="Find top and the best Telegram channels, bots and groups."
           />
-          <link rel="stylesheet" href="/_next/static/style.css" />
           <link
             // tslint:disable-next-line:max-line-length
             href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,700"
