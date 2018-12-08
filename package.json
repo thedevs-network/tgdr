@@ -1,7 +1,7 @@
 {
   "name": "tgdr",
   "description": "Telegram directory to discover channels, bots and groups.",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
