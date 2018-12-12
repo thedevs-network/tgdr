@@ -13,6 +13,7 @@ import reviewRoutes from './routes/reviewRoutes';
 import tagsRoutes from './routes/tagsRoutes';
 import appRoutes from './routes/appRoutes';
 import * as errorController from './controllers/errorController';
+import createReadStream from 'fs';
 
 // Import Telegram bot
 import './bot';
@@ -58,7 +59,12 @@ app.prepare().then(() => {
   server.use('/', appRoutes(app));
   server.use(errorController.send);
 
-  server.get('*', (req, res) => handle(req, res));
+  server.get('/sw.js', (req,res) =>{
+    res.sendFile(__dirname+'/offline/sw.js')
+    console.log(req.url);
+  })
+
+  server.get('*', (req, res) => handle(req, res))
 
   // Start server
   server.listen(config.port, err => {
