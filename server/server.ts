@@ -61,7 +61,8 @@ app.prepare().then(() => {
 
   server.get('/sw.js', (req,res) =>{
     res.sendFile(__dirname+'/offline/sw.js')
-    // console.log(req.url);
+    // tslint:disable-next-line:no-console
+    console.log(req.url);
   })
 
   server.get('*', (req, res) => handle(req, res))
