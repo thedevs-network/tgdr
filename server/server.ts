@@ -13,7 +13,6 @@ import reviewRoutes from './routes/reviewRoutes';
 import tagsRoutes from './routes/tagsRoutes';
 import appRoutes from './routes/appRoutes';
 import * as errorController from './controllers/errorController';
-import createReadStream from 'fs';
 
 // Import Telegram bot
 import './bot';
