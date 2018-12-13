@@ -6,7 +6,7 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
       fetch(indexPage).then(function(response) {
         return caches.open('tgdr-offline').then(function(cache) {
-          console.log(`TGDR Cached index page during Install ${response.url}`);
+          //console.log(`TGDR Cached index page during Install ${response.url}`);
           return cache.put(indexPage, response);
         });
     }));
@@ -17,7 +17,7 @@ self.addEventListener('install', function(event) {
     const updateCache = (request) => {
       return caches.open('tgdr-offline').then(function (cache) {
         return fetch(request).then(function (response) {
-          console.log(`TGDR add page to offline ${response.url}`)
+          //console.log(`TGDR add page to offline ${response.url}`)
           return cache.put(request, response);
         });
       });
@@ -27,14 +27,14 @@ self.addEventListener('install', function(event) {
   
     event.respondWith(
       fetch(event.request).catch(function(error) {
-        console.log(`TGDR Network request Failed. Serving content from cache: ${error}`);
+        //console.log(`TGDR Network request Failed. Serving content from cache: ${error}`);
   
         /*Check to see if you have it in the cache
         Return response
         If not in the cache, then return error page*/
         return caches.open('tgdr-offline').then(function (cache) {
           return cache.match(event.request).then(function (matching) {
-            var report =  !matching || matching.status == 404?Promise.reject('no-match'): matching;
+            var report =  !matching || matching.status === 404?Promise.reject('no-match'): matching;
             return report
           });
         });

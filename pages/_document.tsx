@@ -21,10 +21,6 @@ class DocumentPage extends Document<IProps> {
     return { ...page, styleTags };
   }
 
-  componentDidMount () {
-    
-  }
-
   render() {
     return (
       <html lang="en">
@@ -69,9 +65,7 @@ class DocumentPage extends Document<IProps> {
               navigator.serviceWorker.register('sw.js', {
                   scope: './'
                 }).then(function(reg) {
-                  console.log('Service worker has been registered for scope:'+ reg.scope);
-                }).catch(err => {
-                  console.warn('service worker registration failed', err.message)
+                  //console.log('Service worker has been scope:'+ reg.scope);
                 })
             }
           `}} />
