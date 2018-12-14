@@ -10,26 +10,26 @@ self.addEventListener('install',(event: any) => {
     }));
   });
   
-  self.addEventListener('fetch', (event: any) => {
-    const updateCache = (request) => {
+self.addEventListener('fetch', (event: any) => {
+  const updateCache = (request) => {
+    return caches.open('tgdr-offline').then((cache) => {
+      return fetch(request).then((response) => {
+        return cache.put(request, response);
+      });
+    });
+  };
+
+  event.waitUntil(updateCache(event.request));
+
+  event.respondWith(
+    fetch(event.request).catch((_error) => {
       return caches.open('tgdr-offline').then((cache) => {
-        return fetch(request).then((response) => {
-          return cache.put(request, response);
+        return cache.match(event.request).then((matching: any) => {
+          const report =  !matching || matching.status === 404?
+          Promise.reject('no-match'): matching;
+          return report
         });
       });
-    };
-  
-    event.waitUntil(updateCache(event.request));
-  
-    event.respondWith(
-      fetch(event.request).catch((_error) => {
-        return caches.open('tgdr-offline').then((cache) => {
-          return cache.match(event.request).then((matching: any) => {
-            const report =  !matching || matching.status === 404?Promise.reject('no-match'): matching;
-            return report
-          });
-        });
-      })
-    );
-  })
-  
+    })
+  );
+})
