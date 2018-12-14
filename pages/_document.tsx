@@ -60,12 +60,9 @@ class DocumentPage extends Document<IProps> {
           />
 
           <script dangerouslySetInnerHTML={{ __html: `
-            console.log('YEET')
             if('serviceWorker' in navigator) {
               navigator.serviceWorker.register('sw.js', {
                   scope: './'
-                }).then(function(reg) {
-                  //console.log('Service worker has been scope:'+ reg.scope);
                 })
             }
           `}} />

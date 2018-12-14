@@ -58,10 +58,8 @@ app.prepare().then(() => {
   server.use('/', appRoutes(app));
   server.use(errorController.send);
 
-  server.get('/sw.js', (req,res) =>{
+  server.get('/sw.js', (_req,res) =>{
     res.sendFile(__dirname+'/offline/sw.js')
-    // tslint:disable-next-line:no-console
-    console.log(req.url);
   })
 
   server.get('*', (req, res) => handle(req, res))
