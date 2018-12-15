@@ -52,12 +52,21 @@ class DocumentPage extends Document<IProps> {
             href="apple-icon-152x152.png"
           />
           <meta name="theme-color" content="#7e9cb4" />
-
+          <link rel="manifest" href="manifest.webmanifest" />
           <link
             // tslint:disable-next-line:max-line-length
             href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,700"
             rel="stylesheet"
           />
+
+          <script dangerouslySetInnerHTML={{ __html: `
+            if('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('sw.js', {
+                  scope: './'
+                })
+            }
+          `}} />
+
           {this.props.styleTags}
         </Head>
         <Body>

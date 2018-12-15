@@ -58,7 +58,11 @@ app.prepare().then(() => {
   server.use('/', appRoutes(app));
   server.use(errorController.send);
 
-  server.get('*', (req, res) => handle(req, res));
+  server.get('/sw.js', (_req,res) =>{
+    res.sendFile(__dirname+'/offline/sw.js')
+  })
+
+  server.get('*', (req, res) => handle(req, res))
 
   // Start server
   server.listen(config.port, err => {
