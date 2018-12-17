@@ -92,7 +92,7 @@ const Footer: React.SFC = () => (
           </a>
         </ListItem>
         <ListItem>
-          <a href="tg://resolve?domain=tgdr_io" title="Telegram">
+          <a href="https://t.me/tgdr_io" title="Telegram">
             <Icon
               size={14}
               name="telegram"

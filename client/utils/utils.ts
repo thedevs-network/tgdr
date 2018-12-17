@@ -33,7 +33,7 @@ export const getOpenLink = (username: string) => (
   e: React.MouseEvent<HTMLElement>
 ) => {
   e.stopPropagation();
-  window.open(`tg://resolve?domain=${username}`, '_blank');
+  window.open(`https://t.me/${username}`, '_blank');
   window.focus();
 };
 
