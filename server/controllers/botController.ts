@@ -1,7 +1,7 @@
 import * as express from 'express';
 import axios from 'axios';
 import * as differenceInHours from 'date-fns/difference_in_hours';
-import bot from '../bot';
+import bot, { bot2 } from '../bot';
 import * as cheerio from 'cheerio';
 import * as authQuery from '../db/authQuery';
 import config from '../config';
@@ -10,7 +10,7 @@ import { IUserModel } from '../models/User';
 import { getReportChat } from '../utils';
 
 export const getChatMembers = async (username: string) =>
-  bot.telegram.getChatMembersCount(`@${username}`);
+  bot2.telegram.getChatMembersCount(`@${username}`);
 
 export const getChatDetails = async (username: string) => {
   username = `@${username}`;

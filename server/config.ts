@@ -5,6 +5,7 @@ dotenv.config();
 interface IConfig {
   admin_id: number;
   bot_token: string;
+  bot_token_2: string;
   cloudinary_api_key: string;
   cloudinary_api_secret: string;
   cloudinary_cloud_name:  string;
@@ -18,6 +19,7 @@ interface IConfig {
 const config: IConfig = {
   admin_id: Number(process.env.ADMIN_ID),
   bot_token: process.env.BOT_TOKEN,
+  bot_token_2: process.env.BOT_TOKEN_2,
   cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
   cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
   cloudinary_cloud_name:  process.env.CLOUDINARY_CLOUD_NAME,

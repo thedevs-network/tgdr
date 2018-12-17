@@ -6,6 +6,7 @@ import * as commands from './commands';
 import * as rate from './rate';
 
 const bot = new Telegraf(config.bot_token);
+export const bot2 = new Telegraf(config.bot_token_2);
 
 bot.use(asyncHandler(auth.onlyPrivate));
 bot.use(asyncHandler(auth.register));
