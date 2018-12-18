@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import ReportEntryModal from './ReportModal';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Spinner from '../elements/Spinner';
 import MessageModal from '../MessageModal';
 import {
@@ -90,7 +90,7 @@ class ReportModalContainer extends React.Component<
 
     if (isLoading) {
       return (
-        <Flex justify="center" my={4}>
+        <Flex justifyContent="center" my={4}>
           <Spinner size={32} />
         </Flex>
       );

@@ -1,16 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { prop } from 'styled-tools';
 import Icon from '../elements/Icon';
 import Button from '../elements/Button';
 import Divider from '../elements/Divider';
 
 const IconBox = styled(Flex).attrs({
-  align: 'center',
+  alignItems: 'center',
   alignSelf: 'center',
-  justify: 'center',
+  justifyContent: 'center',
 })`
   width: 80px;
   height: 80px;
@@ -85,7 +85,7 @@ const MessageModal: React.SFC<IMessageModal> = ({
 
   return (
     <>
-      <Flex align="center">
+      <Flex alignItems="center">
         <Flex flex="0 0 0" width={[100]} mx={[3, 4]}>
           <IconBox color={color}>
             <Icon name={iconName} fill={color} size={54} />

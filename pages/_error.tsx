@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Header from '../client/components/Header';
 import Footer from '../client/components/Footer';
 import Button from '../client/components/elements/Button';
@@ -69,10 +69,14 @@ class ErrorPage extends React.Component<IProps> {
         <AppWrapper>
           <Flex flex="1 1 auto" flexDirection="column">
             <Header />
-            <Flex py={5} flexDirection="column" align="center" is="section">
+            <Flex
+            py={5}
+            flexDirection="column"
+            alignItems="center"
+            as="section">
               <SloganTitle>{title}</SloganTitle>
               {subtitle}
-              <Flex mt={4} align="center" justify="center">
+              <Flex mt={4} alignItems="center" justifyContent="center">
                 <Link href="/?sort=top" as="/" passHref>
                   <ViewAllLink title="Back to homepage">
                     <Icon name="arrowLeft" size={15} fill="#64B5F6" mr={10} />

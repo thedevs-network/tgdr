@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import media from 'styled-media-query';
 import Card from './Card';
 import CardsHeader from './CardsHeader';
@@ -52,7 +52,7 @@ const Cards: React.SFC<IProps> = ({
   type,
   onLoadMore,
 }) => (
-  <Flex flexDirection="column" is="section">
+  <Flex flexDirection="column" as="section">
     <CardsHeader
       category={category}
       sort={sort}
@@ -69,7 +69,7 @@ const Cards: React.SFC<IProps> = ({
     </CardsWrapper>
     {total > data.length &&
       loadMore && (
-        <Flex justify="flex-end" mt={3}>
+        <Flex justifyContent="flex-end" mt={3}>
           <Link href="#" title="Load more entries" onClick={onLoadMore} big>
             + Load More
           </Link>

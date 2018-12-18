@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Button from '../elements/Button';
 import Icon from '../elements/Icon';
 import SelectInput from '../elements/inputs/SelectInput';
@@ -19,7 +19,7 @@ const ReportEntryModal: React.SFC<IProps> = ({
   closeModal,
   onSubmit,
 }) => (
-  <Flex flexDirection="column" is="form" onSubmit={onSubmit}>
+  <Flex flexDirection="column" as="form" onSubmit={onSubmit}>
     <Flex flexDirection="column">
       <Field
         options={[

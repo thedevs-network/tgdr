@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import media from 'styled-media-query';
 import Icon from '../../elements/Icon';
 import { submissionInfo } from '../../../../constants/texts';
@@ -24,8 +24,8 @@ const Title = styled.h2`
 `;
 
 const Ul = styled(Flex).attrs({
+  as: 'ul',
   flexDirection: 'column',
-  is: 'ul',
   m: 0,
   p: 0,
 })`
@@ -34,8 +34,8 @@ const Ul = styled(Flex).attrs({
 `;
 
 const Li = styled(Flex).attrs({
-  align: 'center',
-  is: 'li',
+  alignItems: 'center',
+  as: 'li',
   m: 0,
   p: 0,
 })`

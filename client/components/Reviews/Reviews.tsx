@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import format from 'date-fns/format';
 import media from 'styled-media-query';
 import ReportModal from '../ReportModal';
@@ -84,12 +84,12 @@ const Reviews: React.SFC<IProps> = ({
 
     return (
       <div key={index}>
-        <Flex align="flex-start" my={4}>
+        <Flex alignItems="flex-start" my={4}>
           <Icon name={iconName} {...iconColor} size={15} my={1} mx={[2, 3]} />
           <Flex flexDirection="column" flex="1 1 auto">
-            <Flex width={1} mb={1} justify="space-between">
+            <Flex width={1} mb={1} justifyContent="space-between">
               <Name>{`${review.first_name} ${review.last_name || ''}`}</Name>
-              <Flex align="center">
+              <Flex alignItems="center">
                 <Modal
                   trigger={
                     <Link href="#" title="Report" secondary small>
@@ -122,7 +122,7 @@ const Reviews: React.SFC<IProps> = ({
       <Count>Reviews ({reviews.total})</Count>
       {reviewsList}
       {reviews.total > reviews.data.length && (
-        <Flex alignSelf="flex-end" mt={4}>
+        <Flex alignItemsSelf="flex-end" mt={4}>
           <Link href="#" title="Load more reviews" onClick={onLoadMore}>
             + Load more
           </Link>

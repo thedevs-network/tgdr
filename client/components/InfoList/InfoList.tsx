@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import InfoListItem from './InfoListItem';
 import { IEntry } from '../../store/storeTypes';
 import { categories, types } from '../../../constants/categories';
@@ -29,7 +29,7 @@ const InfoList: React.SFC<IProps> = ({ entry, auth }) => {
       mb={3}
       mt={4}
       width={1}
-      justify={['center', 'flex-start']}
+      justifyContent={['center', 'flex-start']}
       flexDirection={['row', 'column']}
       flexWrap={['wrap', 'nowrap']}
     >

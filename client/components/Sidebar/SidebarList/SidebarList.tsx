@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { ifProp } from 'styled-tools';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import media from 'styled-media-query';
 import { ICategories } from '../../../../constants/categories';
 import Icon from '../../elements/Icon';
@@ -106,7 +106,7 @@ const SidebarList: React.SFC<ISidebarList> = ({
   data,
   queryName,
 }) => (
-  <Flex flexDirection="column" flex="1 1 auto" is="nav">
+  <Flex flexDirection="column" flex="1 1 auto" as="nav">
     <Title>{title}</Title>
     <List>
       {data.map(item => (

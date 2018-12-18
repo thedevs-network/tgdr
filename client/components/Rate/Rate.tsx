@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import RateButton from './RateButton';
 
 interface IProps {
@@ -19,7 +19,7 @@ const Rate: React.SFC<IProps> = ({
   dislikes,
   onRate,
 }) => (
-  <Flex mt={3} justify="space-between" width={1} px="4px">
+  <Flex mt={3} justifyContent="space-between" width={1} px="4px">
     <RateButton
       type="like"
       count={likes}
