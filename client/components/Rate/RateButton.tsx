@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { ifProp } from 'styled-tools';
 import media from 'styled-media-query';
 import Icon from '../elements/Icon';
@@ -109,7 +109,7 @@ const RateButton: React.SFC<IProps> = ({
   );
 
   return (
-    <Flex flexDirection="column" align="center">
+    <Flex flexDirection="column" alignItems="center">
       {rateButton}
       <Count isLike={isLike} isActive={isActive}>
         {count || 0}

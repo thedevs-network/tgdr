@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Box, Flex } from 'grid-styled';
+import { Box, Flex } from '@rebass/grid';
 import media from 'styled-media-query';
 import Button from '../../elements/Button';
 import Modal from '../../elements/Modal';
@@ -93,16 +93,16 @@ const HeaderMenu: React.SFC<IProps> = ({
 
   return (
     <Flex
-      align={['flex-end', 'center']}
+      alignItems={['flex-end', 'center']}
       flexDirection={['column', 'row']}
-      is="nav"
+      as="nav"
     >
       <Box mx={[0, 3]}>
         <Modal trigger={<Button responsive>+ Submit</Button>}>
           {showSubmit}
         </Modal>
       </Box>
-      <Flex ml={[0, 2]} mt={[2, 0]} align={['flex-end', 'center']}>
+      <Flex ml={[0, 2]} mt={[2, 0]} alignItems={['flex-end', 'center']}>
         {name && <Name>{name},</Name>}
         {logoutLink}
         {login}

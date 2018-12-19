@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import SubmitModalForm from './SubmitModalForm';
 import { ISubmitEntryState, submitNewEntry } from '../../../store/submitEntry';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Spinner from '../../elements/Spinner';
 import MessageModal from '../../MessageModal';
 import { IAppState } from '../../../store';
@@ -52,7 +52,7 @@ class SubmitModalFormContainer extends React.Component<
 
     if (submitEntry.isLoading) {
       return (
-        <Flex justify="center" my={4}>
+        <Flex justifyContent="center" my={4}>
           <Spinner size={32} />
         </Flex>
       );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { prop } from 'styled-tools';
 import media from 'styled-media-query';
 import Icon, { IIcons } from '../elements/Icon';
@@ -39,7 +39,7 @@ const InfoListItem: React.SFC<IInfoListItem> = ({
   size,
   text,
 }) => (
-  <Wrapepr mb={2} mr={[2, 0]} align="flex-start">
+  <Wrapepr mb={2} mr={[2, 0]} alignItems="flex-start">
     <Icon name={icon} mr={[1, 2]} size={size} fill={color || '#C7CFD6'} />
     <Text color={color || '#888888'}>{text}</Text>
   </Wrapepr>

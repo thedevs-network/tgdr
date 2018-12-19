@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { Container } from '../elements/Layout';
 import Logo from '../elements/Logo';
 import HeaderMenu from './HeaderMenu';
 
 const HeaderWrapper = styled(Flex).attrs({
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
 })`
   background-color: white;
   height: 80px;
@@ -17,8 +17,8 @@ const HeaderWrapper = styled(Flex).attrs({
 class Header extends React.Component {
   render() {
     return (
-      <HeaderWrapper is="header">
-        <Container align="center" justify="space-between">
+      <HeaderWrapper as="header">
+        <Container alignItems="center" justifyContent="space-between">
           <Logo />
           <HeaderMenu />
         </Container>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { Field } from 'redux-form';
 import Button from '../../elements/Button';
 import Icon from '../../elements/Icon';
@@ -33,9 +33,9 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
   ];
 
   return (
-    <Flex is="form" onSubmit={onSubmit} flexDirection="column">
+    <Flex as="form" onSubmit={onSubmit} flexDirection="column">
       <Flex
-        justify="space-between"
+        justifyContent="space-between"
         flexDirection={['column', 'row']}
         flex="1 1 auto"
       >
@@ -76,7 +76,7 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
       </Flex>
       {isEdit && (
         <>
-          <Flex justify="space-between">
+          <Flex justifyContent="space-between">
             <Field
               options={statusOptions}
               mb={3}
@@ -95,11 +95,11 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
           </Flex>
           <Flex
             flexDirection="column"
-            justify="flex-start"
-            align="flex-start"
+            justifyContent="flex-start"
+            alignItems="flex-start"
             mb={3}
           >
-            <Flex align="center">
+            <Flex alignItems="center">
               <Field
                 component="input"
                 id="featured"
@@ -109,7 +109,7 @@ const SubmitModalForm: React.SFC<ISubmitModalForm> = ({
               />
               <CheckboxLabel htmlFor="featured">Featured</CheckboxLabel>
             </Flex>
-            <Flex align="center">
+            <Flex alignItems="center">
               <Field
                 component="input"
                 id="verified"

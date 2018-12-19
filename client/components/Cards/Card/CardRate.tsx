@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Icon from '../../elements/Icon';
 
 const Rate = styled.span`
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const CardRate: React.SFC<IProps> = ({ ratio }) => (
-  <Flex align="center">
+  <Flex alignItems="center">
     <Icon name="heart" size={14} mr={2} fill="#63B3F3" />
     <Rate>{`${ratio}%`}</Rate>
   </Flex>

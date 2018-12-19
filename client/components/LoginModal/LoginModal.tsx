@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import TelegramLoginButton from 'react-telegram-login';
 import Divider from '../elements/Divider';
 import Spinner from '../elements/Spinner';
@@ -25,7 +25,7 @@ const LoginModal: React.SFC<ILoginModal> = ({
   handleLogin,
 }) => {
   const loader = isIframeLoaded && (
-    <Flex justify="center" mt={[3, 4]} width={1}>
+    <Flex justifyContent="center" mt={[3, 4]} width={1}>
       <Spinner size={32} />
     </Flex>
   );
@@ -34,7 +34,7 @@ const LoginModal: React.SFC<ILoginModal> = ({
     <Flex flexDirection="column" flex="1 1 auto">
       <Title>You can use your Telegram account to login.</Title>
       <Divider my={[2, 3]} />
-      <Flex flexDirection="column" align="center">
+      <Flex flexDirection="column" alignItems="center">
         <TelegramLoginButton
           dataOnauth={handleLogin}
           botName={config.LOGIN_BOT_USERNAME}

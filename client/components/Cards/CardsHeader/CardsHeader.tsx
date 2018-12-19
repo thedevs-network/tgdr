@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import queryString from 'query-string';
 import Icon from '../../elements/Icon';
 import * as categories from '../../../../constants/categories';
@@ -36,8 +36,8 @@ const CardsHeader: React.SFC<IProps> = ({
   const query = queryString.stringify(params);
   const linkURL = getViewMoreLinkURL(params);
   return (
-    <Flex justify="space-between" mb={2}>
-      <Flex align="center">
+    <Flex justifyContent="space-between" mb={2}>
+      <Flex alignItems="center">
         <Icon
           name={useSortIcons ? sectionSort.icon : sectionType.icon}
           size={useSortIcons ? 22 : 18}
@@ -49,7 +49,7 @@ const CardsHeader: React.SFC<IProps> = ({
           {sectionCategory && `: ${sectionCategory.name}`}
         </Title>
       </Flex>
-      <Flex align="center">
+      <Flex alignItems="center">
         {showViewAllLink && (
           <Link href={`/?${query}`} as={`/${linkURL}`} passHref scroll={false}>
             <ViewAllLink title={`View all ${type}s`}>

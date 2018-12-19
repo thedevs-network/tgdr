@@ -2,7 +2,7 @@ import SearchInput from '../elements/inputs/SearchInput';
 import * as React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { Box, Flex } from 'grid-styled';
+import { Box, Flex } from '@rebass/grid';
 import { LightBox } from '../elements/Layout';
 import Divider from '../elements/Divider';
 import SidebarList from './SidebarList';
@@ -45,9 +45,9 @@ const Sidebar: React.SFC<IProps> = ({
       p={[16, 4]}
       width={[1, 1, 3 / 12]}
       flexDirection="column"
-      is="aside"
+      as="aside"
     >
-      <Flex mb={[0, 0, 4]} align="center" justify="space-evenly">
+      <Flex mb={[0, 0, 4]} alignItems="center" justifyContent="space-evenly">
         <SearchInput value={search} onChange={onSearchChange} />
         <MenuIcon onClick={onMenuToggle}>
           <Icon name="menu" size={30} stroke="#777" />
