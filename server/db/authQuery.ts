@@ -10,10 +10,13 @@ export const create = (telegram_id: number, userData: Partial<IUserModel>) =>
     upsert: true,
   });
 
-export const setReviewingFlag = async (telegram_id: number) => {
+export const setReviewingFlag = async (
+  telegram_id: number,
+  flag: boolean = true
+) => {
   return User.findOneAndUpdate(
-    { telegram_id, reviewing: { $ne: true } },
-    { reviewing: true },
+    { telegram_id, reviewing: { $ne: flag } },
+    { reviewing: flag },
     {
       new: true,
     }

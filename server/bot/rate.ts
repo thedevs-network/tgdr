@@ -140,6 +140,8 @@ export const submit = async ctx => {
       feedbacks
     );
     sendUserSpamReport(updatedUser);
+  } else {
+    await authQuery.setReviewingFlag(id, false);
   }
 
   await redis.del(getDbName(id));
