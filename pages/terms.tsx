@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NextSFC } from 'next';
 import Head from 'next/head';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Header from '../client/components/Header';
 import Footer from '../client/components/Footer';
 import { SloganTitle } from '../client/components/elements/Typography';
@@ -16,8 +16,8 @@ const Terms: NextSFC = () => (
     <AppWrapper>
       <Flex flex="1 1 auto" flexDirection="column">
         <Header />
-        <Flex py={5} flexDirection="column" align="center" is="section">
-          <Container justify="flex-start" flexDirection="column">
+        <Flex py={5} flexDirection="column" alignItems="center" as="section">
+          <Container justifyContent="flex-start" flexDirection="column">
             <SloganTitle>Terms of Service</SloganTitle>
             <h3>1. Terms</h3>
             <p>By accessing the website at{' '}

@@ -73,6 +73,8 @@ export const create: express.RequestHandler = async (req, res) => {
       feedbacks
     );
     sendUserSpamReport(updatedUser);
+  } else {
+    await authQuery.setReviewingFlag(user.telegram_id, false);
   }
 
   return res

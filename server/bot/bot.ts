@@ -1,4 +1,5 @@
 import Telegraf from 'telegraf';
+import * as signale from 'signale';
 import config from '../config';
 import asyncHandler from './asyncHandler';
 import * as auth from './auth';
@@ -7,6 +8,9 @@ import * as rate from './rate';
 
 const bot = new Telegraf(config.bot_token);
 export const bot2 = new Telegraf(config.bot_token_2);
+
+(bot as any).polling.offset = -1;
+(bot2 as any).polling.offset = -1;
 
 bot.use(asyncHandler(auth.onlyPrivate));
 bot.use(asyncHandler(auth.register));
@@ -36,6 +40,8 @@ bot.command(
   asyncHandler(commands.unban),
   auth.setCommandingFlag(false)
 );
+
+bot.catch(signale.fatal);
 
 bot.startPolling();
 

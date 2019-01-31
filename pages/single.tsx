@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NextSFC } from 'next';
 import Head from 'next/head';
-import { Box, Flex } from 'grid-styled';
+import { Box, Flex } from '@rebass/grid';
 import Error from './_error';
 import config from '../client.config';
 import { Description, Title } from '../client/components/elements/Typography';
@@ -72,7 +72,7 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
           <Flex
             mr={[0, 4]}
             width={[1, 106]}
-            align={['center', 'flex-start']}
+            alignItems={['center', 'flex-start']}
             flexDirection="column"
           >
             <Image
@@ -84,12 +84,15 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
             <InfoList entry={entry} auth={auth} />
           </Flex>
           <Box mt={[3, 0]} flex="1 1 auto">
-            <Flex align="flex-start">
+            <Flex alignItems="flex-start">
               <TitleWrapper>
                 <Title>{entry.title}</Title>
                 <Description>{entry.description}</Description>
               </TitleWrapper>
-              <Flex width={[102, 116]} align="center" flexDirection="column">
+              <Flex
+              width={[102, 116]}
+              alignItems="center"
+              flexDirection="column">
                 <Button big responsive onClick={getOpenLink(entry.username)}>
                   + Add
                   <Icon name="telegram" size={14} fill="#ffffff" ml={2} />

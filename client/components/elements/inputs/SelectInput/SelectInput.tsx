@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { ifProp } from 'styled-tools';
 import media from 'styled-media-query';
 import { InputErrorMessage, Label } from '../../Typography';

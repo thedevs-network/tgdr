@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import ReactDropzone from 'react-dropzone';
 import Icon from '../../Icon';
 
@@ -27,7 +27,7 @@ const Dropzone = styled(ReactDropzone)`
 `;
 
 const PhotoInput: React.SFC = props => (
-  <Flex {...props} align="center" justify="center" pb={4}>
+  <Flex {...props} alignItems="center" justifyContent="center" pb={4}>
     <Dropzone
       name="photo"
       accept="image/jpeg, image/png"

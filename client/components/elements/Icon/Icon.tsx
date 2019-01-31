@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { prop } from 'styled-tools';
 import media from 'styled-media-query';
 import ArrowLeft from '../../../assets/images/arrow-left-icon.svg';
@@ -108,7 +108,7 @@ interface IIcon {
 
 const IconWrapper = styled(
   ({ fill, hoverFill, size, stroke, ...rest }: Partial<IIcon>) => (
-    <Flex {...rest} align="center" justify="center" is="span" />
+    <Flex {...rest} alignItems="center" justifyContent="center" as="span" />
   )
 )`
   svg {

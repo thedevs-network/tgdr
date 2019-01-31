@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import LoginModal from './LoginModal';
 import MessageModal from '../MessageModal';
 import { login } from '../../store/auth';
@@ -61,7 +61,7 @@ class LoginModalContainer extends React.Component<IProps, IState> {
 
     if (auth.isLoading) {
       return (
-        <Flex justify="center" my={4}>
+        <Flex justifyContent="center" my={4}>
           <Spinner size={32} />
         </Flex>
       );

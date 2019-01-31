@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { Image as CloudinaryImage } from 'cloudinary-react';
 import media from 'styled-media-query';
 

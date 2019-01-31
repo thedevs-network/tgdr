@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Textarea from '../elements/inputs/Textarea';
 
 const Button = styled.button.attrs({
@@ -42,7 +42,7 @@ const ReviewForm: React.SFC<IProps> = ({ submitting, onSubmit }) => (
   <Flex
     flexDirection="column"
     flex="1 1 auto"
-    is="form"
+    as="form"
     mb={3}
     onSubmit={onSubmit}
   >

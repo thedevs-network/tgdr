@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import { LightBox } from '../../elements/Layout';
 
 interface IProps {
@@ -14,9 +14,9 @@ interface IState {
 }
 
 const ModalContainer = styled(Flex).attrs({
-  align: 'center',
+  alignItems: 'center',
   flexDirection: 'column',
-  justify: 'flex-start',
+  justifyContent: 'flex-start',
   py: 5,
 })<Partial<IState>>`
   position: fixed;

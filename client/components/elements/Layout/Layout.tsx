@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 
 export const AppLoadingWrapper = styled(Flex).attrs({
-  align: 'center',
+  alignItems: 'center',
   flex: '1 1 auto',
-  justify: 'center',
+  justifyContent: 'center',
 })`
   position: absolute;
   top: 0;
@@ -18,14 +18,14 @@ export const AppLoadingWrapper = styled(Flex).attrs({
 export const AppWrapper = styled(Flex).attrs({
   flex: '1 1 auto',
   flexDirection: 'column',
-  justify: 'space-between',
+  justifyContent: 'space-between',
 })`
   min-height: 100vh;
 `;
 
 export const Container = styled(Flex).attrs({
   px: [10, 15],
-  w: [540, 720, 960, 1140],
+  width: [540, 720, 960, 1140],
 })`
   max-width: 100%;
 `;

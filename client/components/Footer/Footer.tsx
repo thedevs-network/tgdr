@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import Link from 'next/link';
 import media from 'styled-media-query';
 import { Container } from '../elements/Layout';
@@ -9,8 +9,8 @@ import styled from 'styled-components';
 import Icon from '../elements/Icon';
 
 const List = styled(Flex).attrs({
-  align: 'center',
-  is: 'ul',
+  alignItems: 'center',
+  as: 'ul',
 })`
   min-width: 0;
   margin: 0;
@@ -24,7 +24,7 @@ const List = styled(Flex).attrs({
 
 const ListItem = styled(Flex).attrs({
   align: 'center',
-  is: 'li',
+  as: 'li',
 })`
   margin: 0;
   padding: 0 13px 0;
@@ -54,16 +54,16 @@ const Separator = styled.span`
 
 const Footer: React.SFC = () => (
   <Flex
-    align="center"
-    justify="center"
-    is="footer"
+  alignItems="center"
+  justifyContent="center"
+    as="footer"
     pb={4}
     pt={[5, 6]}
     flex="0 0 0"
   >
     <Container
-      align="center"
-      justify="space-between"
+      alignItems="center"
+      justifyContent="space-between"
       flexDirection={['column', 'row']}
     >
       <Logo />

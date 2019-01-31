@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import SearchInputIcon from './SearchInputIcon';
 
 const InputWrapper = styled(Flex).attrs({
-  align: 'center',
+  alignItems: 'center',
   height: 40,
   width: 1,
 })`
@@ -49,7 +49,7 @@ interface IProps {
 }
 
 const SearchInput: React.SFC<IProps> = ({ value, onChange }) => (
-  <InputWrapper height={40} width={1} align="center">
+  <InputWrapper height={40} width={1} alignItems="center">
     <Input placeholder="Search..." value={value} onChange={onChange} />
     <SearchInputIcon />
   </InputWrapper>

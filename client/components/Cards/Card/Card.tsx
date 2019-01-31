@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Router from 'next/router';
-import { Flex } from 'grid-styled';
+import { Flex } from '@rebass/grid';
 import CardJoinButton from './CardJoinButton';
 import CardMembersCount from './CardMembersCount';
 import CardRate from './CardRate';
@@ -12,9 +12,9 @@ import { IEntry } from '../../../store/storeTypes';
 import Icon from '../../elements/Icon';
 
 const CardWrapper = styled(LightBox).attrs({
-  align: 'center',
+  alignItems: 'center',
+  as: 'a',
   flex: '1 1 auto',
-  is: 'a',
   mb: [3],
   mr: [0, 0, 3],
   p: 3,
@@ -62,9 +62,9 @@ const Card = ({ entry }: IProps) => {
         {entry.members && (
           <CardMembersCount>{entry.members} members</CardMembersCount>
         )}
-        <Flex align="center" justify="space-between" mt={2}>
+        <Flex alignItems="center" justifyContent="space-between" mt={2}>
           <CardRate ratio={entry.ratio} />
-          <Flex align="center">
+          <Flex alignItems="center">
             {entry.featured && (
               <Icon name="star" mr={2} size={17} fill="#F9A825" />
             )}
