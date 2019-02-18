@@ -92,11 +92,11 @@ class MyApp extends App<IProps> {
           <meta name="twitter:card" content="summary" />
           <meta
             name="twitter:description"
-            content="Top Telegram Channles, Bots and Groups"
+            content="Top Telegram Channels, Bots and Groups"
           />
           <meta
             name="og:description"
-            content="Top Telegram Channles, Bots and Groups"
+            content="Top Telegram Channels, Bots and Groups"
           />
           <meta name="og:site_name" content="Telegram Directory" />
           <meta name="og:type" content="website" />
