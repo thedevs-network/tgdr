@@ -8,9 +8,11 @@ import config from '../config';
 
 const wilsonScore = decay.wilsonScore();
 
-export const isAdmin = (id: number) => id === config.admin_id;
+export const isAdmin = (id: number) =>
+  config.admin_id.some(element => element === id)
 
-export const getReportChat = (): number => 
+
+export const getReportChat = (): number | number[] => 
   config.report_chat_id || config.admin_id;
 
 export const hasAd = (text: string) =>
