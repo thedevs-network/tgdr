@@ -9,7 +9,7 @@ import config from '../config';
 const wilsonScore = decay.wilsonScore();
 
 export const isAdmin = (id: number) =>
-  config.admin_id.find(element => element === id) === undefined ? false : true
+  config.admin_id.some(element => element === id)
 
 
 export const getReportChat = (): number | number[] => 
