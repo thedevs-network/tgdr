@@ -85,10 +85,15 @@ export const sendReport: express.RequestHandler = async (req, res) => {
   const text =
     title + usernameText + reasonText + infoText + reviewText + userText;
 
-  await bot.telegram.sendMessage(getReportChat(), text, {
-    // @ts-ignore
-    parse_mode: 'HTML',
-  });
+    const chatBuffer = getReportChat()
+    const chats : number[] = Array.isArray(chatBuffer) ? chatBuffer
+    : [chatBuffer]
+  
+    await Promise.all(chats.map(async chat_id => 
+      await bot.telegram.sendMessage(chat_id, text, {
+      // @ts-ignore
+      parse_mode: 'HTML',
+    })))
 
   return res
     .status(200)
@@ -123,10 +128,15 @@ export const sendUserSpamReport = async (user: IUserModel) => {
 
   await authQuery.create(user.telegram_id, { spamReportDate: new Date() });
 
-  await bot.telegram.sendMessage(getReportChat(), text, {
+  const chatBuffer = getReportChat()
+  const chats : number[] = Array.isArray(chatBuffer) ? chatBuffer
+  : [chatBuffer]
+
+  await Promise.all(chats.map(async chat_id => 
+    await bot.telegram.sendMessage(chat_id, text, {
     // @ts-ignore
     parse_mode: 'HTML',
-  });
+  })))
 
   return;
 };
@@ -151,10 +161,15 @@ export const sendNewEntry: express.RequestHandler = async (req, res) => {
   const text =
     title + entryUsername + entryTitle + entryType + entryCategory + userText;
 
-  await bot.telegram.sendMessage(getReportChat(), text, {
+    const chatBuffer = getReportChat()
+  const chats : number[] = Array.isArray(chatBuffer) ? chatBuffer
+  : [chatBuffer]
+
+  await Promise.all(chats.map(async chat_id => 
+    await bot.telegram.sendMessage(chat_id, text, {
     // @ts-ignore
     parse_mode: 'HTML',
-  });
+  })))
 
   return res
     .status(201)
