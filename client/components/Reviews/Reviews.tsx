@@ -63,7 +63,7 @@ const Reviews: React.SFC<IProps> = ({
   reviews,
   onLoadMore,
 }) => {
-  const reviewsList = reviews.data.map((review, index) => {
+  const reviewsList = reviews.data.map(review => {
     const iconColor = review.liked
       ? { fill: '#63B3F3' }
       : { fill: 'transparent', stroke: '#EF9A9A' };
@@ -83,7 +83,7 @@ const Reviews: React.SFC<IProps> = ({
       : closeModal => <LoginModal closeModal={closeModal} />;
 
     return (
-      <div key={index}>
+      <div key={review._id}>
         <Flex alignItems="flex-start" my={4}>
           <Icon name={iconName} {...iconColor} size={15} my={1} mx={[2, 3]} />
           <Flex flexDirection="column" flex="1 1 auto">
