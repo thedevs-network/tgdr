@@ -19,7 +19,7 @@ export const checkForErrors: express.RequestHandler = async (
   return next();
 };
 
-export const createReview: express.RequestHandler = (req, res, next) => {
+export const createReview: express.RequestHandler = async (req, res, next) => {
   const { review } = res.locals;
   const { disliked, liked } = req.body;
 
@@ -34,7 +34,7 @@ export const createReview: express.RequestHandler = (req, res, next) => {
   return next();
 };
 
-export const ban: express.RequestHandler = (req, _res, next) => {
+export const ban: express.RequestHandler = async (req, _res, next) => {
   const { userId, reviewId } = req.body;
 
   if (!userId && !reviewId) {

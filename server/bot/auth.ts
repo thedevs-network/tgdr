@@ -3,7 +3,7 @@ import * as authQuery from '../db/authQuery';
 import { getDbName, isAdmin } from '../utils';
 import { ContextMessageUpdate } from 'telegraf';
 
-export const onlyPrivate = (ctx: ContextMessageUpdate, next) =>
+export const onlyPrivate = async (ctx: ContextMessageUpdate, next) =>
   ctx.chat.type === 'private' ? next() : null;
 
 export const clear = async (ctx: ContextMessageUpdate, next) => {
@@ -35,7 +35,7 @@ export const register = async (ctx, next) => {
   next();
 };
 
-export const authAdmin = (ctx, next) => {
+export const authAdmin = async (ctx, next) => {
   if (ctx.state.isAdmin) next();
   return null;
 };
