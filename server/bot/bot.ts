@@ -23,11 +23,17 @@ bot.command('/skip', asyncHandler(rate.submit));
 bot.command('/rate', asyncHandler(rate.start));
 bot.on('text', asyncHandler(rate.reviewText));
 
+// @ts-ignore
 bot.action('delete', auth.authAdmin, asyncHandler(actions.report));
+// @ts-ignore
 bot.action('reject', auth.authAdmin, asyncHandler(actions.report));
+// @ts-ignore
 bot.action('reject_language', auth.authAdmin, asyncHandler(actions.report));
+// @ts-ignore
 bot.action('reject_spam', auth.authAdmin, asyncHandler(actions.report));
+// @ts-ignore
 bot.action('reject_crypto', auth.authAdmin, asyncHandler(actions.report));
+// @ts-ignore
 bot.action('reject_adult_content', auth.authAdmin, asyncHandler(actions.report));
 
 bot.use(asyncHandler(auth.clear));
