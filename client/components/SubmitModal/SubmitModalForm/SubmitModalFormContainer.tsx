@@ -100,7 +100,7 @@ const asyncValidate = values =>
   new Promise((resolve, reject) => {
     const errors = {} as any;
     if (values.username && values.username.length < 5) {
-      errors.username = 'Username must have at least 5 chars.';
+      errors.username = 'Username must have at least 5 characters.';
     }
     if (
       values.username &&
@@ -110,16 +110,16 @@ const asyncValidate = values =>
       errors.username = 'Only 0-9, a-z and underscores allowed.';
     }
     if (values.title && values.title.length < 3) {
-      errors.title = 'Title must have at least 3 chars.';
+      errors.title = 'Title must have at least 3 characters.';
     }
     if (values.title && values.title.length > 54) {
-      errors.title = 'Too long. Title must have max 54 chars.';
+      errors.title = 'Too long. Title must have max 54 characters.';
     }
     if (values.description && values.description.length < 20) {
-      errors.description = 'Description must have at least 20 chars.';
+      errors.description = 'Description must have at least 20 characters.';
     }
     if (values.description && values.description.length > 800) {
-      errors.description = 'Too long. Description must have max 800 chars.';
+      errors.description = 'Too long. Description must have max 800 characters.';
     }
     if (Object.keys(errors).length) {
       return reject(errors);

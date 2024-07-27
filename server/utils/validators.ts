@@ -7,7 +7,7 @@ export const newEntryValidators = [
     .exists()
     .trim()
     .isLength({ min: 5 })
-    .withMessage('Username must have at least 5 chars.')
+    .withMessage('Username must have at least 5 characters.')
     .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid.'),
   body('category', 'Category is not valid')
@@ -17,12 +17,12 @@ export const newEntryValidators = [
     .exists()
     .trim()
     .isLength({ min: 3, max: 54 })
-    .withMessage('Title must be between 3 and 54 chars.'),
+    .withMessage('Title must be between 3 and 54 characters.'),
   body('description', 'Description is not valid')
     .exists()
     .trim()
     .isLength({ min: 20, max: 800 })
-    .withMessage('Description must be between 20 and 800 chars.'),
+    .withMessage('Description must be between 20 and 800 characters.'),
 ];
 
 export const entryValidator = [
@@ -30,7 +30,7 @@ export const entryValidator = [
     .exists()
     .trim()
     .isLength({ min: 5 })
-    .withMessage('Username must have at least 5 chars.')
+    .withMessage('Username must have at least 5 characters.')
     .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
@@ -79,7 +79,7 @@ export const reviewValidator = [
     .optional()
     .trim()
     .isLength({ min: 20, max: 400 })
-    .withMessage('Text must be between 20 and 400 chars.')
+    .withMessage('Text must be between 20 and 400 characters.')
     .custom(value => !hasAd(value))
     .withMessage(
       'Text must not contain any links or ads. Violators will be banned.'
@@ -88,7 +88,7 @@ export const reviewValidator = [
     .exists()
     .trim()
     .isLength({ min: 5 })
-    .withMessage('Username must have at least 5 chars.')
+    .withMessage('Username must have at least 5 characters.')
     .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
 ];
@@ -98,7 +98,7 @@ export const reportValidator = [
     .exists()
     .trim()
     .isLength({ min: 5 })
-    .withMessage('Username must have at least 5 chars.')
+    .withMessage('Username must have at least 5 characters.')
     .matches(/^[a-z]\w+$/i)
     .withMessage('Username is not valid. It must only contain A-Z, 0-9, _.'),
   body('reason', 'Reason field is not valid.')
@@ -107,5 +107,5 @@ export const reportValidator = [
   body('info')
     .optional()
     .isLength({ max: 400 })
-    .withMessage('Info is too long. Should be less than 400 chars.'),
+    .withMessage('Info is too long. Should be less than 400 characters.'),
 ];

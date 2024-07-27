@@ -71,7 +71,7 @@ const validate = values => {
     !values.text ||
     (values.text && (values.text.length < 20 || values.text.length > 400))
   ) {
-    errors.text = 'You must enter a review between 20 and 400 chars.';
+    errors.text = 'You must enter a review between 20 and 400 characters.';
   }
 
   if (values.text && hasAd(values.text)) {

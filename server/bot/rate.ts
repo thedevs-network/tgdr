@@ -90,7 +90,7 @@ export const likeDislike = async (ctx: ContextMessageUpdate) => {
   await redis.set(getDbName(id), JSON.stringify(userState), 'EX', 60 * 60);
 
   return ctx.reply(
-    'Write a feedback or review (min 20 chars).\n\n' +
+    'Write a feedback or review (min 20 characters).\n\n' +
       'You can /skip this part.'
   );
 };
@@ -181,7 +181,7 @@ export const reviewText = async (ctx, next) => {
 
   // If is not a username, then consider it as review text
   if (text.length < 20 || text.length > 400) {
-    return ctx.reply('ℹ️ Review text must be between 20 and 400 chars.');
+    return ctx.reply('ℹ️ Review text must be between 20 and 400 characters.');
   }
 
   const userState = {
