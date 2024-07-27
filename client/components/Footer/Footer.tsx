@@ -92,30 +92,10 @@ const Footer: React.SFC = () => (
           </a>
         </ListItem>
         <ListItem>
-          <a href="https://t.me/tgdr_io" title="Telegram">
+          <a href="https://t.me/tgdrchannel" title="Telegram">
             <Icon
               size={14}
               name="telegram"
-              fill="#7990A2"
-              hoverFill="#63B3F3"
-            />
-          </a>
-        </ListItem>
-        <ListItem>
-          <a
-            href="https://twitter.com/tgdr_io"
-            title="Twitter"
-            target="_blank"
-            rel="nofollow noopener"
-          >
-            <Icon size={16} name="twitter" fill="#7990A2" hoverFill="#63B3F3" />
-          </a>
-        </ListItem>
-        <ListItem>
-          <a href="mailto:support@tgdr.io" title="Contact Email">
-            <Icon
-              size={16}
-              name="envelope"
               fill="#7990A2"
               hoverFill="#63B3F3"
             />
