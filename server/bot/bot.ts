@@ -5,6 +5,7 @@ import asyncHandler from './asyncHandler';
 import * as auth from './auth';
 import * as commands from './commands';
 import * as rate from './rate';
+import * as actions from './actions';
 
 const bot = new Telegraf(config.bot_token);
 export const bot2 = new Telegraf(config.bot_token_2);
@@ -21,6 +22,13 @@ bot.hears(['💙', '👎'], asyncHandler(rate.likeDislike));
 bot.command('/skip', asyncHandler(rate.submit));
 bot.command('/rate', asyncHandler(rate.start));
 bot.on('text', asyncHandler(rate.reviewText));
+
+bot.action('delete', auth.authAdmin, asyncHandler(actions.report));
+bot.action('reject', auth.authAdmin, asyncHandler(actions.report));
+bot.action('reject_language', auth.authAdmin, asyncHandler(actions.report));
+bot.action('reject_spam', auth.authAdmin, asyncHandler(actions.report));
+bot.action('reject_crypto', auth.authAdmin, asyncHandler(actions.report));
+bot.action('reject_adult_content', auth.authAdmin, asyncHandler(actions.report));
 
 bot.use(asyncHandler(auth.clear));
 

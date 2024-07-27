@@ -9,6 +9,9 @@ import CustomError from '../helpers/customError';
 import { IUserModel } from '../models/User';
 import { getReportChat } from '../utils';
 
+// tslint:disable-next-line
+const Markup = require('telegraf/markup');
+
 export const getChatMembers = async (username: string) =>
   bot2.telegram.getChatMembersCount(`@${username}`);
 
@@ -90,10 +93,20 @@ export const sendReport: express.RequestHandler = async (req, res) => {
     : [chatBuffer]
   
     await Promise.all(chats.map(async chat_id => 
-      await bot.telegram.sendMessage(chat_id, text, {
-      // @ts-ignore
-      parse_mode: 'HTML',
-    })))
+      await bot.telegram.sendMessage(chat_id, text, Markup.inlineKeyboard([
+        [
+          Markup.callbackButton('🗑️ Delete', 'delete'),
+          Markup.callbackButton('🚫 Reject', 'reject'),
+        ],
+        [
+          Markup.callbackButton('🚫 Not English', 'reject_language'),
+          Markup.callbackButton('🚫 Spam/Scam', 'reject_spam'),
+        ],
+        [
+          Markup.callbackButton('🚫 Crypto', 'reject_crypto'),
+          Markup.callbackButton('🚫 Adult Content', 'reject_adult_content'),
+        ],
+      ]).extra({ parse_mode: "HTML" }))))
 
   return res
     .status(200)
@@ -166,10 +179,20 @@ export const sendNewEntry: express.RequestHandler = async (req, res) => {
   : [chatBuffer]
 
   await Promise.all(chats.map(async chat_id => 
-    await bot.telegram.sendMessage(chat_id, text, {
-    // @ts-ignore
-    parse_mode: 'HTML',
-  })))
+    await bot.telegram.sendMessage(chat_id, text, Markup.inlineKeyboard([
+      [
+        Markup.callbackButton('🗑️ Delete', 'delete'),
+        Markup.callbackButton('🚫 Reject', 'reject'),
+      ],
+      [
+        Markup.callbackButton('🚫 Not English', 'reject_language'),
+        Markup.callbackButton('🚫 Spam/Scam', 'reject_spam'),
+      ],
+      [
+        Markup.callbackButton('🚫 Crypto', 'reject_crypto'),
+        Markup.callbackButton('🚫 Adult Content', 'reject_adult_content'),
+      ],
+    ]).extra({ parse_mode: "HTML" }))))
 
   return res
     .status(201)

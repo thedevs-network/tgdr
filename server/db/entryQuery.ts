@@ -27,6 +27,8 @@ export const findById = (entry: string | Document) =>
 
 export const create = (entry: IEntryModel) => Entry.create(entry);
 
+export const deleteOne = (entry: Partial<IEntrySchema>) => Entry.deleteOne(entry);
+
 export const update = async (
   username: string,
   body: Record<string, string | number | boolean>,
