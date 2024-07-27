@@ -5,13 +5,13 @@ import * as botController from './controllers/botController';
 import { wait } from '../client/utils';
 import config from './config';
 
-// Update channels and uspergroups members each 12 hours
+// Update channels and uspergroups members every 24 hours
 setInterval(async () => {
   try {
     const entries = await entryQuery.getNonBots();
     for (const entry of entries) {
       try {
-        await wait(10000);
+        await wait(100);
         const members = await botController.getChatMembers(entry.username);
         await entryQuery.update(entry.username, { members }, true);
       } catch (error) {
