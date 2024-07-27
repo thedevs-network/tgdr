@@ -18,7 +18,7 @@
     ],
     "jsx-boolean-value": ["never"],
     "member-access": [true, "no-public"],
-    "max-line-length": [true, 80],
+    "max-line-length": [true, 100],
     "variable-name": [
       true,
       "check-format",
