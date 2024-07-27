@@ -24,6 +24,7 @@ const Button = styled.button<IButton>`
   border: none;
   border-radius: 20px;
   box-shadow: 0 3px 6px rgba(25, 118, 210, 0.2);
+  text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;

@@ -47,6 +47,7 @@ interface IProps {
 const Card = ({ entry }: IProps) => {
   const goToEntry = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     Router.push(`/single?username=@${entry.username}`, `/@${entry.username}`);
   };
 

@@ -93,7 +93,7 @@ const Single: NextSFC<IReduxProps> = ({ entry, auth }: IReduxProps) => {
               width={[102, 116]}
               alignItems="center"
               flexDirection="column">
-                <Button big responsive onClick={getOpenLink(entry.username)}>
+                <Button as="a" big responsive href={`https://t.me/${entry.username}`} target="_blank" rel="noopener noreferrer">
                   + Add
                   <Icon name="telegram" size={14} fill="#ffffff" ml={2} />
                 </Button>

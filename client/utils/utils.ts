@@ -32,6 +32,7 @@ export const wait = (ms: number) =>
 export const getOpenLink = (username: string) => (
   e: React.MouseEvent<HTMLElement>
 ) => {
+  e.preventDefault();
   e.stopPropagation();
   window.open(`https://t.me/${username}`, '_blank');
   window.focus();
