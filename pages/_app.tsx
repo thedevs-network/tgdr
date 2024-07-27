@@ -64,7 +64,6 @@ class MyApp extends App<IProps> {
       nprogress.done();
       const newActiveTags = window.location.pathname.split('/');
       reduxStore.dispatch(setActiveTags(newActiveTags));
-      logPageView();
     });
     Router.events.on('routeChangeError', () => nprogress.done());
   }
