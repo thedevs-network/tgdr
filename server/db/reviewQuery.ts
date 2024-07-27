@@ -22,3 +22,5 @@ export const create = async (body: IReviewQuery) => {
 };
 
 export const remove = (id: string | Document) => Review.findByIdAndRemove(id);
+
+export const deleteMany = (body: Partial<IReviewSchema>) => Review.deleteMany(body);

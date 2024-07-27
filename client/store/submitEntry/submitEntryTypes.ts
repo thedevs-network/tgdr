@@ -19,4 +19,5 @@ export interface ISubmitEntryParams {
   category: string;
   title: string;
   description: string;
+  status?: string;
 }

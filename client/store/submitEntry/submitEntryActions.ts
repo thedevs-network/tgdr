@@ -21,10 +21,15 @@ export const submitNewEntry: AsyncAction = (
   isEdit?: boolean
 ) => async (dispatch, getState) => {
   try {
+    const isDelete = params.status === 'delete';
     const method = isEdit ? 'put' : 'post';
     dispatch(submitEntryRequest());
     await wait(500);
-    await Axios[method]('/api/entry', params, getAuthHeader(getState));
+    if (isDelete) {
+      await Axios.delete(`/api/entry/${params.username}`, getAuthHeader(getState));
+    } else {
+      await Axios[method]("/api/entry", params, getAuthHeader(getState));
+    }
     dispatch(submitEntrySuccess());
   } catch (error) {
     const {

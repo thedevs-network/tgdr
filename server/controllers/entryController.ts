@@ -3,6 +3,7 @@ import * as botController from './botController';
 import cloudinary from '../cloudinary';
 import { IEntrySchema } from '../models/Entry';
 import * as entryQuery from '../db/entryQuery';
+import * as reviewQuery from '../db/reviewQuery';
 import { getEntryQuery, isAdmin, omitExtraFields } from '../utils';
 import CustomError from '../helpers/customError';
 
@@ -104,4 +105,11 @@ export const getSingle: express.RequestHandler = async (_req, res) => {
   const { entry, review } = res.locals;
   const data = omitExtraFields({ ...entry, review });
   return res.status(200).json({ data });
+};
+
+export const deleteOne: express.RequestHandler = async (req, res) => {
+  const entry = await entryQuery.findOne({ username: req.params.username });
+  await reviewQuery.deleteMany({ entry: entry._id });
+  await entryQuery.deleteOne({ username: req.params.username });
+  return res.status(200).json({ message: "Entry deleted successfully." });
 };

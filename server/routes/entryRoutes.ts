@@ -38,6 +38,15 @@ router.put(
   asyncHandler(entryController.update)
 );
 
+router.delete(
+  '/:username',
+  passport.authenticate('jwt', { session: false }),
+  asyncHandler(authController.adminCheck),
+  entryValidator,
+  asyncHandler(validatorsController.checkForErrors),
+  asyncHandler(entryController.deleteOne),
+);
+
 router.get('/', entriesValidator, asyncHandler(entryController.get));
 
 router.get(
