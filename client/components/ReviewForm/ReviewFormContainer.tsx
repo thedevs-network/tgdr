@@ -53,7 +53,7 @@ class ReviewFormContainer extends React.Component<
     const hasFeedback = review.liked || review.disliked;
 
     if (!hasFeedback) {
-      return <ReviewFormPlaceholder />;
+      return <ReviewFormPlaceholder username={this.props.entry.username} />;
     }
 
     return (
