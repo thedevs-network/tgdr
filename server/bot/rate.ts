@@ -29,7 +29,7 @@ export const init = async (ctx: ContextMessageUpdate, username: string) => {
 
   if (!entry) {
     return ctx.replyWithHTML(
-      `<code>@${username}</code> does not exist in our database.\n\n` +
+      `@${username} does not exist in our database.\n\n` +
         'You can submit it here:\n' +
         '🌐 https://tgdr.io'
     );
@@ -42,7 +42,7 @@ export const init = async (ctx: ContextMessageUpdate, username: string) => {
   await redis.set(getDbName(id), JSON.stringify(userState), 'EX', 60 * 60);
 
   return ctx.replyWithHTML(
-    `You are going to rate the <code>@${username}</code>.\n\n` +
+    `You are going to rate the @${username}.\n\n` +
       'Please select your feedback.',
     Markup.keyboard([['💙', '👎']])
       .oneTime()
@@ -153,7 +153,7 @@ export const submit = async ctx => {
       `Share link to rate <code>@${username}</code>:\n` +
       `https://t.me/tgdrbot?start=${username}\n\n` +
       'Join Telegram Directory:\n' +
-      '@tgdr_io'
+      '@tgdrchannel'
   );
 };
 
