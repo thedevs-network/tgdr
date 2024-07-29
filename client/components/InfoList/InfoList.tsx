@@ -42,7 +42,14 @@ const InfoList: React.SFC<IProps> = ({ entry, auth }) => {
       <InfoListItem icon="at" text={username} size={15} />
       <InfoListItem icon={type.icon} text={type.name.replace('s', '')} />
       {category && <InfoListItem icon="tag" text={category.name} />}
-      {members && <InfoListItem icon="users" text={members} />}
+      {members && (
+        <InfoListItem 
+          icon="users" 
+          text={members.toLocaleString('en-US', {
+            maximumFractionDigits: 0
+          })}
+        />
+      )}
       <Flex ml={[1, 0]}>
         <Modal
           trigger={

@@ -61,7 +61,11 @@ const Card = ({ entry }: IProps) => {
       <InfoWrapper>
         <Title small>{entry.title}</Title>
         {entry.members && (
-          <CardMembersCount>{entry.members} members</CardMembersCount>
+          <CardMembersCount>
+            {entry.members.toLocaleString('en-US', {
+              maximumFractionDigits: 0
+            })} members
+          </CardMembersCount>
         )}
         <Flex alignItems="center" justifyContent="space-between" mt={2}>
           <CardRate ratio={entry.ratio} />
