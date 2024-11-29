@@ -40,7 +40,7 @@ Telegram Directory (TGDR) is a website that helps you discover channels, bots an
 * Redis (Cache layer)
 
 ## Setup
-You need to have [Node.js](https://nodejs.org/), [MongoBD](https://www.mongodb.com/) and [Redis](https://redis.io/) installed on your machine.
+You need to have [Node.js](https://nodejs.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/) installed on your machine.
 
 1. Clone this repository or [download zip](https://github.com/thedevs-network/tgdr/archive/develop.zip).
 2. Copy `.example.env` to `.env` and `client.config.example` to `client.config.ts` and fill them properly.
