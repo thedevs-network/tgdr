@@ -41,7 +41,7 @@
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
     "lodash.debounce": "^4.0.8",
-    "mongoose": "^5.4.0",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "ms": "^2.1.1",
     "next": "^7.0.2",
